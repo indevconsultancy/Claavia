@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="homeVM"
+            type="com.indev.claraa.viewmodel.HomeScreenViewModel" />
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/my_drawer_layout"
+        tools:ignore="MissingConstraints">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/frame_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="@dimen/_45sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <include
+                android:id="@+id/bottomNavigation"
+                layout="@layout/bottom_navigation_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigationMenu"
+            android:layout_width="270dp"
+            android:layout_height="match_parent"
+            app:menu="@menu/mainmenu"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/nav_header"/>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+</layout>

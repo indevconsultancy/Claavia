@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin20" />
+    <dimen name="margin5" />
+    <dimen name="margin15" />
+    <dimen name="nav_header_height" />
+    <dimen name="nav_header_vertical_spacing" />
+</resources>

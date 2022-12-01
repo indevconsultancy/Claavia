@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Claraa</string>
+    <string name="enter_your_user_name">Username</string>
+    <string name="enter_your_password">Password</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="nav_header_desc" />
+    <string name="navigation_drawer_open" />
+    <string name="navigation_drawer_close" />
+    <string name="forgot_password_succesfully">Forgot Password Successfully</string>
+    <string name="email" />
+    <string name="emailUpdate" />
+    <string name="soft_hydrogel_description">Natural soft hydrogels are unique elastic soft materials utilized by living organisms for protecting delicate tissues. Under a theoretical framework derived from the Blob model, we chemically crosslinked high molecular weight hyaluronic acid at a concentration close to its overlap concentration (c*), and created synthetic soft hydrogels that exhibited unique rheological properties similar to a natural soft hydrogel: being dominantly elastic under low shear stress while being viscous when the stress is above a small threshold. We explored a potential application of the hyaluronic acid‐based soft hydrogel as a long‐acting ocular surface lubricant and evaluated its therapeutic effects for dry eye.</string>
+    <string name="Home">Home</string>
+    <string name="My_Profile">My Profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lense"><![CDATA[Claraa Fresh Flow Along with Solution Bottle 80ml & Zipper Travel Case]]></string>
+</resources>
