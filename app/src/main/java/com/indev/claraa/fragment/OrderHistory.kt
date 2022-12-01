@@ -1,5 +1,6 @@
 package com.indev.claraa.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
@@ -16,6 +17,7 @@ import com.indev.claraa.adapter.CartAdapter
 import com.indev.claraa.adapter.PowerRangeAdapter
 import com.indev.claraa.databinding.FragmentOrderHistoryBinding
 import com.indev.claraa.entities.Cart
+import com.indev.claraa.ui.HomeScreen
 import com.indev.claraa.viewmodel.*
 
 class OrderHistory : Fragment(), ClickLinstener {
@@ -43,6 +45,7 @@ class OrderHistory : Fragment(), ClickLinstener {
     }
 
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         orderHistoryViewModel = OrderHistoryViewModel(requireContext())
@@ -54,7 +57,17 @@ class OrderHistory : Fragment(), ClickLinstener {
             cartList = it
         })
 
+        binding.toolbar.menuClick.setOnClickListener(){
+            replaceFregment(Home())
+        }
+
+
+        binding.toolbar.home.setOnClickListener(){
+            replaceFregment(Home())
+        }
+
     }
+
 
     private fun recycleViewList() {
         binding.rvOrder.apply {
@@ -70,6 +83,12 @@ class OrderHistory : Fragment(), ClickLinstener {
         requireView().setOnKeyListener { _, keyCode, event ->
             event.action === KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK
         }
+    }
+
+    private fun replaceFregment(fragment : Fragment) {
+        val fragmentTransition= fragmentManager?.beginTransaction()
+        fragmentTransition?.replace(R.id.frame_layout, fragment)
+        fragmentTransition?.commit()
     }
 
     override fun onClickListner(position: Int) {

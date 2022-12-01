@@ -2,6 +2,7 @@ package com.indev.claraa.viewmodel
 
 import android.content.Context
 import android.content.Intent
+import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
@@ -17,7 +18,12 @@ class LoginViewModel(val context: Context): ViewModel() {
 
 
     fun signIn(){
-         context.startActivity(Intent(context, HomeScreen::class.java))
+//        if (username.get().equals("neha") && password.get().equals("neha123")){
+            context.startActivity(Intent(context, HomeScreen::class.java))
+//        }
+//        else{
+//            Toast.makeText(context,"Invalid",Toast.LENGTH_LONG).show()
+//        }
     }
 
     fun registration(){

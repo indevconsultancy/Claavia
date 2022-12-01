@@ -32,8 +32,8 @@ class Profile : Fragment() {
             ProfileViewModelFactory(requireContext())
         )[ProfileViewModel::class.java]
         binding.profileVM = profileViewModel
-
         return binding.root
+
 
     }
 
@@ -43,15 +43,18 @@ class Profile : Fragment() {
         profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         profileViewModel.readAllData.observe(viewLifecycleOwner, Observer {
 
-            binding.tvName.text = it.user_name
-            binding.tvShapName.text = it.shop_name
-            binding.tvEmail.text = it.email
-            binding.tvMobile.text = it.mobile_number
-            binding.tvState.text = it.state
-            binding.tvDistrict.text = it.district
-            binding.tvAddress.text = it.address
-            binding.tvPincode.text = it.pinCode
+            if(it == null) {
+                binding.tvName.text = it?.user_name
+                binding.tvShapName.text = it?.shop_name
+                binding.tvEmail.text = it?.email
+                binding.tvMobile.text = it?.mobile_number
+                binding.tvState.text = it?.state
+                binding.tvDistrict.text = it?.district
+                binding.tvAddress.text = it?.address
+                binding.tvPincode.text = it?.pinCode
+            }
         })
+
     }
 
     override fun onResume() {

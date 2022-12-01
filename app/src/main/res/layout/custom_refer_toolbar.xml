@@ -41,7 +41,7 @@
                     android:layout_marginEnd="29dp"
                     android:layout_toStartOf="@+id/home"
                     android:layout_toEndOf="@id/menuClick"
-                    android:text="Order History"
+                    android:text="Refer"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_15sdp"
                     android:textStyle="bold" />

@@ -30,6 +30,17 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/left_circular_arrow"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.043"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.095" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circleImageView"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -39,7 +50,7 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView"
-            app:layout_constraintVertical_bias="0.312" />
+            app:layout_constraintVertical_bias="0.361" />
 
         <LinearLayout
             android:id="@+id/linearayout"
@@ -96,10 +107,8 @@
             android:weightSum="2"
             android:background="@drawable/back_button"
             android:backgroundTint="@color/bs_green"
-            android:onClick="@{() ->profileVM.editBtn()}"
             android:gravity="center"
             android:orientation="horizontal"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.546"
@@ -330,7 +339,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:paddingLeft="5dp"
-                        android:text="Patna"
+                        android:text="Uttar Pradesh"
                         android:textColor="@color/black"
                         android:textSize="15dp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -387,7 +396,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:paddingLeft="5dp"
-                        android:text="siwan"
+                        android:text="Agra"
                         android:textColor="@color/black"
                         android:textSize="15dp"
                         app:layout_constraintEnd_toEndOf="parent"

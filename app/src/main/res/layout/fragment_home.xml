@@ -198,7 +198,7 @@
                                             <TextView
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:text="Fresh Flo Lens"
+                                                android:text="Claraa Fresh Flo"
                                                 android:textColor="@color/primary_color"
                                                 android:textSize="15dp"
                                                 android:layout_gravity="center"
@@ -252,7 +252,7 @@
                                             <TextView
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:text="Fresh Flo Lens"
+                                                android:text="Claraa Fresh Flo"
                                                 android:textColor="@color/primary_color"
                                                 android:textSize="15dp"
                                                 android:layout_gravity="center"
@@ -286,7 +286,7 @@
                                 android:layout_marginBottom="10dp"
                                 android:textStyle="bold"
                                 android:textColor="@color/black"
-                                android:text="SPHERICAL MONTHLY HYDROGEL LENSES"/>
+                                android:text="SPHERICAL DAILY DISPOSABLE LENSES"/>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -328,7 +328,7 @@
                                             <TextView
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:text="Fresh Flo Lens"
+                                                android:text="Claraa Fresh Touch"
                                                 android:textColor="@color/primary_color"
                                                 android:textSize="15dp"
                                                 android:layout_gravity="center"
@@ -376,7 +376,7 @@
                                 android:layout_marginBottom="10dp"
                                 android:textStyle="bold"
                                 android:textColor="@color/black"
-                                android:text="SPHERICAL MONTHLY HYDROGEL LENSES"/>
+                                android:text="SPHERICAL COLOR DISPOSABLE LENSES"/>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -418,7 +418,7 @@
                                             <TextView
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:text="Fresh Flo Lens"
+                                                android:text="Claraa Rainbow Fresh"
                                                 android:textColor="@color/primary_color"
                                                 android:textSize="15dp"
                                                 android:layout_gravity="center"

@@ -34,7 +34,7 @@ class UserRegistration : AppCompatActivity() {
 
         preferences= PrefHelper(this)
         checkLogin = preferences.getBoolean(Constant.PREF_IS_LOGIN)
-        if(checkLogin ==true ) {
+        if(checkLogin ==true) {
             registrationViewModel = ViewModelProvider(this).get(RegistrationViewModel::class.java)
             registrationViewModel.readAllData.observe(this, Observer {
 

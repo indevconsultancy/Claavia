@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="cities">
-        <item>A</item>
-        <item>B</item>
-        <item>C</item>
-        <item>D</item>
+    <string-array name="state">
+        <item>Select State</item>
+        <item>Uttar Pradesh </item>
+        <item>Madhya Pradesh</item>
+        <item>Andhra Pradesh</item>
     </string-array>
+
+    <string-array name="district">
+        <item>Select District</item>
+        <item>Ghaziabad</item>
+        <item>Indore</item>
+        <item>Gautam Buddha Nagar</item>
+    </string-array>
+
 
     <string-array name="packets">
         <item>Qty</item>

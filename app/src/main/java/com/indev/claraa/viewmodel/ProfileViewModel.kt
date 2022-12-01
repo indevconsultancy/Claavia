@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.indev.claraa.entities.Cart
 import com.indev.claraa.entities.UserRegistrationModel
+import com.indev.claraa.fragment.Home
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.CartRepository
@@ -24,6 +25,10 @@ class ProfileViewModel(val context: Context): ViewModel() {
     init {
         readAllData = UserRegistrationRepository.getRegistrationData(context)!!
     }
+
+//    fun btnBack(){
+//        context.startActivity(Intent(context, Home::class.java))
+//    }
 
     fun editBtn(){
         context.startActivity(Intent(context, UserRegistration::class.java))

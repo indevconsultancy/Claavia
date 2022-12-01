@@ -21,6 +21,27 @@ class Refer : Fragment() {
         binding= DataBindingUtil.inflate(inflater, R.layout.fragment_refer,container, false)
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.toolbar.menuClick.setOnClickListener(){
+            replaceFregment(Home())
+        }
+
+
+        binding.toolbar.home.setOnClickListener(){
+            replaceFregment(Home())
+        }
+
+    }
+
+    private fun replaceFregment(fragment : Fragment) {
+        val fragmentTransition= fragmentManager?.beginTransaction()
+        fragmentTransition?.replace(R.id.frame_layout, fragment)
+        fragmentTransition?.commit()
+    }
+
     override fun onResume() {
         super.onResume()
         requireView().isFocusableInTouchMode = true
