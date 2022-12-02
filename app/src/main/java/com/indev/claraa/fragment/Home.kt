@@ -8,21 +8,30 @@ import android.view.ViewGroup
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.aemerse.slider.ImageCarousel
 import com.aemerse.slider.model.CarouselItem
+import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
+import com.indev.claraa.adapter.HomeAdapter
 import com.indev.claraa.databinding.FragmentHomeBinding
+import com.indev.claraa.entities.HomeModel
 import com.indev.claraa.ui.LoginScreen
 import com.indev.claraa.viewmodel.HomeScreenViewModel
 import com.indev.claraa.viewmodel.HomeScreenViewModelFactory
 
 
-class Home : Fragment() {
+class Home : Fragment(), ClickLinstener {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var homeScreenViewModel: HomeScreenViewModel
+    private lateinit var homeAdapter: HomeAdapter
+    private lateinit var homeModelList: ArrayList<HomeModel>
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +51,15 @@ class Home : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        homeScreenViewModel = HomeScreenViewModel(requireContext())
+        homeAdapter = HomeAdapter( requireContext(),ArrayList<HomeModel>(), this)
+        recycleViewList()
+
+        homeScreenViewModel.getHomeList(requireContext())?.observe(viewLifecycleOwner, Observer {
+            homeAdapter.setData(it as ArrayList<HomeModel>)
+            homeModelList = it
+        })
+
 
         val carousel: ImageCarousel = binding.carousel
         binding.toolbar.menuClick.setOnClickListener {
@@ -92,7 +110,14 @@ class Home : Fragment() {
             binding.myDrawerLayout.closeDrawer(GravityCompat.START)
             true
         }
+    }
 
+    private fun recycleViewList() {
+        binding.rvProductType.apply {
+            setHasFixedSize(true)
+            binding.rvProductType.layoutManager = LinearLayoutManager(context)
+            adapter= homeAdapter
+        }
     }
 
 
@@ -117,6 +142,9 @@ class Home : Fragment() {
             }.show()
     }
 
+    override fun onClickListner(position: Int) {
+        TODO("Not yet implemented")
+    }
 
 
 }
