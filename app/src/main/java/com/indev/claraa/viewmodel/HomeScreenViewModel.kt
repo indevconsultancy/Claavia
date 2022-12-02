@@ -1,17 +1,24 @@
 package com.indev.claraa.viewmodel
 
 import android.content.Context
-import android.content.Intent
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
-import com.indev.claraa.ui.ProductDetail
+import com.indev.claraa.R
+import com.indev.claraa.fragment.ProductDetails
+import com.indev.claraa.ui.HomeScreen
 
 class HomeScreenViewModel (val context: Context): ViewModel() {
 
-    fun cvImg(){
-        context.startActivity(Intent(context, ProductDetail::class.java))
-    }
+
     fun cvProduct(){
-        context.startActivity(Intent(context, ProductDetail::class.java))
+        replaceFregment(ProductDetails())
+    }
+
+
+    private fun replaceFregment(fragment : Fragment) {
+        var transaction = (context as HomeScreen).supportFragmentManager.beginTransaction()
+        transaction?.replace(R.id.frame_layout, fragment)
+        transaction.commit()
     }
 
 }

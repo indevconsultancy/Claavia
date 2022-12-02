@@ -1,6 +1,5 @@
 package com.indev.claraa.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
@@ -14,17 +13,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
 import com.indev.claraa.adapter.CartAdapter
-import com.indev.claraa.adapter.PowerRangeAdapter
-import com.indev.claraa.databinding.FragmentOrderHistoryBinding
-import com.indev.claraa.entities.Cart
-import com.indev.claraa.ui.HomeScreen
+import com.indev.claraa.databinding.FragmentCartBinding
+import com.indev.claraa.entities.CartModel
 import com.indev.claraa.viewmodel.*
 
-class OrderHistory : Fragment(), ClickLinstener {
-    lateinit var binding:FragmentOrderHistoryBinding
-    private lateinit var orderHistoryViewModel: OrderHistoryViewModel
+class Cart : Fragment(), ClickLinstener {
+    lateinit var binding: FragmentCartBinding
+    private lateinit var cartViewModel: CartViewModel
     private lateinit var cartAdapter: CartAdapter
-    private lateinit var cartList: ArrayList<Cart>
+    private lateinit var cartModelList: ArrayList<CartModel>
 
 
 
@@ -33,12 +30,12 @@ class OrderHistory : Fragment(), ClickLinstener {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater,
-            R.layout.fragment_order_history, container, false)
-        orderHistoryViewModel = ViewModelProvider(
+            R.layout.fragment_cart, container, false)
+        cartViewModel = ViewModelProvider(
             this,
-            OrderHistoryViewModelFactory(requireContext())
-        )[OrderHistoryViewModel::class.java]
-        binding.orderVM = orderHistoryViewModel
+            CartViewModelFactory(requireContext())
+        )[CartViewModel::class.java]
+        binding.cartVM = cartViewModel
 
         return binding.root
 
@@ -49,13 +46,13 @@ class OrderHistory : Fragment(), ClickLinstener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        orderHistoryViewModel = OrderHistoryViewModel(requireContext())
-        cartAdapter = CartAdapter( requireContext(),ArrayList<Cart>(), this)
+        cartViewModel = CartViewModel(requireContext())
+        cartAdapter = CartAdapter( requireContext(),ArrayList<CartModel>(), this)
         recycleViewList()
 
-        orderHistoryViewModel.getCartList(requireContext())?.observe(viewLifecycleOwner, Observer {
-            cartAdapter.setData(it as ArrayList<Cart>)
-            cartList = it
+        cartViewModel.getCartList(requireContext())?.observe(viewLifecycleOwner, Observer {
+            cartAdapter.setData(it as ArrayList<CartModel>)
+            cartModelList = it
         })
 
         binding.toolbar.menuClick.setOnClickListener(){

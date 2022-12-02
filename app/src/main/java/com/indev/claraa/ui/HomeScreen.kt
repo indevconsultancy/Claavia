@@ -8,7 +8,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.indev.claraa.R
 import com.indev.claraa.databinding.ActivityHomeScreenBinding
 import com.indev.claraa.fragment.Home
-import com.indev.claraa.fragment.OrderHistory
+import com.indev.claraa.fragment.Cart
 import com.indev.claraa.fragment.Profile
 import com.indev.claraa.fragment.Refer
 
@@ -30,7 +30,7 @@ class HomeScreen : AppCompatActivity(){
                     replaceFregment(Profile())
                 }
                 R.id.order  ->{
-                    replaceFregment(OrderHistory())
+                    replaceFregment(Cart())
                 }
 
                 R.id.refer  ->{

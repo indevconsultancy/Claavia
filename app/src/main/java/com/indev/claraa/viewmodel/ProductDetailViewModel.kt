@@ -5,13 +5,12 @@ import android.content.Intent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
-import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.indev.claraa.adapter.CartAdapter
-import com.indev.claraa.entities.Cart
+import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.ProductMasterModel
 import com.indev.claraa.repository.CartRepository
 import com.indev.claraa.ui.AnonmyosActivity
@@ -22,7 +21,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
     var packetValue: String? = null
     var rangeValue: String? = null
     private lateinit var cartAdapter: CartAdapter
-    private lateinit var cart: Cart
+    private lateinit var cartModel: CartModel
     private lateinit var productArrayList: ArrayList<ProductMasterModel>
     val optionSelectedListener = MutableLiveData<Pair<String, String>>()
 
@@ -49,9 +48,9 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
     }
 
     fun btnSubmit() {
-        cart = Cart(0, packetValue.toString(), rangeValue.toString())
+        cartModel = CartModel(0, packetValue.toString(), rangeValue.toString())
         viewModelScope.launch {
-            CartRepository.insertCartData(context ,cart)
+            CartRepository.insertCartData(context ,cartModel)
         }
     }
 
@@ -60,7 +59,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
     }
 
 
-    fun getCartList(context: Context): LiveData<List<Cart>>? {
+    fun getCartList(context: Context): LiveData<List<CartModel>>? {
         return CartRepository.getCartList(context)
     }
 

@@ -5,7 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.indev.claraa.entities.Cart
+import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.UserRegistrationModel
 import org.jetbrains.annotations.NotNull
 
@@ -17,10 +17,10 @@ interface ClaraaDao {
     suspend fun insertUserData(userRegistrationTable: UserRegistrationModel): Long
 
     @Insert
-    suspend fun insertUserCart(cart: Cart): Long
+    suspend fun insertUserCart(cartModel: CartModel): Long
 
     @Query("SELECT * FROM cart ORDER BY id ASC")
-    fun getCartData() : LiveData<List<Cart>>
+    fun getCartData() : LiveData<List<CartModel>>
 
     @Query("SELECT * FROM user_master  ORDER BY local_id ASC")
     fun getRegistrationData() : LiveData<UserRegistrationModel>

@@ -172,6 +172,7 @@
                                     android:layout_columnWeight="1"
                                     android:layout_weight="1"
                                     app:cardElevation="8dp"
+                                    android:onClick="@{()->homeVM.cvProduct()}"
                                     android:layout_marginHorizontal="5dp"
                                     android:background="#F0F7F7"
                                     android:backgroundTint="#F0F7F7"

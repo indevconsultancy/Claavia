@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.aemerse.slider.ImageCarousel
@@ -16,7 +15,6 @@ import com.aemerse.slider.model.CarouselItem
 import com.indev.claraa.R
 import com.indev.claraa.databinding.FragmentHomeBinding
 import com.indev.claraa.ui.LoginScreen
-import com.indev.claraa.ui.ProductDetail
 import com.indev.claraa.viewmodel.HomeScreenViewModel
 import com.indev.claraa.viewmodel.HomeScreenViewModelFactory
 
@@ -48,11 +46,6 @@ class Home : Fragment() {
         val carousel: ImageCarousel = binding.carousel
         binding.toolbar.menuClick.setOnClickListener {
             binding.myDrawerLayout.openDrawer(GravityCompat.START)
-        }
-
-        binding.cardView.setOnClickListener {
-            val intent= Intent(activity, ProductDetail::class.java)
-            startActivity(intent)
         }
 
         carousel.registerLifecycle(lifecycle)
@@ -88,7 +81,7 @@ class Home : Fragment() {
                 R.id.profile ->{
                     replaceFregment(Profile())
                 }R.id.order ->{
-                replaceFregment(OrderHistory())
+                replaceFregment(Cart())
             }R.id.refer ->{
                 replaceFregment(Refer())
             }

@@ -4,15 +4,15 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
 
 <data>
     <variable
-        name="orderVM"
-        type="com.indev.claraa.viewmodel.OrderHistoryViewModel"/>
+        name="cartVM"
+        type="com.indev.claraa.viewmodel.CartViewModel"/>
 </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragment.OrderHistory">
+    tools:context=".fragment.Cart">
 
     <LinearLayout
         android:layout_width="match_parent"

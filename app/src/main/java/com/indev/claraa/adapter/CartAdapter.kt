@@ -8,9 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
-import com.indev.claraa.entities.Cart
+import com.indev.claraa.entities.CartModel
 
-class CartAdapter(private val context: Context, var cartList: List<Cart>, private val listener: ClickLinstener) : RecyclerView.Adapter<CartAdapter.MyViewholder>(){
+class CartAdapter(private val context: Context, var cartModelList: List<CartModel>, private val listener: ClickLinstener) : RecyclerView.Adapter<CartAdapter.MyViewholder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewholder {
         val itemView =
@@ -19,17 +19,17 @@ class CartAdapter(private val context: Context, var cartList: List<Cart>, privat
     }
 
     override fun onBindViewHolder(holder: MyViewholder, position: Int) {
-        val currentItem = cartList[position]
+        val currentItem = cartModelList[position]
         holder.tvRange.text ="Size: " + currentItem.ranges
     }
 
-    fun setData(cart: ArrayList<Cart>) {
-        this.cartList= cart
+    fun setData(cartModel: ArrayList<CartModel>) {
+        this.cartModelList= cartModel
         notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
-        return cartList.size
+        return cartModelList.size
     }
 
    inner class MyViewholder(itemView: View) : RecyclerView.ViewHolder(itemView) {

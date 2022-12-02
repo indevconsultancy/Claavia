@@ -1,10 +1,12 @@
-package com.indev.claraa.ui
+package com.indev.claraa.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,28 +17,44 @@ import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
 import com.indev.claraa.adapter.CartAdapter
 import com.indev.claraa.adapter.PowerRangeAdapter
-import com.indev.claraa.databinding.ActivityProductDetailBinding
-import com.indev.claraa.entities.Cart
+import com.indev.claraa.databinding.FragmentProductDetailsBinding
+import com.indev.claraa.entities.CartModel
 import com.indev.claraa.repository.CartRepository
+import com.indev.claraa.ui.HomeScreen
 import com.indev.claraa.viewmodel.ProductDetailViewModel
 import com.indev.claraa.viewmodel.ProductDetailViewModelFactory
 
-class ProductDetail : AppCompatActivity(), ClickLinstener {
-    private lateinit var binding:ActivityProductDetailBinding
+
+class ProductDetails : Fragment(), ClickLinstener {
+
+    private lateinit var binding: FragmentProductDetailsBinding
     private lateinit var productDetailViewModel: ProductDetailViewModel
     private lateinit var cartAdapter: CartAdapter
     private lateinit var powerRangeAdapter: PowerRangeAdapter
-    private lateinit var cartList: ArrayList<Cart>
+    private lateinit var cartModelList: ArrayList<CartModel>
     val productList: ArrayList<String> = ArrayList()
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_product_details, container, false)
+        productDetailViewModel = ViewModelProvider(
+            this,
+            ProductDetailViewModelFactory(requireContext())
+        )[ProductDetailViewModel::class.java]
+        binding.productDetailVM = productDetailViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        supportActionBar?.hide()
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_product_detail)
+        return binding.root
+        return inflater.inflate(R.layout.fragment_product_details, container, false)
+    }
 
 
-        val carousel: ImageCarousel = findViewById(R.id.carousel)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val carousel: ImageCarousel = binding.carousel
         carousel.registerLifecycle(lifecycle)
 
         val list = mutableListOf<CarouselItem>()
@@ -64,13 +82,13 @@ class ProductDetail : AppCompatActivity(), ClickLinstener {
         carousel.setData(list)
 
 
-        productDetailViewModel = ProductDetailViewModel(applicationContext)
-        cartAdapter = CartAdapter(applicationContext, ArrayList<Cart>(), this)
+        productDetailViewModel = ProductDetailViewModel(requireActivity())
+        cartAdapter = CartAdapter(requireActivity(), ArrayList<CartModel>(), this)
         recycleViewList()
 
-        productDetailViewModel.getCartList(this)?.observe(this, Observer {
-            cartAdapter.setData(it as ArrayList<Cart>)
-            cartList = it
+        productDetailViewModel.getCartList(requireActivity())?.observe(requireActivity(), Observer {
+            cartAdapter.setData(it as ArrayList<CartModel>)
+            cartModelList = it
         })
 
 
@@ -79,12 +97,12 @@ class ProductDetail : AppCompatActivity(), ClickLinstener {
         productList.add("-1.5")
         productList.add("-2.0")
 
-        productDetailViewModel = ProductDetailViewModel(applicationContext)
+        productDetailViewModel = ProductDetailViewModel(requireActivity())
         powerRangeAdapter =
-            PowerRangeAdapter(productDetailViewModel, applicationContext, productList, this)
+            PowerRangeAdapter(productDetailViewModel, requireActivity(), productList, this)
         recycleViewPowerrangeList()
 
-        productDetailViewModel.optionSelectedListener.observe(this, Observer { pair ->
+        productDetailViewModel.optionSelectedListener.observe(requireActivity(), Observer { pair ->
             if (pair != null) {
                 binding.txtRange.text = "Power Range: " + pair.first
             }else{
@@ -93,17 +111,17 @@ class ProductDetail : AppCompatActivity(), ClickLinstener {
         })
 
         binding.toolbar.menuClick.setOnClickListener(){
-            onBackPressed()
+//            onBackPressed()
         }
 
         binding.toolbar.home.setOnClickListener(){
-            val intent = Intent(this@ProductDetail, HomeScreen::class.java)
+            val intent = Intent(requireActivity(), HomeScreen::class.java)
             startActivity(intent)
         }
 
 
         var cartRepository= CartRepository()
-        productDetailViewModel = ViewModelProvider(this, ProductDetailViewModelFactory(this))[ProductDetailViewModel::class.java]
+        productDetailViewModel = ViewModelProvider(this, ProductDetailViewModelFactory(requireActivity()))[ProductDetailViewModel::class.java]
         binding.productDetailVM = productDetailViewModel
     }
 
@@ -124,11 +142,9 @@ class ProductDetail : AppCompatActivity(), ClickLinstener {
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-    }
 
     override fun onClickListner(position: Int) {
-        Toast.makeText(applicationContext, ""+position, Toast.LENGTH_LONG).show()
+        Toast.makeText(requireActivity(), ""+position, Toast.LENGTH_LONG).show()
     }
+
 }

@@ -2,8 +2,6 @@ package com.indev.claraa.repository
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import com.indev.claraa.dao.ClaraaDao
-import com.indev.claraa.entities.Cart
 import com.indev.claraa.entities.UserRegistrationModel
 import com.indev.claraa.roomdb.RoomDB
 import kotlinx.coroutines.CoroutineScope
