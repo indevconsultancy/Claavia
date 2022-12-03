@@ -17,19 +17,19 @@ class HomeRepository {
             return RoomDB.getDatabase(context)
         }
 
-        suspend fun insertCartData(context: Context, homeModel: HomeModel) {
-            dataBase = initializeDB(context)
+//        suspend fun insertCartData(context: Context, homeModel: HomeModel) {
+//            dataBase = initializeDB(context)
+//
+//            CoroutineScope(Dispatchers.IO).launch {
+//                dataBase?.userDao()?.insertHome(homeModel)
+//            }
+//
+//        }
 
-            CoroutineScope(Dispatchers.IO).launch {
-                dataBase?.userDao()?.insertHome(homeModel)
-            }
-
-        }
-
-        fun getHomeList(context: Context): LiveData<List<HomeModel>>? {
-            dataBase = initializeDB(context)
-            return dataBase?.userDao()?.getHomeData()
-        }
+//        fun getHomeList(context: Context): LiveData<List<HomeModel>>? {
+//            dataBase = initializeDB(context)
+//            return dataBase?.userDao()?.getHomeData()
+//        }
 
 
     }

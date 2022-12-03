@@ -23,11 +23,11 @@ interface ClaraaDao {
     @Query("SELECT * FROM cart ORDER BY id ASC")
     fun getCartData() : LiveData<List<CartModel>>
 
-    @Insert
-    suspend fun insertHome(homeModel: HomeModel): Long
+//    @Insert
+//    suspend fun insertHome(homeModel: HomeModel): Long
 
-    @Query("SELECT * FROM cart ORDER BY id ASC")
-    fun getHomeData() : LiveData<List<HomeModel>>
+//    @Query("SELECT * FROM cart ORDER BY id ASC")
+//    fun getHomeData() : LiveData<List<HomeModel>>
 
 
     @Query("SELECT * FROM user_master  ORDER BY local_id ASC")

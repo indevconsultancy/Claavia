@@ -5,10 +5,7 @@ import android.content.Intent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.indev.claraa.adapter.CartAdapter
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.ProductMasterModel
@@ -16,7 +13,7 @@ import com.indev.claraa.repository.CartRepository
 import com.indev.claraa.ui.AnonmyosActivity
 import kotlinx.coroutines.launch
 
-class ProductDetailViewModel(val context: Context): ViewModel() {
+class ProductDetailViewModel(val context: Context): ViewModel(), LifecycleOwner {
 
     var packetValue: String? = null
     var rangeValue: String? = null
@@ -25,6 +22,9 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
     private lateinit var productArrayList: ArrayList<ProductMasterModel>
     val optionSelectedListener = MutableLiveData<Pair<String, String>>()
 
+    init {
+
+    }
 
     val packetClicksListener = object : AdapterView.OnItemSelectedListener {
         override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -48,6 +48,12 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
     }
 
     fun btnSubmit() {
+        optionSelectedListener.observe(this, Observer { pair ->
+            if (pair != null) {
+                rangeValue = pair.first
+            }
+        })
+
         cartModel = CartModel(0, packetValue.toString(), rangeValue.toString())
         viewModelScope.launch {
             CartRepository.insertCartData(context ,cartModel)
@@ -67,6 +73,11 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
     fun clickRangeOptionEvent(pair: Pair<String, String>) {
         optionSelectedListener.value = pair
     }
+
+    override fun getLifecycle(): Lifecycle {
+        TODO("Not yet implemented")
+    }
+
 //    fun getRangeList(context: Context): LiveData<List<ProductMasterModel>>?  {
 //        return productArrayList
 //    }

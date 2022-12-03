@@ -26,9 +26,9 @@ class HomeScreenViewModel (val context: Context): ViewModel() {
         transaction.commit()
     }
 
-    fun getHomeList(context: Context): LiveData<List<HomeModel>>? {
-        return HomeRepository.getHomeList(context)
-    }
+//    fun getHomeList(context: Context): LiveData<List<HomeModel>>? {
+//        return HomeRepository.getHomeList(context)
+//    }
 
 
 }

@@ -29,9 +29,7 @@ class Home : Fragment(), ClickLinstener {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var homeScreenViewModel: HomeScreenViewModel
     private lateinit var homeAdapter: HomeAdapter
-    private lateinit var homeModelList: ArrayList<HomeModel>
-
-
+    var homeModelList: ArrayList<String> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,14 +49,19 @@ class Home : Fragment(), ClickLinstener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        homeModelList.add("Claraa Flesh Flo")
+        homeModelList.add("Claraa Flesh Flo Along with Solution Bottle 80ml")
+        homeModelList.add("Claraa Fresh Touch")
+        homeModelList.add("Claraa Rainbow Fresh")
         homeScreenViewModel = HomeScreenViewModel(requireContext())
-        homeAdapter = HomeAdapter( requireContext(),ArrayList<HomeModel>(), this)
+        homeAdapter = HomeAdapter( requireContext(),homeModelList, this)
         recycleViewList()
 
-        homeScreenViewModel.getHomeList(requireContext())?.observe(viewLifecycleOwner, Observer {
-            homeAdapter.setData(it as ArrayList<HomeModel>)
-            homeModelList = it
-        })
+//        homeScreenViewModel.getHomeList(requireContext())?.observe(viewLifecycleOwner, Observer {
+//            homeAdapter.setData(it as ArrayList<String>)
+//            homeModelList = it
+//        })
 
 
         val carousel: ImageCarousel = binding.carousel
@@ -116,6 +119,7 @@ class Home : Fragment(), ClickLinstener {
         binding.rvProductType.apply {
             setHasFixedSize(true)
             binding.rvProductType.layoutManager = LinearLayoutManager(context)
+            (binding.rvProductType.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
             adapter= homeAdapter
         }
     }
