@@ -19,6 +19,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            android:background="@drawable/login_bg"
             android:layout_height="match_parent">
 
             <View
@@ -174,7 +175,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/home_btn"
-                        android:backgroundTint="@color/teal_200"
                         android:textAllCaps="false"
                         android:layout_weight="1"
                         android:textColor="@color/white"

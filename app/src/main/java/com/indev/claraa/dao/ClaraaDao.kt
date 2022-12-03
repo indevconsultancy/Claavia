@@ -5,9 +5,10 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import com.indev.claraa.entities.AddressDetailsModel
 import com.indev.claraa.entities.CartModel
-import com.indev.claraa.entities.HomeModel
 import com.indev.claraa.entities.UserRegistrationModel
+import com.indev.claraa.viewmodel.AddressDetailsViewModel
 import org.jetbrains.annotations.NotNull
 
 @Dao
@@ -23,12 +24,13 @@ interface ClaraaDao {
     @Query("SELECT * FROM cart ORDER BY id ASC")
     fun getCartData() : LiveData<List<CartModel>>
 
-//    @Insert
-//    suspend fun insertHome(homeModel: HomeModel): Long
+    @NotNull
+    @Insert
+    suspend fun insertAddressData(addressDetailsModel: AddressDetailsModel): Long
 
-//    @Query("SELECT * FROM cart ORDER BY id ASC")
-//    fun getHomeData() : LiveData<List<HomeModel>>
-
+//    @Query("SELECT * FROM address ORDER BY local_id ASC")
+//    fun getAddressData() : LiveData<List<AddressDetailsViewModel>>
+//
 
     @Query("SELECT * FROM user_master  ORDER BY local_id ASC")
     fun getRegistrationData() : LiveData<UserRegistrationModel>

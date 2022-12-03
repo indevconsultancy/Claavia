@@ -48,7 +48,7 @@
                             android:textColor="@color/primary_color"
                             android:textSize="15dp"
                             android:layout_gravity="center"
-                            android:gravity="center_vertical | top"
+                            android:gravity="center_vertical|top"
                             android:maxLines="2"
                             android:textStyle="bold" />
 

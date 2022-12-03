@@ -2,6 +2,7 @@ package com.indev.claraa.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -111,12 +112,11 @@ class ProductDetails : Fragment(), ClickLinstener {
         })
 
         binding.toolbar.menuClick.setOnClickListener(){
-//            onBackPressed()
+            replaceFregment(Home())
         }
 
         binding.toolbar.home.setOnClickListener(){
-            val intent = Intent(requireActivity(), HomeScreen::class.java)
-            startActivity(intent)
+            replaceFregment(Home())
         }
 
 
@@ -132,6 +132,22 @@ class ProductDetails : Fragment(), ClickLinstener {
             (binding.rvPowerRange.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
             adapter= powerRangeAdapter
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        requireView().isFocusableInTouchMode = true
+        requireView().requestFocus()
+        requireView().setOnKeyListener { _, keyCode, event ->
+            event.action === KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK
+        }
+    }
+
+    private fun replaceFregment(fragment : Fragment) {
+        val fragmentManager = activity?.supportFragmentManager
+        val fragmentTransition= fragmentManager?.beginTransaction()
+        fragmentTransition?.replace(R.id.frame_layout, fragment)
+        fragmentTransition?.commit()
     }
 
     private fun recycleViewList() {
