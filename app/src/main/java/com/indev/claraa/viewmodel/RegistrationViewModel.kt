@@ -2,9 +2,13 @@ package com.indev.claraa.viewmodel
 
 import android.content.Context
 import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ObservableField
 import androidx.lifecycle.*
 import com.indev.claraa.entities.UserRegistrationModel
@@ -12,6 +16,8 @@ import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.UserRegistrationRepository
 import com.indev.claraa.ui.LoginScreen
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
@@ -80,7 +86,22 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             )
             viewModelScope.launch {
                 UserRegistrationRepository.insertUserData(context, userRegistrationTable)
-                context.startActivity(Intent(context, LoginScreen::class.java))
+                //Data store in model
+                var last_user_id=0
+                CoroutineScope(Dispatchers.IO).launch {
+                    last_user_id = UserRegistrationRepository.userRegistrationAPI(userRegistrationTable)
+                    if (last_user_id> 0) {
+                        context.startActivity(Intent(context, LoginScreen::class.java))
+
+                        Handler(Looper.getMainLooper()).post {
+                            Toast.makeText(context, "Successfully Registered", Toast.LENGTH_LONG).show()
+                        }
+                    } else {
+                        Handler(Looper.getMainLooper()).post {
+                            Toast.makeText(context, "Invalid user", Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }
             }
         }else{
             userRegistrationTable = UserRegistrationModel(

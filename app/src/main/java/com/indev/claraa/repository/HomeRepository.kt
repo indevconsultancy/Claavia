@@ -1,13 +1,7 @@
 package com.indev.claraa.repository
 
 import android.content.Context
-import androidx.lifecycle.LiveData
-import com.indev.claraa.entities.CartModel
-import com.indev.claraa.entities.HomeModel
 import com.indev.claraa.roomdb.RoomDB
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class HomeRepository {
     companion object {

@@ -3,9 +3,7 @@ package com.indev.claraa.repository
 import android.content.Context
 import androidx.lifecycle.LiveData
 import com.indev.claraa.entities.AddressDetailsModel
-import com.indev.claraa.entities.UserRegistrationModel
 import com.indev.claraa.roomdb.RoomDB
-import com.indev.claraa.viewmodel.AddressDetailsViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
