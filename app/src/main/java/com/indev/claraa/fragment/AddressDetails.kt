@@ -37,14 +37,6 @@ class AddressDetails : Fragment() {
 
         return binding.root
     }
-    override fun onResume() {
-        super.onResume()
-        requireView().isFocusableInTouchMode = true
-        requireView().requestFocus()
-        requireView().setOnKeyListener { _, keyCode, event ->
-            event.action === KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

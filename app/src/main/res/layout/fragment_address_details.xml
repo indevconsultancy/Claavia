@@ -300,6 +300,7 @@
                         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                         android:fontFamily="sans-serif"
                         android:inputType="text"
+                        tools:setOnItemSelectedListener="@{addressDetailsVM.clicksListener}"
                         android:textColor="@color/black"
                         android:textSize="15dp" />
                 </LinearLayout>
@@ -342,6 +343,7 @@
                         android:background="@drawable/roundedittext1"
                         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                         android:fontFamily="sans-serif"
+                        tools:setOnItemSelectedListener="@{addressDetailsVM.clickListener}"
                         android:inputType="text"
                         android:textColor="@color/black"
                         android:textSize="15dp" />
@@ -455,7 +457,6 @@
                         android:layout_height="wrap_content"
                         android:text="*"
                         android:textColor="@color/red" />
-
 
                 </LinearLayout>
 

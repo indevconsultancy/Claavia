@@ -135,15 +135,6 @@ class ProductDetails : Fragment(), ClickLinstener {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        requireView().isFocusableInTouchMode = true
-        requireView().requestFocus()
-        requireView().setOnKeyListener { _, keyCode, event ->
-            event.action === KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK
-        }
-    }
-
     private fun replaceFregment(fragment : Fragment) {
         val fragmentManager = activity?.supportFragmentManager
         val fragmentTransition= fragmentManager?.beginTransaction()

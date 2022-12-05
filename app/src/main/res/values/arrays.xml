@@ -3,15 +3,13 @@
     <string-array name="state">
         <item>Select State</item>
         <item>Uttar Pradesh </item>
-        <item>Madhya Pradesh</item>
-        <item>Andhra Pradesh</item>
     </string-array>
 
     <string-array name="district">
         <item>Select District</item>
         <item>Ghaziabad</item>
-        <item>Indore</item>
-        <item>Gautam Buddha Nagar</item>
+        <item>Noida</item>
+        <item>Lucknow</item>
     </string-array>
 
 

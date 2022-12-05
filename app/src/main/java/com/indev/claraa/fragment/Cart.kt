@@ -64,14 +64,6 @@ class Cart : Fragment(), ClickLinstener {
             adapter= cartAdapter
         }
     }
-    override fun onResume() {
-        super.onResume()
-        requireView().isFocusableInTouchMode = true
-        requireView().requestFocus()
-        requireView().setOnKeyListener { _, keyCode, event ->
-            event.action === KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK
-        }
-    }
 
     private fun replaceFregment(fragment : Fragment) {
         val fragmentTransition= fragmentManager?.beginTransaction()

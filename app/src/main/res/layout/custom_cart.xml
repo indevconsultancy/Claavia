@@ -42,7 +42,6 @@
                             android:layout_height="wrap_content"
                             android:src="@drawable/product_one" />
 
-
                         <LinearLayout
                             android:layout_weight="1"
                             android:layout_width="match_parent"
