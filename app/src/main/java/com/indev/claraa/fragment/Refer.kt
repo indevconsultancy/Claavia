@@ -29,11 +29,6 @@ class Refer : Fragment() {
             replaceFregment(Home())
         }
 
-
-        binding.toolbar.home.setOnClickListener(){
-            replaceFregment(Home())
-        }
-
     }
 
     private fun replaceFregment(fragment : Fragment) {

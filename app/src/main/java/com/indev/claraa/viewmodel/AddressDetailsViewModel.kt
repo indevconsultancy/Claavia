@@ -34,19 +34,19 @@ class AddressDetailsViewModel (val context: Context): ViewModel() {
     }
 
     fun btnSubmit() {
-
         addressDetailsModel = AddressDetailsModel(0,0,
             shopName.get().toString(),
             personName.get().toString(),
             email.get().toString(),
             mobNo.get().toString(),
             etAddress.get().toString(),
-            "","","","",
+            "","","",pinCode.get().toString(),
             "",
-            "",
-            pinCode.get().toString())
+            "","",
+            )
         viewModelScope.launch {
             AddressDetailsRepository.insertAddressData(context, addressDetailsModel)
+//            context.startActivity(Intent(context, AddressList::class.java))
             replaceFregment(AddressList())
         }
     }

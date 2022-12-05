@@ -14,6 +14,7 @@
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_weight="1"
+                android:layout_gravity="center"
                 app:cardElevation="8dp"
                 android:onClick="@{()->homeVM.cvProduct()}"
                 android:layout_marginHorizontal="5dp"
@@ -48,7 +49,7 @@
                             android:textColor="@color/primary_color"
                             android:textSize="15dp"
                             android:layout_gravity="center"
-                            android:gravity="center_vertical|top"
+                            android:gravity="center"
                             android:maxLines="2"
                             android:textStyle="bold" />
 
@@ -59,7 +60,7 @@
                             android:textColor="@color/black"
                             android:textSize="18dp"
                             android:layout_gravity="center"
-                            android:gravity="center_vertical"
+                            android:gravity="center"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>

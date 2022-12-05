@@ -30,7 +30,7 @@
             android:layout_marginTop="@dimen/_50sdp">
 
 
-        <ScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -75,6 +75,7 @@
                     android:fontFamily="sans-serif"
                     android:hint="Enter shop name"
                     android:inputType="text"
+                    android:text="@={addressDetailsVM.shopName}"
                     android:textColor="@color/black"
                     android:padding="10dp"
                     android:textSize="15dp" />
@@ -119,6 +120,7 @@
                     android:textColor="@color/black"
                     android:hint="Enter person name"
                     android:inputType="text"
+                    android:text="@={addressDetailsVM.personName}"
                     android:padding="10dp"
                     android:textSize="15dp" />
 
@@ -157,6 +159,7 @@
                     android:background="@drawable/roundedittext1"
                     android:fontFamily="sans-serif"
                     android:hint="Enter email"
+                    android:text="@={addressDetailsVM.email}"
                     android:inputType="text"
                     android:padding="10dp"
                     android:textColor="@color/black"
@@ -198,6 +201,7 @@
                     android:hint="Enter email"
                     android:textColor="@color/black"
                     android:maxLength="10"
+                    android:text="@={addressDetailsVM.mobNo}"
                     android:inputType="number"
                     android:padding="10dp"
                     android:textSize="15dp" />
@@ -229,12 +233,13 @@
                     </LinearLayout>
 
                     <EditText
-                        android:id="@+id/etPincode"
+                        android:id="@+id/etPinCode"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/roundedittext1"
                         android:fontFamily="sans-serif"
                         android:hint="Enter pinCode"
+                        android:text="@={addressDetailsVM.pinCode}"
                         android:inputType="number"
                         android:maxLength="6"
                         android:textColor="@color/black"
@@ -379,6 +384,7 @@
                     android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:fontFamily="sans-serif"
                     android:hint="Enter address"
+                    android:text="@={addressDetailsVM.etAddress}"
                     android:inputType="text"
                     android:padding="10dp"
                     android:textColor="@color/black"

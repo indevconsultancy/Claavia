@@ -116,9 +116,9 @@ class ProductDetails : Fragment(), ClickLinstener {
             replaceFregment(Home())
         }
 
-        binding.toolbar.home.setOnClickListener(){
-            replaceFregment(Home())
-        }
+//        binding.toolbar.home.setOnClickListener(){
+//            replaceFregment(Home())
+//        }
 
 
         var cartRepository= CartRepository()

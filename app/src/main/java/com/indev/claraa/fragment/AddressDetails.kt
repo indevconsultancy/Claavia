@@ -50,13 +50,8 @@ class AddressDetails : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.toolbar.menuClick.setOnClickListener(){
-            replaceFregment(Cart())
+            replaceFregment(AddressList())
         }
-
-        binding.toolbar.home.setOnClickListener(){
-            replaceFregment(Home())
-        }
-
 
     }
 

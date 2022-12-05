@@ -23,8 +23,6 @@ class Cart : Fragment(), ClickLinstener {
     private lateinit var cartAdapter: CartAdapter
     private lateinit var cartModelList: ArrayList<CartModel>
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,10 +36,7 @@ class Cart : Fragment(), ClickLinstener {
         binding.cartVM = cartViewModel
 
         return binding.root
-
-
     }
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,11 +51,6 @@ class Cart : Fragment(), ClickLinstener {
         })
 
         binding.toolbar.menuClick.setOnClickListener(){
-            replaceFregment(Home())
-        }
-
-
-        binding.toolbar.home.setOnClickListener(){
             replaceFregment(Home())
         }
 
