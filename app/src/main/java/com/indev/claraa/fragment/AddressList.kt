@@ -1,7 +1,6 @@
 package com.indev.claraa.fragment
 
 import android.os.Bundle
-import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,17 +12,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
 import com.indev.claraa.adapter.AddressDetailsAdapter
-import com.indev.claraa.adapter.HomeAdapter
 import com.indev.claraa.databinding.FragmentAddressListBinding
 import com.indev.claraa.entities.AddressDetailsModel
-import com.indev.claraa.entities.CartModel
 import com.indev.claraa.viewmodel.*
 
 class AddressList : Fragment(), ClickLinstener {
     private lateinit var binding: FragmentAddressListBinding
     private lateinit var addressListViewModel: AddressListViewModel
     private lateinit var addressDetailsAdapter: AddressDetailsAdapter
-    var addressDetailsViewModelList: ArrayList<String> = ArrayList()
+    lateinit var addressDetailsViewModelList: ArrayList<AddressDetailsModel>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,13 +44,14 @@ class AddressList : Fragment(), ClickLinstener {
             replaceFregment(Cart())
         }
 
-//        addressListViewModel = AddressListViewModel(requireContext())
-//        addressDetailsAdapter = AddressDetailsAdapter(requireContext(), ,ArrayList<AddressDetailsModel>(), this)
-//        recycleViewList()
-//        addressListViewModel.getA(requireContext())?.observe(viewLifecycleOwner, Observer {
-//            addressDetailsAdapter.setData(it as ArrayList<AddressDetailsModel>)
-//            addressDetailsViewModelList = it
-//        })
+        addressListViewModel = AddressListViewModel(requireActivity())
+        addressDetailsAdapter = AddressDetailsAdapter(requireActivity(),ArrayList<AddressDetailsModel>(), this)
+        recycleViewList()
+
+        addressListViewModel.getAddressData(requireActivity())?.observe(requireActivity(), Observer {
+            addressDetailsAdapter.setData(it as ArrayList<AddressDetailsModel>)
+            addressDetailsViewModelList = it
+        })
 
     }
 

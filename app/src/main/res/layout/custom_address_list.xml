@@ -27,74 +27,91 @@
                 android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/shopName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Shop Name"
+                        android:gravity="center"
                         android:textColor="@color/black"
                         android:textSize="13dp" />
 
                     <TextView
-                        android:id="@+id/tvPopulation"
+                        android:id="@+id/PersonName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Person Name"
+                        android:gravity="center"
                         android:textColor="@color/black"
                         android:textSize="13dp" />
 
                     <TextView
+                        android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Email"
+                        android:gravity="center"
                         android:textColor="@color/black"
                         android:textSize="13dp" />
 
                     <TextView
+                        android:id="@+id/mobNo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Mobile Number"
+                        android:gravity="center"
                         android:textColor="@color/black"
                         android:textSize="13dp" />
 
                     <TextView
-                        android:id="@+id/tvContactNumber"
+                        android:id="@+id/pinCode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="PinCode"
+                        android:gravity="center"
                         android:textColor="@color/black"
                         android:textSize="13dp" />
 
                 <TextView
+                    android:id="@+id/state"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="State"
+                    android:gravity="center"
                     android:textColor="@color/black"
                     android:textSize="13dp" />
 
                 <TextView
+                    android:id="@+id/district"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="District"
+                    android:gravity="center"
                     android:textColor="@color/black"
                     android:textSize="13dp" />
                 <TextView
-                    android:id="@+id/tvPradhan_name"
+                    android:id="@+id/houseNo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="House no"
+                    android:gravity="center"
                     android:textColor="@color/black"
                     android:textSize="13dp" />
 
                 <TextView
+                    android:id="@+id/area"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Area, Village"
+                    android:gravity="center"
                     android:textColor="@color/black"
                     android:textSize="13dp" />
 
                 <TextView
+                    android:id="@+id/landMark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Landmark"
+                    android:gravity="center"
                     android:textColor="@color/black"
                     android:textSize="13dp" />
 

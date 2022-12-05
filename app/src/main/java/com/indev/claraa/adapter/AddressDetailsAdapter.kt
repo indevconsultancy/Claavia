@@ -8,9 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
+import com.indev.claraa.entities.AddressDetailsModel
 
 
-class AddressDetailsAdapter (private val context: Context, var addressDetailsModelList: ArrayList<String>, private val listener: ClickLinstener) : RecyclerView.Adapter<AddressDetailsAdapter.MyViewholder>(){
+class AddressDetailsAdapter(private val context: Context, var addressDetailsModelList: ArrayList<AddressDetailsModel>, private val listener: ClickLinstener) : RecyclerView.Adapter<AddressDetailsAdapter.MyViewholder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewholder {
         val itemView =
@@ -20,10 +21,10 @@ class AddressDetailsAdapter (private val context: Context, var addressDetailsMod
 
     override fun onBindViewHolder(holder: MyViewholder, position: Int) {
         val currentItem = addressDetailsModelList[position]
-        holder.newAddress.text = currentItem
-        holder.newAddress.setOnClickListener{
-//            replaceFregment(ProductDetails())
-        }
+        holder.shopName.text = currentItem.toString()
+//        holder.shopName.setOnClickListener{
+////            replaceFregment(ProductDetails())
+//        }
     }
 
 //    private fun replaceFregment(fragment : Fragment) {
@@ -32,7 +33,7 @@ class AddressDetailsAdapter (private val context: Context, var addressDetailsMod
 //        transaction.commit()
 //    }
 
-    fun setData(homeModel: ArrayList<String>) {
+    fun setData(homeModel: ArrayList<AddressDetailsModel>) {
         this.addressDetailsModelList= homeModel
         notifyDataSetChanged()
     }
@@ -42,7 +43,7 @@ class AddressDetailsAdapter (private val context: Context, var addressDetailsMod
     }
 
     inner class MyViewholder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val newAddress: TextView = itemView!!.findViewById(R.id.newAddress)
+        val shopName: TextView = itemView!!.findViewById(R.id.shopName)
 //        val tvProductName: TextView = itemView!!.findViewById(R.id.tvProductName)
 
         init {

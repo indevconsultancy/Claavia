@@ -1,7 +1,6 @@
 package com.indev.claraa.viewmodel
 
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -12,14 +11,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.indev.claraa.R
 import com.indev.claraa.entities.AddressDetailsModel
-import com.indev.claraa.entities.CartModel
-import com.indev.claraa.fragment.AddressDetails
 import com.indev.claraa.fragment.AddressList
 import com.indev.claraa.repository.AddressDetailsRepository
-import com.indev.claraa.repository.CartRepository
-import com.indev.claraa.repository.UserRegistrationRepository
 import com.indev.claraa.ui.HomeScreen
-import com.indev.claraa.ui.LoginScreen
 import kotlinx.coroutines.launch
 
 class AddressDetailsViewModel (val context: Context): ViewModel() {
@@ -32,11 +26,11 @@ class AddressDetailsViewModel (val context: Context): ViewModel() {
     var districtOfUser: String? = null
     var stateOfUser: String? = null
     lateinit var addressDetailsModel: AddressDetailsModel
+//    val readData: LiveData<AddressDetailsModel>
 
-
-    fun getCartList(context: Context): LiveData<List<CartModel>>? {
-        return CartRepository.getCartList(context)
-    }
+//    init {
+//        readData = AddressDetailsRepository.getAddressData(context)!!
+//    }
 
     val clicksListener = object : AdapterView.OnItemSelectedListener {
         override fun onNothingSelected(parent: AdapterView<*>?) {

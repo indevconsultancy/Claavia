@@ -28,9 +28,9 @@ interface ClaraaDao {
     @Insert
     suspend fun insertAddressData(addressDetailsModel: AddressDetailsModel): Long
 
-//    @Query("SELECT * FROM address ORDER BY local_id ASC")
-//    fun getAddressData() : LiveData<List<AddressDetailsViewModel>>
-//
+    @Query("SELECT * FROM address ORDER BY local_id ASC")
+    fun getAddressData() : LiveData<List<AddressDetailsModel>>
+
 
     @Query("SELECT * FROM user_master  ORDER BY local_id ASC")
     fun getRegistrationData() : LiveData<UserRegistrationModel>

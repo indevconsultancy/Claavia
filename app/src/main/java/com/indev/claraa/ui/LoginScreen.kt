@@ -14,7 +14,6 @@ class LoginScreen : AppCompatActivity() {
     private lateinit var binding: LoginScreenBinding
     private lateinit var loginViewModel: LoginViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.login_screen)
