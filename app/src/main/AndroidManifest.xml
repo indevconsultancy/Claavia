@@ -22,22 +22,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".ui.OrderPage"
-            android:exported="false"
-            android:parentActivityName=".ui.ProductDetail" >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ui.ProductDetail"
-            android:exported="false"
-            android:parentActivityName=".ui.HomeScreen" >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
         <activity
             android:name=".ui.EmailVarification"
             android:exported="false" >

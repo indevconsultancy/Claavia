@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.indev.claraa.R
 import com.indev.claraa.entities.AddressDetailsModel
 import com.indev.claraa.entities.CartModel
+import com.indev.claraa.fragment.AddressDetails
 import com.indev.claraa.fragment.AddressList
 import com.indev.claraa.repository.AddressDetailsRepository
 import com.indev.claraa.repository.CartRepository
@@ -46,7 +47,7 @@ class AddressDetailsViewModel (val context: Context): ViewModel() {
             pinCode.get().toString())
         viewModelScope.launch {
             AddressDetailsRepository.insertAddressData(context, addressDetailsModel)
-            context.startActivity(Intent(context, AddressList::class.java))
+            replaceFregment(AddressList())
         }
     }
 

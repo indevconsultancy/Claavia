@@ -336,34 +336,15 @@
                         </TableRow>
                     </TableLayout>
 
-
-
-
-                    <Spinner
-                        android:visibility="gone"
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:id="@+id/spnPowerRange"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:entries="@array/lensrange"
-                        tools:setOnItemSelectedListener="@{productDetailVM.rangeClicksListener}"
-                        />
-
-
-
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerViewCart"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        />
-
+                        android:visibility="gone" />
 
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </layout>
