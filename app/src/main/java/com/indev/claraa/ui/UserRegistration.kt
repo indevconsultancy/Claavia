@@ -1,6 +1,5 @@
 package com.indev.claraa.ui
 
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -10,7 +9,6 @@ import com.indev.claraa.R
 import com.indev.claraa.databinding.ActivityUserRegistrationBinding
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
-import com.indev.claraa.repository.UserRegistrationRepository
 import com.indev.claraa.viewmodel.RegistrationViewModel
 import com.indev.claraa.viewmodel.RegistrationViewModelFactory
 

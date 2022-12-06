@@ -12,7 +12,7 @@ import com.indev.claraa.ui.HomeScreen
 
 class AddressListViewModel (val context: Context): ViewModel() {
 
-   fun btnList(){
+   fun newAddress(){
        replaceFregment(AddNewAddress())
    }
 

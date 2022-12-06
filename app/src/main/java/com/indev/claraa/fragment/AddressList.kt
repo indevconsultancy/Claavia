@@ -74,7 +74,6 @@ class AddressList : Fragment(), ClickLinstener {
     }
 
     override fun onClickListner(position: Int) {
-        TODO("Not yet implemented")
     }
 
 }

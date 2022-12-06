@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp">
 
@@ -31,7 +32,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Shop Name"
-                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:gravity="center_vertical"
                         android:textColor="@color/black"
                         android:textSize="13dp" />
 
@@ -40,7 +42,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Person Name"
-                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:gravity="center_vertical"
                         android:textColor="@color/black"
                         android:textSize="13dp" />
 
@@ -49,7 +52,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Email"
-                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:gravity="center_vertical"
                         android:textColor="@color/black"
                         android:textSize="13dp" />
 
@@ -58,7 +62,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Mobile Number"
-                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:gravity="center_vertical"
                         android:textColor="@color/black"
                         android:textSize="13dp" />
 
@@ -67,7 +72,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="PinCode"
-                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:gravity="center_vertical"
                         android:textColor="@color/black"
                         android:textSize="13dp" />
 
@@ -76,7 +82,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="State"
-                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:gravity="center_vertical"
                     android:textColor="@color/black"
                     android:textSize="13dp" />
 
@@ -85,7 +92,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="District"
-                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:gravity="center_vertical"
                     android:textColor="@color/black"
                     android:textSize="13dp" />
                 <TextView
@@ -93,7 +101,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="House no"
-                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:gravity="center_vertical"
                     android:textColor="@color/black"
                     android:textSize="13dp" />
 
@@ -102,7 +111,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Area, Village"
-                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:gravity="center_vertical"
                     android:textColor="@color/black"
                     android:textSize="13dp" />
 
@@ -111,7 +121,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Landmark"
-                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:gravity="center_vertical"
                     android:textColor="@color/black"
                     android:textSize="13dp" />
 
@@ -135,14 +146,6 @@
                     android:textColor="@color/white"
                     android:textAllCaps="false"
                     android:text="Edit Address"/>
-
-                <Button
-                    android:id="@+id/newAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:textAllCaps="false"
-                    android:text="Add a New Address"/>
 
                 </LinearLayout>
 
