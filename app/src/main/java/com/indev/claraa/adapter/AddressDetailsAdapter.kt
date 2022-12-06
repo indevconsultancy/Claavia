@@ -21,7 +21,7 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
 
     override fun onBindViewHolder(holder: MyViewholder, position: Int) {
         val currentItem = addressDetailsModelList[position]
-        holder.shopName.text = currentItem.toString()
+        holder.shopName.text = currentItem.shop_name
 //        holder.shopName.setOnClickListener{
 ////            replaceFregment(ProductDetails())
 //        }

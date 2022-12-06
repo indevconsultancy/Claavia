@@ -59,12 +59,6 @@ class Home : Fragment(), ClickLinstener {
         homeAdapter = HomeAdapter( requireContext(),homeModelList, this)
         recycleViewList()
 
-//        homeScreenViewModel.getHomeList(requireContext())?.observe(viewLifecycleOwner, Observer {
-//            homeAdapter.setData(it as ArrayList<String>)
-//            homeModelList = it
-//        })
-
-
         val carousel: ImageCarousel = binding.carousel
         binding.toolbar.menuClick.setOnClickListener {
             binding.myDrawerLayout.openDrawer(GravityCompat.START)

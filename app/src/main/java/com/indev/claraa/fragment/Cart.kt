@@ -50,9 +50,12 @@ class Cart : Fragment(), ClickLinstener {
             cartModelList = it
         })
 
-        binding.toolbar.menuClick.setOnClickListener(){
+        binding.toolbar.backClick.setOnClickListener(){
             replaceFregment(Home())
         }
+
+        binding.toolbar.toolbarTitle.text = "Cart"
+
 
     }
 

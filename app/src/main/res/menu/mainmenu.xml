@@ -13,7 +13,7 @@
         <item
             android:id="@+id/order"
             android:icon="@drawable/footer_history_i"
-            android:title="Order History" />
+            android:title="Cart" />
 
         <item
             android:id="@+id/refer"

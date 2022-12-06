@@ -1,6 +1,7 @@
 package com.indev.claraa.ui
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -41,33 +42,36 @@ class HomeScreen : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        if (isTopFragmentConsumedBackPress()) {
-            super.onBackPressed()
-
-        } else {
-            SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE).setTitleText("Exit")
-                .setContentText("Are you sure to want to Exit?").setCancelText("Cancel")
-                .setConfirmText("Ok")
-                .setConfirmClickListener {
-                    finishAffinity()
-                }
-                .showCancelButton(true)
-                .setCancelClickListener { sDialog -> // Showing simple toast message to user
-                    sDialog.cancel()
-                }.show()
-
-        }
-    }
-
-    private fun isTopFragmentConsumedBackPress(): Boolean = true
-
+//
+//    override fun onBackPressed() {
+//
+//        if(binding.bottomNavigation.bottomNavigation.selectedItemId == R.id.home) {
+//            super.onBackPressed()
+//
+//            SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE).setTitleText("Exit")
+//                .setContentText("Are you sure to want to Exit?").setCancelText("Cancel")
+//                .setConfirmText("Ok")
+//                .setConfirmClickListener {
+//                    finishAffinity()
+//                }
+//                .showCancelButton(true)
+//                .setCancelClickListener { sDialog -> // Showing simple toast message to user
+//                    sDialog.cancel()
+//                }.show()
+//        }else{
+//
+//            binding.bottomNavigation.bottomNavigation.selectedItemId ==R.id.home
+//            Toast.makeText(applicationContext,"jhbfkj",Toast.LENGTH_LONG).show()
+//        }
+//
+//    }
 
 
     private fun replaceFregment(fragment : Fragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransition= fragmentManager.beginTransaction()
         fragmentTransition.replace(R.id.frame_layout, fragment)
+        fragmentTransition.addToBackStack(null)
         fragmentTransition.commit()
     }
 

@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="5dp"
     android:orientation="vertical">
 
             <LinearLayout
@@ -14,7 +15,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cvFl"
                     android:layout_width="match_parent"
-                    android:layout_height="170dp"
+                    android:layout_height="150dp"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
                     android:background="@drawable/border"
@@ -29,7 +30,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="120dp"
+                        android:layout_height="100dp"
                         android:orientation="horizontal"
                         android:background="#F0F7F7"
                         android:backgroundTint="#F0F7F7"
@@ -54,7 +55,8 @@
                             android:text="Claraa Fresh Flo Lens"
                             android:layout_gravity="center_vertical"
                             android:textColor="@color/bs_blue"
-                            android:textSize="18dp" />
+                            android:textSize="16dp"
+                            android:textStyle="bold"/>
 
 
                             <TextView
@@ -63,7 +65,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Rs500"
                                     android:textColor="@color/black"
-                                    android:textSize="20dp"
+                                    android:textSize="15dp"
                                     android:layout_gravity="center_vertical"
                                     android:textStyle="bold" />
                             <TextView
@@ -73,7 +75,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Size: -0.5"
                                 android:textColor="@color/black"
-                                android:textSize="15dp"
+                                android:textSize="13dp"
                                 android:layout_gravity="center_vertical"
                                 android:textStyle="bold" />
                             </LinearLayout>
@@ -108,31 +110,31 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_margin="5dp"
                                 android:gravity="center"
                                 android:orientation="horizontal"
                                 android:weightSum="3">
 
 
                                 <ImageView
-                                    android:layout_width="30dp"
-                                    android:layout_height="25dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
                                     android:layout_gravity="center"
                                     android:layout_weight="1"
-                                    android:backgroundTint="@color/light_gray"
+                                    android:padding="@dimen/_3sdp"
+                                    android:background="@color/main_orange_color"
                                     android:src="@drawable/ic_baseline_delete_outline_24"
                                     tools:ignore="MissingConstraints"
                                     tools:layout_editor_absoluteX="204dp"
                                     tools:layout_editor_absoluteY="679dp" />
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="match_parent"
                                         android:layout_height="35dp"
                                         android:layout_gravity="center"
-                                        android:layout_margin="5dp"
                                         android:layout_weight="1"
                                         android:gravity="center"
                                         android:text="1"
+                                        android:background="@color/white"
                                         android:textColor="@color/black"
                                         android:textSize="18dp"
                                         app:layout_constraintEnd_toStartOf="@+id/imageButton"
@@ -143,15 +145,14 @@
 
                                 <ImageView
                                     android:id="@+id/imageButton"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="25dp"
+                                    android:padding="3dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
                                     android:layout_gravity="center"
                                     android:layout_weight="1"
-                                    android:backgroundTint="@color/light_gray"
+                                    android:background="@color/main_orange_color"
                                     android:src="@drawable/ic_baseline_add_24"
-                                    tools:ignore="MissingConstraints"
-                                    tools:layout_editor_absoluteX="204dp"
-                                    tools:layout_editor_absoluteY="679dp" />
+                                    tools:ignore="MissingConstraints" />
 
                             </LinearLayout>
 
@@ -167,12 +168,7 @@
                             android:text="Delete"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_10sdp"
-                            android:layout_weight="1"
-                            />
-
-
-
-
+                            android:layout_weight="1" />
 
                     </LinearLayout>
                     </LinearLayout>

@@ -11,11 +11,11 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragment.AddressDetails">
+        tools:context=".fragment.AddNewAddress">
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/custom_address_toolbar"
+            layout="@layout/custom_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"

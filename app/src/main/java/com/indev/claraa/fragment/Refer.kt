@@ -25,10 +25,11 @@ class Refer : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.toolbar.menuClick.setOnClickListener(){
+        binding.toolbar.backClick.setOnClickListener(){
             replaceFregment(Home())
         }
 
+        binding.toolbar.toolbarTitle.text = "Refer"
     }
 
     private fun replaceFregment(fragment : Fragment) {

@@ -40,9 +40,11 @@ class AddressList : Fragment(), ClickLinstener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.toolbar.menuClick.setOnClickListener(){
+        binding.toolbar.backClick.setOnClickListener(){
             replaceFregment(Cart())
         }
+
+        binding.toolbar.toolbarTitle.text = "Address List"
 
         addressListViewModel = AddressListViewModel(requireActivity())
         addressDetailsAdapter = AddressDetailsAdapter(requireActivity(),ArrayList<AddressDetailsModel>(), this)

@@ -33,8 +33,6 @@ class Profile : Fragment() {
         )[ProfileViewModel::class.java]
         binding.profileVM = profileViewModel
         return binding.root
-
-
     }
 
 
@@ -55,6 +53,19 @@ class Profile : Fragment() {
             }
         })
 
+        binding.toolbar.toolbarTitle.text = "Profile"
+
+        binding.toolbar.backClick.setOnClickListener {
+            replaceFregment(Home())
+        }
+
     }
 
+    private fun replaceFregment(fragment : Fragment) {
+        val fragmentManager = activity?.supportFragmentManager
+        val fragmentTransition= fragmentManager?.beginTransaction()
+        fragmentTransition?.replace(R.id.frame_layout, fragment)
+        fragmentTransition?.addToBackStack(null)
+        fragmentTransition?.commit()
+    }
 }

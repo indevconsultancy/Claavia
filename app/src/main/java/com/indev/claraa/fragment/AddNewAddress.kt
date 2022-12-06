@@ -1,6 +1,5 @@
 package com.indev.claraa.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
@@ -10,16 +9,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.indev.claraa.R
-import com.indev.claraa.adapter.HomeAdapter
 import com.indev.claraa.databinding.FragmentAddressDetailsBinding
-import com.indev.claraa.databinding.FragmentHomeBinding
-import com.indev.claraa.ui.HomeScreen
 import com.indev.claraa.viewmodel.AddressDetailsViewModel
 import com.indev.claraa.viewmodel.AddressDetailsViewModelFactory
-import com.indev.claraa.viewmodel.HomeScreenViewModel
-import com.indev.claraa.viewmodel.HomeScreenViewModelFactory
 
-class AddressDetails : Fragment() {
+class AddNewAddress : Fragment() {
     private lateinit var binding: FragmentAddressDetailsBinding
     private lateinit var addressDetailsViewModel: AddressDetailsViewModel
 
@@ -50,9 +44,10 @@ class AddressDetails : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.toolbar.menuClick.setOnClickListener(){
+        binding.toolbar.backClick.setOnClickListener(){
             replaceFregment(AddressList())
         }
+        binding.toolbar.toolbarTitle.text = "Add New Address"
 
     }
 

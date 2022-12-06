@@ -6,9 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.indev.claraa.R
 import com.indev.claraa.entities.CartModel
-import com.indev.claraa.fragment.AddressDetails
 import com.indev.claraa.fragment.AddressList
-import com.indev.claraa.fragment.Cart
 import com.indev.claraa.repository.CartRepository
 import com.indev.claraa.ui.HomeScreen
 

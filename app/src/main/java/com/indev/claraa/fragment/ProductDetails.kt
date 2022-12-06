@@ -112,16 +112,11 @@ class ProductDetails : Fragment(), ClickLinstener {
             }
         })
 
-        binding.toolbar.menuClick.setOnClickListener(){
+        binding.toolbar.backClick.setOnClickListener(){
             replaceFregment(Home())
         }
+        binding.toolbar.toolbarTitle.text = "Product Details"
 
-//        binding.toolbar.home.setOnClickListener(){
-//            replaceFregment(Home())
-//        }
-
-
-        var cartRepository= CartRepository()
         productDetailViewModel = ViewModelProvider(this, ProductDetailViewModelFactory(requireActivity()))[ProductDetailViewModel::class.java]
         binding.productDetailVM = productDetailViewModel
     }
@@ -157,7 +152,6 @@ class ProductDetails : Fragment(), ClickLinstener {
             adapter= cartAdapter
         }
     }
-
 
     override fun onClickListner(position: Int) {
         Toast.makeText(requireActivity(), ""+position, Toast.LENGTH_LONG).show()

@@ -6,16 +6,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.indev.claraa.R
 import com.indev.claraa.entities.AddressDetailsModel
-import com.indev.claraa.entities.CartModel
-import com.indev.claraa.fragment.AddressDetails
+import com.indev.claraa.fragment.AddNewAddress
 import com.indev.claraa.repository.AddressDetailsRepository
-import com.indev.claraa.repository.CartRepository
 import com.indev.claraa.ui.HomeScreen
 
 class AddressListViewModel (val context: Context): ViewModel() {
 
    fun btnList(){
-       replaceFregment(AddressDetails())
+       replaceFregment(AddNewAddress())
    }
 
     private fun replaceFregment(fragment : Fragment) {

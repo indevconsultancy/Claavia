@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/bs_blue"
+            android:backgroundTint="@color/bs_blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -27,31 +28,23 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/menuClick"
+                    android:id="@+id/backClick"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:src="@drawable/ic_baseline_arrow_back_24" />
 
                 <TextView
-                    android:id="@+id/tv_details"
+                    android:id="@+id/toolbarTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_20sdp"
-                    android:layout_marginEnd="29dp"
-                    android:layout_toEndOf="@id/menuClick"
-                    android:text="Address Details"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/backClick"
+                    android:text="Title"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_15sdp"
                     android:textStyle="bold" />
-<!--                android:layout_toStartOf="@+id/home"-->
-<!--                <ImageView-->
-<!--                    android:id="@+id/home"-->
-<!--                    android:layout_width="@dimen/_20sdp"-->
-<!--                    android:layout_height="@dimen/_20sdp"-->
-<!--                    android:layout_alignParentEnd="true"-->
-<!--                    android:layout_marginEnd="36dp"-->
-<!--                    android:src="@drawable/ic_baseline_home_24" />-->
 
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
