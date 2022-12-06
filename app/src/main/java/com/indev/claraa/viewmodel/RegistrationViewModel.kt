@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ObservableField
 import androidx.lifecycle.*
 import com.indev.claraa.entities.UserRegistrationModel

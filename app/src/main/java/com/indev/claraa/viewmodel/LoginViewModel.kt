@@ -1,6 +1,5 @@
 package com.indev.claraa.viewmodel
 
-import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
@@ -20,7 +19,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class LoginViewModel(@SuppressLint("StaticFieldLeak") private val context: Context): ViewModel() {
+class LoginViewModel(val context: Context): ViewModel() {
 
     var username: ObservableField<String> = ObservableField("")
     var password: ObservableField<String> = ObservableField("")
