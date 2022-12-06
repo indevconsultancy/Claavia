@@ -48,7 +48,6 @@ class LoginViewModel(val context: Context): ViewModel() {
                 if (user_id>0) {
 //                    prefHelper.setString("isLogin", "yes")
                     context.startActivity(Intent(context, HomeScreen::class.java))
-
                     /*Handler(Looper.getMainLooper()).post {
                         Toast.makeText(context, "", Toast.LENGTH_LONG).show()
                     }*/
