@@ -6,11 +6,14 @@ import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.indev.claraa.R
 import com.indev.claraa.entities.LoginModel
+import com.indev.claraa.fragment.Home
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.LoginRepository
@@ -29,9 +32,16 @@ class LoginViewModel(val context: Context): ViewModel() {
 
     fun signIn(){
         progressDialog = ProgressDialog(context)
-        progressDialog.show()
-        progressDialog.setContentView(R.layout.show_dialog)
-        progressDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE)
+            .setContentText("Please Wait")
+            .setConfirmText("Ok")
+            .setConfirmClickListener {
+                context.startActivity(Intent(context, Home::class.java))
+            }
+            .showCancelButton(true)
+            .setCancelClickListener { sDialog -> // Showing simple toast message to user
+                sDialog.cancel()
+            }.show()
         nextActivity()
 //            context.startActivity(Intent(context, HomeScreen::class.java))
     }

@@ -109,14 +109,14 @@ class Home : Fragment(), ClickLinstener {
             true
         }
     }
-    override fun onResume() {
-        super.onResume()
-        requireView().isFocusableInTouchMode = false
-        requireView().requestFocus()
-        requireView().setOnKeyListener { _, keyCode, event ->
-            event.action === KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK
-        }
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        requireView().isFocusableInTouchMode = false
+//        requireView().requestFocus()
+//        requireView().setOnKeyListener { _, keyCode, event ->
+//            event.action === KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK
+//        }
+//    }
 
 
     private fun recycleViewList() {
@@ -133,6 +133,7 @@ class Home : Fragment(), ClickLinstener {
         val fragmentManager = activity?.supportFragmentManager
         val fragmentTransition= fragmentManager?.beginTransaction()
         fragmentTransition?.replace(R.id.frame_layout, fragment)
+        fragmentTransition?.addToBackStack(null)
         fragmentTransition?.commit()
     }
 

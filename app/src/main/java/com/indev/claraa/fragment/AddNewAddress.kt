@@ -33,14 +33,14 @@ class AddNewAddress : Fragment() {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-        requireView().isFocusableInTouchMode = true
-        requireView().requestFocus()
-        requireView().setOnKeyListener { _, keyCode, event ->
-            event.action === KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK
-        }
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        requireView().isFocusableInTouchMode = true
+//        requireView().requestFocus()
+//        requireView().setOnKeyListener { _, keyCode, event ->
+//            event.action === KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK
+//        }
+//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,6 +55,7 @@ class AddNewAddress : Fragment() {
         val fragmentManager = activity?.supportFragmentManager
         val fragmentTransition= fragmentManager?.beginTransaction()
         fragmentTransition?.replace(R.id.frame_layout, fragment)
+        fragmentTransition?.addToBackStack(null)
         fragmentTransition?.commit()
     }
 

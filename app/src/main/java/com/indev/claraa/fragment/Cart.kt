@@ -69,8 +69,10 @@ class Cart : Fragment(), ClickLinstener {
     }
 
     private fun replaceFregment(fragment : Fragment) {
+        val fragmentManager = activity?.supportFragmentManager
         val fragmentTransition= fragmentManager?.beginTransaction()
         fragmentTransition?.replace(R.id.frame_layout, fragment)
+        fragmentTransition?.addToBackStack(null)
         fragmentTransition?.commit()
     }
 
