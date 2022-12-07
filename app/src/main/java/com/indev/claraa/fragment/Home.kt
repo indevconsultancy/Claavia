@@ -2,14 +2,12 @@ package com.indev.claraa.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.pedant.SweetAlert.SweetAlertDialog
@@ -19,7 +17,6 @@ import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
 import com.indev.claraa.adapter.HomeAdapter
 import com.indev.claraa.databinding.FragmentHomeBinding
-import com.indev.claraa.entities.HomeModel
 import com.indev.claraa.ui.LoginScreen
 import com.indev.claraa.viewmodel.HomeScreenViewModel
 import com.indev.claraa.viewmodel.HomeScreenViewModelFactory
@@ -152,7 +149,6 @@ class Home : Fragment(), ClickLinstener {
     }
 
     override fun onClickListner(position: Int) {
-        TODO("Not yet implemented")
     }
 
 

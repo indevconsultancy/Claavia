@@ -38,5 +38,9 @@ interface ClaraaDao {
     @Update
     fun update(userRegistrationTable: UserRegistrationModel)
 
+//    @NotNull
+//    @Insert
+//    suspend fun insertFeatureMasterData(features: Features)
+
 
 }

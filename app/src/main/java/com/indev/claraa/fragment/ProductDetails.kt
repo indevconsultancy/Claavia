@@ -1,6 +1,5 @@
 package com.indev.claraa.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
@@ -82,6 +81,13 @@ class ProductDetails : Fragment(), ClickLinstener {
             )
         )
         carousel.setData(list)
+        binding.toolbar.backClick.setOnClickListener(){
+            replaceFregment(Home())
+        }
+        binding.toolbar.toolbarTitle.text = "Product Details"
+
+        productDetailViewModel = ViewModelProvider(this, ProductDetailViewModelFactory(requireActivity()))[ProductDetailViewModel::class.java]
+        binding.productDetailVM = productDetailViewModel
 
 
         productDetailViewModel = ProductDetailViewModel(requireActivity())
@@ -112,13 +118,7 @@ class ProductDetails : Fragment(), ClickLinstener {
             }
         })
 
-        binding.toolbar.backClick.setOnClickListener(){
-            replaceFregment(Home())
-        }
-        binding.toolbar.toolbarTitle.text = "Product Details"
 
-        productDetailViewModel = ViewModelProvider(this, ProductDetailViewModelFactory(requireActivity()))[ProductDetailViewModel::class.java]
-        binding.productDetailVM = productDetailViewModel
     }
 
     private fun recycleViewPowerrangeList() {
@@ -131,20 +131,20 @@ class ProductDetails : Fragment(), ClickLinstener {
     }
 //    override fun onResume() {
 //        super.onResume()
-//        requireView().isFocusableInTouchMode = true
+//        requireView().isFocusableInTouchMode = false
 //        requireView().requestFocus()
 //        requireView().setOnKeyListener { _, keyCode, event ->
 //            event.action === KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK
 //        }
 //    }
 
+
     private fun replaceFregment(fragment : Fragment) {
-        val fragmentManager = activity?.supportFragmentManager
         val fragmentTransition= fragmentManager?.beginTransaction()
         fragmentTransition?.replace(R.id.frame_layout, fragment)
         fragmentTransition?.addToBackStack(null)
         fragmentTransition?.commit()
-    }
+}
 
     private fun recycleViewList() {
         binding.recyclerViewCart.apply {
