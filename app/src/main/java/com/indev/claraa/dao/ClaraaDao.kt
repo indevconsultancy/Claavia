@@ -5,11 +5,11 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.indev.claraa.entities.AddressDetailsModel
-import com.indev.claraa.entities.CartModel
-import com.indev.claraa.entities.UserRegistrationModel
+import com.google.gson.JsonObject
+import com.indev.claraa.entities.*
 import com.indev.claraa.viewmodel.AddressDetailsViewModel
 import org.jetbrains.annotations.NotNull
+import retrofit2.Response
 
 @Dao
 interface ClaraaDao {
@@ -38,9 +38,12 @@ interface ClaraaDao {
     @Update
     fun update(userRegistrationTable: UserRegistrationModel)
 
-//    @NotNull
-//    @Insert
-//    suspend fun insertFeatureMasterData(features: Features)
+    @NotNull
+    @Insert
+    suspend fun insertStateMasterData(stateModel: StateModel)
 
+    @NotNull
+    @Insert
+    suspend fun insertDistrictMasterData(districtModel: DistrictModel)
 
 }

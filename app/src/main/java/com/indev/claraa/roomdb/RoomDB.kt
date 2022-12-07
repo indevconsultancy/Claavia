@@ -5,13 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.indev.claraa.dao.ClaraaDao
-import com.indev.claraa.entities.AddressDetailsModel
-import com.indev.claraa.entities.CartModel
-import com.indev.claraa.entities.UserRegistrationModel
+import com.indev.claraa.entities.*
 
 
 @Database(entities = [UserRegistrationModel::class,
-                    CartModel::class,AddressDetailsModel::class], version = 1)
+                    CartModel::class,AddressDetailsModel::class,StateModel::class,DistrictModel::class], version = 1)
+
+
 abstract class RoomDB: RoomDatabase() {
 
     abstract fun userDao(): ClaraaDao
