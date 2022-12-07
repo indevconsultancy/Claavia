@@ -116,6 +116,7 @@
 
 
                                 <ImageView
+                                    android:id="@+id/deleteButton"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_gravity="center"
@@ -128,6 +129,7 @@
                                     tools:layout_editor_absoluteY="679dp" />
 
                                     <TextView
+                                        android:id="@+id/tvCount"
                                         android:layout_width="match_parent"
                                         android:layout_height="35dp"
                                         android:layout_gravity="center"
@@ -144,7 +146,7 @@
 
 
                                 <ImageView
-                                    android:id="@+id/imageButton"
+                                    android:id="@+id/addButton"
                                     android:padding="3dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"

@@ -17,7 +17,7 @@ class LoginRepository {
             try {
                 var result = apiInterface?.login(loginModel)
                 return if (result?.body()?.status==1){
-                    result?.body()!!.user_id
+                    result?.body()!!.status
                 } else {
                     0
                 }

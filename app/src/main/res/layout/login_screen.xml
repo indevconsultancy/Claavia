@@ -85,6 +85,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
+                            android:text="@={loginVM.username}"
                             android:background="@drawable/custom_background"
                             android:id="@+id/et_user_name"/>
                     </com.google.android.material.textfield.TextInputLayout>
@@ -140,6 +141,7 @@
                             <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
+                                android:text="@={loginVM.password}"
                                 android:background="@drawable/custom_background"
                                 android:id="@+id/et_password"/>
 

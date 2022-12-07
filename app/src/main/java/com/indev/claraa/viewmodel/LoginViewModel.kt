@@ -36,16 +36,16 @@ class LoginViewModel(val context: Context): ViewModel() {
 //            context.startActivity(Intent(context, HomeScreen::class.java))
     }
     private fun nextActivity() {
-        loginModel= LoginModel(username.get().toString().trim(),password.get().toString().trim(),"")
+        loginModel= LoginModel(username.get().toString().trim(),password.get().toString().trim())
 
         viewModelScope.launch {
             //Data store in model
-            var user_id  =0
+            var status  =0
 
             CoroutineScope(Dispatchers.IO).launch {
-                user_id  = LoginRepository.login(loginModel)
+                status  = LoginRepository.login(loginModel)
                 progressDialog.dismiss()
-                if (user_id>0) {
+                if (status>0) {
 //                    prefHelper.setString("isLogin", "yes")
                     context.startActivity(Intent(context, HomeScreen::class.java))
                     /*Handler(Looper.getMainLooper()).post {
