@@ -1,5 +1,6 @@
 package com.indev.claraa.restApi
 
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.indev.claraa.apiResponse.LoginResponse
 import com.indev.claraa.apiResponse.UserRegistrationResponse
@@ -20,7 +21,7 @@ interface ClaraaApi {
 
 
     @POST("download_general.php")
-    suspend fun downloadMasterData(@Body masterData: MasterData): Response<List<stateMasterResponse>>
+    suspend fun downloadMasterData(@Body masterData: MasterData): Response<JsonArray>
 
 
     @POST("login.php")

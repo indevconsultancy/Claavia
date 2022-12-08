@@ -2,6 +2,7 @@ package com.indev.claraa.repository
 
 import android.content.Context
 import android.util.Log
+import com.google.gson.JsonArray
 import com.indev.claraa.apiResponse.stateMasterResponse
 import com.indev.claraa.dao.ClaraaDao
 import com.indev.claraa.entities.DistrictModel
@@ -31,12 +32,22 @@ class SplashRepository{
 
             try {
                 val result = apiInterface?.downloadMasterData(masterData)
-                list.addAll(result?.body()!!)
-                for (i in 0 until list.size) {
-                    val state_master = StateModel(list[i].state_id, list[i].state_name, list[i].active)
-                    val state_id=  dataBase?.userDao()?.insertStateMasterData(state_master)
-                    Log.e("TAG", "downloadMasterData1: " + state_id )
-              }
+//
+//                list.addAll(result?.body()!!)
+//                for (i in 0 until list.size) {
+//                    val state_master = StateModel(list[i].state_id, list[i].state_name, list[i].active)
+//                    val state_id=  dataBase?.userDao()?.insertStateMasterData(state_master)
+//                    Log.e("TAG", "downloadMasterData1: " + state_id )
+//              }
+
+                val jsonArray = JSONArray(result?.body().toString())
+                        for (i in 0 until jsonArray.length()) {
+                            val singleData = JSONObject(jsonArray[i].toString())
+                            val state_master = StateModel(singleData["state_id"].toString(),singleData["state_name"].toString(), singleData["active"].toString())
+                            val state_id=  dataBase?.userDao()?.insertStateMasterData(state_master)
+                            Log.e("TAG", "downloadMasterData1: " + state_id )
+                        }
+
             } catch (e: Exception) {
                 Log.d("fail", "$e")
             }
