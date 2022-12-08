@@ -28,29 +28,23 @@ class SplashScreen : AppCompatActivity() {
 
         supportActionBar?.hide()
         callNextActivity()
-
         this.window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
+            WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
         val userDao = RoomDB.getDatabase(this@SplashScreen).userDao()
         val apiInterface = ClientApi.getClient()?.create(ClaraaApi::class.java)
         val splashRepo = SplashRepository(apiInterface,userDao)
-
         splashViewModel = ViewModelProvider(this, SplashViewModelFactory(this@SplashScreen, splashRepo))[SplashViewModel::class.java]
-
 
     }
 
     private fun callNextActivity() {
         Handler().postDelayed({
-
             if (splashLoaded == "No") {
                 val intent = Intent(this@SplashScreen, LoginScreen::class.java)
                 startActivity(intent)
                 finishAffinity()
-
             }
         }, splashPreLength.toLong())
     }
