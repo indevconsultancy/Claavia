@@ -9,12 +9,16 @@ import com.indev.claraa.entities.*
 
 
 @Database(entities = [UserRegistrationModel::class,
-                    CartModel::class,AddressDetailsModel::class,StateModel::class,DistrictModel::class], version = 1)
+                        CartModel::class,
+                        AddressDetailsModel::class,
+                        StateModel::class,
+                        DistrictModel::class], version = 1)
 
 
 abstract class RoomDB: RoomDatabase() {
 
     abstract fun userDao(): ClaraaDao
+
 
     companion object {
         @Volatile

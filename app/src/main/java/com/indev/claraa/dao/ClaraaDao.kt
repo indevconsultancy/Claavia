@@ -40,7 +40,7 @@ interface ClaraaDao {
 
     @NotNull
     @Insert
-    suspend fun insertStateMasterData(stateModel: StateModel)
+    suspend fun insertStateMasterData(stateModel: StateModel): Long
 
     @NotNull
     @Insert

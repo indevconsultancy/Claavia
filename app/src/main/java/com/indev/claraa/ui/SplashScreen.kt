@@ -32,10 +32,7 @@ class SplashScreen : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
-        val userDao = RoomDB.getDatabase(this@SplashScreen).userDao()
-        val apiInterface = ClientApi.getClient()?.create(ClaraaApi::class.java)
-        val splashRepo = SplashRepository(apiInterface,userDao)
-        splashViewModel = ViewModelProvider(this, SplashViewModelFactory(this@SplashScreen, splashRepo))[SplashViewModel::class.java]
+        splashViewModel = ViewModelProvider(this, SplashViewModelFactory(this@SplashScreen))[SplashViewModel::class.java]
 
     }
 

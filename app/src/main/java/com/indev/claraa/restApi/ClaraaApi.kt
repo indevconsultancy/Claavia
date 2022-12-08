@@ -3,9 +3,11 @@ package com.indev.claraa.restApi
 import com.google.gson.JsonObject
 import com.indev.claraa.apiResponse.LoginResponse
 import com.indev.claraa.apiResponse.UserRegistrationResponse
+import com.indev.claraa.apiResponse.stateMasterResponse
 import com.indev.claraa.entities.LoginModel
 import com.indev.claraa.entities.MasterData
 import com.indev.claraa.entities.UserRegistrationModel
+import org.json.JSONArray
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -18,7 +20,7 @@ interface ClaraaApi {
 
 
     @POST("download_general.php")
-    suspend fun downloadMasterData(@Body masterData: MasterData): Response<JsonObject?>?
+    suspend fun downloadMasterData(@Body masterData: MasterData): Response<List<stateMasterResponse>>
 
 
     @POST("login.php")
