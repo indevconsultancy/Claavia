@@ -32,47 +32,47 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Shop Name"
-                        android:paddingLeft="10dp"
+                        android:paddingLeft="30dp"
                         android:gravity="center_vertical"
                         android:textColor="@color/black"
-                        android:textSize="13dp" />
+                        android:textSize="15dp" />
 
                     <TextView
                         android:id="@+id/PersonName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Person Name"
-                        android:paddingLeft="10dp"
+                        android:paddingLeft="30dp"
                         android:gravity="center_vertical"
                         android:textColor="@color/black"
-                        android:textSize="13dp" />
+                        android:textSize="15dp" />
 
                     <TextView
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Email"
-                        android:paddingLeft="10dp"
+                        android:paddingLeft="30dp"
                         android:gravity="center_vertical"
                         android:textColor="@color/black"
-                        android:textSize="13dp" />
+                        android:textSize="15dp" />
 
                     <TextView
                         android:id="@+id/mobNo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Mobile Number"
-                        android:paddingLeft="10dp"
+                        android:paddingLeft="30dp"
                         android:gravity="center_vertical"
                         android:textColor="@color/black"
-                        android:textSize="13dp" />
+                        android:textSize="15dp" />
 
                     <TextView
                         android:id="@+id/pinCode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="PinCode"
-                        android:paddingLeft="10dp"
+                        android:paddingLeft="30dp"
                         android:gravity="center_vertical"
                         android:textColor="@color/black"
                         android:textSize="13dp" />
@@ -82,49 +82,49 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="State"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="30dp"
                     android:gravity="center_vertical"
                     android:textColor="@color/black"
-                    android:textSize="13dp" />
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/district"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="District"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="30dp"
                     android:gravity="center_vertical"
                     android:textColor="@color/black"
-                    android:textSize="13dp" />
+                    android:textSize="15dp" />
                 <TextView
                     android:id="@+id/houseNo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="House no"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="30dp"
                     android:gravity="center_vertical"
                     android:textColor="@color/black"
-                    android:textSize="13dp" />
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/area"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Area, Village"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="30dp"
                     android:gravity="center_vertical"
                     android:textColor="@color/black"
-                    android:textSize="13dp" />
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/landMark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Landmark"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="30dp"
                     android:gravity="center_vertical"
                     android:textColor="@color/black"
-                    android:textSize="13dp" />
+                    android:textSize="15dp" />
 
 
                 <LinearLayout
@@ -141,6 +141,7 @@
                     android:text="Deliver to this address"/>
 
                 <Button
+                    android:id="@+id/editAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"

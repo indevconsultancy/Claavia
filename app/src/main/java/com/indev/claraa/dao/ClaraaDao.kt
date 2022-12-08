@@ -50,9 +50,9 @@ interface ClaraaDao {
 
     @NotNull
     @Insert
-    suspend fun insertProductMasterData(productMasterModel: ProductMasterModel): Long
-    @Query("DELETE FROM product_master")
-    fun deleteAllProducts()
+    suspend fun insertProductPacketMasterData(productPacketModel: ProductPacketModel): Long
+    @Query("DELETE FROM product_packet")
+    fun deleteAllProductPackets()
 
 
 }

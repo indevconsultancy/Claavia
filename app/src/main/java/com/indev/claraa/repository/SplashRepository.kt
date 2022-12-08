@@ -4,10 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import com.indev.claraa.apiResponse.stateMasterResponse
-import com.indev.claraa.entities.DistrictModel
-import com.indev.claraa.entities.MasterData
-import com.indev.claraa.entities.ProductMasterModel
-import com.indev.claraa.entities.StateModel
+import com.indev.claraa.entities.*
 import com.indev.claraa.restApi.ClaraaApi
 import com.indev.claraa.restApi.ClientApi
 import com.indev.claraa.roomdb.RoomDB
@@ -37,7 +34,7 @@ class SplashRepository{
                 val jsonArray = JSONArray(result?.body().toString())
                         dataBase?.userDao()?.deleteAllStates()
                         dataBase?.userDao()?.deleteAllDistricts()
-                        dataBase?.userDao()?.deleteAllProducts()
+                        dataBase?.userDao()?.deleteAllProductPackets()
                         for (i in 0 until jsonArray.length()) {
                             val singleData = JSONObject(jsonArray[i].toString())
                             if(masterData.table_name == "state_master") {
@@ -59,21 +56,14 @@ class SplashRepository{
                                 val district_id =
                                     dataBase?.userDao()?.insertDistrictMasterData(district_master)
                                 Log.e("TAG", "downloadMasterData2: " + district_id + masterData)
-                            }else if(masterData.table_name == "product_master") {
-                                val product_master = ProductMasterModel(
-                                    singleData["product_id"].toString(),
-                                    singleData["product_name"].toString(),
-                                    singleData["product_img1"].toString(),
-                                    singleData["product_img2"].toString(),
-                                    singleData["price"].toString(),
-                                    singleData["type_id"].toString(),
+                            }else if(masterData.table_name == "product_packet") {
+                                val product_packet = ProductPacketModel(
                                     singleData["packet_id"].toString(),
-                                    singleData["power_range"].toString(),
-                                    singleData["currency"].toString(),
+                                    singleData["packet_size"].toString(),
                                     singleData["active"].toString()
                                 )
                                 val product_id =
-                                    dataBase?.userDao()?.insertProductMasterData(product_master)
+                                    dataBase?.userDao()?.insertProductPacketMasterData(product_packet)
                                 Log.e("TAG", "downloadMasterData3: " + product_id + masterData)
                             }
                         }

@@ -66,8 +66,8 @@ class AddressDetailsViewModel (val context: Context): ViewModel() {
             etAddress.get().toString(),
             "",stateOfUser.toString(),
             districtOfUser.toString(),pinCode.get().toString(),
-            areaVillage.toString(),
-            landmark.toString(),
+            areaVillage.get().toString(),
+            landmark.get().toString(),
             )
         viewModelScope.launch {
             AddressDetailsRepository.insertAddressData(context, addressDetailsModel)

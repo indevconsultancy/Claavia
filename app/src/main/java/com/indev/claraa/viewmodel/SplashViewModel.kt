@@ -10,7 +10,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class SplashViewModel (private val context: Context): ViewModel() {
-    val table = arrayOf("state_master", "district_master")
+    val table = arrayOf("state_master", "district_master","product_packet")
 
     init {
         downloadMasterData()

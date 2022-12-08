@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
 import com.indev.claraa.entities.AddressDetailsModel
+import com.indev.claraa.fragment.AddNewAddress
 import com.indev.claraa.ui.HomeScreen
 
 
@@ -34,9 +35,9 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
         holder.area.text = currentItem.address2
         holder.landMark.text = currentItem.landmark
         holder.shopName.text = currentItem.shop_name
-//        holder.shopName.setOnClickListener{
-////            replaceFregment(ProductDetails())
-//        }
+        holder.editAddress.setOnClickListener{
+            replaceFregment(AddNewAddress())
+        }
     }
 
     private fun replaceFregment(fragment : Fragment) {
@@ -65,6 +66,7 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
         val houseNo: TextView = itemView!!.findViewById(R.id.houseNo)
         val area: TextView = itemView!!.findViewById(R.id.area)
         val landMark: TextView = itemView!!.findViewById(R.id.landMark)
+        val editAddress: TextView = itemView!!.findViewById(R.id.editAddress)
 
         init {
             itemView.setOnClickListener {
