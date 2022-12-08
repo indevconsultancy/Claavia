@@ -41,6 +41,7 @@ class SplashRepository{
 //              }
 
                 val jsonArray = JSONArray(result?.body().toString())
+                        dataBase?.userDao()?.deleteAllStates()
                         for (i in 0 until jsonArray.length()) {
                             val singleData = JSONObject(jsonArray[i].toString())
                             val state_master = StateModel(singleData["state_id"].toString(),singleData["state_name"].toString(), singleData["active"].toString())

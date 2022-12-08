@@ -5,11 +5,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.google.gson.JsonObject
 import com.indev.claraa.entities.*
-import com.indev.claraa.viewmodel.AddressDetailsViewModel
 import org.jetbrains.annotations.NotNull
-import retrofit2.Response
 
 @Dao
 interface ClaraaDao {
@@ -41,6 +38,9 @@ interface ClaraaDao {
     @NotNull
     @Insert
     suspend fun insertStateMasterData(stateModel: StateModel): Long
+
+    @Query("DELETE FROM state_master")
+    fun deleteAllStates()
 
     @NotNull
     @Insert
