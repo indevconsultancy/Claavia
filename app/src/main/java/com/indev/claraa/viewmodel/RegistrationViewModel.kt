@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.*
 import com.indev.claraa.entities.UserRegistrationModel
+import com.indev.claraa.fragment.Profile
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.UserRegistrationRepository
@@ -60,7 +61,6 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             Log.d("TAG", "onItemSelected: " + stateOfUser)
         }
     }
-
 
 
     fun btnSubmit() {

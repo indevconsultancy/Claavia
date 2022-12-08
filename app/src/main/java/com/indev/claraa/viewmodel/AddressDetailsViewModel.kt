@@ -23,6 +23,8 @@ class AddressDetailsViewModel (val context: Context): ViewModel() {
     var mobNo: ObservableField<String> = ObservableField("")
     var etAddress: ObservableField<String> = ObservableField("")
     var pinCode: ObservableField<String> = ObservableField("")
+    var areaVillage: ObservableField<String> = ObservableField("")
+    var landmark: ObservableField<String> = ObservableField("")
     var districtOfUser: String? = null
     var stateOfUser: String? = null
     lateinit var addressDetailsModel: AddressDetailsModel
@@ -64,8 +66,8 @@ class AddressDetailsViewModel (val context: Context): ViewModel() {
             etAddress.get().toString(),
             "",stateOfUser.toString(),
             districtOfUser.toString(),pinCode.get().toString(),
-            "",
-            "",
+            areaVillage.toString(),
+            landmark.toString(),
             )
         viewModelScope.launch {
             AddressDetailsRepository.insertAddressData(context, addressDetailsModel)

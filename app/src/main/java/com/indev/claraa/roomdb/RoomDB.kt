@@ -12,7 +12,7 @@ import com.indev.claraa.entities.*
                         CartModel::class,
                         AddressDetailsModel::class,
                         StateModel::class,
-                        DistrictModel::class], version = 1)
+                        DistrictModel::class,ProductMasterModel::class], version = 1)
 
 
 abstract class RoomDB: RoomDatabase() {

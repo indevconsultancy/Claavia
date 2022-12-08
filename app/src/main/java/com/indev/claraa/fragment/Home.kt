@@ -41,13 +41,11 @@ class Home : Fragment(), ClickLinstener {
             HomeScreenViewModelFactory(requireContext())
         )[HomeScreenViewModel::class.java]
         binding.homeVM = homeScreenViewModel
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         homeModelList.add("Claraa Flesh Flo")
         homeModelList.add("Claraa Flesh Flo Along with Solution Bottle 80ml")
         homeModelList.add("Claraa Fresh Touch")
@@ -114,7 +112,6 @@ class Home : Fragment(), ClickLinstener {
 //            event.action === KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK
 //        }
 //    }
-
 
     private fun recycleViewList() {
         binding.rvProductType.apply {

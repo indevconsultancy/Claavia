@@ -44,6 +44,15 @@ interface ClaraaDao {
 
     @NotNull
     @Insert
-    suspend fun insertDistrictMasterData(districtModel: DistrictModel)
+    suspend fun insertDistrictMasterData(districtModel: DistrictModel): Long
+    @Query("DELETE FROM district_master")
+    fun deleteAllDistricts()
+
+    @NotNull
+    @Insert
+    suspend fun insertProductMasterData(productMasterModel: ProductMasterModel): Long
+    @Query("DELETE FROM product_master")
+    fun deleteAllProducts()
+
 
 }

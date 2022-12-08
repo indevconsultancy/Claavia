@@ -41,7 +41,7 @@ class Profile : Fragment() {
         profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         profileViewModel.readAllData.observe(viewLifecycleOwner, Observer {
 
-            if(it == null) {
+            if(it != null) {
                 binding.tvName.text = it?.user_name
                 binding.tvShapName.text = it?.shop_name
                 binding.tvEmail.text = it?.email

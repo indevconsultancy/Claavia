@@ -33,7 +33,6 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
         holder.houseNo.text = currentItem.address1
         holder.area.text = currentItem.address2
         holder.landMark.text = currentItem.landmark
-
         holder.shopName.text = currentItem.shop_name
 //        holder.shopName.setOnClickListener{
 ////            replaceFregment(ProductDetails())

@@ -4,9 +4,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "district_master")
-data class DistrictModel(@PrimaryKey(autoGenerate = true)
-                         val local_id: Int,
-                         val district_id: Int,
+data class DistrictModel(@PrimaryKey(autoGenerate = false)
+                         val district_id: String,
                          val district_name: String,
-                         val active: Int,
-                         val state_id: Int)
+                         val active: String,
+                         val state_id: String)
