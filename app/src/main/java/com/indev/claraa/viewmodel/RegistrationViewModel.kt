@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.*
 import com.indev.claraa.entities.UserRegistrationModel
-import com.indev.claraa.fragment.Profile
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.UserRegistrationRepository
@@ -77,11 +76,9 @@ class RegistrationViewModel (val context: Context): ViewModel() {
                 email.get().toString(),
                 mobNo.get().toString(),
                 etAddress.get().toString(),
-                "",
                 stateOfUser.toString(),
                 districtOfUser.toString(),
-                "",
-                "",
+                "","",
                 pinCode.get().toString()
             )
             viewModelScope.launch {
@@ -112,11 +109,9 @@ class RegistrationViewModel (val context: Context): ViewModel() {
                 email.get().toString(),
                 mobNo.get().toString(),
                 etAddress.get().toString(),
-                "",
                 stateOfUser.toString(),
                 districtOfUser.toString(),
-                "",
-                "",
+                "","",
                 pinCode.get().toString()
             )
             userRegistrationTable.shop_name = shopName.get().toString()
@@ -124,9 +119,8 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             userRegistrationTable.email = shopName.get().toString()
             userRegistrationTable.mobile_number = shopName.get().toString()
             userRegistrationTable.address = shopName.get().toString()
-            userRegistrationTable.city = shopName.get().toString()
-            userRegistrationTable.state = shopName.get().toString()
-            userRegistrationTable.district = shopName.get().toString()
+            userRegistrationTable.state_id = shopName.get().toString()
+            userRegistrationTable.district_id = shopName.get().toString()
             userRegistrationTable.pinCode = shopName.get().toString()
             userRegistrationTable.register_date = shopName.get().toString()
             userRegistrationTable.active = shopName.get().toString()

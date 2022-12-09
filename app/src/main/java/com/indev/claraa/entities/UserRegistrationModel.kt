@@ -12,9 +12,8 @@ data class UserRegistrationModel(@PrimaryKey(autoGenerate = true)
                                  var email: String,
                                  var mobile_number: String,
                                  var address: String,
-                                 var city: String,
-                                 var state: String,
-                                 var district: String,
+                                 var state_id: String,
+                                 var district_id: String,
                                  var active: String,
                                  var register_date: String,
                                  var pinCode: String)

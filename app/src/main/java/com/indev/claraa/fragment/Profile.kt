@@ -46,8 +46,8 @@ class Profile : Fragment() {
                 binding.tvShapName.text = it?.shop_name
                 binding.tvEmail.text = it?.email
                 binding.tvMobile.text = it?.mobile_number
-                binding.tvState.text = it?.state
-                binding.tvDistrict.text = it?.district
+                binding.tvState.text = it?.state_id
+                binding.tvDistrict.text = it?.district_id
                 binding.tvAddress.text = it?.address
                 binding.tvPincode.text = it?.pinCode
             }

@@ -12,10 +12,9 @@ data class AddressDetailsModel(@PrimaryKey(autoGenerate = true)
                                var email: String,
                                var mobile_number: String,
                                var address1: String,
-                               var city: String,
-                               var state: String,
-                               var district: String,
+                               var state_id: String,
+                               var district_id: String,
                                var pinCode: String,
                                var address2: String,
-                               var landmark: String,
+                               var landmark: String
 )
