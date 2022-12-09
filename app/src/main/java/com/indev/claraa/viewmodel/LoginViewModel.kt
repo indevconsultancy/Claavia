@@ -26,9 +26,9 @@ class LoginViewModel(val context: Context): ViewModel() {
 
     var username: ObservableField<String> = ObservableField("")
     var password: ObservableField<String> = ObservableField("")
-    lateinit var prefHelper: PrefHelper
     lateinit var progressDialog: ProgressDialog
     lateinit var loginModel: LoginModel
+    lateinit var prefHelper: PrefHelper
 
     fun signIn(){
         progressDialog = ProgressDialog(context)
@@ -42,10 +42,10 @@ class LoginViewModel(val context: Context): ViewModel() {
             .setCancelClickListener { sDialog -> // Showing simple toast message to user
                 sDialog.cancel()
             }.show()
-        nextActivity()
-//            context.startActivity(Intent(context, HomeScreen::class.java))
+            nextActivity()
     }
     private fun nextActivity() {
+
         loginModel= LoginModel(username.get().toString().trim(),password.get().toString().trim())
 
         viewModelScope.launch {
@@ -53,14 +53,13 @@ class LoginViewModel(val context: Context): ViewModel() {
             var status  =0
 
             CoroutineScope(Dispatchers.IO).launch {
-                status  = LoginRepository.login(loginModel)
+                status  = LoginRepository.login(context,loginModel)
                 progressDialog.dismiss()
-                if (status>0) {
-//                    prefHelper.setString("isLogin", "yes")
+                if (status== 1) {
+                    prefHelper= PrefHelper(context)
+                    prefHelper.put( Constant.PREF_IS_LOGIN,true)
+
                     context.startActivity(Intent(context, HomeScreen::class.java))
-                    /*Handler(Looper.getMainLooper()).post {
-                        Toast.makeText(context, "", Toast.LENGTH_LONG).show()
-                    }*/
                 } else {
                     Handler(Looper.getMainLooper()).post {
                         Toast.makeText(context, "Invalid user", Toast.LENGTH_LONG).show()

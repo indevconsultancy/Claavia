@@ -19,6 +19,8 @@ import com.indev.claraa.R
 import com.indev.claraa.adapter.ProductMasterAdapter
 import com.indev.claraa.databinding.FragmentHomeBinding
 import com.indev.claraa.entities.ProductMasterModel
+import com.indev.claraa.helper.Constant
+import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.ui.LoginScreen
 import com.indev.claraa.viewmodel.HomeScreenViewModel
 import com.indev.claraa.viewmodel.HomeScreenViewModelFactory
@@ -30,6 +32,7 @@ class Home : Fragment(), ClickLinstener {
     private lateinit var homeScreenViewModel: HomeScreenViewModel
     private lateinit var productMasterAdapter: ProductMasterAdapter
     var productMasterModelArrayList: ArrayList<ProductMasterModel> = ArrayList()
+    lateinit var prefHelper: PrefHelper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -160,6 +163,8 @@ class Home : Fragment(), ClickLinstener {
             .setContentText("Are you sure you want to logout?").setCancelText("Cancel")
             .setConfirmText("Ok")
             .setConfirmClickListener {
+                prefHelper= PrefHelper(requireContext())
+                prefHelper.put( Constant.PREF_IS_LOGIN,false)
                 val intent= Intent(activity, LoginScreen::class.java)
                 startActivity(intent)
             }

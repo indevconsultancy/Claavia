@@ -11,9 +11,10 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
+import com.indev.claraa.entities.ProductMasterModel
 import com.indev.claraa.viewmodel.ProductDetailViewModel
 
-class PowerRangeAdapter(private val productDetailViewModel: ProductDetailViewModel,private val context: Context, var productList: ArrayList<String>, private val listener: ClickLinstener) : RecyclerView.Adapter<PowerRangeAdapter.MyViewholder>(){
+class PowerRangeAdapter(val productDetailViewModel: ProductDetailViewModel,private val context: Context, var productMasterArrayList: ArrayList<ProductMasterModel>, private val listener: ClickLinstener) : RecyclerView.Adapter<PowerRangeAdapter.MyViewholder>(){
 
     var selectedItemPosition: Int = 0
     lateinit var selectValue: String
@@ -25,13 +26,13 @@ class PowerRangeAdapter(private val productDetailViewModel: ProductDetailViewMod
     }
 
     override fun onBindViewHolder(holder: MyViewholder, position: Int) {
-        val currentItem = productList[position]
-        holder.tvPowerRange.text = currentItem
+        val currentItem = productMasterArrayList[position]
+        holder.tvPowerRange.text = currentItem.power_range
 
         holder.cardView.setOnClickListener {
             selectedItemPosition= position
-            selectValue= currentItem
-            clickEvent(currentItem, "1")
+            selectValue= currentItem.power_range
+            clickEvent(currentItem.power_range, "1")
             notifyDataSetChanged()
         }
 
@@ -51,13 +52,13 @@ class PowerRangeAdapter(private val productDetailViewModel: ProductDetailViewMod
         notifyDataSetChanged()
     }
 
-//    fun setData(productMaster: ArrayList<ProductMasterModel>) {
-//        this.productList= productMaster
-//        notifyDataSetChanged()
-//    }
+    fun setData(productMasterArrayList: ArrayList<ProductMasterModel>) {
+        this.productMasterArrayList= productMasterArrayList
+        notifyDataSetChanged()
+    }
 
     override fun getItemCount(): Int {
-        return productList.size
+        return productMasterArrayList.size
     }
 
     inner class MyViewholder(itemView: View) : RecyclerView.ViewHolder(itemView) {

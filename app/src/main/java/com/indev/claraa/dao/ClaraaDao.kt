@@ -24,6 +24,10 @@ interface ClaraaDao {
     @Query("SELECT * FROM product_master where type_id = :selectedCategory group by product_name ORDER BY product_id ASC")
     fun getProductMasterData(selectedCategory: Int): LiveData<List<ProductMasterModel>>
 
+
+    @Query("SELECT * FROM product_master where product_name = :selectedProduct")
+    fun getProductData(selectedProduct: String): LiveData<List<ProductMasterModel>>
+
     @NotNull
     @Insert
     suspend fun insertAddressData(addressDetailsModel: AddressDetailsModel): Long
@@ -48,8 +52,13 @@ interface ClaraaDao {
     @NotNull
     @Insert
     suspend fun insertDistrictMasterData(districtModel: DistrictModel): Long
+
+
     @Query("DELETE FROM district_master")
     fun deleteAllDistricts()
+
+    @Query("DELETE FROM user_master")
+    fun deleteUserMasterTable()
 
     @NotNull
     @Insert

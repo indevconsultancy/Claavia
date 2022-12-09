@@ -1,14 +1,12 @@
 package com.indev.claraa.fragment
 
 import android.os.Bundle
-import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ObservableField
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,8 +18,7 @@ import com.indev.claraa.adapter.CartAdapter
 import com.indev.claraa.adapter.PowerRangeAdapter
 import com.indev.claraa.databinding.FragmentProductDetailsBinding
 import com.indev.claraa.entities.CartModel
-import com.indev.claraa.repository.CartRepository
-import com.indev.claraa.ui.HomeScreen
+import com.indev.claraa.entities.ProductMasterModel
 import com.indev.claraa.viewmodel.ProductDetailViewModel
 import com.indev.claraa.viewmodel.ProductDetailViewModelFactory
 
@@ -33,7 +30,7 @@ class ProductDetails : Fragment(), ClickLinstener {
     private lateinit var cartAdapter: CartAdapter
     private lateinit var powerRangeAdapter: PowerRangeAdapter
     private lateinit var cartModelList: ArrayList<CartModel>
-    val productList: ArrayList<String> = ArrayList()
+    lateinit var productMasterArrayList: ArrayList<ProductMasterModel>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,7 +51,7 @@ class ProductDetails : Fragment(), ClickLinstener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        productMasterArrayList= ArrayList<ProductMasterModel>()
         val carousel: ImageCarousel = binding.carousel
         carousel.registerLifecycle(lifecycle)
 
@@ -99,25 +96,23 @@ class ProductDetails : Fragment(), ClickLinstener {
             cartModelList = it
         })
 
-
-        productList.add("-0.5")
-        productList.add("-1.0")
-        productList.add("-1.5")
-        productList.add("-2.0")
-
         productDetailViewModel = ProductDetailViewModel(requireActivity())
-        powerRangeAdapter =
-            PowerRangeAdapter(productDetailViewModel, requireActivity(), productList, this)
+        powerRangeAdapter = PowerRangeAdapter(productDetailViewModel,requireActivity(), productMasterArrayList, this)
         recycleViewPowerrangeList()
+
+        productDetailViewModel.getPruductMasterList(requireActivity(), "Claraa Fresh Flo")?.observe(requireActivity(), Observer {
+            powerRangeAdapter.setData(it as ArrayList<ProductMasterModel>)
+            productMasterArrayList = it
+        })
+
 
         productDetailViewModel.optionSelectedListener.observe(requireActivity(), Observer { pair ->
             if (pair != null) {
                 binding.txtRange.text = "Power Range: " + pair.first
             }else{
-                binding.txtRange.text = "Power Range: " + "-0.5"
+                binding.txtRange.text = "Power Range: " + productMasterArrayList.get(0).power_range
             }
         })
-
 
     }
 

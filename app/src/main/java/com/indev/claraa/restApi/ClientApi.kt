@@ -11,6 +11,7 @@ class ClientApi {
 
     companion object{
         private const val BASE_URL = "https://claraa.indevconsultancy.in/api/"
+        val BASE_IMAGE_URL = "https://claraa.indevconsultancy.in/api/product_image/"
 
         private var retrofit: Retrofit? = null
         fun getClient(): Retrofit? {

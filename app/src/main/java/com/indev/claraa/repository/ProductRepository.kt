@@ -3,12 +3,13 @@ package com.indev.claraa.repository
 import android.content.Context
 import androidx.lifecycle.LiveData
 import com.indev.claraa.entities.CartModel
+import com.indev.claraa.entities.ProductMasterModel
 import com.indev.claraa.roomdb.RoomDB
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CartRepository {
+class ProductRepository {
  
     companion object {
         private var dataBase: RoomDB? = null
@@ -31,6 +32,10 @@ class CartRepository {
             return dataBase?.userDao()?.getCartData()
         }
 
+        fun getProductData(context: Context, selectedProduct: String): LiveData<List<ProductMasterModel>>? {
+            dataBase = initializeDB(context)
+            return dataBase?.userDao()?.getProductData(selectedProduct)
+        }
 
     }
 

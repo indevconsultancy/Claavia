@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.indev.claraa.R
 import com.indev.claraa.entities.ProductMasterModel
 import com.indev.claraa.fragment.ProductDetails
+import com.indev.claraa.restApi.ClientApi
 import com.indev.claraa.ui.HomeScreen
 
 class ProductMasterAdapter(private val context: Context, var productMasterModelArrayList: ArrayList<ProductMasterModel>, private val listener: ClickLinstener) : RecyclerView.Adapter<ProductMasterAdapter.MyViewholder>(){
@@ -28,7 +29,7 @@ class ProductMasterAdapter(private val context: Context, var productMasterModelA
         val currentItem = productMasterModelArrayList[position]
         holder.tvProductName.text = currentItem.product_name
         holder.tvPrice.text = currentItem.currency + " " +currentItem.price
-        Glide.with(context).load(currentItem.product_img1).into(holder.imageProduct)
+        Glide.with(context).load(ClientApi.BASE_IMAGE_URL +currentItem.product_img1).into(holder.imageProduct)
         holder.cardView.setOnClickListener{
             replaceFregment(ProductDetails())
         }
@@ -61,6 +62,5 @@ class ProductMasterAdapter(private val context: Context, var productMasterModelA
             }
         }
     }
-
 
 }

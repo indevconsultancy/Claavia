@@ -85,14 +85,6 @@ class SplashRepository{
             } catch (e: Exception) {
                 Log.d("fail", "$e")
             }
-
-           /*     list.addAll(result?.body()!!)
-                for (i in 0 until list.size) {
-                    val state_master = StateModel(list[i].state_id, list[i].state_name, list[i].active)
-                    val state_id=  dataBase?.userDao()?.insertStateMasterData(state_master)
-                    Log.e("TAG", "downloadMasterData1: " + state_id )
-              }*/
         }
-
     }
 }

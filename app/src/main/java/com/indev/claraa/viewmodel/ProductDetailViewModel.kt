@@ -6,7 +6,9 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.lifecycle.*
 import com.indev.claraa.entities.CartModel
-import com.indev.claraa.repository.CartRepository
+import com.indev.claraa.entities.ProductMasterModel
+import com.indev.claraa.repository.ProductRepository
+import com.indev.claraa.repository.HomeRepository
 import kotlinx.coroutines.launch
 
 class ProductDetailViewModel(val context: Context): ViewModel() {
@@ -28,12 +30,16 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
     fun btnSubmit() {
         cartModel = CartModel(0,1, packetValue.toString(), "-0.5")
         viewModelScope.launch {
-            CartRepository.insertCartData(context ,cartModel)
+            ProductRepository.insertCartData(context ,cartModel)
         }
     }
 
     fun getCartList(context: Context): LiveData<List<CartModel>>? {
-        return CartRepository.getCartList(context)
+        return ProductRepository.getCartList(context)
+    }
+
+    fun getPruductMasterList(context: Context,selectedProduct: String): LiveData<List<ProductMasterModel>>? {
+        return ProductRepository.getProductData(context,selectedProduct)
     }
 
     fun clickRangeOptionEvent(pair: Pair<String, String>) {

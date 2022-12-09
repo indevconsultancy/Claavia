@@ -7,12 +7,12 @@ import androidx.lifecycle.ViewModel
 import com.indev.claraa.R
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.fragment.AddressList
-import com.indev.claraa.repository.CartRepository
+import com.indev.claraa.repository.ProductRepository
 import com.indev.claraa.ui.HomeScreen
 
 class CartViewModel (val context: Context): ViewModel() {
     fun getCartList(context: Context): LiveData<List<CartModel>>? {
-        return CartRepository.getCartList(context)
+        return ProductRepository.getCartList(context)
     }
 
     fun btnBuy(){
