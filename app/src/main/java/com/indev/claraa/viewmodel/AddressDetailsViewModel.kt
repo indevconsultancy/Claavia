@@ -1,9 +1,13 @@
 package com.indev.claraa.viewmodel
 
 import android.content.Context
+import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
@@ -13,7 +17,11 @@ import com.indev.claraa.R
 import com.indev.claraa.entities.AddressDetailsModel
 import com.indev.claraa.fragment.AddressList
 import com.indev.claraa.repository.AddressDetailsRepository
+import com.indev.claraa.repository.UserRegistrationRepository
 import com.indev.claraa.ui.HomeScreen
+import com.indev.claraa.ui.LoginScreen
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class AddressDetailsViewModel (val context: Context): ViewModel() {
@@ -71,9 +79,22 @@ class AddressDetailsViewModel (val context: Context): ViewModel() {
             )
         viewModelScope.launch {
             AddressDetailsRepository.insertAddressData(context, addressDetailsModel)
-//            context.startActivity(Intent(context, AddressList::class.java))
-            replaceFregment(AddressList())
+            var last_insert_id=0
+            CoroutineScope(Dispatchers.IO).launch {
+                last_insert_id = AddressDetailsRepository.userAddressDetailsAPI(addressDetailsModel)
+                if (last_insert_id> 0) {
+                    replaceFregment(AddressList())
+
+                    Handler(Looper.getMainLooper()).post {
+                        Toast.makeText(context, "Successfully Registered", Toast.LENGTH_LONG).show()
+                    }
+                } else {
+                    Handler(Looper.getMainLooper()).post {
+                        Toast.makeText(context, "Invalid user", Toast.LENGTH_LONG).show()
+                    }
+                }
         }
+    }
     }
 
 

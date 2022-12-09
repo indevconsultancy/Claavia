@@ -15,6 +15,7 @@ import com.indev.claraa.fragment.Profile
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.UserRegistrationRepository
+import com.indev.claraa.ui.HomeScreen
 import com.indev.claraa.ui.LoginScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -131,7 +132,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             userRegistrationTable.active = shopName.get().toString()
             viewModelScope.launch {
                 UserRegistrationRepository.updateData(context, userRegistrationTable)
-                context.startActivity(Intent(context, LoginScreen::class.java))
+                context.startActivity(Intent(context, HomeScreen::class.java))
             }
         }
     }

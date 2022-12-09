@@ -1,8 +1,10 @@
 package com.indev.claraa.restApi
 
 import com.google.gson.JsonArray
+import com.indev.claraa.apiResponse.AddressDetailsResponse
 import com.indev.claraa.apiResponse.LoginResponse
 import com.indev.claraa.apiResponse.UserRegistrationResponse
+import com.indev.claraa.entities.AddressDetailsModel
 import com.indev.claraa.entities.LoginModel
 import com.indev.claraa.entities.MasterData
 import com.indev.claraa.entities.UserRegistrationModel
@@ -21,5 +23,8 @@ interface ClaraaApi {
 
     @POST("login.php")
     suspend fun login(@Body loginModel: LoginModel):  Response<LoginResponse>
+
+    @POST("address_insert.php")
+    suspend fun addressDetails(@Body addressDetailsModel: AddressDetailsModel): Response<AddressDetailsResponse>
 
 }
