@@ -16,10 +16,8 @@ interface ClaraaApi {
     @POST("registration.php")
     suspend fun registration(@Body userRegistrationModel: UserRegistrationModel):  Response<UserRegistrationResponse>
 
-
     @POST("download_general.php")
     suspend fun downloadMasterData(@Body masterData: MasterData): Response<JsonArray>
-
 
     @POST("login.php")
     suspend fun login(@Body loginModel: LoginModel):  Response<LoginResponse>

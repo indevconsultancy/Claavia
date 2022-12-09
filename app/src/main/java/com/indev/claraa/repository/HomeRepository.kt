@@ -1,6 +1,8 @@
 package com.indev.claraa.repository
 
 import android.content.Context
+import androidx.lifecycle.LiveData
+import com.indev.claraa.entities.ProductMasterModel
 import com.indev.claraa.roomdb.RoomDB
 
 class HomeRepository {
@@ -11,17 +13,10 @@ class HomeRepository {
             return RoomDB.getDatabase(context)
         }
 
-//        suspend fun insertCartData(context: Context, homeModel: HomeModel) {
-//            dataBase = initializeDB(context)
-//
-//            CoroutineScope(Dispatchers.IO).launch {
-//                dataBase?.userDao()?.insertHome(homeModel)
-//            }
-//
-//        }
-
-
-//        suspend fun
+        fun getProductList(context: Context, selectedCategory: Int): LiveData<List<ProductMasterModel>>? {
+            dataBase = initializeDB(context)
+            return dataBase?.userDao()?.getProductMasterData(selectedCategory)
+        }
 
 
     }

@@ -21,6 +21,9 @@ interface ClaraaDao {
     @Query("SELECT * FROM cart ORDER BY id ASC")
     fun getCartData() : LiveData<List<CartModel>>
 
+    @Query("SELECT * FROM product_master where type_id = :selectedCategory group by product_name ORDER BY product_id ASC")
+    fun getProductMasterData(selectedCategory: Int): LiveData<List<ProductMasterModel>>
+
     @NotNull
     @Insert
     suspend fun insertAddressData(addressDetailsModel: AddressDetailsModel): Long
@@ -29,7 +32,7 @@ interface ClaraaDao {
     fun getAddressData() : LiveData<List<AddressDetailsModel>>
 
 
-    @Query("SELECT * FROM user_master  ORDER BY local_id ASC")
+    @Query("SELECT * FROM user_master ORDER BY local_id ASC")
     fun getRegistrationData() : LiveData<UserRegistrationModel>
 
     @Update
@@ -51,8 +54,21 @@ interface ClaraaDao {
     @NotNull
     @Insert
     suspend fun insertProductPacketMasterData(productPacketModel: ProductPacketModel): Long
+
+    @NotNull
+    @Insert
+    suspend fun insertProductMasterData(productMasterModel: ProductMasterModel): Long
+
+    @Query("DELETE FROM product_master")
+    fun deleteAllProductMaster()
+
+    @NotNull
+    @Insert
+    suspend fun insertProductTypeData(productTypeModel: ProductTypeModel): Long
+
+    @Query("DELETE FROM product_type")
+    fun deleteAllProductType()
+
     @Query("DELETE FROM product_packet")
     fun deleteAllProductPackets()
-
-
 }

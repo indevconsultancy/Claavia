@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.pedant.SweetAlert.SweetAlertDialog
@@ -15,8 +16,9 @@ import com.aemerse.slider.ImageCarousel
 import com.aemerse.slider.model.CarouselItem
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
-import com.indev.claraa.adapter.HomeAdapter
+import com.indev.claraa.adapter.ProductMasterAdapter
 import com.indev.claraa.databinding.FragmentHomeBinding
+import com.indev.claraa.entities.ProductMasterModel
 import com.indev.claraa.ui.LoginScreen
 import com.indev.claraa.viewmodel.HomeScreenViewModel
 import com.indev.claraa.viewmodel.HomeScreenViewModelFactory
@@ -26,8 +28,8 @@ class Home : Fragment(), ClickLinstener {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var homeScreenViewModel: HomeScreenViewModel
-    private lateinit var homeAdapter: HomeAdapter
-    var homeModelList: ArrayList<String> = ArrayList()
+    private lateinit var productMasterAdapter: ProductMasterAdapter
+    var productMasterModelArrayList: ArrayList<ProductMasterModel> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,13 +48,24 @@ class Home : Fragment(), ClickLinstener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        homeModelList.add("Claraa Flesh Flo")
-        homeModelList.add("Claraa Flesh Flo Along with Solution Bottle 80ml")
-        homeModelList.add("Claraa Fresh Touch")
-        homeModelList.add("Claraa Rainbow Fresh")
-        homeScreenViewModel = HomeScreenViewModel(requireContext())
-        homeAdapter = HomeAdapter( requireContext(),homeModelList, this)
-        recycleViewList()
+        getProductRecycleViewList(1)
+
+        binding.btnMonthly.setOnClickListener {
+            getProductRecycleViewList(1)
+        }
+
+        binding.btnWeekly.setOnClickListener {
+            getProductRecycleViewList(2)
+        }
+
+        binding.btnDaily.setOnClickListener {
+            getProductRecycleViewList(3)
+        }
+
+        binding.btnSolution.setOnClickListener {
+            getProductRecycleViewList(4)
+
+        }
 
         val carousel: ImageCarousel = binding.carousel
         binding.toolbar.menuClick.setOnClickListener {
@@ -104,6 +117,17 @@ class Home : Fragment(), ClickLinstener {
             true
         }
     }
+
+    private fun getProductRecycleViewList(selectedCategory: Int) {
+        homeScreenViewModel = HomeScreenViewModel(requireContext())
+        productMasterAdapter = ProductMasterAdapter(requireContext(),productMasterModelArrayList, this)
+        recycleViewList()
+
+        homeScreenViewModel.getProductMasterList(requireActivity(),selectedCategory)?.observe(requireActivity(), Observer {
+            productMasterAdapter.setData(it as ArrayList<ProductMasterModel>)
+            productMasterModelArrayList = it
+        })
+    }
 //    override fun onResume() {
 //        super.onResume()
 //        requireView().isFocusableInTouchMode = false
@@ -118,7 +142,7 @@ class Home : Fragment(), ClickLinstener {
             setHasFixedSize(true)
             binding.rvProductType.layoutManager = LinearLayoutManager(context)
             (binding.rvProductType.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
-            adapter= homeAdapter
+            adapter= productMasterAdapter
         }
     }
 

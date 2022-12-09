@@ -137,9 +137,10 @@
                     android:gravity="center_vertical"
                     android:padding="5dp"
                     android:weightSum="4">
-                <TextView
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnMonthly"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_25sdp"
                     android:background="@drawable/home_btn"
                     android:textAllCaps="false"
                     android:textSize="13dp"
@@ -149,9 +150,10 @@
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:text="Monthly"/>
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnDaily"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_25sdp"
                         android:background="@drawable/home_btn"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
@@ -162,9 +164,10 @@
                         android:gravity="center"
                         android:layout_gravity="center"
                         android:text="Daily"/>
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnWeekly"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_25sdp"
                         android:background="@drawable/home_btn"
                         android:textAllCaps="false"
                         android:layout_weight="1"
@@ -175,9 +178,10 @@
                         android:gravity="center"
                         android:layout_gravity="center"
                         android:text="weekly"/>
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnSolution"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_25sdp"
                         android:background="@drawable/home_btn"
                         android:textColor="@color/white"
                         android:textAllCaps="false"

@@ -12,13 +12,14 @@ import com.indev.claraa.entities.*
                         CartModel::class,
                         AddressDetailsModel::class,
                         StateModel::class,
-                        DistrictModel::class,ProductMasterModel::class,ProductPacketModel::class], version = 1)
-
+                        DistrictModel::class,
+                        ProductMasterModel::class,
+                        ProductTypeModel::class,
+                        ProductPacketModel::class], version = 1)
 
 abstract class RoomDB: RoomDatabase() {
 
     abstract fun userDao(): ClaraaDao
-
 
     companion object {
         @Volatile
