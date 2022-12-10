@@ -5,8 +5,11 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.aemerse.slider.ImageCarousel
+import com.aemerse.slider.model.CarouselItem
 import com.indev.claraa.R
 import com.indev.claraa.databinding.ActivitySplashScreenBinding
 import com.indev.claraa.helper.Constant
@@ -29,9 +32,37 @@ class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash_screen)
-
         supportActionBar?.hide()
         prefHelper = PrefHelper(applicationContext)
+
+        val carousel: ImageCarousel = binding.carousel
+        carousel.registerLifecycle(lifecycle)
+
+        val list = mutableListOf<CarouselItem>()
+
+        list.add(
+            CarouselItem(
+                imageUrl = "https://claraa.in/images/banner/1.jpg",
+            )
+        )
+
+        list.add(
+            CarouselItem(
+                imageUrl = "https://claraa.in/images/banner/2.jpg"
+            )
+        )
+
+        val headers = mutableMapOf<String, String>()
+        headers["header_key"] = "header_value"
+
+        list.add(
+            CarouselItem(
+                imageUrl = "https://claraa.in/images/about/9.jpg",
+                headers = headers
+            )
+        )
+        carousel.setData(list)
+
 
         callNextActivity()
         this.window.setFlags(

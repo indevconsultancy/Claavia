@@ -29,8 +29,8 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
         holder.email.text = currentItem.email
         holder.mobNo.text = currentItem.mobile_number
         holder.pinCode.text = currentItem.pinCode
-        holder.state.text = currentItem.state
-        holder.district.text = currentItem.district
+        holder.state.text = currentItem.state_id
+        holder.district.text = currentItem.district_id
         holder.houseNo.text = currentItem.address1
         holder.area.text = currentItem.address2
         holder.landMark.text = currentItem.landmark

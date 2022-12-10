@@ -3,11 +3,193 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.SplashScreen"
-        android:background="@drawable/splash_bg">
+        tools:context=".ui.SplashScreen">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="10dp"
+                android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/discovered"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Discover a New Vision"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.083"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="0dp" />
+
+                <com.aemerse.slider.ImageCarousel
+                    android:id="@+id/carousel"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    app:autoPlay="true"
+                    android:layout_marginTop="10dp"
+                    app:autoPlayDelay="3000"
+                    app:autoWidthFixing="true"
+                    app:bottomShadowAlpha="0.6"
+                    app:bottomShadowHeight="64dp"
+                    app:captionMargin="0dp"
+                    app:captionTextSize="14sp"
+                    app:carouselBackground="#00000000"
+                    app:carouselGravity="CENTER"
+                    app:carouselPadding="0dp"
+                    app:carouselPaddingBottom="0dp"
+                    app:carouselPaddingEnd="0dp"
+                    app:carouselPaddingStart="0dp"
+                    app:carouselPaddingTop="0dp"
+                    app:carouselType="BLOCK"
+                    app:imageScaleType="centerCrop"
+                    app:indicatorMargin="0dp"
+                    app:infiniteCarousel="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/discovered"
+                    app:layout_constraintVertical_bias="0.089"
+                    app:nextButtonId="@id/btn_next"
+                    app:nextButtonLayout="@layout/next_button_layout"
+                    app:nextButtonMargin="4dp"
+                    app:previousButtonId="@id/btn_previous"
+                    app:previousButtonLayout="@layout/previous_button_layout"
+                    app:previousButtonMargin="4dp"
+                    app:scaleOnScroll="false"
+                    app:scalingFactor="0.15"
+                    app:showBottomShadow="true"
+                    app:showCaption="true"
+                    app:showIndicator="true"
+                    app:showNavigationButtons="false"
+                    app:showTopShadow="true"
+                    app:topShadowAlpha="0.6"
+                    app:topShadowHeight="32dp"
+                    app:touchToPause="true"
+                    tools:layout_editor_absoluteX="0dp" />
+
+                <Button
+                    android:id="@+id/SubmitButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/submitbutton"
+                    android:gravity="center"
+                    android:text="Next"
+                    android:textAllCaps="false"
+                    android:textColor="#FFF"
+                    android:textSize="15dp"/>
+
+
+                <com.smarteist.autoimageslider.SliderView
+                    android:id="@+id/slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:sliderAnimationDuration="600"
+                    app:sliderAutoCycleDirection="back_and_forth"
+                    app:sliderIndicatorAnimationDuration="600"
+                    app:sliderIndicatorEnabled="true"
+                    app:sliderIndicatorGravity="center_horizontal|bottom"
+                    app:sliderIndicatorOrientation="horizontal"
+                    app:sliderIndicatorPadding="3dp"
+                    app:sliderIndicatorRadius="2dp"
+                    app:sliderIndicatorSelectedColor="#5A5A5A"
+                    app:sliderIndicatorUnselectedColor="#FFF"
+                    app:sliderScrollTimeInSec="1" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="3"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Skip"
+                        android:gravity="center"
+                        android:layout_weight="2"
+                        android:textColor="@color/bs_blue"
+                        android:textSize="15dp"/>
+
+
+
+                <com.smarteist.autoimageslider.SliderView
+                    android:id="@+id/slider3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:sliderAnimationDuration="600"
+                    app:sliderAutoCycleDirection="back_and_forth"
+                    app:sliderIndicatorAnimationDuration="600"
+                    app:sliderIndicatorEnabled="true"
+                    app:sliderIndicatorGravity="center_horizontal|bottom"
+                    app:sliderIndicatorOrientation="horizontal"
+                    app:sliderIndicatorPadding="3dp"
+                    app:sliderIndicatorRadius="2dp"
+                    android:layout_weight="1"
+                    app:sliderIndicatorSelectedColor="#5A5A5A"
+                    app:sliderIndicatorUnselectedColor="#FFF"
+                    app:sliderScrollTimeInSec="1" />
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+</LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
 </layout>

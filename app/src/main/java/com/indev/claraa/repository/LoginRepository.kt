@@ -16,7 +16,7 @@ class LoginRepository {
 
         var apiInterface = ClientApi.getClient()?.create(ClaraaApi::class.java)
 
-        private fun initializeDB(context: Context): RoomDB? {
+        private fun initializeDB(context: Context): RoomDB?{
             return RoomDB.getDatabase(context)
         }
         suspend fun login(context: Context,loginModel: LoginModel): Int {
