@@ -31,10 +31,10 @@
                 android:layout_height="wrap_content"
                 android:text="Verify Your Mobile Number"
                 android:gravity="center_vertical"
-                android:textSize="25dp"
+                android:textSize="20dp"
                 android:textColorHighlight="@color/bs_green"
-                android:textStyle="italic"
                 android:padding="5dp"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 />
 
@@ -76,7 +76,7 @@
             <Button
                 android:id="@+id/SubmitButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:background="@drawable/submitbutton"
                 android:gravity="center"
                 android:onClick="@{() ->emailVM.btnSubmit()}"

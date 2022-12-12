@@ -6,8 +6,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.indev.claraa.R
 import com.indev.claraa.databinding.LoginScreenBinding
-import com.indev.claraa.helper.Constant
-import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.viewmodel.LoginViewModel
 import com.indev.claraa.viewmodel.LoginViewModelFactory
 

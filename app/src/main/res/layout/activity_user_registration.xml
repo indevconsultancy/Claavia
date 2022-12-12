@@ -8,7 +8,7 @@
             name="registrationVM"
             type="com.indev.claraa.viewmodel.RegistrationViewModel"/>
     </data>
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.UserRegistration">
@@ -20,14 +20,31 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="15dp"
                 android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hello there, Partner!"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/registration"
+                    android:textSize="13dp"
+                    android:textColor="@color/gray"/>
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -38,13 +55,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Shop Name" />
+                            android:text="Business Name"
+                            android:textColor="@color/black"
+                            android:textSize="15dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="*"
-                            android:textColor="@color/red" />
+                            android:textColor="@color/black" />
 
                     </LinearLayout>
 
@@ -53,10 +72,10 @@
                         android:id="@+id/etShopName"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@drawable/roundedittext1"
+                        android:background="@drawable/btn_border"
                         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                         android:fontFamily="sans-serif"
-                        android:hint="Enter shop name"
+                        android:hint="Enter your Business name"
                         android:inputType="text"
                         android:padding="10dp"
                         android:text="@={registrationVM.shopName}"
@@ -80,13 +99,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Contact Person Name" />
+                            android:text="Owner Name"
+                            android:textColor="@color/black"
+                            android:textSize="15dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="*"
-                            android:textColor="@color/red" />
+                            android:textColor="@color/black" />
 
 
                     </LinearLayout>
@@ -95,10 +116,10 @@
                         android:id="@+id/etUserName"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@drawable/roundedittext1"
+                        android:background="@drawable/btn_border"
                         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                         android:fontFamily="sans-serif"
-                        android:hint="Enter contact person name"
+                        android:hint="Enter Full Name"
                         android:inputType="text"
                         android:padding="10dp"
                         android:text="@={registrationVM.personName}"
@@ -121,13 +142,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Email" />
+                            android:text="Email"
+                            android:textColor="@color/black"
+                            android:textSize="15dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="*"
-                            android:textColor="@color/red" />
+                            android:textColor="@color/black" />
 
                     </LinearLayout>
 
@@ -135,9 +158,9 @@
                         android:id="@+id/etEmail"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@drawable/roundedittext1"
+                        android:background="@drawable/btn_border"
                         android:fontFamily="sans-serif"
-                        android:hint="Enter email"
+                        android:hint="Enter Email ID"
                         android:inputType="text"
                         android:padding="10dp"
                         android:text="@={registrationVM.email}"
@@ -159,13 +182,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Mobile Number" />
+                            android:text="Mobile Number"
+                            android:textColor="@color/black"
+                            android:textSize="15dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="*"
-                            android:textColor="@color/red" />
+                            android:textColor="@color/black" />
 
                     </LinearLayout>
 
@@ -173,9 +198,9 @@
                         android:id="@+id/etMobile"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@drawable/roundedittext1"
+                        android:background="@drawable/btn_border"
                         android:fontFamily="sans-serif"
-                        android:hint="Enter email"
+                        android:hint="(Autofilled from previous page)"
                         android:maxLength="10"
                         android:inputType="number"
                         android:padding="10dp"
@@ -192,6 +217,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="2"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
 
@@ -199,25 +225,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_margin="5dp"
+                android:layout_marginRight="10dp"
                 android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
                         android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="State" />
+                            android:text="State"
+                            android:textColor="@color/black"
+                            android:textSize="15dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="*"
-                            android:textColor="@color/red" />
+                            android:textColor="@color/black" />
 
 
                     </LinearLayout>
@@ -226,40 +253,41 @@
                     android:id="@+id/spnState"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:padding="10dp"
-                    android:entries="@array/state"
-                    android:background="@drawable/roundedittext1"
+                    android:background="@drawable/btn_border"
                     android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:entries="@array/state"
                     android:fontFamily="sans-serif"
                     android:inputType="text"
-                    tools:setOnItemSelectedListener="@{registrationVM.clickListener}"
+                    android:padding="10dp"
                     android:textColor="@color/black"
-                    android:textSize="15dp" />
+                    android:textSize="15dp"
+                    tools:setOnItemSelectedListener="@{registrationVM.clickListener}" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_margin="5dp"
+                    android:layout_marginLeft="10dp"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
                         android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="District" />
+                            android:text="District"
+                            android:textColor="@color/black"
+                            android:textSize="15dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="*"
-                            android:textColor="@color/red" />
+                            android:textColor="@color/black" />
 
 
                     </LinearLayout>
@@ -271,7 +299,7 @@
                     android:layout_height="40dp"
                     android:padding="10dp"
                     android:entries="@array/district"
-                    android:background="@drawable/roundedittext1"
+                    android:background="@drawable/btn_border"
                     android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:fontFamily="sans-serif"
                     android:inputType="text"
@@ -281,8 +309,6 @@
 
                 </LinearLayout>
             </LinearLayout>
-
-                ///
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -298,13 +324,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Address" />
+                            android:text="Address"
+                            android:textColor="@color/black"
+                            android:textSize="15dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="*"
-                            android:textColor="@color/red" />
+                            android:textColor="@color/black" />
 
 
                     </LinearLayout>
@@ -313,10 +341,10 @@
                         android:id="@+id/etAddress"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@drawable/roundedittext1"
+                        android:background="@drawable/btn_border"
                         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                         android:fontFamily="sans-serif"
-                        android:hint="Enter address"
+                        android:hint="(Enter Business Address)"
                         android:inputType="text"
                         android:padding="10dp"
                         android:text="@={registrationVM.etAddress}"
@@ -338,13 +366,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="PinCode" />
+                            android:text="PinCode"
+                            android:textColor="@color/black"
+                            android:textSize="15dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="*"
-                            android:textColor="@color/red" />
+                            android:textColor="@color/black" />
 
 
                     </LinearLayout>
@@ -353,9 +383,9 @@
                         android:id="@+id/etPincode"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@drawable/roundedittext1"
+                        android:background="@drawable/btn_border"
                         android:fontFamily="sans-serif"
-                        android:hint="Enter pinCode"
+                        android:hint="(Enter Pin Code)"
                         android:inputType="number"
                         android:maxLength="6"
                         android:padding="10dp"
@@ -367,7 +397,7 @@
                 <Button
                     android:id="@+id/btnSubmit"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_alignBottom="@id/btnSubmit"
                     android:layout_alignParentBottom="true"
                     android:layout_marginTop="20dp"
@@ -383,5 +413,5 @@
             </LinearLayout>
 
         </ScrollView>
-    </RelativeLayout>
+    </FrameLayout>
 </layout>
