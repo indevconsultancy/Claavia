@@ -3,259 +3,62 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.SplashScreen">
 
+        <TextView
+            android:id="@+id/textSkipIntro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="70dp"
+            android:text="Skip"
+            android:textColor="@color/bs_blue"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/bs_blue"
+            android:minWidth="110dp"
+            android:text="Next"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/textSkipIntro"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <LinearLayout
+            android:id="@+id/indicatorContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/buttonNext" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/introSliderViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:onClick="introSliderViewPager"
+            android:layout_marginBottom="12dp"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toTopOf="@id/indicatorContainer"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:weightSum="2">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="10dp"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
 
 
-                    <TextView
-                        android:id="@+id/discovered"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center"
-                        android:text="Discover a New Vision"
-                        android:textColor="@color/black"
-                        android:textSize="20dp"
-                        android:textStyle="italic"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.083"
-                        tools:ignore="MissingConstraints"
-                        tools:layout_editor_absoluteX="0dp" />
-
-                    <com.aemerse.slider.ImageCarousel
-                        android:id="@+id/carousel"
-                        android:layout_width="match_parent"
-                        android:layout_height="300dp"
-                        android:layout_marginTop="10dp"
-                        app:autoPlay="true"
-                        app:autoPlayDelay="3000"
-                        app:autoWidthFixing="true"
-                        app:bottomShadowAlpha="0.6"
-                        app:bottomShadowHeight="64dp"
-                        app:captionMargin="0dp"
-                        app:captionTextSize="14sp"
-                        app:carouselBackground="#00000000"
-                        app:carouselGravity="CENTER"
-                        app:carouselPadding="0dp"
-                        app:carouselPaddingBottom="0dp"
-                        app:carouselPaddingEnd="0dp"
-                        app:carouselPaddingStart="0dp"
-                        app:carouselPaddingTop="0dp"
-                        app:carouselType="BLOCK"
-                        app:imageScaleType="centerCrop"
-                        app:indicatorMargin="0dp"
-                        app:infiniteCarousel="true"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/discovered"
-                        app:layout_constraintVertical_bias="0.089"
-                        app:nextButtonId="@id/btn_next"
-                        app:nextButtonLayout="@layout/next_button_layout"
-                        app:nextButtonMargin="4dp"
-                        app:previousButtonId="@id/btn_previous"
-                        app:previousButtonLayout="@layout/previous_button_layout"
-                        app:previousButtonMargin="4dp"
-                        app:scaleOnScroll="false"
-                        app:scalingFactor="0.15"
-                        app:showBottomShadow="true"
-                        app:showCaption="true"
-                        app:showIndicator="true"
-                        app:showNavigationButtons="false"
-                        app:showTopShadow="true"
-                        app:topShadowAlpha="0.6"
-                        app:topShadowHeight="32dp"
-                        app:touchToPause="true"
-                        tools:layout_editor_absoluteX="0dp" />
-
-                    <Button
-                        android:id="@+id/SubmitButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/submitbutton"
-                        android:gravity="center"
-                        android:text="Next"
-                        android:textAllCaps="false"
-                        android:textColor="#FFF"
-                        android:textSize="15dp" />
-
-
-                    <com.smarteist.autoimageslider.SliderView
-                        android:id="@+id/slider"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerInParent="true"
-                        android:visibility="gone"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:sliderAnimationDuration="600"
-                        app:sliderAutoCycleDirection="back_and_forth"
-                        app:sliderIndicatorAnimationDuration="600"
-                        app:sliderIndicatorEnabled="true"
-                        app:sliderIndicatorGravity="center_horizontal|bottom"
-                        app:sliderIndicatorOrientation="horizontal"
-                        app:sliderIndicatorPadding="3dp"
-                        app:sliderIndicatorRadius="2dp"
-                        app:sliderIndicatorSelectedColor="#5A5A5A"
-                        app:sliderIndicatorUnselectedColor="#FFF"
-                        app:sliderScrollTimeInSec="1" />
-
-                    </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="bottom"
-                    android:gravity="bottom"
-                    android:layout_marginBottom="50dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="3">
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:layout_marginLeft="30dp"
-                            android:text="Skip"
-                            android:textColor="@color/bs_blue"
-                            android:textSize="15dp" />
-
-                        <com.smarteist.autoimageslider.SliderView
-                            android:id="@+id/slider3"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_centerInParent="true"
-                            android:layout_weight="1"
-                            android:visibility="visible"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:sliderAnimationDuration="600"
-                            app:sliderAutoCycleDirection="back_and_forth"
-                            app:sliderIndicatorAnimationDuration="600"
-                            app:sliderIndicatorEnabled="true"
-                            app:sliderIndicatorGravity="center_horizontal|bottom"
-                            app:sliderIndicatorOrientation="horizontal"
-                            app:sliderIndicatorPadding="3dp"
-                            app:sliderIndicatorRadius="2dp"
-                            app:sliderIndicatorSelectedColor="@color/bs_blue"
-                            app:sliderIndicatorUnselectedColor="#5A5A5A"
-                            app:sliderScrollTimeInSec="1" />
-
-                        <com.aemerse.slider.ImageCarousel
-                            android:id="@+id/carousel1"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_weight="1"
-                            app:autoPlay="false"
-                            app:autoPlayDelay="3000"
-                            app:autoWidthFixing="true"
-                            app:bottomShadowAlpha="0.6"
-                            app:bottomShadowHeight="64dp"
-                            app:captionMargin="0dp"
-                            app:captionTextSize="14sp"
-                            app:carouselBackground="@color/white"
-                            app:carouselType="BLOCK"
-                            app:imageScaleType="centerCrop"
-                            app:indicatorMargin="0dp"
-                            app:infiniteCarousel="true"
-                            app:nextButtonId="@id/btn_next"
-                            app:nextButtonLayout="@layout/next_button_layout"
-                            app:nextButtonMargin="4dp"
-                            app:previousButtonId="@id/btn_previous"
-                            app:previousButtonLayout="@layout/previous_button_layout"
-                            app:previousButtonMargin="4dp"
-                            app:scaleOnScroll="false"
-                            app:scalingFactor="0.15"
-                            app:showBottomShadow="true"
-                            app:showCaption="true"
-                            app:showIndicator="true"
-                            app:showNavigationButtons="true"
-                            app:showTopShadow="true"
-                            app:topShadowAlpha="0.6"
-                            app:topShadowHeight="32dp"
-                            app:touchToPause="true" />
-
-                        <com.aemerse.slider.ImageCarousel
-                            android:id="@+id/carousel1"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_weight="1"
-                            app:autoPlay="false"
-                            app:autoPlayDelay="3000"
-                            app:autoWidthFixing="true"
-                            app:bottomShadowAlpha="0.6"
-                            app:bottomShadowHeight="64dp"
-                            app:captionMargin="0dp"
-                            app:captionTextSize="14sp"
-                            app:carouselBackground="@color/white"
-                            app:carouselType="BLOCK"
-                            app:imageScaleType="centerCrop"
-                            app:indicatorMargin="0dp"
-                            app:infiniteCarousel="true"
-                            app:nextButtonId="@id/btn_next"
-                            app:nextButtonLayout="@layout/next_button_layout"
-                            app:nextButtonMargin="4dp"
-                            app:previousButtonId="@id/btn_previous"
-                            app:previousButtonLayout="@layout/previous_button_layout"
-                            app:previousButtonMargin="4dp"
-                            app:scaleOnScroll="false"
-                            app:scalingFactor="0.15"
-                            app:showBottomShadow="true"
-                            app:showCaption="true"
-                            app:showIndicator="true"
-                            app:showNavigationButtons="true"
-                            app:showTopShadow="true"
-                            app:topShadowAlpha="0.6"
-                            app:topShadowHeight="32dp"
-                            app:touchToPause="true" />
-
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-            </LinearLayout>
-        </LinearLayout>
-        </LinearLayout>
 
 </layout>

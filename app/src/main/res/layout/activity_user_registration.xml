@@ -302,7 +302,6 @@
                     android:entries="@array/district"
                     android:background="@drawable/btn_border"
                     android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                    android:entries="@array/state"
                     android:fontFamily="sans-serif"
                     android:inputType="text"
                     tools:setOnItemSelectedListener="@{registrationVM.clicksListener}"

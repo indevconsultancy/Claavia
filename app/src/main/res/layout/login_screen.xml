@@ -18,8 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginTop="80dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -206,10 +205,10 @@
             android:layout_gravity="bottom"
             android:gravity="center">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
                 android:layout_width="250dp"
                 android:layout_height="200dp"
-                android:src="@drawable/claraa_icon"/>
+                android:src="@drawable/claraa_login_img"/>
 
         </LinearLayout>
     </RelativeLayout>

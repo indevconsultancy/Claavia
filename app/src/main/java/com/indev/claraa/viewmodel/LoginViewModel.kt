@@ -63,6 +63,7 @@ class LoginViewModel(val context: Context): ViewModel() {
                 } else {
                     Handler(Looper.getMainLooper()).post {
                         Toast.makeText(context, "Invalid user", Toast.LENGTH_LONG).show()
+                        progressDialog.dismiss()
                     }
                 }
             }

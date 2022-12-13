@@ -35,8 +35,8 @@ class SplashScreen : AppCompatActivity() {
         supportActionBar?.hide()
         prefHelper = PrefHelper(applicationContext)
 
-        val carousel: ImageCarousel = binding.carousel
-        carousel.registerLifecycle(lifecycle)
+//        val carousel: ImageCarousel = binding.carousel
+//        carousel.registerLifecycle(lifecycle)
 
         val list = mutableListOf<CarouselItem>()
 
@@ -61,7 +61,7 @@ class SplashScreen : AppCompatActivity() {
                 headers = headers
             )
         )
-        carousel.setData(list)
+        //carousel.setData(list)
 
 
         callNextActivity()
@@ -77,9 +77,9 @@ class SplashScreen : AppCompatActivity() {
 
         Handler().postDelayed({
             if(checkLogin == true) {
-                    val intent = Intent(this@SplashScreen, HomeScreen::class.java)
-                    startActivity(intent)
-                    finishAffinity()
+                val intent = Intent(this@SplashScreen, HomeScreen::class.java)
+                startActivity(intent)
+                finishAffinity()
             }else{
                 val intent = Intent(this@SplashScreen, LoginScreen::class.java)
                 startActivity(intent)
