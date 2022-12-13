@@ -131,6 +131,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -301,6 +302,7 @@
                     android:entries="@array/district"
                     android:background="@drawable/btn_border"
                     android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:entries="@array/state"
                     android:fontFamily="sans-serif"
                     android:inputType="text"
                     tools:setOnItemSelectedListener="@{registrationVM.clicksListener}"
@@ -318,7 +320,6 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
                         android:orientation="horizontal">
 
                         <TextView

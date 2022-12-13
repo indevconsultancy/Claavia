@@ -127,7 +127,7 @@
                         app:sliderIndicatorUnselectedColor="#FFF"
                         app:sliderScrollTimeInSec="1" />
 
-                </LinearLayout>
+                    </LinearLayout>
 
 
                 <LinearLayout
@@ -179,6 +179,40 @@
                             app:sliderIndicatorSelectedColor="@color/bs_blue"
                             app:sliderIndicatorUnselectedColor="#5A5A5A"
                             app:sliderScrollTimeInSec="1" />
+
+                        <com.aemerse.slider.ImageCarousel
+                            android:id="@+id/carousel1"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            app:autoPlay="false"
+                            app:autoPlayDelay="3000"
+                            app:autoWidthFixing="true"
+                            app:bottomShadowAlpha="0.6"
+                            app:bottomShadowHeight="64dp"
+                            app:captionMargin="0dp"
+                            app:captionTextSize="14sp"
+                            app:carouselBackground="@color/white"
+                            app:carouselType="BLOCK"
+                            app:imageScaleType="centerCrop"
+                            app:indicatorMargin="0dp"
+                            app:infiniteCarousel="true"
+                            app:nextButtonId="@id/btn_next"
+                            app:nextButtonLayout="@layout/next_button_layout"
+                            app:nextButtonMargin="4dp"
+                            app:previousButtonId="@id/btn_previous"
+                            app:previousButtonLayout="@layout/previous_button_layout"
+                            app:previousButtonMargin="4dp"
+                            app:scaleOnScroll="false"
+                            app:scalingFactor="0.15"
+                            app:showBottomShadow="true"
+                            app:showCaption="true"
+                            app:showIndicator="true"
+                            app:showNavigationButtons="true"
+                            app:showTopShadow="true"
+                            app:topShadowAlpha="0.6"
+                            app:topShadowHeight="32dp"
+                            app:touchToPause="true" />
 
                         <com.aemerse.slider.ImageCarousel
                             android:id="@+id/carousel1"
