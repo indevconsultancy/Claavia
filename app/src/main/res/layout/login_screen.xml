@@ -120,7 +120,7 @@
                         android:layout_height="35dp"
                         android:background="@drawable/edittextcircle"
                         android:hint="@string/enter_your_password"
-                        android:text="@{loginVM.password}"
+                        android:text="@={loginVM.password}"
                         android:inputType="textPassword"
                         android:layout_marginRight="@dimen/margin15"
                         android:textSize="15dp"

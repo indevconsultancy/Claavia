@@ -25,6 +25,7 @@ interface ClaraaApi {
     @POST("login.php")
     suspend fun login(@Body loginModel: LoginModel):  Response<LoginResponse>
 
+
     @POST("address_insert.php")
     suspend fun addressDetails(@Body addressDetailsModel: AddressDetailsModel,@Header("Authorization") authorization:Any): Response<AddressDetailsResponse>
 

@@ -11,7 +11,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.aemerse.slider.ImageCarousel
 import com.aemerse.slider.model.CarouselItem
 import com.indev.claraa.R
+import com.indev.claraa.adapter.IntroSliderAdapter
 import com.indev.claraa.databinding.ActivitySplashScreenBinding
+import com.indev.claraa.entities.IntroSlide
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.SplashRepository
@@ -23,11 +25,12 @@ import com.indev.claraa.viewmodel.SplashViewModelFactory
 
 class SplashScreen : AppCompatActivity() {
     private lateinit var binding: ActivitySplashScreenBinding
-    private val splashPreLength = 2000
+    private val splashPreLength = 5000
     var splashLoaded = "No"
     lateinit var splashViewModel: SplashViewModel
     lateinit var prefHelper: PrefHelper
     var checkLogin: Boolean = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,32 +41,6 @@ class SplashScreen : AppCompatActivity() {
 //        val carousel: ImageCarousel = binding.carousel
 //        carousel.registerLifecycle(lifecycle)
 
-        val list = mutableListOf<CarouselItem>()
-
-        list.add(
-            CarouselItem(
-                imageUrl = "https://claraa.in/images/banner/1.jpg",
-            )
-        )
-
-        list.add(
-            CarouselItem(
-                imageUrl = "https://claraa.in/images/banner/2.jpg"
-            )
-        )
-
-        val headers = mutableMapOf<String, String>()
-        headers["header_key"] = "header_value"
-
-        list.add(
-            CarouselItem(
-                imageUrl = "https://claraa.in/images/about/9.jpg",
-                headers = headers
-            )
-        )
-        //carousel.setData(list)
-
-
         callNextActivity()
         this.window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -71,6 +48,7 @@ class SplashScreen : AppCompatActivity() {
         splashViewModel = ViewModelProvider(this, SplashViewModelFactory(this@SplashScreen))[SplashViewModel::class.java]
 
     }
+
 
     private fun callNextActivity() {
         checkLogin = prefHelper.getBoolean(Constant.PREF_IS_LOGIN)
@@ -81,7 +59,7 @@ class SplashScreen : AppCompatActivity() {
                 startActivity(intent)
                 finishAffinity()
             }else{
-                val intent = Intent(this@SplashScreen, LoginScreen::class.java)
+                val intent = Intent(this@SplashScreen, IntroScreen::class.java)
                 startActivity(intent)
                 finishAffinity()
             }
