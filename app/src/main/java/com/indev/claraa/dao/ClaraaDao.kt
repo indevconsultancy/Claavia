@@ -1,5 +1,6 @@
 package com.indev.claraa.dao
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
@@ -26,7 +27,11 @@ interface ClaraaDao {
 
 
     @Query("SELECT * FROM product_master where product_name = :selectedProduct")
-    fun getProductData(selectedProduct: String): LiveData<List<ProductMasterModel>>
+    fun getProductPowerList(selectedProduct: String): LiveData<List<ProductMasterModel>>
+
+
+    @Query("SELECT * FROM product_master where product_name = :selectedProduct")
+    fun getProductData(selectedProduct: String): List<ProductMasterModel>
 
     @NotNull
     @Insert
@@ -80,4 +85,10 @@ interface ClaraaDao {
 
     @Query("DELETE FROM product_packet")
     fun deleteAllProductPackets()
+
+    @Query("DELETE FROM cart WHERE id = :cartId")
+    fun deleteByProductId(cartId: Int)
+
+    @Query("UPDATE cart SET quantity = :quantity WHERE id = :id")
+    fun updateCartProductQuantity(quantity: Int, id: Int): Int
 }

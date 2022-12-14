@@ -32,9 +32,29 @@ class ProductRepository {
             return dataBase?.userDao()?.getCartData()
         }
 
-        fun getProductData(context: Context, selectedProduct: String): LiveData<List<ProductMasterModel>>? {
+        fun getPowerList(context: Context, selectedProduct: String): LiveData<List<ProductMasterModel>>? {
+            dataBase = initializeDB(context)
+            return dataBase?.userDao()?.getProductPowerList(selectedProduct)
+        }
+
+
+        fun getProductData(context: Context, selectedProduct: String): List<ProductMasterModel>? {
             dataBase = initializeDB(context)
             return dataBase?.userDao()?.getProductData(selectedProduct)
+        }
+
+        fun deleteProductData(cartId: Int,context: Context){
+            dataBase = initializeDB(context)
+            CoroutineScope(Dispatchers.IO).launch {
+                dataBase?.userDao()?.deleteByProductId(cartId)
+            }
+        }
+
+        fun updateCartProductQuantity(quantity: Int, cartId: Int,context: Context){
+            dataBase = initializeDB(context)
+            CoroutineScope(Dispatchers.IO).launch {
+                dataBase?.userDao()?.updateCartProductQuantity(quantity,cartId)
+            }
         }
 
     }

@@ -38,6 +38,7 @@
                         android:weightSum="2">
 
                         <ImageView
+                            android:id="@+id/imageProduct"
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -50,6 +51,7 @@
                             android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tvProductName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Claraa Fresh Flo Lens"
@@ -60,10 +62,11 @@
 
 
                             <TextView
+                                    android:id="@+id/tvPrice"
                                     android:layout_marginTop="5dp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Rs500"
+                                    android:text="500"
                                     android:textColor="@color/black"
                                     android:textSize="15dp"
                                     android:layout_gravity="center_vertical"
@@ -161,6 +164,7 @@
                         </androidx.cardview.widget.CardView>
 
                         <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnDelete"
                             android:layout_width="@dimen/_70sdp"
                             android:layout_height="match_parent"
                             android:layout_margin="@dimen/_5sdp"
