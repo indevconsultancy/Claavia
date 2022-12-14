@@ -1,6 +1,5 @@
 package com.indev.claraa.ui
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -25,6 +24,8 @@ class IntroScreen : AppCompatActivity() {
             IntroSlide("","",R.drawable.intro1),
             IntroSlide("","",R.drawable.intro2),
             IntroSlide("","",R.drawable.intro3),
+            IntroSlide("","",R.drawable.intro4),
+            IntroSlide("","",R.drawable.intro5),
         )
     )
 
@@ -48,6 +49,15 @@ class IntroScreen : AppCompatActivity() {
                 binding.introSliderViewPager.currentItem += 1
             }else{
                 startActivity(Intent(applicationContext, LoginScreen::class.java))
+            }
+        }
+
+        binding.navigateBefore.setOnClickListener {
+            if (binding.introSliderViewPager.currentItem - 1 < introSliderAdapter.itemCount){
+                binding.introSliderViewPager.currentItem -= 1
+            }else{
+//                binding.introSliderViewPager.currentItem > -1
+                finishAffinity()
             }
         }
 
