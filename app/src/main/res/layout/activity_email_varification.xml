@@ -14,10 +14,20 @@
         android:orientation="vertical"
         tools:context=".ui.EmailVarification">
 
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/custom_img_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="150dp"
             android:layout_marginHorizontal="30dp"
             android:orientation="vertical">
 
@@ -32,20 +42,19 @@
                 android:text="Verify Your Mobile Number"
                 android:gravity="center_vertical"
                 android:textSize="20dp"
+                android:fontFamily="@font/aleo_regular"
                 android:textColorHighlight="@color/bs_green"
                 android:padding="5dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                />
+                android:textColor="@color/black" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                android:fontFamily="sans-serif"
                 android:background="@drawable/btn_border"
                 android:hint="Enter the OTP"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/aleo_regular"
                 android:text="@={emailVM.email}"
                 android:inputType="text"
                 android:padding="10dp"
@@ -55,9 +64,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                android:fontFamily="sans-serif"
                 android:text="Didn't receive OTP"
                 android:gravity="center"
+                android:fontFamily="@font/aleo_regular"
                 android:layout_marginTop="20dp"
                 android:textSize="15dp" />
 
@@ -65,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/aleo_regular"
                 android:text="Resend OTP in 30 sec."
                 android:textColor="@color/bs_blue"
                 android:gravity="center"
@@ -83,6 +92,7 @@
                 android:text="Verify"
                 android:textAllCaps="false"
                 android:textColor="#FFF"
+                android:fontFamily="@font/aleo_regular"
                 android:layout_marginTop="20dp"
                 android:textSize="15dp" />
         </LinearLayout>

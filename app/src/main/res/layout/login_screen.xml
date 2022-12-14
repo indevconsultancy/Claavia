@@ -8,24 +8,32 @@
             type="com.indev.claraa.viewmodel.LoginViewModel" />
     </data>
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent">
 
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/custom_img_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="80dp">
+            android:layout_marginTop="120dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="You're Set!"
-                android:textSize="20dp"
-                android:textStyle="bold"
+                android:textSize="25dp"
+                android:fontFamily="@font/aleo_regular"
                 android:textColor="@color/black"/>
 
         <LinearLayout
@@ -44,6 +52,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:text="Email/ Username"
+                    android:fontFamily="@font/aleo_regular"
                     android:textColor="@android:color/black"
                     android:textSize="15dp" />
 
@@ -61,13 +70,14 @@
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_marginHorizontal="10dp"
-                    android:src="@drawable/user_icon" />
+                    android:src="@drawable/user_img" />
 
                 <EditText
                     android:id="@+id/etUsername"
                     android:layout_marginRight="22dp"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
+                    android:fontFamily="@font/aleo_regular"
                     android:background="@drawable/edittextcircle"
                     android:hint="@string/enter_your_user_name"
                     android:text="@={loginVM.username}"
@@ -92,6 +102,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:text="Password"
+                        android:fontFamily="@font/aleo_regular"
                         android:textColor="@android:color/black"
                         android:textSize="15dp" />
 
@@ -111,7 +122,7 @@
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_marginHorizontal="10dp"
-                        android:src="@drawable/password"
+                        android:src="@drawable/password_img"
                         android:layout_weight="0"/>
 
                     <EditText
@@ -120,6 +131,7 @@
                         android:layout_height="35dp"
                         android:background="@drawable/edittextcircle"
                         android:hint="@string/enter_your_password"
+                        android:fontFamily="@font/aleo_regular"
                         android:text="@={loginVM.password}"
                         android:inputType="textPassword"
                         android:layout_marginRight="@dimen/margin15"
@@ -149,6 +161,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:fontFamily="@font/aleo_regular"
                 android:onClick="@{() ->loginVM.signIn()}"
                 android:background="@drawable/submitbutton"
                 android:backgroundTint="@color/bs_blue"
@@ -157,26 +170,28 @@
                 android:textColor="@color/white"
                 android:textSize="18dp"/>
 
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:hint="OTP"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/bs_blue"
-                android:textSize="15dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
+                android:fontFamily="@font/aleo_regular"
                 android:onClick="@{() ->loginVM.forgot()}"
-                android:hint="Forgot Password?"
+                android:text="Forgot Password?"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/black"
+                android:textColor="@color/gray_20"
                 android:textSize="15dp"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="Login using OTP?"
+                android:fontFamily="@font/aleo_regular"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/register_border"
+                android:textColor="@color/gray_20"
+                android:textSize="15dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -197,12 +212,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/aleo_regular"
                     android:gravity="center"
                     android:onClick="@{() ->loginVM.registration()}"
                     android:text="New to Claraa? Register here"
                     android:textColor="@color/black"
                     android:textSize="15dp" />
+
 
             </LinearLayout>
         </LinearLayout>

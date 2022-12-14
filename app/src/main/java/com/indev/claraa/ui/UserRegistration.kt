@@ -21,8 +21,7 @@ class UserRegistration : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_user_registration)
-        title = "Registration"
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.hide()
 
         registrationViewModel = ViewModelProvider(
             this,

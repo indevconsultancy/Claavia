@@ -77,7 +77,7 @@ class IntroScreen : AppCompatActivity() {
                 this?.setImageDrawable(
                     ContextCompat.getDrawable(
                         applicationContext,
-                        R.drawable.indicator_inactive
+                        R.drawable.background_border
                 )
                 )
                 this?.layoutParams = layoutParams

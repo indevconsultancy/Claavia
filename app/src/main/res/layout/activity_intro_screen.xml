@@ -29,7 +29,7 @@
             android:gravity="center"
             android:text="Discover a New Vision"
             android:textColor="@color/black"
-            android:textSize="25dp" />
+            android:textSize="20dp" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/introSliderViewPager"

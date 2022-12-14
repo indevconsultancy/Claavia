@@ -17,8 +17,7 @@ class EmailVarification : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,  R.layout.activity_email_varification)
 
-        setTitle("Forgot Password")
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.hide()
 
         emailVerificationViewModel = ViewModelProvider(this, EmailVerificationViewModelFactory(this))[EmailVerificationViewModel::class.java]
         binding.emailVM = emailVerificationViewModel
