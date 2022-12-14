@@ -8,6 +8,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.SplashScreen">
 
+
         <TextView
             android:id="@+id/textSkipIntro"
             android:layout_width="wrap_content"
