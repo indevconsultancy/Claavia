@@ -15,7 +15,7 @@ import com.indev.claraa.entities.*
                         DistrictModel::class,
                         ProductMasterModel::class,
                         ProductTypeModel::class,
-                        ProductPacketModel::class], version = 1)
+                        ProductPacketModel::class], version = 2)
 
 abstract class RoomDB: RoomDatabase() {
 

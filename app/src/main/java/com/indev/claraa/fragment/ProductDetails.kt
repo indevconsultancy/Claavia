@@ -31,6 +31,7 @@ class ProductDetails : Fragment(), ClickLinstener {
     private lateinit var powerRangeAdapter: PowerRangeAdapter
     private lateinit var cartModelList: ArrayList<CartModel>
     lateinit var productMasterArrayList: ArrayList<ProductMasterModel>
+     var selectedProduct ="Claraa Fresh Flo"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -100,7 +101,7 @@ class ProductDetails : Fragment(), ClickLinstener {
         powerRangeAdapter = PowerRangeAdapter(productDetailViewModel,requireActivity(), productMasterArrayList, this)
         recycleViewPowerrangeList()
 
-        productDetailViewModel.getPruductMasterList(requireActivity(), "Claraa Fresh Flo")?.observe(requireActivity(), Observer {
+        productDetailViewModel.getPruductPowerList(requireActivity(), selectedProduct)?.observe(requireActivity(), Observer {
             powerRangeAdapter.setData(it as ArrayList<ProductMasterModel>)
             productMasterArrayList = it
         })
@@ -114,6 +115,12 @@ class ProductDetails : Fragment(), ClickLinstener {
             }
         })
 
+    }
+
+    companion object{
+
+        var selectedValue="Claraa Fresh Flo"
+        var rangeValue="-0.5"
     }
 
     private fun recycleViewPowerrangeList() {
