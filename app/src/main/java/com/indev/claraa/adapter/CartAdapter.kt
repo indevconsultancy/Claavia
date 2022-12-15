@@ -29,22 +29,23 @@ class CartAdapter(private val context: Context, var cartModelList: List<CartMode
 
     override fun onBindViewHolder(holder: MyViewholder, position: Int) {
         val currentItem = cartModelList[position]
-        holder.tvRange.text ="Size: " + currentItem.ranges
-        count= currentItem.quantity.toInt()
+        holder.tvRange.text ="Size: " + currentItem.power_range
 
         holder.tvProductName.text = currentItem.product_name
-        var price= currentItem.price
-        var totalPrice= count * price.toInt()
+        var totalPrice= currentItem.quantity.toInt() * currentItem.price.toInt()
         holder.tvPrice.text =totalPrice.toString()
 
+        count= currentItem.quantity.toInt()
+
         holder.addButton.setOnClickListener {
+            count= currentItem.quantity.toInt()
+
             if(count >0){
+                Toast.makeText(context, "" + count, Toast.LENGTH_LONG).show()
                 increamentCount()
-                holder.tvCount.setText("" + count)
                 ProductRepository.updateCartProductQuantity(count,currentItem.id,context)
                 holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_remove_24));
             }else{
-                holder.tvCount.setText("" + count)
                 holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_delete_outline_24));
             }
         }
@@ -57,19 +58,28 @@ class CartAdapter(private val context: Context, var cartModelList: List<CartMode
         }
 
         holder.deleteButton.setOnClickListener {
+            count= currentItem.quantity.toInt()
+
             if(count > 1){
                 decreamentCount()
-                holder.tvCount.setText("" + count)
                 ProductRepository.updateCartProductQuantity(count,currentItem.id,context)
                 holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_remove_24));
             }else{
-                holder.tvCount.setText("" + count)
                 ProductRepository.deleteProductData(currentItem.id,context)
                 holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_delete_outline_24));
             }
         }
 
 
+        if(count<=1){
+            holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_delete_outline_24));
+        }else{
+            holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_remove_24));
+        }
+        holder.tvCount.setText("" + count)
+
+        var totalCartPrice  = totalPrice * cartModelList.size
+        totalAmount= totalCartPrice
     }
 
     fun increamentCount() = count++
@@ -99,6 +109,10 @@ class CartAdapter(private val context: Context, var cartModelList: List<CartMode
                 listener.onClickListner(adapterPosition)
             }
         }
+    }
+
+    companion object{
+        var totalAmount = 0
     }
 }
 

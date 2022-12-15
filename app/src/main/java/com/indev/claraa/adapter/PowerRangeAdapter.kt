@@ -17,7 +17,7 @@ import com.indev.claraa.viewmodel.ProductDetailViewModel
 class PowerRangeAdapter(val productDetailViewModel: ProductDetailViewModel,private val context: Context, var productMasterArrayList: ArrayList<ProductMasterModel>, private val listener: ClickLinstener) : RecyclerView.Adapter<PowerRangeAdapter.MyViewholder>(){
 
     var selectedItemPosition: Int = 0
-    lateinit var selectValue: String
+    var selectValue: String ="0.5"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewholder {
         val itemView =
@@ -32,8 +32,10 @@ class PowerRangeAdapter(val productDetailViewModel: ProductDetailViewModel,priva
         holder.cardView.setOnClickListener {
             selectedItemPosition= position
             selectValue= currentItem.power_range
+            productRange= selectValue
             clickEvent(currentItem.power_range, "1")
             notifyDataSetChanged()
+
         }
 
         if(selectedItemPosition == position){
@@ -73,5 +75,8 @@ class PowerRangeAdapter(val productDetailViewModel: ProductDetailViewModel,priva
         }
     }
 
+    companion object{
+        var productRange= "0.90"
+    }
 
 }

@@ -34,6 +34,7 @@ class ProductMasterAdapter(private val context: Context, var productMasterModelA
         Glide.with(context).load(ClientApi.BASE_IMAGE_URL +currentItem.product_img1).into(holder.imageProduct)
         holder.cardView.setOnClickListener{
             replaceFregment(ProductDetails())
+            productId= currentItem.product_id
         }
 
     }
@@ -64,6 +65,10 @@ class ProductMasterAdapter(private val context: Context, var productMasterModelA
                 listener.onClickListner(adapterPosition)
             }
         }
+    }
+
+    companion object{
+        var productId= "0.90"
     }
 
 }

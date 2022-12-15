@@ -129,14 +129,6 @@ class Home : Fragment(), ClickLinstener {
             productMasterModelArrayList = it
         })
     }
-//    override fun onResume() {
-//        super.onResume()
-//        requireView().isFocusableInTouchMode = false
-//        requireView().requestFocus()
-//        requireView().setOnKeyListener { _, keyCode, event ->
-//            event.action === KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK
-//        }
-//    }
 
     private fun recycleViewList() {
         binding.rvProductType.apply {
@@ -146,7 +138,6 @@ class Home : Fragment(), ClickLinstener {
             adapter= productMasterAdapter
         }
     }
-
 
     private fun replaceFregment(fragment : Fragment) {
         val fragmentManager = activity?.supportFragmentManager

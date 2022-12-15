@@ -118,9 +118,7 @@ class ProductDetails : Fragment(), ClickLinstener {
     }
 
     companion object{
-
-        var selectedValue="Claraa Fresh Flo"
-        var rangeValue="-0.5"
+         var rangeValue = PowerRangeAdapter.productRange
     }
 
     private fun recycleViewPowerrangeList() {

@@ -6,10 +6,13 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.lifecycle.*
+import com.indev.claraa.adapter.ProductMasterAdapter
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.ProductMasterModel
 import com.indev.claraa.fragment.ProductDetails
 import com.indev.claraa.repository.ProductRepository
+import com.indev.claraa.repository.SplashRepository
+import com.indev.claraa.roomdb.RoomDB
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,13 +23,19 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
     private lateinit var cartModel: CartModel
     val optionSelectedListener = MutableLiveData<Pair<String, String>>()
     lateinit var productMasterArrayList: ArrayList<ProductMasterModel>
+    lateinit var cartModelArrayList: ArrayList<CartModel>
+    lateinit var productDetailViewModel: ProductDetailViewModel
+    private var dataBase: RoomDB? = null
 
+    private fun initializeDB(context: Context): RoomDB? {
+        return RoomDB.getDatabase(context)
+    }
 
     init{
-        var productName= ProductDetails.selectedValue
+        var product_id= ProductMasterAdapter.productId
 
         CoroutineScope(Dispatchers.IO).launch {
-            productMasterArrayList= ProductRepository.getProductData(context,productName) as ArrayList<ProductMasterModel>
+            productMasterArrayList= ProductRepository.getProductData(context,product_id.toInt()) as ArrayList<ProductMasterModel>
         }
     }
 
@@ -41,12 +50,39 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
     }
 
     fun btnSubmit() {
+        dataBase = initializeDB(context)
 
-        cartModel = CartModel(0,packetValue.toString(), ProductDetails.rangeValue,productMasterArrayList.get(0).product_id,productMasterArrayList.get(0).product_name,productMasterArrayList.get(0).product_img1,productMasterArrayList.get(0).product_img2,
-            productMasterArrayList.get(0).price,"1",productMasterArrayList.get(0).type_id,productMasterArrayList.get(0).packet_id,productMasterArrayList.get(0).power_range,productMasterArrayList.get(0).currency,productMasterArrayList.get(0).active)
-        viewModelScope.launch {
-            ProductRepository.insertCartData(context ,cartModel)
+        var checkExitPorduct=0
+        CoroutineScope(Dispatchers.IO).launch {
+            checkExitPorduct = dataBase?.userDao()?.isProductRowExist(productMasterArrayList.get(0).product_id.toInt(), productMasterArrayList.get(0).power_range, packetValue.toString())!!
+            if(checkExitPorduct==0) {
+                cartModel = CartModel(
+                    0,
+                    packetValue.toString(),
+                    ProductDetails.rangeValue,
+                    productMasterArrayList.get(0).product_id,
+                    productMasterArrayList.get(0).product_name,
+                    productMasterArrayList.get(0).product_img1,
+                    productMasterArrayList.get(0).product_img2,
+                    productMasterArrayList.get(0).price,
+                    "1",
+                    productMasterArrayList.get(0).type_id,
+                    productMasterArrayList.get(0).packet_id,
+                    productMasterArrayList.get(0).power_range,
+                    productMasterArrayList.get(0).currency,
+                    productMasterArrayList.get(0).active
+                )
+                viewModelScope.launch {
+                    ProductRepository.insertCartData(context, cartModel)
+                }
+            }else{
+                cartModelArrayList= ProductRepository.getCartDatabyProductId(productMasterArrayList.get(0).product_id.toInt(),context) as ArrayList<CartModel>
+                ProductRepository.updateCartProductQuantity(cartModelArrayList.get(0).quantity.toInt() + 1,cartModelArrayList.get(0).id,context)
+            }
         }
+//        var checkExitPorduct = ProductRepository.checkexistProduct(productMasterArrayList.get(0).product_id.toInt(), productMasterArrayList.get(0).power_range, context)
+//        var checkExitPorduct
+
     }
 
     fun getCartList(context: Context): LiveData<List<CartModel>>? {

@@ -30,8 +30,8 @@ interface ClaraaDao {
     fun getProductPowerList(selectedProduct: String): LiveData<List<ProductMasterModel>>
 
 
-    @Query("SELECT * FROM product_master where product_name = :selectedProduct")
-    fun getProductData(selectedProduct: String): List<ProductMasterModel>
+    @Query("SELECT * FROM product_master where product_id = :product_id")
+    fun getProductData(product_id: Int): List<ProductMasterModel>
 
     @NotNull
     @Insert
@@ -91,4 +91,11 @@ interface ClaraaDao {
 
     @Query("UPDATE cart SET quantity = :quantity WHERE id = :id")
     fun updateCartProductQuantity(quantity: Int, id: Int): Int
+
+
+    @Query("SELECT EXISTS(SELECT * from cart where product_id = :productId and power_range = :power_range and packets = :packets)")
+    fun isProductRowExist(productId: Int, power_range: String, packets: String): Int
+
+    @Query("SELECT * from cart where product_id = :productId")
+    fun getCartDatabyProductId(productId: Int) : List<CartModel>
 }

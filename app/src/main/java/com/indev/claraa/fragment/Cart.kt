@@ -60,12 +60,16 @@ class Cart : Fragment(), ClickLinstener {
     }
 
 
+
+
     private fun recycleViewList() {
         binding.rvOrder.apply {
             setHasFixedSize(true)
             binding.rvOrder.layoutManager = LinearLayoutManager(context)
             adapter= cartAdapter
         }
+        binding.totalAmount.text = "SubTotal ₹\u200E" + CartAdapter.totalAmount.toString()
+
     }
 
     private fun replaceFregment(fragment : Fragment) {

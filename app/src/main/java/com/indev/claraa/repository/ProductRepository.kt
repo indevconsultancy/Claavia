@@ -38,9 +38,14 @@ class ProductRepository {
         }
 
 
-        fun getProductData(context: Context, selectedProduct: String): List<ProductMasterModel>? {
+        fun getProductData(context: Context, product_id: Int): List<ProductMasterModel>? {
             dataBase = initializeDB(context)
-            return dataBase?.userDao()?.getProductData(selectedProduct)
+            return dataBase?.userDao()?.getProductData(product_id)
+        }
+
+        fun getCartDatabyProductId(productId: Int,context: Context): List<CartModel>? {
+            dataBase = initializeDB(context)
+            return dataBase?.userDao()?.getCartDatabyProductId(productId)
         }
 
         fun deleteProductData(cartId: Int,context: Context){
@@ -52,10 +57,12 @@ class ProductRepository {
 
         fun updateCartProductQuantity(quantity: Int, cartId: Int,context: Context){
             dataBase = initializeDB(context)
+
             CoroutineScope(Dispatchers.IO).launch {
                 dataBase?.userDao()?.updateCartProductQuantity(quantity,cartId)
             }
         }
+
 
     }
 
