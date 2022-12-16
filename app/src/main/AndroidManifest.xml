@@ -16,6 +16,27 @@
         android:theme="@style/Theme.Claraa"
         tools:targetApi="31">
         <activity
+            android:name=".ui.RegisterWithUs"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.OTPScreen"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.MobileNumber"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.IntroScreen"
             android:exported="false">
             <meta-data

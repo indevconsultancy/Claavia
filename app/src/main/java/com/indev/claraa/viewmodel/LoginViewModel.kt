@@ -6,16 +6,12 @@ import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.ObservableField
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.indev.claraa.R
 import com.indev.claraa.entities.LoginModel
 import com.indev.claraa.fragment.Home
-import com.indev.claraa.fragment.OTPScreen
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.LoginRepository
@@ -75,7 +71,7 @@ class LoginViewModel(val context: Context): ViewModel() {
         fun registration(){
         prefHelper= PrefHelper(context)
         prefHelper.put( Constant.PREF_IS_LOGIN,false)
-        context.startActivity(Intent(context, UserRegistration::class.java))
+        context.startActivity(Intent(context, RegisterWithUs::class.java))
     }
 
     fun forgot(){
@@ -83,15 +79,7 @@ class LoginViewModel(val context: Context): ViewModel() {
     }
 
     fun otpVerify(){
-        replaceFregment(OTPScreen())
-//        context.startActivity(Intent(context, OTPScreen::class.java))
+        context.startActivity(Intent(context, MobileNumber::class.java))
     }
-
-    private fun replaceFregment(fragment : Fragment) {
-        var transaction = (context as LoginScreen).supportFragmentManager.beginTransaction()
-        transaction?.replace(R.id.frame_layout, fragment)
-        transaction.commit()
-    }
-
 
 }
