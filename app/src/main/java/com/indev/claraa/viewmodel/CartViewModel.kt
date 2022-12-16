@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.indev.claraa.R
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.fragment.AddressList
+import com.indev.claraa.fragment.Home
 import com.indev.claraa.repository.ProductRepository
 import com.indev.claraa.ui.HomeScreen
 
@@ -17,6 +18,9 @@ class CartViewModel (val context: Context): ViewModel() {
 
     fun btnBuy(){
         replaceFregment(AddressList())
+    }
+    fun btnBackProduct(){
+        replaceFregment(Home())
     }
 
     private fun replaceFregment(fragment : Fragment) {

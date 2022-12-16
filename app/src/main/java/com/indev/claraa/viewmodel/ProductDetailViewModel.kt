@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.lifecycle.*
+import com.indev.claraa.adapter.PowerRangeAdapter
 import com.indev.claraa.adapter.ProductMasterAdapter
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.ProductMasterModel
@@ -24,7 +25,6 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
     val optionSelectedListener = MutableLiveData<Pair<String, String>>()
     lateinit var productMasterArrayList: ArrayList<ProductMasterModel>
     lateinit var cartModelArrayList: ArrayList<CartModel>
-    lateinit var productDetailViewModel: ProductDetailViewModel
     private var dataBase: RoomDB? = null
 
     private fun initializeDB(context: Context): RoomDB? {
@@ -54,21 +54,22 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
 
         var checkExitPorduct=0
         CoroutineScope(Dispatchers.IO).launch {
-            checkExitPorduct = dataBase?.userDao()?.isProductRowExist(productMasterArrayList.get(0).product_id.toInt(), productMasterArrayList.get(0).power_range, packetValue.toString())!!
+            var productID = dataBase?.userDao()?.getproductID(PowerRangeAdapter.power_range)!!
+            checkExitPorduct = dataBase?.userDao()?.isProductRowExist(productID, productMasterArrayList.get(0).power_range, packetValue.toString())!!
             if(checkExitPorduct==0) {
                 cartModel = CartModel(
                     0,
                     packetValue.toString(),
-                    ProductDetails.rangeValue,
-                    productMasterArrayList.get(0).product_id,
+                    productID.toString(),
                     productMasterArrayList.get(0).product_name,
                     productMasterArrayList.get(0).product_img1,
                     productMasterArrayList.get(0).product_img2,
                     productMasterArrayList.get(0).price,
+                    productMasterArrayList.get(0).price.toInt(),
                     "1",
                     productMasterArrayList.get(0).type_id,
                     productMasterArrayList.get(0).packet_id,
-                    productMasterArrayList.get(0).power_range,
+                    PowerRangeAdapter.power_range,
                     productMasterArrayList.get(0).currency,
                     productMasterArrayList.get(0).active
                 )
@@ -77,11 +78,10 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
                 }
             }else{
                 cartModelArrayList= ProductRepository.getCartDatabyProductId(productMasterArrayList.get(0).product_id.toInt(),context) as ArrayList<CartModel>
-                ProductRepository.updateCartProductQuantity(cartModelArrayList.get(0).quantity.toInt() + 1,cartModelArrayList.get(0).id,context)
+                var totalAmount= cartModelArrayList.get(0).amount * (cartModelArrayList.get(0).quantity.toInt()+1)
+                ProductRepository.updateCartProductQuantity(cartModelArrayList.get(0).quantity.toInt() + 1,totalAmount,cartModelArrayList.get(0).id,context)
             }
         }
-//        var checkExitPorduct = ProductRepository.checkexistProduct(productMasterArrayList.get(0).product_id.toInt(), productMasterArrayList.get(0).power_range, context)
-//        var checkExitPorduct
 
     }
 
@@ -92,8 +92,8 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
     fun getPruductPowerList(context: Context, selectedProduct: String): LiveData<List<ProductMasterModel>>? {
         return ProductRepository.getPowerList(context,selectedProduct)
     }
-
-    fun clickRangeOptionEvent(pair: Pair<String, String>) {
-        optionSelectedListener.value = pair
-    }
+//
+//    fun clickRangeOptionEvent(pair: Pair<String, String>) {
+//        optionSelectedListener.value = pair
+//    }
 }

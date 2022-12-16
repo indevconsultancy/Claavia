@@ -55,11 +55,11 @@ class ProductRepository {
             }
         }
 
-        fun updateCartProductQuantity(quantity: Int, cartId: Int,context: Context){
+        fun updateCartProductQuantity(quantity: Int,totalPrice: Int, cartId: Int,context: Context){
             dataBase = initializeDB(context)
 
             CoroutineScope(Dispatchers.IO).launch {
-                dataBase?.userDao()?.updateCartProductQuantity(quantity,cartId)
+                dataBase?.userDao()?.updateCartProductQuantity(quantity,totalPrice,cartId)
             }
         }
 

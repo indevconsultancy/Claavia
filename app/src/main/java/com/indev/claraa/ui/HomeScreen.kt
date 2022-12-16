@@ -61,7 +61,6 @@ class HomeScreen : AppCompatActivity() {
         }else{
 
             binding.bottomNavigation.bottomNavigation.selectedItemId ==R.id.home
-            Toast.makeText(applicationContext,"jhbfkj",Toast.LENGTH_LONG).show()
         }
 
     }

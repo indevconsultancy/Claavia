@@ -21,6 +21,7 @@ import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.ProductMasterModel
 import com.indev.claraa.viewmodel.ProductDetailViewModel
 import com.indev.claraa.viewmodel.ProductDetailViewModelFactory
+import java.time.temporal.TemporalAmount
 
 
 class ProductDetails : Fragment(), ClickLinstener {
@@ -98,7 +99,7 @@ class ProductDetails : Fragment(), ClickLinstener {
         })
 
         productDetailViewModel = ProductDetailViewModel(requireActivity())
-        powerRangeAdapter = PowerRangeAdapter(productDetailViewModel,requireActivity(), productMasterArrayList, this)
+        powerRangeAdapter = PowerRangeAdapter(requireActivity(), productMasterArrayList, this)
         recycleViewPowerrangeList()
 
         productDetailViewModel.getPruductPowerList(requireActivity(), selectedProduct)?.observe(requireActivity(), Observer {
@@ -106,20 +107,8 @@ class ProductDetails : Fragment(), ClickLinstener {
             productMasterArrayList = it
         })
 
-
-        productDetailViewModel.optionSelectedListener.observe(requireActivity(), Observer { pair ->
-            if (pair != null) {
-                binding.txtRange.text = "Power Range: " + pair.first
-            }else{
-                binding.txtRange.text = "Power Range: " + productMasterArrayList.get(0).power_range
-            }
-        })
-
     }
 
-    companion object{
-         var rangeValue = PowerRangeAdapter.productRange
-    }
 
     private fun recycleViewPowerrangeList() {
         binding.rvPowerRange.apply {
@@ -129,22 +118,13 @@ class ProductDetails : Fragment(), ClickLinstener {
             adapter= powerRangeAdapter
         }
     }
-//    override fun onResume() {
-//        super.onResume()
-//        requireView().isFocusableInTouchMode = false
-//        requireView().requestFocus()
-//        requireView().setOnKeyListener { _, keyCode, event ->
-//            event.action === KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK
-//        }
-//    }
-
 
     private fun replaceFregment(fragment : Fragment) {
         val fragmentTransition= fragmentManager?.beginTransaction()
         fragmentTransition?.replace(R.id.frame_layout, fragment)
         fragmentTransition?.addToBackStack(null)
         fragmentTransition?.commit()
-}
+    }
 
     private fun recycleViewList() {
         binding.recyclerViewCart.apply {
@@ -159,6 +139,10 @@ class ProductDetails : Fragment(), ClickLinstener {
     }
 
     override fun updateTextView(amount: Int) {
+    }
+
+    override fun updatePowerRange(power_range: String) {
+        binding.txtRange.text = "Power Range: " + power_range
 
     }
 

@@ -64,8 +64,9 @@ class Cart : Fragment(), ClickLinstener {
         binding.totalAmount.text = "SubTotal ₹\u200E" + amount
     }
 
+    override fun updatePowerRange(power_range: String) {
 
-
+    }
 
     private fun recycleViewList() {
         binding.rvOrder.apply {

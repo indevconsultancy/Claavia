@@ -81,4 +81,7 @@ class AddressList : Fragment(), ClickLinstener {
     override fun updateTextView(amount: Int) {
     }
 
+    override fun updatePowerRange(power_range: String) {
+    }
+
 }

@@ -19,7 +19,7 @@ import com.indev.claraa.restApi.ClientApi
 
 class CartAdapter(val context: Context, var cartModelList: List<CartModel>, private val listener: ClickLinstener) : RecyclerView.Adapter<CartAdapter.MyViewholder>(){
     var count =0
-
+    var totalPrice= 0
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewholder {
         val itemView =
             LayoutInflater.from(parent.context).inflate(R.layout.custom_cart, parent, false)
@@ -30,9 +30,6 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
         val currentItem = cartModelList[position]
         holder.tvRange.text ="Size: " + currentItem.power_range
         holder.tvProductName.text = currentItem.product_name
-        var totalPrice= currentItem.quantity.toInt() * currentItem.price.toInt()
-        holder.tvPrice.text =totalPrice.toString()
-
         count= currentItem.quantity.toInt()
 
         holder.addButton.setOnClickListener {
@@ -41,7 +38,8 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
             if(count >0){
                 Toast.makeText(context, "" + count, Toast.LENGTH_LONG).show()
                 increamentCount()
-                ProductRepository.updateCartProductQuantity(count,currentItem.id,context)
+                totalPrice= count * currentItem.price.toInt()
+                ProductRepository.updateCartProductQuantity(count,totalPrice,currentItem.id,context)
                 holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_remove_24));
             }else{
                 holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_delete_outline_24));
@@ -60,7 +58,8 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
 
             if(count > 1){
                 decreamentCount()
-                ProductRepository.updateCartProductQuantity(count,currentItem.id,context)
+                totalPrice= count * currentItem.price.toInt()
+                ProductRepository.updateCartProductQuantity(count,totalPrice,currentItem.id,context)
                 holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_remove_24));
             }else{
                 ProductRepository.deleteProductData(currentItem.id,context)
@@ -75,18 +74,23 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
             holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_remove_24));
         }
         holder.tvCount.setText("" + count)
+        holder.tvPrice.text = currentItem.amount.toString()
 
-        var totalCartPrice  = totalPrice * cartModelList.size
-        totalAmount= totalCartPrice
+        totalAmount= grandTotal(cartModelList)
         if(count==0) {
             listener.updateTextView(0)
         }else{
             listener.updateTextView(totalAmount)
         }
-
     }
 
-
+    private fun grandTotal(size: List<CartModel>): Int {
+        var totalPrice = 0
+        for (i in size.indices) {
+            totalPrice += size[i].amount
+        }
+        return totalPrice
+    }
 
     fun increamentCount() = count++
     fun decreamentCount() = count--

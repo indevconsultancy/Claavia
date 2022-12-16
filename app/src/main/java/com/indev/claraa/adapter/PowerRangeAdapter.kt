@@ -14,10 +14,10 @@ import com.indev.claraa.R
 import com.indev.claraa.entities.ProductMasterModel
 import com.indev.claraa.viewmodel.ProductDetailViewModel
 
-class PowerRangeAdapter(val productDetailViewModel: ProductDetailViewModel,private val context: Context, var productMasterArrayList: ArrayList<ProductMasterModel>, private val listener: ClickLinstener) : RecyclerView.Adapter<PowerRangeAdapter.MyViewholder>(){
+class PowerRangeAdapter(private val context: Context, var productMasterArrayList: ArrayList<ProductMasterModel>, private val listener: ClickLinstener) : RecyclerView.Adapter<PowerRangeAdapter.MyViewholder>(){
 
     var selectedItemPosition: Int = 0
-    var selectValue: String ="0.5"
+    var checkRange: Boolean= false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewholder {
         val itemView =
@@ -29,13 +29,17 @@ class PowerRangeAdapter(val productDetailViewModel: ProductDetailViewModel,priva
         val currentItem = productMasterArrayList[position]
         holder.tvPowerRange.text = currentItem.power_range
 
+        if(checkRange==false) {
+            listener.updatePowerRange(productMasterArrayList[0].power_range)
+            power_range= productMasterArrayList[0].power_range
+        }
+
         holder.cardView.setOnClickListener {
             selectedItemPosition= position
-            selectValue= currentItem.power_range
-            productRange= selectValue
-            clickEvent(currentItem.power_range, "1")
+            power_range= currentItem.power_range
+            listener.updatePowerRange(currentItem.power_range)
+            checkRange=true
             notifyDataSetChanged()
-
         }
 
         if(selectedItemPosition == position){
@@ -49,10 +53,10 @@ class PowerRangeAdapter(val productDetailViewModel: ProductDetailViewModel,priva
 
     }
 
-    private fun clickEvent(range: String, option: String) {
+/*    private fun clickEvent(range: String, option: String) {
         productDetailViewModel.clickRangeOptionEvent(Pair(range, option))
         notifyDataSetChanged()
-    }
+    }*/
 
     fun setData(productMasterArrayList: ArrayList<ProductMasterModel>) {
         this.productMasterArrayList= productMasterArrayList
@@ -76,7 +80,7 @@ class PowerRangeAdapter(val productDetailViewModel: ProductDetailViewModel,priva
     }
 
     companion object{
-        var productRange= "0.90"
+        var power_range="0"
     }
 
 }

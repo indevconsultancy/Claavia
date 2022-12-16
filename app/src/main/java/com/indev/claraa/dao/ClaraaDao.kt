@@ -33,6 +33,10 @@ interface ClaraaDao {
     @Query("SELECT * FROM product_master where product_id = :product_id")
     fun getProductData(product_id: Int): List<ProductMasterModel>
 
+
+    @Query("SELECT product_id from product_master where power_range = :power_range")
+    fun getproductID(power_range: String): Int
+
     @NotNull
     @Insert
     suspend fun insertAddressData(addressDetailsModel: AddressDetailsModel): Long
@@ -89,8 +93,8 @@ interface ClaraaDao {
     @Query("DELETE FROM cart WHERE id = :cartId")
     fun deleteByProductId(cartId: Int)
 
-    @Query("UPDATE cart SET quantity = :quantity WHERE id = :id")
-    fun updateCartProductQuantity(quantity: Int, id: Int): Int
+    @Query("UPDATE cart SET quantity = :quantity , amount = :totalPrice WHERE id = :id")
+    fun updateCartProductQuantity(quantity: Int, totalPrice: Int, id: Int): Int
 
 
     @Query("SELECT EXISTS(SELECT * from cart where product_id = :productId and power_range = :power_range and packets = :packets)")
