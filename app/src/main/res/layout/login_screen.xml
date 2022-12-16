@@ -227,14 +227,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
             android:layout_alignParentBottom="true"
-            android:layout_gravity="bottom"
-            android:gravity="center">
+            android:orientation="vertical">
 
             <ImageView
                 android:layout_width="250dp"
-                android:layout_height="200dp"
+                android:layout_height="230dp"
+                android:layout_gravity="center"
                 android:src="@drawable/claraa_login_img"/>
 
         </LinearLayout>

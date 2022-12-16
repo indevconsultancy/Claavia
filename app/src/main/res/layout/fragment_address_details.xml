@@ -37,7 +37,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="10dp"
+            android:layout_marginHorizontal="30dp"
             android:orientation="vertical">
 
 
@@ -54,6 +54,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/aleo_regular"
                         android:textColor="@color/black"
                         android:text="Shop Name" />
 
@@ -70,9 +71,9 @@
                     android:id="@+id/etShopName"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:background="@drawable/roundedittext1"
+                    android:background="@drawable/btn_border"
                     android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/aleo_regular"
                     android:hint="Enter shop name"
                     android:inputType="text"
                     android:text="@={addressDetailsVM.shopName}"
@@ -99,6 +100,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
+                        android:fontFamily="@font/aleo_regular"
                         android:text="Person Name" />
 
                     <TextView
@@ -114,12 +116,12 @@
                     android:id="@+id/etUserName"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:background="@drawable/roundedittext1"
+                    android:background="@drawable/btn_border"
                     android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                    android:fontFamily="sans-serif"
                     android:textColor="@color/black"
                     android:hint="Enter person name"
                     android:inputType="text"
+                    android:fontFamily="@font/aleo_regular"
                     android:text="@={addressDetailsVM.personName}"
                     android:padding="10dp"
                     android:textSize="15dp" />
@@ -142,6 +144,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
+                        android:fontFamily="@font/aleo_regular"
                         android:text="Email" />
 
                     <TextView
@@ -156,9 +159,9 @@
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:background="@drawable/roundedittext1"
-                    android:fontFamily="sans-serif"
+                    android:background="@drawable/btn_border"
                     android:hint="Enter email"
+                    android:fontFamily="@font/aleo_regular"
                     android:text="@={addressDetailsVM.email}"
                     android:inputType="text"
                     android:padding="10dp"
@@ -182,6 +185,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
+                        android:fontFamily="@font/aleo_regular"
                         android:text="Mobile Number" />
 
                     <TextView
@@ -196,8 +200,8 @@
                     android:id="@+id/etMobile"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:background="@drawable/roundedittext1"
-                    android:fontFamily="sans-serif"
+                    android:background="@drawable/btn_border"
+                    android:fontFamily="@font/aleo_regular"
                     android:hint="Enter email"
                     android:textColor="@color/black"
                     android:maxLength="10"
@@ -221,6 +225,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
+                            android:fontFamily="@font/aleo_regular"
                             android:text="PinCode" />
 
                         <TextView
@@ -236,8 +241,8 @@
                         android:id="@+id/etPinCode"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@drawable/roundedittext1"
-                        android:fontFamily="sans-serif"
+                        android:background="@drawable/btn_border"
+                        android:fontFamily="@font/aleo_regular"
                         android:hint="Enter pinCode"
                         android:text="@={addressDetailsVM.pinCode}"
                         android:inputType="number"
@@ -279,6 +284,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
+                            android:fontFamily="@font/aleo_regular"
                             android:text="State" />
 
                         <TextView
@@ -296,9 +302,9 @@
                         android:layout_height="40dp"
                         android:padding="10dp"
                         android:entries="@array/state"
-                        android:background="@drawable/roundedittext1"
+                        android:background="@drawable/btn_border"
                         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                        android:fontFamily="sans-serif"
+                        android:fontFamily="@font/aleo_regular"
                         android:inputType="text"
                         tools:setOnItemSelectedListener="@{addressDetailsVM.clicksListener}"
                         android:textColor="@color/black"
@@ -322,6 +328,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
+                            android:fontFamily="@font/aleo_regular"
                             android:text="District" />
 
                         <TextView
@@ -340,9 +347,9 @@
                         android:layout_height="40dp"
                         android:padding="10dp"
                         android:entries="@array/district"
-                        android:background="@drawable/roundedittext1"
+                        android:background="@drawable/btn_border"
                         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                        android:fontFamily="sans-serif"
+                        android:fontFamily="@font/aleo_regular"
                         tools:setOnItemSelectedListener="@{addressDetailsVM.clickListener}"
                         android:inputType="text"
                         android:textColor="@color/black"
@@ -367,6 +374,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
+                        android:fontFamily="@font/aleo_regular"
                         android:text="Flat, House no., Building, Company, Apartment" />
 
                     <TextView
@@ -382,9 +390,9 @@
                     android:id="@+id/etAddress"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:background="@drawable/roundedittext1"
+                    android:background="@drawable/btn_border"
                     android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/aleo_regular"
                     android:hint="Enter address"
                     android:text="@={addressDetailsVM.etAddress}"
                     android:inputType="text"
@@ -409,6 +417,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
+                        android:fontFamily="@font/aleo_regular"
                         android:text="Area, Street, Sector, Village" />
 
                     <TextView
@@ -423,9 +432,9 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:background="@drawable/roundedittext1"
+                    android:background="@drawable/btn_border"
                     android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/aleo_regular"
                     android:hint="Enter address"
                     android:inputType="text"
                     android:text="@={addressDetailsVM.areaVillage}"
@@ -451,6 +460,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
+                        android:fontFamily="@font/aleo_regular"
                         android:text="Landmark" />
 
                     <TextView
@@ -464,9 +474,9 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:background="@drawable/roundedittext1"
+                    android:background="@drawable/btn_border"
                     android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/aleo_regular"
                     android:hint="Enter address"
                     android:text="@={addressDetailsVM.landmark}"
                     android:inputType="text"
@@ -485,6 +495,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:fontFamily="@font/aleo_regular"
                 android:onClick="@{() ->addressDetailsVM.btnSubmit()}"
                 android:background="@drawable/submitbutton"
                 android:backgroundTint="@color/bs_blue"

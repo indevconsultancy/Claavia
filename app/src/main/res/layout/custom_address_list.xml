@@ -32,6 +32,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Shop Name"
+                        android:fontFamily="@font/aleo_regular"
                         android:paddingLeft="30dp"
                         android:gravity="center_vertical"
                         android:textColor="@color/black"
@@ -43,6 +44,7 @@
                         android:layout_height="wrap_content"
                         android:text="Person Name"
                         android:paddingLeft="30dp"
+                        android:fontFamily="@font/aleo_regular"
                         android:gravity="center_vertical"
                         android:textColor="@color/black"
                         android:textSize="15dp" />
@@ -53,6 +55,7 @@
                         android:layout_height="wrap_content"
                         android:text="Email"
                         android:paddingLeft="30dp"
+                        android:fontFamily="@font/aleo_regular"
                         android:gravity="center_vertical"
                         android:textColor="@color/black"
                         android:textSize="15dp" />
@@ -63,6 +66,7 @@
                         android:layout_height="wrap_content"
                         android:text="Mobile Number"
                         android:paddingLeft="30dp"
+                        android:fontFamily="@font/aleo_regular"
                         android:gravity="center_vertical"
                         android:textColor="@color/black"
                         android:textSize="15dp" />
@@ -74,6 +78,7 @@
                         android:text="PinCode"
                         android:paddingLeft="30dp"
                         android:gravity="center_vertical"
+                        android:fontFamily="@font/aleo_regular"
                         android:textColor="@color/black"
                         android:textSize="13dp" />
 
@@ -85,6 +90,7 @@
                     android:paddingLeft="30dp"
                     android:gravity="center_vertical"
                     android:textColor="@color/black"
+                    android:fontFamily="@font/aleo_regular"
                     android:textSize="15dp" />
 
                 <TextView
@@ -95,6 +101,7 @@
                     android:paddingLeft="30dp"
                     android:gravity="center_vertical"
                     android:textColor="@color/black"
+                    android:fontFamily="@font/aleo_regular"
                     android:textSize="15dp" />
                 <TextView
                     android:id="@+id/houseNo"
@@ -103,6 +110,7 @@
                     android:text="House no"
                     android:paddingLeft="30dp"
                     android:gravity="center_vertical"
+                    android:fontFamily="@font/aleo_regular"
                     android:textColor="@color/black"
                     android:textSize="15dp" />
 
@@ -113,6 +121,7 @@
                     android:text="Area, Village"
                     android:paddingLeft="30dp"
                     android:gravity="center_vertical"
+                    android:fontFamily="@font/aleo_regular"
                     android:textColor="@color/black"
                     android:textSize="15dp" />
 
@@ -123,6 +132,7 @@
                     android:text="Landmark"
                     android:paddingLeft="30dp"
                     android:gravity="center_vertical"
+                    android:fontFamily="@font/aleo_regular"
                     android:textColor="@color/black"
                     android:textSize="15dp" />
 
@@ -138,6 +148,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:textAllCaps="false"
+                    android:fontFamily="@font/aleo_regular"
                     android:text="Deliver to this address"/>
 
                 <Button
@@ -145,6 +156,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
+                    android:fontFamily="@font/aleo_regular"
                     android:textAllCaps="false"
                     android:text="Edit Address"/>
 
