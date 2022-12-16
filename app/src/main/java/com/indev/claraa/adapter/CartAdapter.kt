@@ -12,13 +12,12 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.Resource
 import com.indev.claraa.R
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.repository.ProductRepository
 import com.indev.claraa.restApi.ClientApi
 
-class CartAdapter(private val context: Context, var cartModelList: List<CartModel>, private val listener: ClickLinstener) : RecyclerView.Adapter<CartAdapter.MyViewholder>(){
+class CartAdapter(val context: Context, var cartModelList: List<CartModel>, private val listener: ClickLinstener) : RecyclerView.Adapter<CartAdapter.MyViewholder>(){
     var count =0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewholder {
@@ -30,7 +29,6 @@ class CartAdapter(private val context: Context, var cartModelList: List<CartMode
     override fun onBindViewHolder(holder: MyViewholder, position: Int) {
         val currentItem = cartModelList[position]
         holder.tvRange.text ="Size: " + currentItem.power_range
-
         holder.tvProductName.text = currentItem.product_name
         var totalPrice= currentItem.quantity.toInt() * currentItem.price.toInt()
         holder.tvPrice.text =totalPrice.toString()
@@ -80,7 +78,15 @@ class CartAdapter(private val context: Context, var cartModelList: List<CartMode
 
         var totalCartPrice  = totalPrice * cartModelList.size
         totalAmount= totalCartPrice
+        if(count==0) {
+            listener.updateTextView(0)
+        }else{
+            listener.updateTextView(totalAmount)
+        }
+
     }
+
+
 
     fun increamentCount() = count++
     fun decreamentCount() = count--
@@ -114,5 +120,7 @@ class CartAdapter(private val context: Context, var cartModelList: List<CartMode
     companion object{
         var totalAmount = 0
     }
+
+
 }
 

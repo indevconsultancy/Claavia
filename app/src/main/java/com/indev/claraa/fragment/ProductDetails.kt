@@ -158,4 +158,8 @@ class ProductDetails : Fragment(), ClickLinstener {
         Toast.makeText(requireActivity(), ""+position, Toast.LENGTH_LONG).show()
     }
 
+    override fun updateTextView(amount: Int) {
+
+    }
+
 }

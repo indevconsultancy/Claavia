@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -59,6 +60,10 @@ class Cart : Fragment(), ClickLinstener {
 
     }
 
+    override fun updateTextView(amount: Int) {
+        binding.totalAmount.text = "SubTotal ₹\u200E" + amount
+    }
+
 
 
 
@@ -68,9 +73,9 @@ class Cart : Fragment(), ClickLinstener {
             binding.rvOrder.layoutManager = LinearLayoutManager(context)
             adapter= cartAdapter
         }
-        binding.totalAmount.text = "SubTotal ₹\u200E" + CartAdapter.totalAmount.toString()
 
     }
+
 
     private fun replaceFregment(fragment : Fragment) {
         val fragmentManager = activity?.supportFragmentManager

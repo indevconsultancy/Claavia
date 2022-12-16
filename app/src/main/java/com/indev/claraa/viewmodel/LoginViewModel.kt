@@ -8,6 +8,7 @@ import android.os.Looper
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.ObservableField
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cn.pedant.SweetAlert.SweetAlertDialog
@@ -82,7 +83,14 @@ class LoginViewModel(val context: Context): ViewModel() {
     }
 
     fun otpVerify(){
-        context.startActivity(Intent(context, OTPScreen::class.java))
+        replaceFregment(OTPScreen())
+//        context.startActivity(Intent(context, OTPScreen::class.java))
+    }
+
+    private fun replaceFregment(fragment : Fragment) {
+        var transaction = (context as LoginScreen).supportFragmentManager.beginTransaction()
+        transaction?.replace(R.id.frame_layout, fragment)
+        transaction.commit()
     }
 
 

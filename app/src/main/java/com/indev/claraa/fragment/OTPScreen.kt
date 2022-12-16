@@ -36,6 +36,8 @@ class OTPScreen : Fragment(), ClickLinstener {
     override fun onClickListner(position: Int) {
     }
 
+    override fun updateTextView(amount: Int) {
+    }
 
 
 }
