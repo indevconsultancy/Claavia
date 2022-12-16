@@ -14,6 +14,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.indev.claraa.R
 import com.indev.claraa.entities.LoginModel
 import com.indev.claraa.fragment.Home
+import com.indev.claraa.fragment.OTPScreen
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.LoginRepository
@@ -78,6 +79,10 @@ class LoginViewModel(val context: Context): ViewModel() {
 
     fun forgot(){
         context.startActivity(Intent(context, EmailVarification::class.java))
+    }
+
+    fun otpVerify(){
+        context.startActivity(Intent(context, OTPScreen::class.java))
     }
 
 
