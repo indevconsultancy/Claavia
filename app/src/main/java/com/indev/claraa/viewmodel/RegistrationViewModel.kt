@@ -78,7 +78,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
                 etAddress.get().toString(),
                 stateOfUser.toString(),
                 districtOfUser.toString(),
-                "","",
+                "","","","",
                 pinCode.get().toString()
             )
             viewModelScope.launch {
@@ -111,7 +111,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
                 etAddress.get().toString(),
                 stateOfUser.toString(),
                 districtOfUser.toString(),
-                "","",
+                "","","","",
                 pinCode.get().toString()
             )
             userRegistrationTable.shop_name = shopName.get().toString()

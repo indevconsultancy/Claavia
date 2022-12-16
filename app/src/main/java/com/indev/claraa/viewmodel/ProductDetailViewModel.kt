@@ -60,7 +60,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
                 cartModel = CartModel(
                     0,
                     packetValue.toString(),
-                    productID.toString(),
+                    productID.toString(),"",
                     productMasterArrayList.get(0).product_name,
                     productMasterArrayList.get(0).product_img1,
                     productMasterArrayList.get(0).product_img2,
@@ -71,9 +71,8 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
                     productMasterArrayList.get(0).packet_id,
                     PowerRangeAdapter.power_range,
                     productMasterArrayList.get(0).currency,
-                    productMasterArrayList.get(0).active
-                )
-                viewModelScope.launch {
+                    "", "",productMasterArrayList.get(0).active)
+                    viewModelScope.launch {
                     ProductRepository.insertCartData(context, cartModel)
                 }
             }else{

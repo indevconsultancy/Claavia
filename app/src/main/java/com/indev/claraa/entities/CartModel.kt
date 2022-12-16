@@ -8,6 +8,7 @@ data class CartModel(@PrimaryKey(autoGenerate = true)
                      val id: Int,
                      val packets: String,
                      val product_id: String,
+                     val user_id: String,
                      val product_name: String,
                      val product_img1: String,
                      val product_img2: String,
@@ -18,5 +19,7 @@ data class CartModel(@PrimaryKey(autoGenerate = true)
                      var packet_id: String,
                      var power_range: String,
                      var currency: String,
+                     var latitude : String,
+                     var longitude: String,
                      var active: String
                      )

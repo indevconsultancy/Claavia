@@ -73,7 +73,7 @@ class AddressDetailsViewModel (val context: Context): ViewModel() {
             mobNo.get().toString(),
             etAddress.get().toString(),stateOfUser.toString(),
             districtOfUser.toString(),pinCode.get().toString(),
-            areaVillage.get().toString(),
+            areaVillage.get().toString(),"","",
             landmark.get().toString(),
             )
         viewModelScope.launch {

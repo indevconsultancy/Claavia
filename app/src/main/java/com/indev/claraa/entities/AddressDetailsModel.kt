@@ -16,5 +16,7 @@ data class AddressDetailsModel(@PrimaryKey(autoGenerate = true)
                                var district_id: String,
                                var pinCode: String,
                                var address2: String,
+                               var latitude : String,
+                               var longitude: String,
                                var landmark: String
 )

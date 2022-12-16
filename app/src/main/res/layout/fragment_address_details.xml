@@ -62,7 +62,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="*"
-                        android:textColor="@color/red" />
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
 
@@ -107,7 +107,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="*"
-                        android:textColor="@color/red" />
+                        android:textColor="@color/black"/>
 
 
                 </LinearLayout>
@@ -151,7 +151,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="*"
-                        android:textColor="@color/red" />
+                        android:textColor="@color/black"/>
 
                 </LinearLayout>
 
@@ -192,7 +192,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="*"
-                        android:textColor="@color/red" />
+                        android:textColor="@color/black"/>
 
                 </LinearLayout>
 
@@ -232,7 +232,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="*"
-                            android:textColor="@color/red" />
+                            android:textColor="@color/black"/>
 
 
                     </LinearLayout>
@@ -291,7 +291,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="*"
-                            android:textColor="@color/red" />
+                            android:textColor="@color/black"/>
 
 
                     </LinearLayout>
@@ -335,7 +335,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="*"
-                            android:textColor="@color/red" />
+                            android:textColor="@color/black"/>
 
 
                     </LinearLayout>
@@ -375,13 +375,13 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:fontFamily="@font/aleo_regular"
-                        android:text="Flat, House no., Building, Company, Apartment" />
+                        android:text="Shop no., Building, Company, Apartment" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="*"
-                        android:textColor="@color/red" />
+                        android:textColor="@color/black"/>
 
 
                 </LinearLayout>
@@ -424,7 +424,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="*"
-                        android:textColor="@color/red" />
+                        android:textColor="@color/black"/>
 
 
                 </LinearLayout>
@@ -467,7 +467,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="*"
-                        android:textColor="@color/red" />
+                        android:textColor="@color/black"/>
 
                 </LinearLayout>
 
@@ -489,7 +489,7 @@
             <TextView
                 android:id="@+id/btnSubmit"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_alignBottom="@id/btnSubmit"
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="20dp"

@@ -12,5 +12,7 @@ data class OrderMasterModel(@PrimaryKey(autoGenerate = true)
                               val order_date: String,
                               val order_amount: String,
                               var active: String,
+                              var latitude : String,
+                              var longitude: String,
                               val payment_status: String)
 
