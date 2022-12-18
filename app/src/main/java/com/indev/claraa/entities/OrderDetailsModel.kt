@@ -13,5 +13,7 @@ data class OrderDetailsModel(@PrimaryKey(autoGenerate = true)
                             val amount: String,
                             var latitude : String,
                             var longitude: String,
+                            var user_id: Int,
+                            var order_date: String,
                             var active: String)
 

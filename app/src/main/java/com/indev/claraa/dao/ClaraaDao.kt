@@ -45,7 +45,7 @@ interface ClaraaDao {
     fun getAddressData() : LiveData<List<AddressDetailsModel>>
 
 
-    @Query("SELECT * FROM user_master ORDER BY local_id ASC")
+    @Query("SELECT * FROM user_master")
     fun getRegistrationData() : LiveData<UserRegistrationModel>
 
     @Update

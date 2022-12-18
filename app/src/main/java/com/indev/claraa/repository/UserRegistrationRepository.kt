@@ -44,7 +44,21 @@ class UserRegistrationRepository {
 
         suspend fun userRegistrationAPI(userRegistrationTable: UserRegistrationModel): Int {
             try {
-                var result = apiInterface?.registration(userRegistrationTable,"Bearer :eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjcwNTg0ODU3LCJuYmYiOjE2NzA1ODQ4NjcsImV4cCI6MTY3MDU4NDk3NywiZGF0YSI6eyJ1c2VyX2lkIjpudWxsLCJ1c2VyX25hbWUiOiJBbWl0IiwibW9iaWxlX251bWJlciI6bnVsbH19.t4EewAXitIlvC8dFadv_dM9TQ6gcyRA6-eex-j2Z-cQ")
+                var result = apiInterface?.registration(userRegistrationTable)
+                return if (result?.body()?.status==1){
+                    result?.body()!!.last_user_id
+                } else {
+                    0
+                }
+            } catch (e: Exception) {
+                Log.d("fail", "$e")
+            }
+            return 0
+        }
+
+        suspend fun userProfileUpdateAPI(userRegistrationTable: UserRegistrationModel): Int {
+            try {
+                var result = apiInterface?.updateProfile(userRegistrationTable,"Bearer :eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjcwNTg0ODU3LCJuYmYiOjE2NzA1ODQ4NjcsImV4cCI6MTY3MDU4NDk3NywiZGF0YSI6eyJ1c2VyX2lkIjpudWxsLCJ1c2VyX25hbWUiOiJBbWl0IiwibW9iaWxlX251bWJlciI6bnVsbH19.t4EewAXitIlvC8dFadv_dM9TQ6gcyRA6-eex-j2Z-cQ")
                 return if (result?.body()?.status==1){
                     result?.body()!!.last_user_id
                 } else {

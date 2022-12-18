@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.bumptech.glide.Glide
 import com.indev.claraa.R
@@ -31,6 +32,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
         holder.tvRange.text ="Size: " + currentItem.power_range
         holder.tvProductName.text = currentItem.product_name
         count= currentItem.quantity.toInt()
+        totalProduct = count
 
         holder.addButton.setOnClickListener {
             count= currentItem.quantity.toInt()
@@ -49,7 +51,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
 
 
         holder.btnDelete.setOnClickListener{
-            ProductRepository.deleteProductData(currentItem.id,context)
+            deletePopupShow(currentItem.id)
             notifyDataSetChanged()
         }
 
@@ -62,7 +64,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
                 ProductRepository.updateCartProductQuantity(count,totalPrice,currentItem.id,context)
                 holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_remove_24));
             }else{
-                ProductRepository.deleteProductData(currentItem.id,context)
+                deletePopupShow(currentItem.id)
                 holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_delete_outline_24));
             }
         }
@@ -82,6 +84,20 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
         }else{
             listener.updateTextView(totalAmount)
         }
+    }
+
+    private fun deletePopupShow(id: Int) {
+        SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE).setTitleText("")
+            .setContentText("Are you sure you want to delete form the cart?").setCancelText("Cancel")
+            .setConfirmText("Ok")
+            .setConfirmClickListener { sDialog ->
+                ProductRepository.deleteProductData(id,context)
+                sDialog.dismiss()
+            }
+            .showCancelButton(true)
+            .setCancelClickListener { sDialog -> // Showing simple toast message to user
+                sDialog.cancel()
+            }.show()
     }
 
     private fun grandTotal(size: List<CartModel>): Int {
@@ -123,6 +139,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
 
     companion object{
         var totalAmount = 0
+        var totalProduct = 0
     }
 
 

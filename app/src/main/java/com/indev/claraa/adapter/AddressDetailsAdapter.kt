@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +12,7 @@ import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
 import com.indev.claraa.entities.AddressDetailsModel
 import com.indev.claraa.fragment.AddNewAddress
+import com.indev.claraa.fragment.OrderPlace
 import com.indev.claraa.ui.HomeScreen
 
 
@@ -25,7 +27,7 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
     override fun onBindViewHolder(holder: MyViewholder, position: Int) {
         val currentItem = addressDetailsModelList[position]
         holder.shopName.text = currentItem.shop_name
-        holder.PersonName.text = currentItem.user_name
+        holder.personName.text = currentItem.user_name
         holder.email.text = currentItem.email
         holder.mobNo.text = currentItem.mobile_number
         holder.pinCode.text = currentItem.pinCode
@@ -35,8 +37,8 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
         holder.area.text = currentItem.address2
         holder.landMark.text = currentItem.landmark
         holder.shopName.text = currentItem.shop_name
-        holder.editAddress.setOnClickListener{
-            replaceFregment(AddNewAddress())
+        holder.btnDelivery.setOnClickListener{
+            replaceFregment(OrderPlace())
         }
     }
 
@@ -57,7 +59,7 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
 
     inner class MyViewholder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val shopName: TextView = itemView!!.findViewById(R.id.shopName)
-        val PersonName: TextView = itemView!!.findViewById(R.id.PersonName)
+        val personName: TextView = itemView!!.findViewById(R.id.PersonName)
         val email: TextView = itemView!!.findViewById(R.id.email)
         val mobNo: TextView = itemView!!.findViewById(R.id.mobNo)
         val pinCode: TextView = itemView!!.findViewById(R.id.pinCode)
@@ -66,7 +68,8 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
         val houseNo: TextView = itemView!!.findViewById(R.id.houseNo)
         val area: TextView = itemView!!.findViewById(R.id.area)
         val landMark: TextView = itemView!!.findViewById(R.id.landMark)
-        val editAddress: TextView = itemView!!.findViewById(R.id.editAddress)
+        val editAddress: Button = itemView!!.findViewById(R.id.editAddress)
+        val btnDelivery: Button = itemView!!.findViewById(R.id.btnDelivery)
 
         init {
             itemView.setOnClickListener {

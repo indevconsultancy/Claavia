@@ -65,7 +65,6 @@ class Cart : Fragment(), ClickLinstener {
     }
 
     override fun updatePowerRange(power_range: String) {
-
     }
 
     private fun recycleViewList() {
@@ -74,7 +73,6 @@ class Cart : Fragment(), ClickLinstener {
             binding.rvOrder.layoutManager = LinearLayoutManager(context)
             adapter= cartAdapter
         }
-
     }
 
 

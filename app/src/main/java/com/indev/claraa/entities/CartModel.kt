@@ -19,6 +19,7 @@ data class CartModel(@PrimaryKey(autoGenerate = true)
                      var packet_id: String,
                      var power_range: String,
                      var currency: String,
+                     var cart_date: String,
                      var latitude : String,
                      var longitude: String,
                      var active: String

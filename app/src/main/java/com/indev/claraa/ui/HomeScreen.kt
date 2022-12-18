@@ -6,14 +6,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
+import com.indev.claraa.adapter.CartAdapter
 import com.indev.claraa.databinding.ActivityHomeScreenBinding
 import com.indev.claraa.fragment.Cart
 import com.indev.claraa.fragment.Home
 import com.indev.claraa.fragment.Profile
 import com.indev.claraa.fragment.Refer
 
-class HomeScreen : AppCompatActivity() {
+class HomeScreen : AppCompatActivity(), ClickLinstener {
     private lateinit var binding: ActivityHomeScreenBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,6 +23,8 @@ class HomeScreen : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home_screen)
         supportActionBar?.hide()
         replaceFregment(Home())
+        var badge= binding.bottomNavigation.bottomNavigation.getOrCreateBadge(R.id.order)
+        badge.number = CartAdapter.totalProduct
 
         binding.bottomNavigation.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
@@ -59,10 +63,8 @@ class HomeScreen : AppCompatActivity() {
                     sDialog.cancel()
                 }.show()
         }else{
-
             binding.bottomNavigation.bottomNavigation.selectedItemId ==R.id.home
         }
-
     }
 
 
@@ -74,6 +76,14 @@ class HomeScreen : AppCompatActivity() {
         fragmentTransition.commit()
     }
 
+    override fun onClickListner(position: Int) {
+    }
+
+    override fun updateTextView(amount: Int) {
+    }
+
+    override fun updatePowerRange(power_range: String) {
+    }
 
 }
 

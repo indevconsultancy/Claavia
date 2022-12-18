@@ -24,7 +24,11 @@ import kotlinx.coroutines.launch
 class RegistrationViewModel (val context: Context): ViewModel() {
 
     var shopName: ObservableField<String> = ObservableField("")
-    var personName: ObservableField<String> = ObservableField("")
+    var username: ObservableField<String> = ObservableField("")
+    var password: ObservableField<String> = ObservableField("")
+    var confirmPassword: ObservableField<String> = ObservableField("")
+    var ownerName: ObservableField<String> = ObservableField("")
+    var gender: ObservableField<String> = ObservableField("")
     var email: ObservableField<String> = ObservableField("")
     var mobNo: ObservableField<String> = ObservableField("")
     var etAddress: ObservableField<String> = ObservableField("")
@@ -64,71 +68,114 @@ class RegistrationViewModel (val context: Context): ViewModel() {
 
 
     fun btnSubmit() {
-        prefHelper= PrefHelper(context)
+        prefHelper = PrefHelper(context)
         checkLogin = prefHelper.getBoolean(Constant.PREF_IS_LOGIN)
 
-        if(checkLogin == false) {
+        if (checkLogin == true) {
             userRegistrationTable = UserRegistrationModel(
-                0,
-                0,
+                44,
                 shopName.get().toString(),
-                personName.get().toString(),
+                ownerName.get().toString(),
+                username.get().toString(),
+                "amit123",
                 email.get().toString(),
                 mobNo.get().toString(),
                 etAddress.get().toString(),
                 stateOfUser.toString(),
                 districtOfUser.toString(),
-                "","","","",
+                etAddress.get().toString(), "17-12-2022", "male", "", "",
                 pinCode.get().toString()
+            )
+            userRegistrationTable.shop_name = shopName.get().toString()
+            userRegistrationTable.user_name = username.get().toString()
+            userRegistrationTable.owner_name = ownerName.get().toString()
+            userRegistrationTable.email = email.get().toString()
+            userRegistrationTable.mobile_number = mobNo.get().toString()
+            userRegistrationTable.address = etAddress.get().toString()
+            userRegistrationTable.state_id = stateOfUser.toString()
+            userRegistrationTable.district_id = districtOfUser.toString()
+            userRegistrationTable.pinCode = pinCode.get().toString()
+            viewModelScope.launch {
+                UserRegistrationRepository.updateData(context, userRegistrationTable)
+                var last_user_id=0
+                CoroutineScope(Dispatchers.IO).launch {
+                    last_user_id = UserRegistrationRepository.userProfileUpdateAPI(userRegistrationTable)
+                    if (last_user_id> 0) {
+                        context.startActivity(Intent(context, HomeScreen::class.java))
+                        Handler(Looper.getMainLooper()).post {
+                            Toast.makeText(context, "Successfully Updated..", Toast.LENGTH_LONG).show()
+                        }
+                    } else {
+                        Handler(Looper.getMainLooper()).post {
+                            Toast.makeText(context, "Something went wrong..", Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fun btnJoin(){
+        if(checkValidation()) {
+            userRegistrationTable = UserRegistrationModel(
+                0,
+                "","",
+                username.get().toString(),
+                password.get().toString(),
+                email.get().toString(),
+                "",
+                etAddress.get().toString(),
+                "",
+                "",
+                "", "17-12-2022", "male", "", "",
+                ""
             )
             viewModelScope.launch {
                 UserRegistrationRepository.insertUserData(context, userRegistrationTable)
-                //Data store in model
                 var last_user_id=0
                 CoroutineScope(Dispatchers.IO).launch {
                     last_user_id = UserRegistrationRepository.userRegistrationAPI(userRegistrationTable)
                     if (last_user_id> 0) {
                         context.startActivity(Intent(context, LoginScreen::class.java))
-
                         Handler(Looper.getMainLooper()).post {
-                            Toast.makeText(context, "Successfully Registered", Toast.LENGTH_LONG).show()
+                            Toast.makeText(context, "Successfully Registered..", Toast.LENGTH_LONG).show()
                         }
                     } else {
                         Handler(Looper.getMainLooper()).post {
-                            Toast.makeText(context, "Invalid user", Toast.LENGTH_LONG).show()
+                            Toast.makeText(context, "Something went wrong..", Toast.LENGTH_LONG).show()
                         }
                     }
                 }
             }
-        }else{
-            userRegistrationTable = UserRegistrationModel(
-                0,
-                0,
-                shopName.get().toString(),
-                personName.get().toString(),
-                email.get().toString(),
-                mobNo.get().toString(),
-                etAddress.get().toString(),
-                stateOfUser.toString(),
-                districtOfUser.toString(),
-                "","","","",
-                pinCode.get().toString()
-            )
-            userRegistrationTable.shop_name = shopName.get().toString()
-            userRegistrationTable.user_name = shopName.get().toString()
-            userRegistrationTable.email = shopName.get().toString()
-            userRegistrationTable.mobile_number = shopName.get().toString()
-            userRegistrationTable.address = shopName.get().toString()
-            userRegistrationTable.state_id = shopName.get().toString()
-            userRegistrationTable.district_id = shopName.get().toString()
-            userRegistrationTable.pinCode = shopName.get().toString()
-            userRegistrationTable.register_date = shopName.get().toString()
-            userRegistrationTable.active = shopName.get().toString()
-            viewModelScope.launch {
-                UserRegistrationRepository.updateData(context, userRegistrationTable)
-                context.startActivity(Intent(context, HomeScreen::class.java))
-            }
         }
+    }
+
+    private fun checkValidation(): Boolean {
+        if(username.get()?.isEmpty() == true) {
+            Toast.makeText(context, "Please enter username..", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if(email.get()?.isEmpty() == true) {
+            Toast.makeText(context, "Please enter email..", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if(password.get()?.isEmpty() == true) {
+            Toast.makeText(context, "Please enter password..", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if(confirmPassword.get()?.isEmpty() == true) {
+            Toast.makeText(context, "Please enter confirm password..", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if(!password.get().equals(confirmPassword.get())) {
+            Toast.makeText(context, "Password and confirm password do not match..", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true
+
     }
 
 }

@@ -27,7 +27,7 @@ class LoginViewModel(val context: Context): ViewModel() {
     lateinit var progressDialog: ProgressDialog
     lateinit var loginModel: LoginModel
     lateinit var prefHelper: PrefHelper
-
+    var checkProfileUpdate= false
     fun signIn(){
         progressDialog = ProgressDialog(context)
         SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE)
@@ -42,8 +42,8 @@ class LoginViewModel(val context: Context): ViewModel() {
             }.show()
             nextActivity()
     }
-    private fun nextActivity() {
 
+    private fun nextActivity() {
         loginModel= LoginModel(username.get().toString().trim(),password.get().toString().trim())
 
         viewModelScope.launch {
@@ -57,7 +57,12 @@ class LoginViewModel(val context: Context): ViewModel() {
                     prefHelper= PrefHelper(context)
                     prefHelper.put( Constant.PREF_IS_LOGIN,true)
 
-                    context.startActivity(Intent(context, HomeScreen::class.java))
+                    checkProfileUpdate = prefHelper.getBoolean(Constant.PREF_IS_UPDATE)
+                    if(checkProfileUpdate == true){
+                        context.startActivity(Intent(context, HomeScreen::class.java))
+                    }else {
+                        context.startActivity(Intent(context, UserRegistration::class.java))
+                    }
                 } else {
                     Handler(Looper.getMainLooper()).post {
                         Toast.makeText(context, "Invalid user", Toast.LENGTH_LONG).show()
@@ -68,10 +73,10 @@ class LoginViewModel(val context: Context): ViewModel() {
         }
     }
 
-        fun registration(){
+    fun registration(){
         prefHelper= PrefHelper(context)
         prefHelper.put( Constant.PREF_IS_LOGIN,false)
-        context.startActivity(Intent(context, RegisterWithUs::class.java))
+        context.startActivity(Intent(context, UserRegistration::class.java))
     }
 
     fun forgot(){

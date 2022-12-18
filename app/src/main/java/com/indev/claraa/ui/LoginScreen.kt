@@ -24,5 +24,4 @@ class LoginScreen : AppCompatActivity() {
         binding.loginVM = loginViewModel
 
     }
-
 }

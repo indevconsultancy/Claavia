@@ -1,26 +1,30 @@
 package com.indev.claraa.viewmodel
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
+import android.os.Handler
+import android.os.Looper
+import android.os.Message
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.lifecycle.*
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.indev.claraa.adapter.PowerRangeAdapter
 import com.indev.claraa.adapter.ProductMasterAdapter
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.ProductMasterModel
-import com.indev.claraa.fragment.ProductDetails
 import com.indev.claraa.repository.ProductRepository
-import com.indev.claraa.repository.SplashRepository
 import com.indev.claraa.roomdb.RoomDB
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+
 class ProductDetailViewModel(val context: Context): ViewModel() {
 
     var packetValue: String? = null
+    var qtyValue: String? = null
     private lateinit var cartModel: CartModel
     val optionSelectedListener = MutableLiveData<Pair<String, String>>()
     lateinit var productMasterArrayList: ArrayList<ProductMasterModel>
@@ -44,44 +48,102 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
         }
 
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
             packetValue = parent?.getItemAtPosition(position) as String
-            Toast.makeText(context, "" + packetValue, Toast.LENGTH_LONG).show()
         }
     }
 
+     val qtyClicksListener = object : AdapterView.OnItemSelectedListener {
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+        }
+
+        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            qtyValue = parent?.getItemAtPosition(position) as String
+        }
+    }
+
+
+    @SuppressLint("SuspiciousIndentation")
     fun btnSubmit() {
         dataBase = initializeDB(context)
 
-        var checkExitPorduct=0
-        CoroutineScope(Dispatchers.IO).launch {
-            var productID = dataBase?.userDao()?.getproductID(PowerRangeAdapter.power_range)!!
-            checkExitPorduct = dataBase?.userDao()?.isProductRowExist(productID, productMasterArrayList.get(0).power_range, packetValue.toString())!!
-            if(checkExitPorduct==0) {
-                cartModel = CartModel(
-                    0,
-                    packetValue.toString(),
-                    productID.toString(),"",
-                    productMasterArrayList.get(0).product_name,
-                    productMasterArrayList.get(0).product_img1,
-                    productMasterArrayList.get(0).product_img2,
-                    productMasterArrayList.get(0).price,
-                    productMasterArrayList.get(0).price.toInt(),
-                    "1",
-                    productMasterArrayList.get(0).type_id,
-                    productMasterArrayList.get(0).packet_id,
+        if(checkValidation()) {
+            var checkExitPorduct = 0
+            CoroutineScope(Dispatchers.IO).launch {
+                var productID = dataBase?.userDao()?.getproductID(PowerRangeAdapter.power_range)!!
+                checkExitPorduct = dataBase?.userDao()?.isProductRowExist(
+                    productID,
                     PowerRangeAdapter.power_range,
-                    productMasterArrayList.get(0).currency,
-                    "", "",productMasterArrayList.get(0).active)
+                    packetValue.toString()
+                )!!
+                if (checkExitPorduct == 0) {
+                    cartModel = CartModel(
+                        0,
+                        packetValue.toString(),
+                        productID.toString(), "",
+                        productMasterArrayList.get(0).product_name,
+                        productMasterArrayList.get(0).product_img1,
+                        productMasterArrayList.get(0).product_img2,
+                        productMasterArrayList.get(0).price,
+                        productMasterArrayList.get(0).price.toInt(),
+                        qtyValue.toString(),
+                        productMasterArrayList.get(0).type_id,
+                        productMasterArrayList.get(0).packet_id,
+                        PowerRangeAdapter.power_range,
+                        productMasterArrayList.get(0).currency,
+                        "", "", "", productMasterArrayList.get(0).active
+                    )
                     viewModelScope.launch {
-                    ProductRepository.insertCartData(context, cartModel)
+                        ProductRepository.insertCartData(context, cartModel)
+                        Handler(Looper.getMainLooper()).post {
+                            showAlertDialog()
+                        }
+                    }
+                } else {
+                    cartModelArrayList = ProductRepository.getCartDatabyProductId(
+                        productID,
+                        context
+                    ) as ArrayList<CartModel>
+                    var totalAmount =
+                        cartModelArrayList.get(0).amount * (cartModelArrayList.get(0).quantity.toInt() + 1)
+                    ProductRepository.updateCartProductQuantity(
+                        cartModelArrayList.get(0).quantity.toInt() + 1,
+                        totalAmount,
+                        cartModelArrayList.get(0).id,
+                        context
+                    )
+
+                    Handler(Looper.getMainLooper()).post {
+                        showAlertDialog()
+                    }
                 }
-            }else{
-                cartModelArrayList= ProductRepository.getCartDatabyProductId(productMasterArrayList.get(0).product_id.toInt(),context) as ArrayList<CartModel>
-                var totalAmount= cartModelArrayList.get(0).amount * (cartModelArrayList.get(0).quantity.toInt()+1)
-                ProductRepository.updateCartProductQuantity(cartModelArrayList.get(0).quantity.toInt() + 1,totalAmount,cartModelArrayList.get(0).id,context)
             }
         }
 
+    }
+
+    private fun showAlertDialog() {
+        SweetAlertDialog(context)
+            .setTitleText("Added Product in Cart")
+            .setContentText("")
+            .setConfirmText("Ok")
+            .setConfirmClickListener {sdialog ->
+                sdialog.dismiss()
+            }
+            .show()
+    }
+
+    private fun checkValidation(): Boolean {
+        if (packetValue.toString().trim().equals("Packs Size")) {
+            Toast.makeText(context, "Please select Pack size..", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (qtyValue.toString().trim().equals("Qty.")) {
+            Toast.makeText(context, "Please select Quantity..", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true
     }
 
     fun getCartList(context: Context): LiveData<List<CartModel>>? {

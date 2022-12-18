@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "address")
 data class AddressDetailsModel(@PrimaryKey(autoGenerate = true)
                                val local_id: Int,
+                               val id: Int,
                                var user_id: Int,
                                var shop_name: String,
                                var user_name: String,
@@ -18,5 +19,6 @@ data class AddressDetailsModel(@PrimaryKey(autoGenerate = true)
                                var address2: String,
                                var latitude : String,
                                var longitude: String,
+                               var address_registration_date: String,
                                var landmark: String
 )

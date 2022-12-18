@@ -172,5 +172,4 @@ class Home : Fragment(), ClickLinstener {
     override fun updatePowerRange(power_range: String) {
     }
 
-
 }

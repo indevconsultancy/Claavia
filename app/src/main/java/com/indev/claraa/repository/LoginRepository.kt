@@ -30,7 +30,7 @@ class LoginRepository {
                     dataBase?.userDao()?.deleteUserMasterTable()
                     userProfileArray.addAll(result?.body()!!.profile_data)
                     for (i in 0 until userProfileArray.size) {
-                        val user_profile = UserRegistrationModel(0, userProfileArray[i].user_id,"",userProfileArray[i].user_name,userProfileArray[i].email,userProfileArray[i].mobile_number,"",  userProfileArray[i].state_id, userProfileArray[i].district_id,"","","","","")
+                        val user_profile = UserRegistrationModel(userProfileArray[i].user_id,userProfileArray[i].shop_name,userProfileArray[i].owner_name,userProfileArray[i].user_name,userProfileArray[i].email,userProfileArray[i].mobile_number,userProfileArray[i].address,  userProfileArray[i].state_id, userProfileArray[i].district_id,userProfileArray[i].active,userProfileArray[i].register_date,"","","","",userProfileArray[i].pinCode)
                         dataBase?.userDao()?.insertUserData(user_profile)
                     }
                     result?.body()!!.status

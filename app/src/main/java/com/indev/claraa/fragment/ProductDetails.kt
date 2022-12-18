@@ -47,7 +47,6 @@ class ProductDetails : Fragment(), ClickLinstener {
         binding.productDetailVM = productDetailViewModel
 
         return binding.root
-        return inflater.inflate(R.layout.fragment_product_details, container, false)
     }
 
 
@@ -145,5 +144,6 @@ class ProductDetails : Fragment(), ClickLinstener {
         binding.txtRange.text = "Power Range: " + power_range
 
     }
+
 
 }

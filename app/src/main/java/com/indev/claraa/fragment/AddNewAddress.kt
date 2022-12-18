@@ -1,7 +1,6 @@
 package com.indev.claraa.fragment
 
 import android.os.Bundle
-import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +9,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.indev.claraa.R
 import com.indev.claraa.databinding.FragmentAddressDetailsBinding
-import com.indev.claraa.viewmodel.AddressDetailsViewModel
+import com.indev.claraa.viewmodel.AddressViewModel
 import com.indev.claraa.viewmodel.AddressDetailsViewModelFactory
 
 class AddNewAddress : Fragment() {
     private lateinit var binding: FragmentAddressDetailsBinding
-    private lateinit var addressDetailsViewModel: AddressDetailsViewModel
+    private lateinit var addressViewModel: AddressViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,23 +23,14 @@ class AddNewAddress : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_address_details, container, false)
-        addressDetailsViewModel = ViewModelProvider(
+        addressViewModel = ViewModelProvider(
             this,
             AddressDetailsViewModelFactory(requireContext())
-        )[AddressDetailsViewModel::class.java]
-        binding.addressDetailsVM = addressDetailsViewModel
+        )[AddressViewModel::class.java]
+        binding.addressDetailsVM = addressViewModel
 
         return binding.root
     }
-
-//    override fun onResume() {
-//        super.onResume()
-//        requireView().isFocusableInTouchMode = true
-//        requireView().requestFocus()
-//        requireView().setOnKeyListener { _, keyCode, event ->
-//            event.action === KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK
-//        }
-//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,7 +38,6 @@ class AddNewAddress : Fragment() {
             replaceFregment(AddressList())
         }
         binding.toolbar.toolbarTitle.text = "Add New Address"
-
     }
 
     private fun replaceFregment(fragment : Fragment) {
@@ -58,8 +47,4 @@ class AddNewAddress : Fragment() {
         fragmentTransition?.addToBackStack(null)
         fragmentTransition?.commit()
     }
-
-
-
-
 }

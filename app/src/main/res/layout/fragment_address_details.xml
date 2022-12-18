@@ -6,7 +6,7 @@
     <data>
         <variable
             name="addressDetailsVM"
-            type="com.indev.claraa.viewmodel.AddressDetailsViewModel"/>
+            type="com.indev.claraa.viewmodel.AddressViewModel"/>
     </data>
     <FrameLayout
         android:layout_width="match_parent"
