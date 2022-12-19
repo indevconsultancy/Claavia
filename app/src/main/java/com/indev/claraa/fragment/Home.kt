@@ -74,27 +74,25 @@ class Home : Fragment(), ClickLinstener {
         }
 
         carousel.registerLifecycle(lifecycle)
-
         val list = mutableListOf<CarouselItem>()
-
-        list.add(
-            CarouselItem(
-                imageUrl = "https://claraa.in/images/banner/1.jpg",
-            )
-        )
-
-        list.add(
-            CarouselItem(
-                imageUrl = "https://claraa.in/images/banner/2.jpg"
-            )
-        )
-
         val headers = mutableMapOf<String, String>()
         headers["header_key"] = "header_value"
 
         list.add(
             CarouselItem(
-                imageUrl = "https://claraa.in/images/about/9.jpg",
+                imageUrl = "https://claraa.indevconsultancy.in/api/product_image/claraa1.jpg",
+            )
+        )
+
+        list.add(
+            CarouselItem(
+                imageUrl = "https://claraa.indevconsultancy.in/api/product_image/claraa2.jpg"
+            )
+        )
+
+        list.add(
+            CarouselItem(
+                imageUrl = "https://claraa.indevconsultancy.in/api/product_image/claraa3.jpg",
                 headers = headers
             )
         )

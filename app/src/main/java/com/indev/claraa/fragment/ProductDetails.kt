@@ -19,9 +19,9 @@ import com.indev.claraa.adapter.PowerRangeAdapter
 import com.indev.claraa.databinding.FragmentProductDetailsBinding
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.ProductMasterModel
+import com.indev.claraa.restApi.ClientApi
 import com.indev.claraa.viewmodel.ProductDetailViewModel
 import com.indev.claraa.viewmodel.ProductDetailViewModelFactory
-import java.time.temporal.TemporalAmount
 
 
 class ProductDetails : Fragment(), ClickLinstener {
@@ -53,32 +53,7 @@ class ProductDetails : Fragment(), ClickLinstener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         productMasterArrayList= ArrayList<ProductMasterModel>()
-        val carousel: ImageCarousel = binding.carousel
-        carousel.registerLifecycle(lifecycle)
 
-        val list = mutableListOf<CarouselItem>()
-
-        list.add(
-            CarouselItem(
-                imageUrl = "https://claraa.in/images/banner/1.jpg",
-            )
-        )
-        list.add(
-            CarouselItem(
-                imageUrl = "https://claraa.in/images/banner/2.jpg"
-            )
-        )
-
-        val headers = mutableMapOf<String, String>()
-        headers["header_key"] = "header_value"
-
-        list.add(
-            CarouselItem(
-                imageUrl = "https://claraa.in/images/about/9.jpg",
-                headers = headers
-            )
-        )
-        carousel.setData(list)
         binding.toolbar.backClick.setOnClickListener(){
             replaceFregment(Home())
         }
@@ -104,8 +79,32 @@ class ProductDetails : Fragment(), ClickLinstener {
         productDetailViewModel.getPruductPowerList(requireActivity(), selectedProduct)?.observe(requireActivity(), Observer {
             powerRangeAdapter.setData(it as ArrayList<ProductMasterModel>)
             productMasterArrayList = it
+            showSlider(productMasterArrayList)
         })
 
+
+    }
+
+    private fun showSlider(productMasterArrayList: ArrayList<ProductMasterModel>) {
+        val carousel: ImageCarousel = binding.carousel
+        carousel.registerLifecycle(lifecycle)
+        val list = mutableListOf<CarouselItem>()
+        val headers = mutableMapOf<String, String>()
+        headers["header_key"] = "header_value"
+
+        list.add(
+            CarouselItem(
+                imageUrl = ClientApi.BASE_IMAGE_URL+productMasterArrayList[0].product_img1,
+            )
+        )
+
+        list.add(
+            CarouselItem(
+                imageUrl = ClientApi.BASE_IMAGE_URL+productMasterArrayList[0].product_img2,
+                headers = headers
+            )
+        )
+        carousel.setData(list)
     }
 
 

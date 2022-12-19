@@ -54,10 +54,11 @@ class IntroScreen : AppCompatActivity() {
 
         binding.navigateBefore.setOnClickListener {
             if (binding.introSliderViewPager.currentItem - 1 < introSliderAdapter.itemCount){
-                binding.introSliderViewPager.currentItem -= 1
-            }else{
-//                binding.introSliderViewPager.currentItem > -1
-                finishAffinity()
+                if(binding.introSliderViewPager.currentItem == 0){
+                        finish()
+                }else{
+                    binding.introSliderViewPager.currentItem -= 1
+                }
             }
         }
 

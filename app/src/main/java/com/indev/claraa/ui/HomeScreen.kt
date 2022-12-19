@@ -51,25 +51,25 @@ class HomeScreen : AppCompatActivity(), ClickLinstener {
     }
 
 
-    override fun onBackPressed() {
-
-        if(binding.bottomNavigation.bottomNavigation.selectedItemId == R.id.home) {
-            super.onBackPressed()
-
-            SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE).setTitleText("Exit")
-                .setContentText("Are you sure to want to Exit?").setCancelText("Cancel")
-                .setConfirmText("Ok")
-                .setConfirmClickListener {
-                    finishAffinity()
-                }
-                .showCancelButton(true)
-                .setCancelClickListener { sDialog -> // Showing simple toast message to user
-                    sDialog.cancel()
-                }.show()
-        }else{
-            binding.bottomNavigation.bottomNavigation.selectedItemId ==R.id.home
-        }
-    }
+//    override fun onBackPressed() {
+//
+//        if(binding.bottomNavigation.bottomNavigation.selectedItemId == R.id.home) {
+//            super.onBackPressed()
+//
+//            SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE).setTitleText("Exit")
+//                .setContentText("Are you sure to want to Exit?").setCancelText("Cancel")
+//                .setConfirmText("Ok")
+//                .setConfirmClickListener {
+//                    finishAffinity()
+//                }
+//                .showCancelButton(true)
+//                .setCancelClickListener { sDialog -> // Showing simple toast message to user
+//                    sDialog.cancel()
+//                }.show()
+//        }else{
+//            binding.bottomNavigation.bottomNavigation.selectedItemId ==R.id.home
+//        }
+//    }
 
 
     private fun replaceFregment(fragment : Fragment) {
