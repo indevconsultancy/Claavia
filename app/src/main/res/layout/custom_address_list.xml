@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp">
 
@@ -24,93 +24,95 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/shopName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Shop Name"
-                        android:fontFamily="@font/aleo_regular"
-                        android:paddingLeft="30dp"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/black"
-                        android:textSize="15dp" />
+                <TextView
+                    android:id="@+id/shopName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/aleo_regular"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30dp"
+                    android:text="Shop Name"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
 
-                    <TextView
-                        android:id="@+id/PersonName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Person Name"
-                        android:paddingLeft="30dp"
-                        android:fontFamily="@font/aleo_regular"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/black"
-                        android:textSize="15dp" />
+                <TextView
+                    android:id="@+id/PersonName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/aleo_regular"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30dp"
+                    android:text="Person Name"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
 
-                    <TextView
-                        android:id="@+id/email"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Email"
-                        android:paddingLeft="30dp"
-                        android:fontFamily="@font/aleo_regular"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/black"
-                        android:textSize="15dp" />
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/aleo_regular"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30dp"
+                    android:text="Email"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
 
-                    <TextView
-                        android:id="@+id/mobNo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Mobile Number"
-                        android:paddingLeft="30dp"
-                        android:fontFamily="@font/aleo_regular"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/black"
-                        android:textSize="15dp" />
+                <TextView
+                    android:id="@+id/mobNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/aleo_regular"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30dp"
+                    android:text="Mobile Number"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
 
-                    <TextView
-                        android:id="@+id/pinCode"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="PinCode"
-                        android:paddingLeft="30dp"
-                        android:gravity="center_vertical"
-                        android:fontFamily="@font/aleo_regular"
-                        android:textColor="@color/black"
-                        android:textSize="13dp" />
+                <TextView
+                    android:id="@+id/pinCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/aleo_regular"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30dp"
+                    android:text="PinCode"
+                    android:textColor="@color/black"
+                    android:textSize="13dp" />
 
                 <TextView
                     android:id="@+id/state"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="State"
-                    android:paddingLeft="30dp"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/black"
                     android:fontFamily="@font/aleo_regular"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30dp"
+                    android:text="State"
+                    android:textColor="@color/black"
                     android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/district"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="District"
-                    android:paddingLeft="30dp"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/black"
                     android:fontFamily="@font/aleo_regular"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30dp"
+                    android:text="District"
+                    android:textColor="@color/black"
                     android:textSize="15dp" />
+
                 <TextView
                     android:id="@+id/houseNo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="House no"
-                    android:paddingLeft="30dp"
-                    android:gravity="center_vertical"
                     android:fontFamily="@font/aleo_regular"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30dp"
+                    android:text="House no"
                     android:textColor="@color/black"
                     android:textSize="15dp" />
 
@@ -118,10 +120,10 @@
                     android:id="@+id/area"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Area, Village"
-                    android:paddingLeft="30dp"
-                    android:gravity="center_vertical"
                     android:fontFamily="@font/aleo_regular"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30dp"
+                    android:text="Area, Village"
                     android:textColor="@color/black"
                     android:textSize="15dp" />
 
@@ -129,10 +131,10 @@
                     android:id="@+id/landMark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Landmark"
-                    android:paddingLeft="30dp"
-                    android:gravity="center_vertical"
                     android:fontFamily="@font/aleo_regular"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30dp"
+                    android:text="Landmark"
                     android:textColor="@color/black"
                     android:textSize="15dp" />
 
@@ -140,27 +142,27 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_margin="20dp">
+                    android:layout_margin="20dp"
+                    android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/btnDelivery"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:textAllCaps="false"
-                    android:fontFamily="@font/aleo_regular"
-                    android:text="Deliver to this address"/>
+                    <Button
+                        android:id="@+id/btnDelivery"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/aleo_regular"
+                        android:text="Deliver to this address"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white" />
 
-                <Button
-                    android:id="@+id/editAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:visibility="gone"
-                    android:fontFamily="@font/aleo_regular"
-                    android:textAllCaps="false"
-                    android:text="Edit Address"/>
+                    <Button
+                        android:id="@+id/editAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/aleo_regular"
+                        android:text="Edit Address"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 

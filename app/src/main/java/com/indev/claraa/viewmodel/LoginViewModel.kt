@@ -42,7 +42,7 @@ class LoginViewModel(val context: Context): ViewModel() {
             CoroutineScope(Dispatchers.IO).launch {
                 status  = LoginRepository.login(context,loginModel)
                 if (status== 1) {
-                    prefHelper.put( Constant.PREF_IS_LOGIN,true)
+                    prefHelper.put(Constant.PREF_IS_LOGIN,true)
                     checkProfileUpdate = prefHelper.getBoolean(Constant.PREF_IS_UPDATE)
                     if(checkProfileUpdate == true){
                         context.startActivity(Intent(context, HomeScreen::class.java))
@@ -51,7 +51,6 @@ class LoginViewModel(val context: Context): ViewModel() {
                     }
                     SweetDialog.dismissDialog()
                 } else {
-
                     Handler(Looper.getMainLooper()).post {
                         SweetDialog.dismissDialog()
                         Toast.makeText(context, "Invalid credential...", Toast.LENGTH_LONG).show()

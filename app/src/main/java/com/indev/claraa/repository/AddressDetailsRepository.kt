@@ -36,7 +36,7 @@ class AddressDetailsRepository {
 
         suspend fun userAddressDetailsAPI(addressDetailsModel: AddressDetailsModel): Int {
             try {
-                var result = apiInterface?.addressDetails(addressDetailsModel,"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjcxNDQ5ODg3LCJuYmYiOjE2NzE0NDk4OTcsImV4cCI6MTY3MTQ1MDAwNywiZGF0YSI6eyJ1c2VyX2lkIjpudWxsLCJ1c2VyX25hbWUiOiJBbWl0IiwibW9iaWxlX251bWJlciI6bnVsbH19.-RQbJiE1_qID4-88fGssVjnXWkT6CJZ1Gbjptw_cfHM")
+                var result = apiInterface?.addressDetails(addressDetailsModel,"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjcxNDUwOTg1LCJuYmYiOjE2NzE0NTA5OTUsImV4cCI6MTY3MTQ1MTEwNSwiZGF0YSI6eyJ1c2VyX2lkIjpudWxsLCJ1c2VyX25hbWUiOiJBbWl0IiwibW9iaWxlX251bWJlciI6bnVsbH19.NNtamcC05ofBAYwZJ9GfwHg1owY2bO9rHeEomLVAENI")
                 return if (result?.body()?.status==1){
                     result?.body()!!.last_insert_id
                 } else {

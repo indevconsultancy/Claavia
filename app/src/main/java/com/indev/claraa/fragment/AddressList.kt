@@ -70,7 +70,7 @@ class AddressList : Fragment(), ClickLinstener {
         binding.rvAddressList.apply {
             setHasFixedSize(true)
             binding.rvAddressList.layoutManager = LinearLayoutManager(context)
-            (binding.rvAddressList.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
+            (binding.rvAddressList.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.VERTICAL
             adapter= addressDetailsAdapter
         }
     }
