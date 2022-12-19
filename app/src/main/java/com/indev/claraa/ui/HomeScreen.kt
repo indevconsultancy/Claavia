@@ -14,9 +14,12 @@ import com.indev.claraa.fragment.Cart
 import com.indev.claraa.fragment.Home
 import com.indev.claraa.fragment.Profile
 import com.indev.claraa.fragment.Refer
+import com.indev.claraa.helper.Constant
+import com.indev.claraa.helper.PrefHelper
 
 class HomeScreen : AppCompatActivity(), ClickLinstener {
     private lateinit var binding: ActivityHomeScreenBinding
+    lateinit var preferences: PrefHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +28,7 @@ class HomeScreen : AppCompatActivity(), ClickLinstener {
         replaceFregment(Home())
         var badge= binding.bottomNavigation.bottomNavigation.getOrCreateBadge(R.id.order)
         badge.number = CartAdapter.totalProduct
-
+        preferences= PrefHelper(this)
         binding.bottomNavigation.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.home -> {
@@ -35,6 +38,7 @@ class HomeScreen : AppCompatActivity(), ClickLinstener {
                     replaceFregment(Profile())
                 }
                 R.id.order -> {
+                    preferences.put(Constant.PREF_IS_CHECK_CART, false)
                     replaceFregment(Cart())
                 }
 

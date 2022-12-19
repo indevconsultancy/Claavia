@@ -102,4 +102,7 @@ interface ClaraaDao {
 
     @Query("SELECT * from cart where product_id = :productId")
     fun getCartDatabyProductId(productId: Int) : List<CartModel>
+
+    @Query("SELECT * from address where id = :addressId")
+    fun getAddress(addressId: Int) : LiveData<AddressDetailsModel>
 }

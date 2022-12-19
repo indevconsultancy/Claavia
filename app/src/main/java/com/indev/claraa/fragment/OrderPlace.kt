@@ -6,15 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
+import com.indev.claraa.adapter.CartAdapter
 import com.indev.claraa.databinding.FragmentOrderPlaceBinding
 import com.indev.claraa.databinding.FragmentProfileBinding
+import com.indev.claraa.entities.CartModel
 import com.indev.claraa.viewmodel.*
 
-class OrderPlace : Fragment() {
+class OrderPlace : Fragment(), ClickLinstener{
     private lateinit var binding: FragmentOrderPlaceBinding
     private lateinit var orderPlaceViewModel: OrderPlaceViewModel
+    private lateinit var cartAdapter: CartAdapter
+    private lateinit var cartModelList: ArrayList<CartModel>
 
 
     override fun onCreateView(
@@ -34,8 +41,41 @@ class OrderPlace : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        orderPlaceViewModel= OrderPlaceViewModel(requireContext())
+        cartAdapter = CartAdapter( requireContext(),ArrayList<CartModel>(), this)
+        recycleViewList()
+
+        orderPlaceViewModel.getCartList(requireContext())?.observe(viewLifecycleOwner, Observer {
+            cartAdapter.setData(it as ArrayList<CartModel>)
+            cartModelList = it
+        })
+
+        orderPlaceViewModel.readAllData.observe(viewLifecycleOwner) {
+            if (it != null) {
+                binding.tvAddress.text = it.shop_name + "," + it.address1 + "," +
+                        it.address2
+            }
+        }
 
         binding.toolbar.toolbarTitle.text = "Order Place"
+    }
+
+    override fun updateTextView(amount: Int) {
+        binding.tvOrderTotal.text = "₹\u200E" + amount
+    }
+
+    private fun recycleViewList() {
+        binding.rvOrder.apply {
+            setHasFixedSize(true)
+            binding.rvOrder.layoutManager = LinearLayoutManager(context)
+            adapter= cartAdapter
+        }
+    }
+
+    override fun onClickListner(position: Int) {
+    }
+
+    override fun updatePowerRange(power_range: String) {
     }
 
 }

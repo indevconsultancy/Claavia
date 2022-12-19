@@ -20,15 +20,10 @@ class ProfileViewModel(val context: Context): ViewModel() {
         readAllData = UserRegistrationRepository.getRegistrationData(context)!!
     }
 
-//    fun btnBack(){
-//        context.startActivity(Intent(context, Home::class.java))
-//    }
-
     fun editBtn(){
         context.startActivity(Intent(context, UserRegistration::class.java))
         prefHelper= PrefHelper(context)
         prefHelper.put( Constant.PREF_IS_LOGIN,true)
-
     }
 
 }

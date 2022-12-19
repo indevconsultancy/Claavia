@@ -1,6 +1,7 @@
 package com.indev.claraa.adapter
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,11 +14,14 @@ import com.indev.claraa.R
 import com.indev.claraa.entities.AddressDetailsModel
 import com.indev.claraa.fragment.AddNewAddress
 import com.indev.claraa.fragment.OrderPlace
+import com.indev.claraa.helper.Constant
+import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.ui.HomeScreen
 
 
 class AddressDetailsAdapter(private val context: Context, var addressDetailsModelList: ArrayList<AddressDetailsModel>, private val listener: ClickLinstener) : RecyclerView.Adapter<AddressDetailsAdapter.MyViewholder>(){
 
+    lateinit var preferences: PrefHelper
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewholder {
         val itemView =
             LayoutInflater.from(parent.context).inflate(R.layout.custom_address_list, parent, false)
@@ -37,7 +41,10 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
         holder.area.text = currentItem.address2
         holder.landMark.text = currentItem.landmark
         holder.shopName.text = currentItem.shop_name
+
+        preferences= PrefHelper(context)
         holder.btnDelivery.setOnClickListener{
+            preferences.put(Constant.PREF_IS_CHECK_CART, true)
             replaceFregment(OrderPlace())
         }
     }

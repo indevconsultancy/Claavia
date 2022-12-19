@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -15,12 +16,19 @@ import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.bumptech.glide.Glide
 import com.indev.claraa.R
 import com.indev.claraa.entities.CartModel
+import com.indev.claraa.helper.Constant
+import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.ProductRepository
 import com.indev.claraa.restApi.ClientApi
 
 class CartAdapter(val context: Context, var cartModelList: List<CartModel>, private val listener: ClickLinstener) : RecyclerView.Adapter<CartAdapter.MyViewholder>(){
+
+    lateinit var prefHelper: PrefHelper
     var count =0
     var totalPrice= 0
+    var check_cart_list = false
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewholder {
         val itemView =
             LayoutInflater.from(parent.context).inflate(R.layout.custom_cart, parent, false)
@@ -29,11 +37,18 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
 
     override fun onBindViewHolder(holder: MyViewholder, position: Int) {
         val currentItem = cartModelList[position]
-        holder.tvRange.text ="Size: " + currentItem.power_range
+        holder.tvRange.text ="Power range: " + currentItem.power_range
+        holder.tvPackSize.text ="Packs size: " + currentItem.packets
         holder.tvProductName.text = currentItem.product_name
         count= currentItem.quantity.toInt()
         totalProduct = count
-
+        prefHelper= PrefHelper(context)
+        check_cart_list=prefHelper.getBoolean(Constant.PREF_IS_CHECK_CART)
+        if(check_cart_list == true){
+            holder.llButton.visibility =View.GONE
+        }else{
+            holder.llButton.visibility =View.VISIBLE
+        }
         holder.addButton.setOnClickListener {
             count= currentItem.quantity.toInt()
 
@@ -69,14 +84,13 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
             }
         }
 
-
         if(count<=1){
             holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_delete_outline_24));
         }else{
             holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_remove_24));
         }
         holder.tvCount.setText("" + count)
-        holder.tvPrice.text = currentItem.amount.toString()
+        holder.tvPrice.text = currentItem.currency +" "+ currentItem.amount.toString()
 
         totalAmount= grandTotal(cartModelList)
         if(count==0) {
@@ -122,6 +136,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
 
    inner class MyViewholder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvRange: TextView = itemView!!.findViewById(R.id.tvRange)
+        val tvPackSize: TextView = itemView!!.findViewById(R.id.tvPackSize)
         val tvCount: TextView = itemView!!.findViewById(R.id.tvCount)
         val tvPrice: TextView = itemView!!.findViewById(R.id.tvPrice)
         val tvProductName: TextView = itemView!!.findViewById(R.id.tvProductName)
@@ -129,6 +144,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
         val imageProduct: ImageView = itemView!!.findViewById(R.id.imageProduct)
         val btnDelete: Button = itemView!!.findViewById(R.id.btnDelete)
         val addButton: ImageView = itemView!!.findViewById(R.id.addButton)
+        val llButton: LinearLayout = itemView!!.findViewById(R.id.llButton)
 
         init {
             itemView.setOnClickListener {
