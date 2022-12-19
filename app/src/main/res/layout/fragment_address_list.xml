@@ -42,6 +42,7 @@
                 android:layout_height="50dp"
                 android:onClick="@{() ->addressListVM.newAddress()}"
                 android:textColor="@color/white"
+                android:fontFamily="@font/aleo_regular"
                 android:textAllCaps="false"
                 android:text="Add a New Address"/>
 

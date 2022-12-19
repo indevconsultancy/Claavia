@@ -69,21 +69,21 @@ class AddressViewModel (val context: Context): ViewModel() {
             )
         viewModelScope.launch {
             AddressDetailsRepository.insertAddressData(context, addressDetailsModel)
-//            var last_insert_id=0
-//            CoroutineScope(Dispatchers.IO).launch {
-//                last_insert_id = AddressDetailsRepository.userAddressDetailsAPI(addressDetailsModel)
-//                if (last_insert_id> 0) {
+            var last_insert_id=0
+            CoroutineScope(Dispatchers.IO).launch {
+                last_insert_id = AddressDetailsRepository.userAddressDetailsAPI(addressDetailsModel)
+                if (last_insert_id> 0) {
                     replaceFregment(AddressList())
 
                     Handler(Looper.getMainLooper()).post {
                         Toast.makeText(context, "Successfully Address Registered", Toast.LENGTH_LONG).show()
                     }
-//                } else {
-//                    Handler(Looper.getMainLooper()).post {
-//                        Toast.makeText(context, "Invalid user", Toast.LENGTH_LONG).show()
-//                    }
-//                }
-//            }
+                } else {
+                    Handler(Looper.getMainLooper()).post {
+                        Toast.makeText(context, "Invalid user", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
         }
     }
 
