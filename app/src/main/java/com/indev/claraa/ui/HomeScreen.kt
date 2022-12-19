@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
@@ -25,25 +26,25 @@ class HomeScreen : AppCompatActivity(), ClickLinstener {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home_screen)
         supportActionBar?.hide()
-        replaceFregment(Home())
+        replaceFregment(Home(), 0)
         var badge= binding.bottomNavigation.bottomNavigation.getOrCreateBadge(R.id.order)
         badge.number = 2
         preferences= PrefHelper(this)
         binding.bottomNavigation.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.home -> {
-                    replaceFregment(Home())
+                    replaceFregment(Home(), 0)
                 }
                 R.id.profile -> {
-                    replaceFregment(Profile())
+                    replaceFregment(Profile(), 1)
                 }
                 R.id.order -> {
                     preferences.put(Constant.PREF_IS_CHECK_CART, false)
-                    replaceFregment(Cart())
+                    replaceFregment(Cart(),2)
                 }
 
                 R.id.refer -> {
-                    replaceFregment(Refer())
+                    replaceFregment(Refer(),3)
                 }
             }
             true
@@ -51,32 +52,39 @@ class HomeScreen : AppCompatActivity(), ClickLinstener {
     }
 
 
-//    override fun onBackPressed() {
-//
-//        if(binding.bottomNavigation.bottomNavigation.selectedItemId == R.id.home) {
-//            super.onBackPressed()
-//
-//            SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE).setTitleText("Exit")
-//                .setContentText("Are you sure to want to Exit?").setCancelText("Cancel")
-//                .setConfirmText("Ok")
-//                .setConfirmClickListener {
-//                    finishAffinity()
-//                }
-//                .showCancelButton(true)
-//                .setCancelClickListener { sDialog -> // Showing simple toast message to user
-//                    sDialog.cancel()
-//                }.show()
-//        }else{
-//            binding.bottomNavigation.bottomNavigation.selectedItemId ==R.id.home
-//        }
-//    }
+    override fun onBackPressed() {
+
+        if(binding.bottomNavigation.bottomNavigation.selectedItemId == R.id.home) {
+            super.onBackPressed()
+
+            SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE).setTitleText("Exit")
+                .setContentText("Are you sure to want to Exit?").setCancelText("Cancel")
+                .setConfirmText("Ok")
+                .setConfirmClickListener {
+                    finishAffinity()
+                }
+                .showCancelButton(true)
+                .setCancelClickListener { sDialog -> // Showing simple toast message to user
+                    sDialog.cancel()
+                }.show()
+        }else{
+            replaceFregment(Home(),1)
+        }
+    }
 
 
-    private fun replaceFregment(fragment : Fragment) {
+    private fun replaceFregment(fragment : Fragment, flag: Int) {
         val fragmentManager = supportFragmentManager
         val fragmentTransition= fragmentManager.beginTransaction()
-        fragmentTransition.replace(R.id.frame_layout, fragment)
-        fragmentTransition.addToBackStack(null)
+
+        if(flag == 0){
+            fragmentTransition.add(R.id.frame_layout, fragment)
+            fragmentManager.popBackStack("FRAGMENT_1", FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            fragmentTransition.addToBackStack("FRAGMENT_1")
+        }else{
+            fragmentTransition.replace(R.id.frame_layout, fragment)
+            fragmentTransition.addToBackStack(null)
+        }
         fragmentTransition.commit()
     }
 
