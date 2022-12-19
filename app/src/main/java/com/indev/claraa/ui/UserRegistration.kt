@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
+import android.view.WindowManager
 import androidx.constraintlayout.widget.ConstraintSet.GONE
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer

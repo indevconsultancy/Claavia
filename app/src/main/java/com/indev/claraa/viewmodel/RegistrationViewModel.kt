@@ -73,7 +73,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
 
         if (checkLogin == true) {
             userRegistrationTable = UserRegistrationModel(
-                44,
+                prefHelper.getInt(Constant.PREF_USERID)!!,
                 shopName.get().toString(),
                 ownerName.get().toString(),
                 username.get().toString(),
@@ -117,8 +117,9 @@ class RegistrationViewModel (val context: Context): ViewModel() {
 
     fun btnJoin(){
         if(checkValidation()) {
+            prefHelper = PrefHelper(context)
             userRegistrationTable = UserRegistrationModel(
-                0,
+                prefHelper.getInt(Constant.PREF_USERID)!!,
                 "","",
                 username.get().toString(),
                 password.get().toString(),

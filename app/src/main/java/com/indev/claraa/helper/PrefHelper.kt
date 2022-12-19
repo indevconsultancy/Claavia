@@ -19,6 +19,11 @@ class PrefHelper  (context: Context) {
             .apply()
     }
 
+   fun put(key: String, value: Int) {
+        editor.putInt(key, value)
+            .apply()
+    }
+
     fun put(key: String, value: Boolean) {
         editor.putBoolean(key, value)
             .apply()
@@ -30,6 +35,10 @@ class PrefHelper  (context: Context) {
 
     fun getString(key: String): String? {
         return sharedPref.getString(key, null)
+    }
+
+    fun getInt(key: String): Int? {
+        return sharedPref.getInt(key.toString(), 0)
     }
 
     fun clear() {

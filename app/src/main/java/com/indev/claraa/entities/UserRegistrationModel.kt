@@ -18,7 +18,7 @@ data class UserRegistrationModel(@PrimaryKey(autoGenerate = true)
                                  var active: String,
                                  var register_date: String,
                                  var gender: String,
-                                 var latitude : String,
+                                 var latitude: String,
                                  var longitude: String,
                                  var pinCode: String)
 
