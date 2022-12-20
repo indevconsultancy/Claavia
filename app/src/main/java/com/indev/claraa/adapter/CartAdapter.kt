@@ -8,7 +8,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import cn.pedant.SweetAlert.SweetAlertDialog
@@ -53,10 +52,9 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
             count= currentItem.quantity.toInt()
 
             if(count >0){
-                Toast.makeText(context, "" + count, Toast.LENGTH_LONG).show()
                 increamentCount()
                 totalPrice= count * currentItem.price.toInt()
-                ProductRepository.updateCartProductQuantity(count,totalPrice,currentItem.id,context)
+                ProductRepository.updateCartProductQuantity(count,totalPrice,currentItem.local_id,context)
                 holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_remove_24));
             }else{
                 holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_delete_outline_24));
@@ -66,7 +64,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
 
 
         holder.btnDelete.setOnClickListener{
-            deletePopupShow(currentItem.id)
+            deletePopupShow(currentItem.local_id)
             notifyDataSetChanged()
         }
 
@@ -76,10 +74,10 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
             if(count > 1){
                 decreamentCount()
                 totalPrice= count * currentItem.price.toInt()
-                ProductRepository.updateCartProductQuantity(count,totalPrice,currentItem.id,context)
+                ProductRepository.updateCartProductQuantity(count,totalPrice,currentItem.local_id,context)
                 holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_remove_24));
             }else{
-                deletePopupShow(currentItem.id)
+                deletePopupShow(currentItem.local_id)
                 holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_delete_outline_24));
             }
         }
@@ -93,11 +91,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
         holder.tvPrice.text = currentItem.currency +" "+ currentItem.amount.toString()
 
         totalAmount= grandTotal(cartModelList)
-        if(count==0) {
-            listener.updateTextView(0)
-        }else{
-            listener.updateTextView(totalAmount)
-        }
+        listener.updateTextView(totalAmount)
     }
 
     private fun deletePopupShow(id: Int) {
@@ -105,6 +99,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
             .setContentText("Are you sure you want to delete form the cart?").setCancelText("Cancel")
             .setConfirmText("Ok")
             .setConfirmClickListener { sDialog ->
+                listener.updateTextView(0)
                 ProductRepository.deleteProductData(id,context)
                 sDialog.dismiss()
             }
@@ -157,7 +152,5 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
         var totalAmount = 0
         var totalProduct = 0
     }
-
-
 }
 

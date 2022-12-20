@@ -28,7 +28,8 @@ class HomeScreen : AppCompatActivity(), ClickLinstener {
         supportActionBar?.hide()
         replaceFregment(Home(), 0)
         var badge= binding.bottomNavigation.bottomNavigation.getOrCreateBadge(R.id.order)
-        badge.number = 2
+
+        badge.number = CartAdapter.totalProduct
         preferences= PrefHelper(this)
         binding.bottomNavigation.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {

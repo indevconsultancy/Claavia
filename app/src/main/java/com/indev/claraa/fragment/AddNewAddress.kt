@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.indev.claraa.R
 import com.indev.claraa.databinding.FragmentAddressDetailsBinding
@@ -38,6 +39,22 @@ class AddNewAddress : Fragment() {
             replaceFregment(AddressList())
         }
         binding.toolbar.toolbarTitle.text = "Add New Address"
+        addressViewModel.readAllData.observe(viewLifecycleOwner, Observer {
+            if(it != null) {
+                binding.etShopName.setText(it.shop_name)
+                binding.etMobile.setText(it.mobile_number)
+                binding.etUserName.setText(it.user_name)
+                binding.etAddress1.setText(it.address1)
+                binding.etAddress2.setText(it.address2)
+                binding.spnState.setSelection(1)
+                binding.spnDistrict.setSelection(1)
+                binding.etLandmark.setText(it.landmark)
+                binding.etPinCode.setText(it.pinCode)
+
+            }
+        })
+
+
     }
 
     private fun replaceFregment(fragment : Fragment) {

@@ -19,7 +19,7 @@ interface ClaraaDao {
     @Insert
     suspend fun insertUserCart(cartModel: CartModel): Long
 
-    @Query("SELECT * FROM cart ORDER BY id ASC")
+    @Query("SELECT * FROM cart ORDER BY local_id ASC")
     fun getCartData() : LiveData<List<CartModel>>
 
     @Query("SELECT * FROM product_master where type_id = :selectedCategory group by product_name ORDER BY product_id ASC")
@@ -43,6 +43,10 @@ interface ClaraaDao {
 
     @Query("SELECT * FROM address ORDER BY local_id ASC")
     fun getAddressData() : LiveData<List<AddressDetailsModel>>
+
+
+   @Query("SELECT * FROM address where local_id= :id")
+    fun getAddressDatabyLocalID(id : Int) : LiveData<AddressDetailsModel>
 
 
     @Query("SELECT * FROM user_master")
@@ -90,10 +94,10 @@ interface ClaraaDao {
     @Query("DELETE FROM product_packet")
     fun deleteAllProductPackets()
 
-    @Query("DELETE FROM cart WHERE id = :cartId")
+    @Query("DELETE FROM cart WHERE local_id = :cartId")
     fun deleteByProductId(cartId: Int)
 
-    @Query("UPDATE cart SET quantity = :quantity , amount = :totalPrice WHERE id = :id")
+    @Query("UPDATE cart SET quantity = :quantity , amount = :totalPrice WHERE local_id = :id")
     fun updateCartProductQuantity(quantity: Int, totalPrice: Int, id: Int): Int
 
 
@@ -105,4 +109,11 @@ interface ClaraaDao {
 
     @Query("SELECT * from address where user_id = :addressId")
     fun getAddress(addressId: Int) : LiveData<AddressDetailsModel>
+
+
+    @Query("DELETE FROM address WHERE local_id = :id")
+    fun deleteAddress(id: Int)
+
+    @Update
+    fun editAddress(addressDetailsModel: AddressDetailsModel)
 }

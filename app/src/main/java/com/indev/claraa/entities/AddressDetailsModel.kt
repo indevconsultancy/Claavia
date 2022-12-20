@@ -10,7 +10,6 @@ data class AddressDetailsModel(@PrimaryKey(autoGenerate = true)
                                var user_id: Int,
                                var shop_name: String,
                                var user_name: String,
-                               var email: String,
                                var mobile_number: String,
                                var address1: String,
                                var state_id: String,

@@ -1,6 +1,7 @@
 package com.indev.claraa.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
@@ -16,12 +17,15 @@ import com.indev.claraa.fragment.AddNewAddress
 import com.indev.claraa.fragment.OrderPlace
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
+import com.indev.claraa.repository.AddressDetailsRepository
+import com.indev.claraa.repository.ProductRepository
 import com.indev.claraa.ui.HomeScreen
 
 
 class AddressDetailsAdapter(private val context: Context, var addressDetailsModelList: ArrayList<AddressDetailsModel>, private val listener: ClickLinstener) : RecyclerView.Adapter<AddressDetailsAdapter.MyViewholder>(){
 
     lateinit var preferences: PrefHelper
+    var localId=0
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewholder {
         val itemView =
             LayoutInflater.from(parent.context).inflate(R.layout.custom_address_list, parent, false)
@@ -29,24 +33,30 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
     }
 
     override fun onBindViewHolder(holder: MyViewholder, position: Int) {
+        local_id =0
         val currentItem = addressDetailsModelList[position]
         holder.shopName.text = currentItem.shop_name
         holder.personName.text = currentItem.user_name
-        holder.email.text = currentItem.email
-        holder.mobNo.text = currentItem.mobile_number
-        holder.pinCode.text = currentItem.pinCode
-        holder.state.text = currentItem.state_id
-        holder.district.text = currentItem.district_id
-        holder.houseNo.text = currentItem.address1
-        holder.area.text = currentItem.address2
-        holder.landMark.text = currentItem.landmark
-        holder.shopName.text = currentItem.shop_name
+        holder.mobNo.text = "Phone Number: " + currentItem.mobile_number
+        holder.stateDistrict.text = currentItem.state_id + ", " + currentItem.district_id
+        holder.address1.text = currentItem.address1 +"," + currentItem.address2 + "," +currentItem.landmark
 
         preferences= PrefHelper(context)
         holder.btnDelivery.setOnClickListener{
             preferences.put(Constant.PREF_IS_CHECK_CART, true)
             replaceFregment(OrderPlace())
         }
+
+        holder.deleteAddress.setOnClickListener{
+            AddressDetailsRepository.deleteAddress(currentItem.local_id,context)
+        }
+
+        holder.editAddress.setOnClickListener{
+            local_id =currentItem.local_id
+            listener.onClickListner(currentItem.local_id)
+            replaceFregment(AddNewAddress())
+        }
+
     }
 
     private fun replaceFregment(fragment : Fragment) {
@@ -67,16 +77,12 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
     inner class MyViewholder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val shopName: TextView = itemView!!.findViewById(R.id.shopName)
         val personName: TextView = itemView!!.findViewById(R.id.PersonName)
-        val email: TextView = itemView!!.findViewById(R.id.email)
         val mobNo: TextView = itemView!!.findViewById(R.id.mobNo)
-        val pinCode: TextView = itemView!!.findViewById(R.id.pinCode)
-        val state: TextView = itemView!!.findViewById(R.id.state)
-        val district: TextView = itemView!!.findViewById(R.id.district)
-        val houseNo: TextView = itemView!!.findViewById(R.id.houseNo)
-        val area: TextView = itemView!!.findViewById(R.id.area)
-        val landMark: TextView = itemView!!.findViewById(R.id.landMark)
+        val stateDistrict: TextView = itemView!!.findViewById(R.id.tvStateDistrict)
+        val address1: TextView = itemView!!.findViewById(R.id.tvAddress1)
         val editAddress: Button = itemView!!.findViewById(R.id.editAddress)
         val btnDelivery: Button = itemView!!.findViewById(R.id.btnDelivery)
+        val deleteAddress: Button = itemView!!.findViewById(R.id.deleteAddress)
 
         init {
             itemView.setOnClickListener {
@@ -85,5 +91,8 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
         }
     }
 
+    companion object{
+        var local_id= 0
+    }
 
 }

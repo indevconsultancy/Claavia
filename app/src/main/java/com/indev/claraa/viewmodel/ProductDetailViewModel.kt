@@ -14,6 +14,8 @@ import com.indev.claraa.adapter.PowerRangeAdapter
 import com.indev.claraa.adapter.ProductMasterAdapter
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.ProductMasterModel
+import com.indev.claraa.helper.Constant
+import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.ProductRepository
 import com.indev.claraa.roomdb.RoomDB
 import kotlinx.coroutines.CoroutineScope
@@ -30,6 +32,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
     lateinit var productMasterArrayList: ArrayList<ProductMasterModel>
     lateinit var cartModelArrayList: ArrayList<CartModel>
     private var dataBase: RoomDB? = null
+    lateinit var prefHelper: PrefHelper
 
     private fun initializeDB(context: Context): RoomDB? {
         return RoomDB.getDatabase(context)
@@ -66,7 +69,9 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
     @SuppressLint("SuspiciousIndentation")
     fun btnSubmit() {
         dataBase = initializeDB(context)
+        prefHelper= PrefHelper(context)
 
+        var user_id =prefHelper.getInt(Constant.PREF_USERID)!!
         if(checkValidation()) {
             var checkExitPorduct = 0
             CoroutineScope(Dispatchers.IO).launch {
@@ -74,13 +79,12 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
                 checkExitPorduct = dataBase?.userDao()?.isProductRowExist(
                     productID,
                     PowerRangeAdapter.power_range,
-                    packetValue.toString()
-                )!!
+                    packetValue.toString())!!
                 if (checkExitPorduct == 0) {
                     cartModel = CartModel(
-                        0,
+                        0,0,
                         packetValue.toString(),
-                        productID.toString(), "",
+                        productID.toString(), user_id,
                         productMasterArrayList.get(0).product_name,
                         productMasterArrayList.get(0).product_img1,
                         productMasterArrayList.get(0).product_img2,
@@ -105,11 +109,11 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
                         context
                     ) as ArrayList<CartModel>
                     var totalAmount =
-                        cartModelArrayList.get(0).amount * (cartModelArrayList.get(0).quantity.toInt() + 1)
+                        cartModelArrayList.get(0).amount * (cartModelArrayList.get(0).quantity.toInt() + qtyValue!!.toInt())
                     ProductRepository.updateCartProductQuantity(
-                        cartModelArrayList.get(0).quantity.toInt() + 1,
+                        cartModelArrayList.get(0).quantity.toInt() + qtyValue!!.toInt(),
                         totalAmount,
-                        cartModelArrayList.get(0).id,
+                        cartModelArrayList.get(0).local_id,
                         context
                     )
 
