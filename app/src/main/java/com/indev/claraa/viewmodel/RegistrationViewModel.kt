@@ -90,6 +90,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             userRegistrationTable.state_id = UserRegistration.state_id.toString()
             userRegistrationTable.district_id = districtOfUser.toString()
             userRegistrationTable.pinCode = pinCode.get().toString()
+
             viewModelScope.launch {
                 UserRegistrationRepository.updateData(context, userRegistrationTable)
                 var last_user_id=0

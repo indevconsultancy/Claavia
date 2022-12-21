@@ -93,26 +93,26 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
             etAddress2.get().toString(),"","","",
             landmark.get().toString(),
         )
-        AddressDetailsRepository.editAddress(addressDetailsModel, context)
+        //AddressDetailsRepository.editAddress(addressDetailsModel, context)
 
-//        viewModelScope.launch {
-//            AddressDetailsRepository.insertAddressData(context, addressDetailsModel)
-//            var last_insert_id=0
-//            CoroutineScope(Dispatchers.IO).launch {
-//                last_insert_id = AddressDetailsRepository.userAddressDetailsAPI(addressDetailsModel)
-//                if (last_insert_id> 0) {
-//                    replaceFregment(AddressList())
-//
-//                    Handler(Looper.getMainLooper()).post {
-//                        Toast.makeText(context, "Successfully Address Registered", Toast.LENGTH_LONG).show()
-//                    }
-//                } else {
-//                    Handler(Looper.getMainLooper()).post {
-//                        Toast.makeText(context, "Invalid user", Toast.LENGTH_LONG).show()
-//                    }
-//                }
-//            }
-//        }
+        viewModelScope.launch {
+            AddressDetailsRepository.editAddress(addressDetailsModel, context)
+            var last_id=0
+            CoroutineScope(Dispatchers.IO).launch {
+                last_id = AddressDetailsRepository.addressUpdateApi(addressDetailsModel)
+                if (last_id> 0) {
+                    replaceFregment(AddressList())
+
+                    Handler(Looper.getMainLooper()).post {
+                        Toast.makeText(context, "Successfully Address Updated", Toast.LENGTH_LONG).show()
+                    }
+                } else {
+                    Handler(Looper.getMainLooper()).post {
+                        Toast.makeText(context, "Invalid user", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
     }
 
     private fun insertAddress(user_id: Int?) {
@@ -127,10 +127,10 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
         )
         viewModelScope.launch {
             AddressDetailsRepository.insertAddressData(context, addressDetailsModel)
-            var last_insert_id=0
+            var last_id=0
             CoroutineScope(Dispatchers.IO).launch {
-                last_insert_id = AddressDetailsRepository.userAddressDetailsAPI(addressDetailsModel)
-                if (last_insert_id> 0) {
+                last_id = AddressDetailsRepository.userAddressDetailsAPI(addressDetailsModel)
+                if (last_id> 0) {
                     replaceFregment(AddressList())
 
                     Handler(Looper.getMainLooper()).post {

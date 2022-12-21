@@ -40,20 +40,6 @@ class AddressDetailsRepository {
             return dataBase?.userDao()?.getAddressDatabyLocalID(id)
         }
 
-        suspend fun userAddressDetailsAPI(addressDetailsModel: AddressDetailsModel): Int {
-            try {
-                var result = apiInterface?.addressDetails(addressDetailsModel,"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjcxNTI1NzYzLCJuYmYiOjE2NzE1MjU3NzMsImV4cCI6MTY3NDExNzgyMywiZGF0YSI6eyJ1c2VyX2lkIjpudWxsLCJ1c2VyX25hbWUiOiJBbWl0IiwibW9iaWxlX251bWJlciI6bnVsbH19.dPRrCfHsmpVPS0Rr0HquCzUca9qJOyUhy52HZoZzO1o")
-                return if (result?.body()?.status==1){
-                    result?.body()!!.last_insert_id
-                } else {
-                    0
-                }
-            } catch (e: Exception) {
-                Log.d("fail", "$e")
-            }
-            return 0
-        }
-
 
         fun editAddress(addressDetailsModel: AddressDetailsModel,context: Context){
             dataBase = initializeDB(context)
@@ -68,6 +54,35 @@ class AddressDetailsRepository {
                 dataBase?.userDao()?.deleteAddress(id)
             }
         }
+
+        suspend fun userAddressDetailsAPI(addressDetailsModel: AddressDetailsModel): Int {
+            try {
+                var result = apiInterface?.addressDetails(addressDetailsModel,"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjcxNTI1NzYzLCJuYmYiOjE2NzE1MjU3NzMsImV4cCI6MTY3NDExNzgyMywiZGF0YSI6eyJ1c2VyX2lkIjpudWxsLCJ1c2VyX25hbWUiOiJBbWl0IiwibW9iaWxlX251bWJlciI6bnVsbH19.dPRrCfHsmpVPS0Rr0HquCzUca9qJOyUhy52HZoZzO1o")
+                return if (result?.body()?.status==1){
+                    result?.body()!!.last_id
+                } else {
+                    0
+                }
+            } catch (e: Exception) {
+                Log.d("fail", "$e")
+            }
+            return 0
+        }
+
+        suspend fun addressUpdateApi(addressDetailsModel: AddressDetailsModel): Int {
+            try {
+                var result = apiInterface?.updateAddress(addressDetailsModel,"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjcxNjE0MTI2LCJuYmYiOjE2NzE2MTQxMzYsImV4cCI6MTY3NDIwNjE4NiwiZGF0YSI6eyJ1c2VyX2lkIjpudWxsLCJ1c2VyX25hbWUiOiJBbWl0IiwibW9iaWxlX251bWJlciI6bnVsbH19.vb8Zc9FbSTzLpa6w9VYOrRc3OS34VPACfpkaI9jDC14")
+                return if (result?.body()?.status==1){
+                    result?.body()!!.last_id
+                } else {
+                    0
+                }
+            } catch (e: Exception) {
+                Log.d("fail", "$e")
+            }
+            return 0
+        }
+
 
     }
 

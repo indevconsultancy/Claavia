@@ -8,16 +8,21 @@ import android.os.Message
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.indev.claraa.R
 import com.indev.claraa.adapter.PowerRangeAdapter
 import com.indev.claraa.adapter.ProductMasterAdapter
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.ProductMasterModel
+import com.indev.claraa.fragment.AddressList
+import com.indev.claraa.fragment.ProductDetails
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.ProductRepository
 import com.indev.claraa.roomdb.RoomDB
+import com.indev.claraa.ui.HomeScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -134,9 +139,17 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
             .setConfirmText("Ok")
             .setConfirmClickListener {sdialog ->
                 sdialog.dismiss()
+                replaceFregment(ProductDetails())
             }
             .show()
     }
+
+    private fun replaceFregment(fragment : Fragment) {
+        var transaction = (context as HomeScreen).supportFragmentManager.beginTransaction()
+        transaction?.replace(R.id.frame_layout, fragment)
+        transaction.commit()
+    }
+
 
     private fun checkValidation(): Boolean {
         if (packetValue.toString().trim().equals("Packs Size")) {
