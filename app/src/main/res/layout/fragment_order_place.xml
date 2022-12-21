@@ -44,7 +44,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical | top"
+                        android:layout_gravity="center_vertical|top"
                         android:fontFamily="@font/aleobold"
                         android:text="Shipping to: "
                         android:textColor="@color/black"
@@ -55,7 +55,7 @@
                         android:id="@+id/tvAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical | top"
+                        android:layout_gravity="center_vertical|top"
                         android:textColor="@color/black"
                         android:textSize="18dp" />
                 </LinearLayout>

@@ -56,7 +56,9 @@ class OrderPlace : Fragment(), ClickLinstener{
                         it.address2
             }
         }
-
+        binding.toolbar.backClick.setOnClickListener(){
+            replaceFregment(AddressList())
+        }
         binding.toolbar.toolbarTitle.text = "Order Place"
     }
 
@@ -70,6 +72,14 @@ class OrderPlace : Fragment(), ClickLinstener{
             binding.rvOrder.layoutManager = LinearLayoutManager(context)
             adapter= cartAdapter
         }
+    }
+
+    private fun replaceFregment(fragment : Fragment) {
+        val fragmentManager = activity?.supportFragmentManager
+        val fragmentTransition= fragmentManager?.beginTransaction()
+        fragmentTransition?.replace(R.id.frame_layout, fragment)
+        fragmentTransition?.addToBackStack(null)
+        fragmentTransition?.commit()
     }
 
     override fun onClickListner(position: Int) {

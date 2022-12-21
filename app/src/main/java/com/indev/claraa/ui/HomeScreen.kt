@@ -1,7 +1,6 @@
 package com.indev.claraa.ui
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -74,7 +73,7 @@ class HomeScreen : AppCompatActivity(), ClickLinstener {
                     sDialog.cancel()
                 }.show()
         }else{
-            replaceFregment(Home(),1)
+           // replaceFregment(Home(),1)
         }
     }
 
