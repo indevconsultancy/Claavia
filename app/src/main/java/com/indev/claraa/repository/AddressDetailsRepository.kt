@@ -55,6 +55,15 @@ class AddressDetailsRepository {
             }
         }
 
+        fun updateAddressId(last_id: Int,id: Int,context: Context){
+            dataBase = initializeDB(context)
+
+            CoroutineScope(Dispatchers.IO).launch {
+                dataBase?.userDao()?.updateAddressId(last_id,id)
+            }
+        }
+
+
         suspend fun userAddressDetailsAPI(addressDetailsModel: AddressDetailsModel): Int {
             try {
                 var result = apiInterface?.addressDetails(addressDetailsModel,"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjcxNTI1NzYzLCJuYmYiOjE2NzE1MjU3NzMsImV4cCI6MTY3NDExNzgyMywiZGF0YSI6eyJ1c2VyX2lkIjpudWxsLCJ1c2VyX25hbWUiOiJBbWl0IiwibW9iaWxlX251bWJlciI6bnVsbH19.dPRrCfHsmpVPS0Rr0HquCzUca9qJOyUhy52HZoZzO1o")

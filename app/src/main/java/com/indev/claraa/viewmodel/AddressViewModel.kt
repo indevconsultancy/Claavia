@@ -132,7 +132,7 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
                 last_id = AddressDetailsRepository.userAddressDetailsAPI(addressDetailsModel)
                 if (last_id> 0) {
                     replaceFregment(AddressList())
-
+                    AddressDetailsRepository.getAddressDatabyLocalID(context,last_id)
                     Handler(Looper.getMainLooper()).post {
                         Toast.makeText(context, "Successfully Address Registered", Toast.LENGTH_LONG).show()
                     }

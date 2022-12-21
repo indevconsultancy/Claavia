@@ -119,4 +119,8 @@ interface ClaraaDao {
 
     @Update
     fun editAddress(addressDetailsModel: AddressDetailsModel)
+
+
+    @Query("UPDATE address SET id = :last_id WHERE local_id = :local_id")
+    fun updateAddressId(last_id: Int, local_id: Int): Int
 }
