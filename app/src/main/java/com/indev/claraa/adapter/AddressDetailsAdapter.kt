@@ -57,7 +57,6 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
             listener.onClickListner(currentItem.local_id)
             replaceFregment(AddNewAddress())
         }
-
     }
 
     private fun replaceFregment(fragment : Fragment) {
