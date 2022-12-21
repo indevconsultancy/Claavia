@@ -3,6 +3,7 @@ package com.indev.claraa.adapter
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +49,8 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
         }
 
         holder.deleteAddress.setOnClickListener{
-            AddressDetailsRepository.deleteAddress(currentItem.local_id,context)
+            listener.onClickListner(currentItem.id.toInt())
+            //AddressDetailsRepository.deleteAddress(currentItem.local_id,context)
         }
 
         holder.editAddress.setOnClickListener{
@@ -58,6 +60,7 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
             replaceFregment(AddNewAddress())
         }
     }
+
 
     private fun replaceFregment(fragment : Fragment) {
         var transaction = (context as HomeScreen).supportFragmentManager.beginTransaction()

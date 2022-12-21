@@ -1,6 +1,5 @@
 package com.indev.claraa.dao
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
@@ -114,7 +113,7 @@ interface ClaraaDao {
     fun getAddress(addressId: Int) : LiveData<AddressDetailsModel>
 
 
-    @Query("DELETE FROM address WHERE local_id = :id")
+    @Query("DELETE FROM address WHERE id = :id")
     fun deleteAddress(id: Int)
 
     @Update

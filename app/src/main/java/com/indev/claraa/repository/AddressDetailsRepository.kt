@@ -41,33 +41,36 @@ class AddressDetailsRepository {
         }
 
 
-        fun editAddress(addressDetailsModel: AddressDetailsModel,context: Context){
+        fun editAddress(addressDetailsModel: AddressDetailsModel, context: Context) {
             dataBase = initializeDB(context)
             CoroutineScope(Dispatchers.IO).launch {
                 dataBase?.userDao()?.editAddress(addressDetailsModel)
             }
         }
 
-        fun deleteAddress(id: Int,context: Context){
+        fun deleteAddress(id: Int, context: Context) {
             dataBase = initializeDB(context)
             CoroutineScope(Dispatchers.IO).launch {
                 dataBase?.userDao()?.deleteAddress(id)
             }
         }
 
-        fun updateAddressId(last_id: Int,id: String,context: Context){
+        fun updateAddressId(last_id: Int, id: String, context: Context) {
             dataBase = initializeDB(context)
 
             CoroutineScope(Dispatchers.IO).launch {
-                dataBase?.userDao()?.updateAddressId(last_id,id)
+                dataBase?.userDao()?.updateAddressId(last_id, id)
             }
         }
 
 
         suspend fun userAddressDetailsAPI(addressDetailsModel: AddressDetailsModel): Int {
             try {
-                var result = apiInterface?.addressDetails(addressDetailsModel,"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjcxNTI1NzYzLCJuYmYiOjE2NzE1MjU3NzMsImV4cCI6MTY3NDExNzgyMywiZGF0YSI6eyJ1c2VyX2lkIjpudWxsLCJ1c2VyX25hbWUiOiJBbWl0IiwibW9iaWxlX251bWJlciI6bnVsbH19.dPRrCfHsmpVPS0Rr0HquCzUca9qJOyUhy52HZoZzO1o")
-                return if (result?.body()?.status==1){
+                var result = apiInterface?.addressDetails(
+                    addressDetailsModel,
+                    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjcxNTI1NzYzLCJuYmYiOjE2NzE1MjU3NzMsImV4cCI6MTY3NDExNzgyMywiZGF0YSI6eyJ1c2VyX2lkIjpudWxsLCJ1c2VyX25hbWUiOiJBbWl0IiwibW9iaWxlX251bWJlciI6bnVsbH19.dPRrCfHsmpVPS0Rr0HquCzUca9qJOyUhy52HZoZzO1o"
+                )
+                return if (result?.body()?.status == 1) {
                     result?.body()!!.last_id
                 } else {
                     0
@@ -80,8 +83,11 @@ class AddressDetailsRepository {
 
         suspend fun addressUpdateApi(addressDetailsModel: AddressDetailsModel): Int {
             try {
-                var result = apiInterface?.updateAddress(addressDetailsModel,"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjcxNjEzMzk5LCJuYmYiOjE2NzE2MTM0MDksImV4cCI6MTY3NDIwNTQ1OSwiZGF0YSI6eyJ1c2VyX2lkIjpudWxsLCJ1c2VyX25hbWUiOiJBbWl0IiwibW9iaWxlX251bWJlciI6bnVsbH19.kgPPS_tGELwddw0hW3UwwQtW0-ZNZvza2R8FE0XJxr8")
-                return if (result?.body()?.status==1){
+                var result = apiInterface?.updateAddress(
+                    addressDetailsModel,
+                    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjcxNjEzMzk5LCJuYmYiOjE2NzE2MTM0MDksImV4cCI6MTY3NDIwNTQ1OSwiZGF0YSI6eyJ1c2VyX2lkIjpudWxsLCJ1c2VyX25hbWUiOiJBbWl0IiwibW9iaWxlX251bWJlciI6bnVsbH19.kgPPS_tGELwddw0hW3UwwQtW0-ZNZvza2R8FE0XJxr8"
+                )
+                return if (result?.body()?.status == 1) {
                     result?.body()!!.last_id
                 } else {
                     0
@@ -92,6 +98,22 @@ class AddressDetailsRepository {
             return 0
         }
 
+        suspend fun addressDeleteApi(addressDetailsModel: AddressDetailsModel): Int {
+            try {
+                var result = apiInterface?.deleteAddress(
+                    addressDetailsModel,
+                    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjcxNjEzMzk5LCJuYmYiOjE2NzE2MTM0MDksImV4cCI6MTY3NDIwNTQ1OSwiZGF0YSI6eyJ1c2VyX2lkIjpudWxsLCJ1c2VyX25hbWUiOiJBbWl0IiwibW9iaWxlX251bWJlciI6bnVsbH19.kgPPS_tGELwddw0hW3UwwQtW0-ZNZvza2R8FE0XJxr8"
+                )
+                return if (result?.body()?.status == 1) {
+                   1
+                } else {
+                    0
+                }
+            } catch (e: Exception) {
+                Log.d("fail", "$e")
+            }
+            return 0
+        }
 
     }
 

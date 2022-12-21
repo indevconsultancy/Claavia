@@ -81,6 +81,7 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
             insertAddress(user_id!!)
         }else{
             updateAddress(local_id,id, user_id!!)
+            deleteAddress(id.toInt())
         }
     }
 
@@ -105,6 +106,28 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
                 if (last_id> 0) {
                     replaceFregment(AddressList())
 
+
+                    Handler(Looper.getMainLooper()).post {
+                        Toast.makeText(context, "Successfully Address Updated", Toast.LENGTH_LONG).show()
+                    }
+                } else {
+                    Handler(Looper.getMainLooper()).post {
+                        Toast.makeText(context, "Invalid user", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun deleteAddress(id: Int,) {
+        AddressDetailsRepository.deleteAddress(id,context)
+        viewModelScope.launch {
+            AddressDetailsRepository.deleteAddress(id,context)
+            var last_id=0
+            CoroutineScope(Dispatchers.IO).launch {
+                last_id = AddressDetailsRepository.addressDeleteApi(addressDetailsModel)
+                if (last_id> 0) {
+                    replaceFregment(AddressList())
 
                     Handler(Looper.getMainLooper()).post {
                         Toast.makeText(context, "Successfully Address Updated", Toast.LENGTH_LONG).show()
@@ -158,6 +181,7 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
     }
 
     override fun onClickListner(id: Int) {
+        deleteAddress(id)
     }
 
     override fun updateTextView(amount: Int) {
