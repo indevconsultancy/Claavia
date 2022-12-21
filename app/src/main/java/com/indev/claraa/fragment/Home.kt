@@ -18,6 +18,7 @@ import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
 import com.indev.claraa.adapter.ProductMasterAdapter
 import com.indev.claraa.databinding.FragmentHomeBinding
+import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.ProductMasterModel
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper

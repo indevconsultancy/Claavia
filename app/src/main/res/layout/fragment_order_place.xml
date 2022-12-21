@@ -8,7 +8,7 @@
             name="orderPlaceVM"
             type="com.indev.claraa.viewmodel.OrderPlaceViewModel"/>
     </data>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -24,75 +24,98 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/toolbar"
+                android:layout_marginBottom="@dimen/_50sdp"
+                android:orientation="vertical">
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="top"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical | top"
+                        android:fontFamily="@font/aleobold"
+                        android:text="Shipping to: "
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
+
+
+                    <TextView
+                        android:id="@+id/tvAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical | top"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/aleobold"
+                        android:text="Total Order: "
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
+
+
+                    <TextView
+                        android:id="@+id/tvOrderTotal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_order"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_10sdp"></androidx.recyclerview.widget.RecyclerView>
+
+
+            </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rlBottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="top"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginHorizontal="@dimen/_10sdp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Shipping to: "
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:fontFamily="@font/aleobold"
-            android:layout_gravity="center_vertical" />
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="-286dp"
+            android:layout_marginBottom="10dp">
 
 
-        <TextView
-            android:id="@+id/tvAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="18dp"
-            android:layout_gravity="center_vertical"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="@dimen/_10sdp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Order Total: "
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:fontFamily="@font/aleobold"
-            android:layout_gravity="center_vertical" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:onClick="@{() ->orderPlaceVM.btnPlace()}"
+                android:text="Proceed to Checkout"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+        </RelativeLayout>
 
 
-        <TextView
-            android:id="@+id/tvOrderTotal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="18dp"
-            android:layout_gravity="center_vertical"/>
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_order"
-            android:layout_width="match_parent"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            android:layout_height="wrap_content">
-        </androidx.recyclerview.widget.RecyclerView>
-
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            android:onClick="@{() ->orderPlaceVM.btnPlace()}"
-            android:textColor="@color/white"
-            android:textAllCaps="false"
-            android:text="Proceed to Checkout"/>
-
-    </LinearLayout>
+    </RelativeLayout>
 
 </layout>

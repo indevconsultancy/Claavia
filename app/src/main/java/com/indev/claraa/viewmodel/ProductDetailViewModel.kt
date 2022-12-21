@@ -80,6 +80,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
                     productID,
                     PowerRangeAdapter.power_range,
                     packetValue.toString())!!
+                var amount= productMasterArrayList.get(0).price.toInt() * qtyValue!!.toInt()
                 if (checkExitPorduct == 0) {
                     cartModel = CartModel(
                         0,0,
@@ -89,7 +90,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
                         productMasterArrayList.get(0).product_img1,
                         productMasterArrayList.get(0).product_img2,
                         productMasterArrayList.get(0).price,
-                        productMasterArrayList.get(0).price.toInt(),
+                        amount,
                         qtyValue.toString(),
                         productMasterArrayList.get(0).type_id,
                         productMasterArrayList.get(0).packet_id,

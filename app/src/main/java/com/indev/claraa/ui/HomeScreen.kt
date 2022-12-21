@@ -6,21 +6,23 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.LiveData
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
 import com.indev.claraa.adapter.CartAdapter
 import com.indev.claraa.databinding.ActivityHomeScreenBinding
-import com.indev.claraa.fragment.Cart
-import com.indev.claraa.fragment.Home
-import com.indev.claraa.fragment.Profile
-import com.indev.claraa.fragment.Refer
+import com.indev.claraa.entities.CartModel
+import com.indev.claraa.fragment.*
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
+import com.indev.claraa.repository.ProductRepository
+import com.indev.claraa.viewmodel.ProductDetailViewModel
 
 class HomeScreen : AppCompatActivity(), ClickLinstener {
     private lateinit var binding: ActivityHomeScreenBinding
     lateinit var preferences: PrefHelper
+    lateinit var cartArrayList: LiveData<List<CartModel>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +30,11 @@ class HomeScreen : AppCompatActivity(), ClickLinstener {
         supportActionBar?.hide()
         replaceFregment(Home(), 0)
         var badge= binding.bottomNavigation.bottomNavigation.getOrCreateBadge(R.id.order)
+        cartArrayList = ProductRepository.getCartList(applicationContext)!!
 
-        badge.number = CartAdapter.totalProduct
+         cartArrayList.observe(this,{
+             badge.number =it.size
+        })
         preferences= PrefHelper(this)
         binding.bottomNavigation.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
