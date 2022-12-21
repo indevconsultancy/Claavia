@@ -55,7 +55,7 @@ class AddressDetailsRepository {
             }
         }
 
-        fun updateAddressId(last_id: Int,id: Int,context: Context){
+        fun updateAddressId(last_id: Int,id: String,context: Context){
             dataBase = initializeDB(context)
 
             CoroutineScope(Dispatchers.IO).launch {
@@ -80,7 +80,7 @@ class AddressDetailsRepository {
 
         suspend fun addressUpdateApi(addressDetailsModel: AddressDetailsModel): Int {
             try {
-                var result = apiInterface?.updateAddress(addressDetailsModel,"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjcxNjE0MTI2LCJuYmYiOjE2NzE2MTQxMzYsImV4cCI6MTY3NDIwNjE4NiwiZGF0YSI6eyJ1c2VyX2lkIjpudWxsLCJ1c2VyX25hbWUiOiJBbWl0IiwibW9iaWxlX251bWJlciI6bnVsbH19.vb8Zc9FbSTzLpa6w9VYOrRc3OS34VPACfpkaI9jDC14")
+                var result = apiInterface?.updateAddress(addressDetailsModel,"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjcxNjEzMzk5LCJuYmYiOjE2NzE2MTM0MDksImV4cCI6MTY3NDIwNTQ1OSwiZGF0YSI6eyJ1c2VyX2lkIjpudWxsLCJ1c2VyX25hbWUiOiJBbWl0IiwibW9iaWxlX251bWJlciI6bnVsbH19.kgPPS_tGELwddw0hW3UwwQtW0-ZNZvza2R8FE0XJxr8")
                 return if (result?.body()?.status==1){
                     result?.body()!!.last_id
                 } else {

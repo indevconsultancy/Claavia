@@ -1,5 +1,6 @@
 package com.indev.claraa.viewmodel
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
@@ -13,15 +14,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.agraharisoft.notepad.Listener.ClickLinstener
+import com.indev.claraa.CommonClass
 import com.indev.claraa.R
 import com.indev.claraa.adapter.AddressDetailsAdapter
 import com.indev.claraa.entities.AddressDetailsModel
-import com.indev.claraa.entities.UserRegistrationModel
 import com.indev.claraa.fragment.AddressList
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.AddressDetailsRepository
-import com.indev.claraa.repository.UserRegistrationRepository
 import com.indev.claraa.ui.HomeScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -40,6 +40,7 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
     var stateOfUser: String? = null
     lateinit var addressDetailsModel: AddressDetailsModel
     var local_id = 0
+    var id = "0"
     lateinit var prefHelper: PrefHelper
     val readAllData: LiveData<AddressDetailsModel>
 
@@ -75,16 +76,17 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
         prefHelper = PrefHelper(context)
         var user_id = prefHelper.getInt(Constant.PREF_USERID)
         local_id = AddressDetailsAdapter.local_id
+        id = AddressDetailsAdapter.id
         if(local_id== 0) {
-            insertAddress(user_id)
+            insertAddress(user_id!!)
         }else{
-            updateAddress(local_id, user_id!!)
+            updateAddress(local_id,id, user_id!!)
         }
     }
 
-    private fun updateAddress(local_id: Int, user_id: Int) {
+    private fun updateAddress(local_id: Int, id: String, userId: Int) {
         addressDetailsModel = AddressDetailsModel(
-            local_id,0,user_id,
+            local_id,id,userId,
             shopName.get().toString(),
             personName.get().toString(),
             mobNo.get().toString(),
@@ -103,6 +105,7 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
                 if (last_id> 0) {
                     replaceFregment(AddressList())
 
+
                     Handler(Looper.getMainLooper()).post {
                         Toast.makeText(context, "Successfully Address Updated", Toast.LENGTH_LONG).show()
                     }
@@ -115,8 +118,10 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
         }
     }
 
-    private fun insertAddress(user_id: Int?) {
-        addressDetailsModel = AddressDetailsModel(0,0,0,
+    @SuppressLint("NewApi")
+    private fun insertAddress(user_id: Int) {
+        var id= CommonClass.getUniqueId()
+        addressDetailsModel = AddressDetailsModel(0, id.toString(),user_id,
             shopName.get().toString(),
             personName.get().toString(),
             mobNo.get().toString(),
@@ -132,7 +137,7 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
                 last_id = AddressDetailsRepository.userAddressDetailsAPI(addressDetailsModel)
                 if (last_id> 0) {
                     replaceFregment(AddressList())
-                    AddressDetailsRepository.getAddressDatabyLocalID(context,last_id)
+                    AddressDetailsRepository.updateAddressId(last_id,id.toString(), context)
                     Handler(Looper.getMainLooper()).post {
                         Toast.makeText(context, "Successfully Address Registered", Toast.LENGTH_LONG).show()
                     }

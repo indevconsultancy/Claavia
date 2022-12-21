@@ -53,6 +53,7 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
 
         holder.editAddress.setOnClickListener{
             local_id =currentItem.local_id
+            id =currentItem.id
             listener.onClickListner(currentItem.local_id)
             replaceFregment(AddNewAddress())
         }
@@ -93,6 +94,7 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
 
     companion object{
         var local_id= 0
+        var id= "0"
     }
 
 }

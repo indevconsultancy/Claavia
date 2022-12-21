@@ -39,7 +39,7 @@ interface ClaraaDao {
 
     @NotNull
     @Insert
-    suspend fun insertAddressData(addressDetailsModel: AddressDetailsModel): Long
+    suspend fun insertAddressData(addressDetailsModel: AddressDetailsModel) : Long
 
     @Query("SELECT * FROM address ORDER BY local_id ASC")
     fun getAddressData() : LiveData<List<AddressDetailsModel>>
@@ -121,6 +121,6 @@ interface ClaraaDao {
     fun editAddress(addressDetailsModel: AddressDetailsModel)
 
 
-    @Query("UPDATE address SET id = :last_id WHERE local_id = :local_id")
-    fun updateAddressId(last_id: Int, local_id: Int): Int
+    @Query("UPDATE address SET id = :last_id WHERE id = :id")
+    fun updateAddressId(last_id: Int, id: String): Int
 }
