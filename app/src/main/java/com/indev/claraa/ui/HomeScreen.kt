@@ -31,9 +31,9 @@ class HomeScreen : AppCompatActivity(), ClickLinstener {
         var badge= binding.bottomNavigation.bottomNavigation.getOrCreateBadge(R.id.order)
         cartArrayList = ProductRepository.getCartList(applicationContext)!!
 
-         cartArrayList.observe(this,{
-             badge.number =it.size
-        })
+         cartArrayList.observe(this) {
+             badge.number = it.size
+         }
         preferences= PrefHelper(this)
         binding.bottomNavigation.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
@@ -73,7 +73,7 @@ class HomeScreen : AppCompatActivity(), ClickLinstener {
                     sDialog.cancel()
                 }.show()
         }else{
-           // replaceFregment(Home(),1)
+           replaceFregment(Home(),1)
         }
     }
 

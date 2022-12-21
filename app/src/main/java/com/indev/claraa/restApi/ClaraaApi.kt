@@ -30,4 +30,8 @@ interface ClaraaApi {
 
     @POST("address_insert.php")
     suspend fun addressDetails(@Body addressDetailsModel: AddressDetailsModel,@Header("Authorization") authorization:Any): Response<AddressDetailsResponse>
+
+    @POST("address_update.php")
+    suspend fun updateAddress(@Body addressDetailsModel: AddressDetailsModel,@Header("Authorization") authorization:Any):  Response<UserRegistrationResponse>
+
 }
