@@ -46,6 +46,7 @@ class SplashScreen : AppCompatActivity() {
                 startActivity(intent)
                 finishAffinity()
             }else{
+                prefHelper.put(Constant.PREF_SPLASH, true)
                 val intent = Intent(this@SplashScreen, IntroScreen::class.java)
                 startActivity(intent)
                 finishAffinity()

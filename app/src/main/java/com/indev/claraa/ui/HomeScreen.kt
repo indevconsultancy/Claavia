@@ -1,5 +1,6 @@
 package com.indev.claraa.ui
 
+import android.R.array
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -9,14 +10,13 @@ import androidx.lifecycle.LiveData
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
-import com.indev.claraa.adapter.CartAdapter
 import com.indev.claraa.databinding.ActivityHomeScreenBinding
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.fragment.*
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.ProductRepository
-import com.indev.claraa.viewmodel.ProductDetailViewModel
+
 
 class HomeScreen : AppCompatActivity(), ClickLinstener {
     private lateinit var binding: ActivityHomeScreenBinding

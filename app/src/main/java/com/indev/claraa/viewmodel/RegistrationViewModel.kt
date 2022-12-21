@@ -1,5 +1,6 @@
 package com.indev.claraa.viewmodel
 
+import android.R
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
@@ -10,12 +11,15 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.*
+import com.indev.claraa.entities.CartModel
+import com.indev.claraa.entities.StateModel
 import com.indev.claraa.entities.UserRegistrationModel
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.UserRegistrationRepository
 import com.indev.claraa.ui.HomeScreen
 import com.indev.claraa.ui.LoginScreen
+import com.indev.claraa.ui.UserRegistration
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,7 +38,6 @@ class RegistrationViewModel (val context: Context): ViewModel() {
     var etAddress: ObservableField<String> = ObservableField("")
     var pinCode: ObservableField<String> = ObservableField("")
     var districtOfUser: String? = null
-    var stateOfUser: String? = null
      lateinit var userRegistrationTable: UserRegistrationModel
     val readAllData: LiveData<UserRegistrationModel>
     lateinit var prefHelper: PrefHelper
@@ -43,6 +46,8 @@ class RegistrationViewModel (val context: Context): ViewModel() {
     init {
         readAllData = UserRegistrationRepository.getRegistrationData(context)!!
     }
+
+
 
     val clicksListener = object : AdapterView.OnItemSelectedListener {
         override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -55,16 +60,6 @@ class RegistrationViewModel (val context: Context): ViewModel() {
         }
     }
 
-    val clickListener = object : AdapterView.OnItemSelectedListener {
-        override fun onNothingSelected(parent: AdapterView<*>?) {
-
-        }
-
-        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            stateOfUser = parent?.getItemAtPosition(position) as String
-            Log.d("TAG", "onItemSelected: " + stateOfUser)
-        }
-    }
 
 
     fun btnSubmit() {
@@ -81,8 +76,8 @@ class RegistrationViewModel (val context: Context): ViewModel() {
                 email.get().toString(),
                 mobNo.get().toString(),
                 etAddress.get().toString(),
-                stateOfUser.toString(),
                 districtOfUser.toString(),
+                UserRegistration.state_id.toString(),
                 etAddress.get().toString(), "17-12-2022", "male", "", "",
                 pinCode.get().toString()
             )
@@ -92,7 +87,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             userRegistrationTable.email = email.get().toString()
             userRegistrationTable.mobile_number = mobNo.get().toString()
             userRegistrationTable.address = etAddress.get().toString()
-            userRegistrationTable.state_id = stateOfUser.toString()
+            userRegistrationTable.state_id = UserRegistration.state_id.toString()
             userRegistrationTable.district_id = districtOfUser.toString()
             userRegistrationTable.pinCode = pinCode.get().toString()
             viewModelScope.launch {
@@ -149,6 +144,10 @@ class RegistrationViewModel (val context: Context): ViewModel() {
                 }
             }
         }
+    }
+
+    fun getStateList(context: Context): List<StateModel>? {
+        return UserRegistrationRepository.getStateList(context)
     }
 
     private fun checkValidation(): Boolean {

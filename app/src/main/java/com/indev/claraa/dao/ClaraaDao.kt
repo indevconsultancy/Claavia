@@ -52,6 +52,9 @@ interface ClaraaDao {
     @Query("SELECT * FROM user_master")
     fun getRegistrationData() : LiveData<UserRegistrationModel>
 
+    @Query("SELECT * FROM state_master")
+    fun getStateList() : List<StateModel>
+
     @Update
     fun update(userRegistrationTable: UserRegistrationModel)
 

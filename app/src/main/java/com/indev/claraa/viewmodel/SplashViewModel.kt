@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.indev.claraa.entities.MasterData
 import com.indev.claraa.entities.ProductMasterModel
+import com.indev.claraa.helper.Constant
+import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.SplashRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -13,9 +15,14 @@ import kotlinx.coroutines.launch
 class SplashViewModel (private val context: Context): ViewModel() {
     val table = arrayOf("state_master", "district_master","product_packet","product_master","product_type")
     lateinit var productMasterModel: ProductMasterModel
+    lateinit var prefHelper: PrefHelper
 
     init {
-        downloadMasterData()
+        prefHelper= PrefHelper(context)
+        var checkSplash= prefHelper.getBoolean(Constant.PREF_SPLASH)
+        if(checkSplash == false) {
+            downloadMasterData()
+        }
     }
 
     fun downloadMasterData() {
