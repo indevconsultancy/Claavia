@@ -143,6 +143,7 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
 
     @SuppressLint("NewApi")
     private fun insertAddress(user_id: Int) {
+        if (checkValidation()){
         var id= CommonClass.getUniqueId()
         addressDetailsModel = AddressDetailsModel(0, id.toString(),user_id,
             shopName.get().toString(),
@@ -172,6 +173,7 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
                 }
             }
         }
+        }
     }
 
 
@@ -179,6 +181,40 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
         var transaction = (context as HomeScreen).supportFragmentManager.beginTransaction()
         transaction?.replace(R.id.frame_layout, fragment)
         transaction.commit()
+    }
+
+    private fun checkValidation(): Boolean{
+       if (shopName.get().toString().trim().length<4) {
+           Toast.makeText(context,"Please enter shop name",Toast.LENGTH_SHORT).show()
+          return false
+       }
+        if (personName.get().toString().trim().length<4){
+            Toast.makeText(context,"Please enter person name",Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if (mobNo.get().toString().trim().length==10){
+            Toast.makeText(context,"Please enter mobile number",Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (etAddress1.get().toString().trim().length<10){
+            Toast.makeText(context,"Please enter address name",Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if (etAddress2.get().toString().trim().length<10){
+            Toast.makeText(context,"Please enter street",Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if (landmark.get().toString().trim().length<8){
+            Toast.makeText(context,"Please enter landmark",Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if (pinCode.get().toString().trim().length==6){
+            Toast.makeText(context,"Please enter pin code",Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        return true
     }
 
     override fun onClickListner(id: Int) {
