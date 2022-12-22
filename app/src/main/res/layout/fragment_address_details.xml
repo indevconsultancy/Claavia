@@ -262,7 +262,6 @@
                         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                         android:fontFamily="@font/aleo_regular"
                         android:inputType="text"
-                        tools:setOnItemSelectedListener="@{addressDetailsVM.clicksListener}"
                         android:textColor="@color/black"
                         android:textSize="15dp" />
                 </LinearLayout>
@@ -306,7 +305,6 @@
                         android:background="@drawable/btn_border"
                         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                         android:fontFamily="@font/aleo_regular"
-                        tools:setOnItemSelectedListener="@{addressDetailsVM.clickListener}"
                         android:inputType="text"
                         android:textColor="@color/black"
                         android:textSize="15dp" />

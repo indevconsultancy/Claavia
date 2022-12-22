@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.indev.claraa.entities.AddressDetailsModel
+import com.indev.claraa.entities.DistrictModel
+import com.indev.claraa.entities.StateModel
 import com.indev.claraa.entities.UserRegistrationModel
 import com.indev.claraa.restApi.ClaraaApi
 import com.indev.claraa.restApi.ClientApi
@@ -62,6 +64,16 @@ class AddressDetailsRepository {
                 dataBase?.userDao()?.updateAddressId(last_id, id)
             }
         }
+
+        fun getStateList(context: Context): List<StateModel>? {
+            dataBase = initializeDB(context)
+            return dataBase?.userDao()?.getStateList()
+        }
+        fun getDistrictList(context: Context): List<DistrictModel>? {
+            dataBase = initializeDB(context)
+            return dataBase?.userDao()?.getDistrictList()
+        }
+
 
 
         suspend fun userAddressDetailsAPI(addressDetailsModel: AddressDetailsModel): Int {

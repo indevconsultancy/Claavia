@@ -75,8 +75,8 @@ class RegistrationViewModel (val context: Context): ViewModel() {
                 email.get().toString(),
                 mobNo.get().toString(),
                 etAddress.get().toString(),
-                districtOfUser.toString(),
                 UserRegistration.state_id.toString(),
+                UserRegistration.district_id.toString(),
                 etAddress.get().toString(), "17-12-2022", "male", "", "",
                 pinCode.get().toString()
             )
@@ -87,7 +87,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             userRegistrationTable.mobile_number = mobNo.get().toString()
             userRegistrationTable.address = etAddress.get().toString()
             userRegistrationTable.state_id = UserRegistration.state_id.toString()
-            userRegistrationTable.district_id = districtOfUser.toString()
+            userRegistrationTable.district_id = UserRegistration.district_id.toString()
             userRegistrationTable.pinCode = pinCode.get().toString()
 
             viewModelScope.launch {
