@@ -192,7 +192,7 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
             Toast.makeText(context,"Please enter person name",Toast.LENGTH_SHORT).show()
             return false
         }
-        if (mobNo.get().toString().trim().length==10){
+        if (mobNo.get().toString().length==10){
             Toast.makeText(context,"Please enter mobile number",Toast.LENGTH_SHORT).show()
             return false
         }
@@ -209,7 +209,7 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
             Toast.makeText(context,"Please enter landmark",Toast.LENGTH_SHORT).show()
             return false
         }
-        if (pinCode.get().toString().trim().length==6){
+        if (pinCode.get().toString().length==6){
             Toast.makeText(context,"Please enter pin code",Toast.LENGTH_SHORT).show()
             return false
         }
