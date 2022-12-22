@@ -48,6 +48,8 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
             replaceFregment(OrderPlace())
         }
 
+
+
         holder.deleteAddress.setOnClickListener{
             listener.onClickListner(currentItem.id.toInt())
             //AddressDetailsRepository.deleteAddress(currentItem.local_id,context)

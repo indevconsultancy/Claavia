@@ -27,8 +27,11 @@ class LoginViewModel(val context: Context): ViewModel() {
     lateinit var loginModel: LoginModel
     lateinit var prefHelper: PrefHelper
     var checkProfileUpdate= false
-    fun signIn(){
-        nextActivity()
+
+    fun signIn() {
+        if (checkValidation()) {
+            nextActivity()
+        }
     }
 
     private fun nextActivity() {
@@ -74,6 +77,8 @@ class LoginViewModel(val context: Context): ViewModel() {
             }.show()
     }
 
+
+
     fun registration(){
         prefHelper= PrefHelper(context)
         prefHelper.put( Constant.PREF_IS_LOGIN,false)
@@ -87,5 +92,19 @@ class LoginViewModel(val context: Context): ViewModel() {
     fun otpVerify(){
         context.startActivity(Intent(context, MobileNumber::class.java))
     }
+
+    private fun checkValidation(): Boolean {
+        if(username.get().toString().length<4) {
+            Toast.makeText(context, "Please enter username..", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if(password.get().toString().length<6) {
+            Toast.makeText(context, "Please enter username..", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true
+    }
+
 
 }

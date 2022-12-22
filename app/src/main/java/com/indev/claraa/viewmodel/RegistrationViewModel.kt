@@ -1,6 +1,5 @@
 package com.indev.claraa.viewmodel
 
-import android.R
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
@@ -11,7 +10,6 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.*
-import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.StateModel
 import com.indev.claraa.entities.UserRegistrationModel
 import com.indev.claraa.helper.Constant
@@ -38,7 +36,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
     var etAddress: ObservableField<String> = ObservableField("")
     var pinCode: ObservableField<String> = ObservableField("")
     var districtOfUser: String? = null
-     lateinit var userRegistrationTable: UserRegistrationModel
+    lateinit var userRegistrationTable: UserRegistrationModel
     val readAllData: LiveData<UserRegistrationModel>
     lateinit var prefHelper: PrefHelper
     var checkLogin: Boolean = false
@@ -152,21 +150,21 @@ class RegistrationViewModel (val context: Context): ViewModel() {
     }
 
     private fun checkValidation(): Boolean {
-        if(username.get()?.isEmpty() == true) {
+        if(username.get().toString().length<4) {
             Toast.makeText(context, "Please enter username..", Toast.LENGTH_SHORT).show()
             return false
         }
 
-        if(email.get()?.isEmpty() == true) {
+        if(email.get().toString().length<10) {
             Toast.makeText(context, "Please enter email..", Toast.LENGTH_SHORT).show()
             return false
         }
-        if(password.get()?.isEmpty() == true) {
+        if(password.get().toString().length<5) {
             Toast.makeText(context, "Please enter password..", Toast.LENGTH_SHORT).show()
             return false
         }
 
-        if(confirmPassword.get()?.isEmpty() == true) {
+        if(confirmPassword.get().toString().length<5) {
             Toast.makeText(context, "Please enter confirm password..", Toast.LENGTH_SHORT).show()
             return false
         }
