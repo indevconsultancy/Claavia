@@ -3,6 +3,7 @@ package com.indev.claraa.repository
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
+import com.indev.claraa.entities.DistrictModel
 import com.indev.claraa.entities.StateModel
 import com.indev.claraa.entities.UserRegistrationModel
 import com.indev.claraa.restApi.ClaraaApi
@@ -38,6 +39,11 @@ class UserRegistrationRepository {
         fun getStateList(context: Context): List<StateModel>? {
             dataBase = initializeDB(context)
             return dataBase?.userDao()?.getStateList()
+        }
+
+        fun getDistrictList(context: Context): List<DistrictModel>? {
+            dataBase = initializeDB(context)
+            return dataBase?.userDao()?.getDistrictList()
         }
 
         fun updateData(context: Context, userRegistrationTable: UserRegistrationModel){

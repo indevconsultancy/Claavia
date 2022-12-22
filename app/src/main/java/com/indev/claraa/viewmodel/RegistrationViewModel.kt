@@ -10,6 +10,7 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.*
+import com.indev.claraa.entities.DistrictModel
 import com.indev.claraa.entities.StateModel
 import com.indev.claraa.entities.UserRegistrationModel
 import com.indev.claraa.helper.Constant
@@ -47,16 +48,16 @@ class RegistrationViewModel (val context: Context): ViewModel() {
 
 
 
-    val clicksListener = object : AdapterView.OnItemSelectedListener {
-        override fun onNothingSelected(parent: AdapterView<*>?) {
-
-        }
-
-        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            districtOfUser = parent?.getItemAtPosition(position) as String
-            Log.d("TAG", "onItemSelected: " + districtOfUser)
-        }
-    }
+//    val clicksListener = object : AdapterView.OnItemSelectedListener {
+//        override fun onNothingSelected(parent: AdapterView<*>?) {
+//
+//        }
+//
+//        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+//            districtOfUser = parent?.getItemAtPosition(position) as String
+//            Log.d("TAG", "onItemSelected: " + districtOfUser)
+//        }
+//    }
 
 
 
@@ -147,6 +148,9 @@ class RegistrationViewModel (val context: Context): ViewModel() {
 
     fun getStateList(context: Context): List<StateModel>? {
         return UserRegistrationRepository.getStateList(context)
+    }
+    fun getDistrictList(context: Context): List<DistrictModel>? {
+        return UserRegistrationRepository.getDistrictList(context)
     }
 
     private fun checkValidation(): Boolean {

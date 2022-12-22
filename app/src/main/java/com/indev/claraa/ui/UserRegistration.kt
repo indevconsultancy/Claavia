@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.indev.claraa.R
 import com.indev.claraa.databinding.ActivityUserRegistrationBinding
+import com.indev.claraa.entities.DistrictModel
 import com.indev.claraa.entities.StateModel
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
@@ -28,6 +29,7 @@ class UserRegistration : AppCompatActivity() {
     var checkLogin: Boolean = false
     var stateOfUser: String? = null
     private lateinit var stateArrayList: ArrayList<StateModel>
+    private lateinit var districtArrayList: ArrayList<DistrictModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,6 +74,37 @@ class UserRegistration : AppCompatActivity() {
             })
         }
 
+        districtArrayList = ArrayList<DistrictModel>()
+        CoroutineScope(Dispatchers.IO).launch {
+            districtArrayList = registrationViewModel.getDistrictList(applicationContext) as ArrayList<DistrictModel>
+            val spinnerArray = arrayOfNulls<String>(districtArrayList.size)
+            val spinnerMap = HashMap<Int, String>()
+            for (i in 0 until districtArrayList.size) {
+                spinnerMap[i] = districtArrayList.get(i).district_id
+                spinnerArray[i] = districtArrayList.get(i).district_name
+            }
+
+            val adapter = ArrayAdapter(applicationContext, android.R.layout.simple_spinner_item, spinnerArray)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.spnDistrict.setAdapter(adapter)
+            binding.spnDistrict.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener{
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    var id = spinnerMap[binding.spnDistrict.getSelectedItemPosition()]
+                    Log.d("TAG", "onItemSelected: " + id)
+                    district_id= id!!.toInt()
+
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                }
+            })
+        }
+
         preferences= PrefHelper(this)
         checkLogin = preferences.getBoolean(Constant.PREF_IS_LOGIN)
         if(checkLogin ==true) {
@@ -97,5 +130,6 @@ class UserRegistration : AppCompatActivity() {
 
     companion object{
         var state_id=0
+        var district_id=0
     }
 }
