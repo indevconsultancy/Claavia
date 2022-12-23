@@ -277,7 +277,6 @@
                             android:background="@drawable/submitbutton"
                             android:fontFamily="@font/aleo_regular"
                             android:gravity="center"
-                            android:onClick="@{() ->registrationVM.btnJoin()}"
                             android:text="Join Claraa"
                             android:textAllCaps="false"
                             android:textColor="@color/white"

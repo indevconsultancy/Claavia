@@ -89,9 +89,9 @@ class LoginViewModel(val context: Context): ViewModel() {
         context.startActivity(Intent(context, EmailVarification::class.java))
     }
 
-    fun otpVerify(){
-        context.startActivity(Intent(context, MobileNumber::class.java))
-    }
+//    fun otpVerify(){
+//        context.startActivity(Intent(context, MobileNumber::class.java))
+//    }
 
     private fun checkValidation(): Boolean {
         if(username.get().toString().length<4) {

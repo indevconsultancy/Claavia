@@ -190,18 +190,18 @@
                     android:textColor="@color/gray_20"
                     android:textSize="15dp"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/register_border"
-                    android:fontFamily="@font/aleo_regular"
-                    android:gravity="center"
-                    android:onClick="@{() ->loginVM.otpVerify()}"
-                    android:text="Login using OTP?"
-                    android:textColor="@color/gray_20"
-                    android:textSize="15dp" />
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:background="@drawable/register_border"-->
+<!--                    android:fontFamily="@font/aleo_regular"-->
+<!--                    android:gravity="center"-->
+<!--                    android:onClick="@{() ->loginVM.otpVerify()}"-->
+<!--                    android:text="Login using OTP?"-->
+<!--                    android:textColor="@color/gray_20"-->
+<!--                    android:textSize="15dp" />-->
 
                 <LinearLayout
                     android:layout_width="match_parent"

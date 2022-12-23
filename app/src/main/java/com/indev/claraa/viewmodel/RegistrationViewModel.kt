@@ -112,40 +112,40 @@ class RegistrationViewModel (val context: Context): ViewModel() {
     }
 
     fun btnSubmit(){
- //       if(checkValidation()) {
-            prefHelper = PrefHelper(context)
-            userRegistrationTable = UserRegistrationModel(
-                prefHelper.getInt(Constant.PREF_USERID)!!,
-                shopName.get().toString(),
-                ownerName.get().toString(),
-                username.get().toString(),
-                "amit123",
-                email.get().toString(),
-                mobNo.get().toString(),
-                etAddress.get().toString(),
-                UserRegistration.state_id.toString(),
-                UserRegistration.district_id.toString(),
-                etAddress.get().toString(), "17-12-2022", "male", "", "",
-                pinCode.get().toString()
-            )
-            viewModelScope.launch {
-                UserRegistrationRepository.insertUserData(context, userRegistrationTable)
-                var last_user_id=0
-                CoroutineScope(Dispatchers.IO).launch {
-                    last_user_id = UserRegistrationRepository.userRegistrationAPI(userRegistrationTable)
-                    if (last_user_id> 0) {
-                        context.startActivity(Intent(context, LoginScreen::class.java))
-                        Handler(Looper.getMainLooper()).post {
-                            Toast.makeText(context, "Successfully Registered..", Toast.LENGTH_LONG).show()
-                        }
-                    } else {
-                        Handler(Looper.getMainLooper()).post {
-                            Toast.makeText(context, "Something went wrong..", Toast.LENGTH_LONG).show()
-                        }
+        //       if(checkValidation()) {
+        prefHelper = PrefHelper(context)
+        userRegistrationTable = UserRegistrationModel(
+            prefHelper.getInt(Constant.PREF_USERID)!!,
+            shopName.get().toString(),
+            ownerName.get().toString(),
+            username.get().toString(),
+            "amit123",
+            email.get().toString(),
+            mobNo.get().toString(),
+            etAddress.get().toString(),
+            UserRegistration.state_id.toString(),
+            UserRegistration.district_id.toString(),
+            etAddress.get().toString(), "17-12-2022", "male", "", "",
+            pinCode.get().toString()
+        )
+        viewModelScope.launch {
+            UserRegistrationRepository.insertUserData(context, userRegistrationTable)
+            var last_user_id=0
+            CoroutineScope(Dispatchers.IO).launch {
+                last_user_id = UserRegistrationRepository.userRegistrationAPI(userRegistrationTable)
+                if (last_user_id> 0) {
+                    context.startActivity(Intent(context, LoginScreen::class.java))
+                    Handler(Looper.getMainLooper()).post {
+                        Toast.makeText(context, "Successfully Registered..", Toast.LENGTH_LONG).show()
+                    }
+                } else {
+                    Handler(Looper.getMainLooper()).post {
+                        Toast.makeText(context, "Something went wrong..", Toast.LENGTH_LONG).show()
                     }
                 }
             }
- //       }
+        }
+        //       }
     }
 
     fun getStateList(context: Context): List<StateModel>? {
