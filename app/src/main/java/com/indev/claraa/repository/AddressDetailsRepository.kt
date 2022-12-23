@@ -50,7 +50,7 @@ class AddressDetailsRepository {
             }
         }
 
-        fun deleteAddress(id: Int, context: Context) {
+        fun deleteAddress(id: String, context: Context) {
             dataBase = initializeDB(context)
             CoroutineScope(Dispatchers.IO).launch {
                 dataBase?.userDao()?.deleteAddress(id)
@@ -110,10 +110,10 @@ class AddressDetailsRepository {
             return 0
         }
 
-        suspend fun addressDeleteApi(addressDetailsModel: AddressDetailsModel): Int {
+        suspend fun addressDeleteApi(id: String): Int {
             try {
                 var result = apiInterface?.deleteAddress(
-                    addressDetailsModel,
+                    id,
                     "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjcxNjEzMzk5LCJuYmYiOjE2NzE2MTM0MDksImV4cCI6MTY3NDIwNTQ1OSwiZGF0YSI6eyJ1c2VyX2lkIjpudWxsLCJ1c2VyX25hbWUiOiJBbWl0IiwibW9iaWxlX251bWJlciI6bnVsbH19.kgPPS_tGELwddw0hW3UwwQtW0-ZNZvza2R8FE0XJxr8"
                 )
                 return if (result?.body()?.status == 1) {

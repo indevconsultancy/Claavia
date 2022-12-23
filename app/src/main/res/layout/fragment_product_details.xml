@@ -164,12 +164,25 @@
                         app:cardCornerRadius="8dp"
                         app:cardElevation="8dp"
                         android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/etQuantity"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/btn_border"
+                            android:fontFamily="@font/aleo_regular"
+                            android:hint="Enter Qty."
+                            android:inputType="number"
+                            android:padding="5dp"
+                            android:text="@={productDetailVM.etQuantity}"
+                            android:textSize="15dp" />
                     <Spinner
                         android:id="@+id/spnQuantity"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:entries="@array/quantity"
                         android:gravity="center"
+                        android:visibility="gone"
                         tools:setOnItemSelectedListener="@{productDetailVM.qtyClicksListener}" />
                     </androidx.cardview.widget.CardView>
 

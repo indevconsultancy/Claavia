@@ -1,26 +1,29 @@
 package com.indev.claraa.adapter
 
 import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
-import android.util.Log
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
 import com.indev.claraa.entities.AddressDetailsModel
 import com.indev.claraa.fragment.AddNewAddress
+import com.indev.claraa.fragment.AddressList
 import com.indev.claraa.fragment.OrderPlace
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.AddressDetailsRepository
-import com.indev.claraa.repository.ProductRepository
 import com.indev.claraa.ui.HomeScreen
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class AddressDetailsAdapter(private val context: Context, var addressDetailsModelList: ArrayList<AddressDetailsModel>, private val listener: ClickLinstener) : RecyclerView.Adapter<AddressDetailsAdapter.MyViewholder>(){
@@ -51,15 +54,32 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
 
 
         holder.deleteAddress.setOnClickListener{
-            listener.onClickListner(currentItem.id.toInt())
-            //AddressDetailsRepository.deleteAddress(currentItem.local_id,context)
+            deleteAddress(currentItem.id)
+        //            AddressDetailsRepository.deleteAddress(currentItem.local_id,context)
         }
 
         holder.editAddress.setOnClickListener{
             local_id =currentItem.local_id
             id =currentItem.id
-            listener.onClickListner(currentItem.local_id)
             replaceFregment(AddNewAddress())
+        }
+    }
+
+    private fun deleteAddress(id: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            AddressDetailsRepository.deleteAddress(id,context)
+            var last_id=0
+            last_id = AddressDetailsRepository.addressDeleteApi(id)
+            if (last_id> 0) {
+                replaceFregment(AddressList())
+                Handler(Looper.getMainLooper()).post {
+                    Toast.makeText(context, "Successfully Address Deleted", Toast.LENGTH_LONG).show()
+                }
+            } else {
+                Handler(Looper.getMainLooper()).post {
+                    Toast.makeText(context, "Invalid user", Toast.LENGTH_LONG).show()
+                }
+            }
         }
     }
 

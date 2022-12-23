@@ -22,6 +22,7 @@ import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.ProductMasterModel
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
+import com.indev.claraa.repository.LoginRepository
 import com.indev.claraa.ui.LoginScreen
 import com.indev.claraa.viewmodel.HomeScreenViewModel
 import com.indev.claraa.viewmodel.HomeScreenViewModelFactory
@@ -153,6 +154,7 @@ class Home : Fragment(), ClickLinstener {
             .setConfirmClickListener {
                 prefHelper= PrefHelper(requireContext())
                 prefHelper.put( Constant.PREF_IS_LOGIN,false)
+                LoginRepository.prefHelper.put(Constant.PREF_USERID,0)
                 val intent= Intent(activity, LoginScreen::class.java)
                 startActivity(intent)
             }

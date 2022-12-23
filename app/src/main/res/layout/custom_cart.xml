@@ -105,7 +105,6 @@
                         android:backgroundTint="#F0F7F7"
                         android:padding="2dp"
                         android:orientation="horizontal">
-
                         <androidx.cardview.widget.CardView
                             android:layout_weight="1"
                             android:layout_width="100dp"
@@ -117,6 +116,43 @@
                             android:backgroundTint="@color/light_gray"
                             app:cardCornerRadius="190dp"
                             app:cardElevation="8dp">
+
+                            <EditText
+                                android:id="@+id/etQuantity"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/custom_design_edittext"
+                                android:fontFamily="@font/aleo_regular"
+                                android:hint="Enter Qty."
+                                android:paddingLeft="@dimen/_15sdp"
+                                android:inputType="number"
+                                android:text="@={productDetailVM.etQuantity}"
+                                android:textSize="15dp" />
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/btnUpdate"
+                                android:layout_width="@dimen/_70sdp"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/submitbutton"
+                                android:backgroundTint="@color/primary_color"
+                                android:text="Update"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_10sdp"
+                                android:layout_gravity="end"
+                                android:layout_weight="1" />
+                        </androidx.cardview.widget.CardView>
+                        <androidx.cardview.widget.CardView
+                            android:layout_weight="1"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_marginHorizontal="@dimen/_10sdp"
+                            android:background="@color/light_gray"
+                            android:backgroundTint="@color/light_gray"
+                            app:cardCornerRadius="190dp"
+                            app:cardElevation="8dp"
+                            android:visibility="gone">
 
 
                             <LinearLayout
@@ -180,9 +216,9 @@
                             android:layout_margin="@dimen/_5sdp"
                             android:layout_marginHorizontal="@dimen/_10sdp"
                             android:background="@drawable/submitbutton"
-                            android:backgroundTint="@color/white"
+                            android:backgroundTint="@color/primary_color"
                             android:text="Delete"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/_10sdp"
                             android:layout_weight="1" />
 

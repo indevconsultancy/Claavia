@@ -91,9 +91,10 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             userRegistrationTable.pinCode = pinCode.get().toString()
 
             viewModelScope.launch {
-                UserRegistrationRepository.updateData(context, userRegistrationTable)
-                var last_user_id=0
+
                 CoroutineScope(Dispatchers.IO).launch {
+                    UserRegistrationRepository.updateData(context, userRegistrationTable)
+                    var last_user_id=0
                     last_user_id = UserRegistrationRepository.userProfileUpdateAPI(userRegistrationTable)
                     if (last_user_id> 0) {
                         context.startActivity(Intent(context, HomeScreen::class.java))
@@ -154,7 +155,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
     }
 
     private fun checkValidation(): Boolean {
-        if(username.get().toString().length<4) {
+        if(username.get().toString().length==0) {
             Toast.makeText(context, "Please enter username..", Toast.LENGTH_SHORT).show()
             return false
         }
@@ -163,6 +164,8 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             Toast.makeText(context, "Please enter email..", Toast.LENGTH_SHORT).show()
             return false
         }
+
+
         if(password.get().toString().length<5) {
             Toast.makeText(context, "Please enter password..", Toast.LENGTH_SHORT).show()
             return false
@@ -178,7 +181,6 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             return false
         }
         return true
-
     }
 
 }

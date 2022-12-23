@@ -8,6 +8,7 @@ import android.os.Message
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
+import androidx.databinding.ObservableField
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import cn.pedant.SweetAlert.SweetAlertDialog
@@ -38,6 +39,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
     lateinit var cartModelArrayList: ArrayList<CartModel>
     private var dataBase: RoomDB? = null
     lateinit var prefHelper: PrefHelper
+    var etQuantity: ObservableField<String> = ObservableField("")
 
     private fun initializeDB(context: Context): RoomDB? {
         return RoomDB.getDatabase(context)
@@ -80,12 +82,13 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
         if(checkValidation()) {
             var checkExitPorduct = 0
             CoroutineScope(Dispatchers.IO).launch {
+                var qty= etQuantity.get().toString()
                 var productID = dataBase?.userDao()?.getproductID(PowerRangeAdapter.power_range)!!
                 checkExitPorduct = dataBase?.userDao()?.isProductRowExist(
                     productID,
                     PowerRangeAdapter.power_range,
                     packetValue.toString())!!
-                var amount= productMasterArrayList.get(0).price.toInt() * qtyValue!!.toInt()
+                var amount= productMasterArrayList.get(0).price.toInt() * qty.toInt()
                 if (checkExitPorduct == 0) {
                     cartModel = CartModel(
                         0,0,
@@ -96,7 +99,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
                         productMasterArrayList.get(0).product_img2,
                         productMasterArrayList.get(0).price,
                         amount,
-                        qtyValue.toString(),
+                        qty,
                         productMasterArrayList.get(0).type_id,
                         productMasterArrayList.get(0).packet_id,
                         PowerRangeAdapter.power_range,
@@ -115,9 +118,9 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
                         context
                     ) as ArrayList<CartModel>
                     var totalAmount =
-                        cartModelArrayList.get(0).amount * (cartModelArrayList.get(0).quantity.toInt() + qtyValue!!.toInt())
+                        cartModelArrayList.get(0).amount * (cartModelArrayList.get(0).quantity.toInt() +  qty.toInt())
                     ProductRepository.updateCartProductQuantity(
-                        cartModelArrayList.get(0).quantity.toInt() + qtyValue!!.toInt(),
+                        cartModelArrayList.get(0).quantity.toInt() + qty.toInt(),
                         totalAmount,
                         cartModelArrayList.get(0).local_id,
                         context

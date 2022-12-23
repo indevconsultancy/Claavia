@@ -117,7 +117,7 @@ interface ClaraaDao {
 
 
     @Query("DELETE FROM address WHERE id = :id")
-    fun deleteAddress(id: Int)
+    fun deleteAddress(id: String)
 
     @Update
     fun editAddress(addressDetailsModel: AddressDetailsModel)

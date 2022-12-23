@@ -35,7 +35,7 @@ interface ClaraaApi {
     suspend fun updateAddress(@Body addressDetailsModel: AddressDetailsModel,@Header("Authorization") authorization:Any):  Response<AddressDetailsResponse>
 
     @POST("address_delete.php")
-    suspend fun deleteAddress(@Body addressDetailsModel: AddressDetailsModel,@Header("Authorization") authorization:Any):  Response<AddressDetailsResponse>
+    suspend fun deleteAddress(@Body id: String,@Header("Authorization") authorization:Any):  Response<AddressDetailsResponse>
 
 
 }

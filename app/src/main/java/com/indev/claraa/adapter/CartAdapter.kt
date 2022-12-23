@@ -1,14 +1,12 @@
 package com.indev.claraa.adapter
 
 import android.content.Context
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.core.content.ContextCompat
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.agraharisoft.notepad.Listener.ClickLinstener
@@ -20,12 +18,14 @@ import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.ProductRepository
 import com.indev.claraa.restApi.ClientApi
 
+
 class CartAdapter(val context: Context, var cartModelList: List<CartModel>, private val listener: ClickLinstener) : RecyclerView.Adapter<CartAdapter.MyViewholder>(){
 
     lateinit var prefHelper: PrefHelper
     var count =0
     var totalPrice= 0
     var check_cart_list = false
+    var isTextChanged= false
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewholder {
@@ -48,7 +48,50 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
         }else{
             holder.llButton.visibility =View.VISIBLE
         }
-        holder.addButton.setOnClickListener {
+
+        holder.etQuantity.setText(count.toString())
+
+//        holder.etQuantity.addTextChangedListener(object : TextWatcher {
+//            override fun onTextChanged(
+//                s: CharSequence, start: Int,
+//                before: Int, count: Int
+//            ) {
+//                //setting data to array, when changed
+//                // this is a semplified example in the actual app i save the text
+//                // in  a .txt in the external storage
+//
+//                isTextChanged= true
+//
+//            }
+//
+//            override fun beforeTextChanged(
+//                s: CharSequence, start: Int,
+//                count: Int, after: Int
+//            ) {
+//            }
+//
+//            override fun afterTextChanged(s: Editable) {
+//
+//                if(isTextChanged){
+//                    isTextChanged =false
+//
+//                    var qty= s.toString()
+//                    totalPrice= currentItem.price.toInt() * qty.toInt()
+//                    if(qty.toInt() > 1) {
+//                        ProductRepository.updateCartProductQuantity(
+//                            qty.toInt(),
+//                            totalPrice,
+//                            currentItem.local_id,
+//                            context
+//                        )
+//
+//
+//                    }
+//                }
+//            }
+//        })
+
+       /* holder.addButton.setOnClickListener {
             count= currentItem.quantity.toInt()
 
             if(count >0){
@@ -59,16 +102,30 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
             }else{
                 holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_delete_outline_24));
             }
-        }
+        }*/
         Glide.with(context).load(ClientApi.BASE_IMAGE_URL +currentItem.product_img1).into(holder.imageProduct)
 
 
-        holder.btnDelete.setOnClickListener{
+      holder.btnDelete.setOnClickListener{
             deletePopupShow(currentItem.local_id)
             notifyDataSetChanged()
         }
 
-        holder.deleteButton.setOnClickListener {
+        holder.btnUpdate.setOnClickListener{
+            var qty= holder.etQuantity.text.toString()
+            totalPrice= currentItem.price.toInt() * qty.toInt()
+                    if(qty.toInt() > 1) {
+                        ProductRepository.updateCartProductQuantity(
+                            qty.toInt(),
+                            totalPrice,
+                            currentItem.local_id,
+                            context
+                        )
+            notifyDataSetChanged()
+        }
+
+        }
+    /*  holder.deleteButton.setOnClickListener {
             count= currentItem.quantity.toInt()
 
             if(count > 1){
@@ -80,14 +137,14 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
                 deletePopupShow(currentItem.local_id)
                 holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_delete_outline_24));
             }
-        }
+        }*/
 
-        if(count<=1){
+        /*if(count<=1){
             holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_delete_outline_24));
         }else{
             holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_remove_24));
-        }
-        holder.tvCount.setText("" + count)
+        }*/
+//        holder.tvCount.setText("" + count)
         holder.tvPrice.text = currentItem.currency +" "+ currentItem.amount.toString()
 
         totalAmount= grandTotal(cartModelList)
@@ -140,6 +197,8 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
         val btnDelete: Button = itemView!!.findViewById(R.id.btnDelete)
         val addButton: ImageView = itemView!!.findViewById(R.id.addButton)
         val llButton: LinearLayout = itemView!!.findViewById(R.id.llButton)
+        val etQuantity: EditText = itemView!!.findViewById(R.id.etQuantity)
+        val btnUpdate: Button = itemView!!.findViewById(R.id.btnUpdate)
 
         init {
             itemView.setOnClickListener {
