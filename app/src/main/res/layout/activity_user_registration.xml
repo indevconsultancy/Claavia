@@ -21,482 +21,41 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ScrollView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:id="@+id/llRegistrationWitheUs"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="30dp"
-                    android:layout_marginTop="80dp"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/aleo_regular"
-                        android:text="Register with us!"
-                        android:textColor="@color/black"
-                        android:textSize="25dp" />
-
                     <LinearLayout
+                        android:id="@+id/llRegistrationWitheUs"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginTop="80dp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/aleo_regular"
-                                android:text="Username"
-                                android:textColor="@color/black"
-                                android:textSize="15dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="*"
-                                android:textColor="@color/black" />
-
-                        </LinearLayout>
-
-
-                        <EditText
-                            android:id="@+id/etUserName"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:background="@drawable/btn_border"
-                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                            android:fontFamily="@font/aleo_regular"
-                            android:hint="Enter username"
-                            android:inputType="text"
-                            android:padding="10dp"
-                            android:text="@={registrationVM.username}"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="vertical">
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/aleo_regular"
-                                android:text="Email"
-                                android:textColor="@color/black"
-                                android:textSize="15dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="*"
-                                android:textColor="@color/black" />
-
-
-                        </LinearLayout>
-
-                        <EditText
-                            android:id="@+id/etEmail"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:background="@drawable/btn_border"
-                            android:fontFamily="@font/aleo_regular"
-                            android:hint="Enter email address"
-                            android:inputType="text"
-                            android:padding="10dp"
-                            android:text="@={registrationVM.email}"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/aleo_regular"
-                                android:text="Password"
-                                android:textColor="@color/black"
-                                android:textSize="15dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="*"
-                                android:textColor="@color/black" />
-
-                        </LinearLayout>
-
-                        <EditText
-                            android:id="@+id/etPassword"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:background="@drawable/btn_border"
-                            android:fontFamily="@font/aleo_regular"
-                            android:hint="Password"
-                            android:inputType="textPassword"
-                            android:padding="10dp"
-                            android:text="@={registrationVM.password}"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/aleo_regular"
-                                android:text="Password"
-                                android:textColor="@color/black"
-                                android:textSize="15dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="*"
-                                android:textColor="@color/black" />
-
-                        </LinearLayout>
-
-                        <EditText
-                            android:id="@+id/etConfirmPassword"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:background="@drawable/btn_border"
-                            android:fontFamily="@font/aleo_regular"
-                            android:hint="Confirm Password"
-                            android:inputType="textPassword"
-                            android:maxLength="10"
-                            android:padding="10dp"
-                            android:text="@={registrationVM.confirmPassword}"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal"
-                        android:weightSum="3">
 
                         <TextView
-                            android:id="@+id/Button"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginRight="5dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/register_border"
-                            android:gravity="center"
-                            android:text="Male"
-                            android:textAllCaps="false" />
-
-                        <TextView
-                            android:id="@+id/Button2"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginRight="5dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/register_border"
-                            android:gravity="center"
-                            android:text="Female"
-                            android:textAllCaps="false" />
-
-                        <TextView
-                            android:id="@+id/Button3"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginRight="5dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/register_border"
-                            android:gravity="center"
-                            android:text="Other"
-                            android:textAllCaps="false" />
-
-                    </LinearLayout>
-
-                    <Button
-                        android:id="@+id/btnJoin"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_alignBottom="@id/btnSubmit"
-                        android:layout_alignParentBottom="true"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/submitbutton"
-                        android:fontFamily="@font/aleo_regular"
-                        android:gravity="center"
-                        android:onClick="@{() ->registrationVM.btnJoin()}"
-                        android:text="Join Claraa"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textSize="18dp" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/llUpdateProfile"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="30dp"
-                    android:layout_marginTop="80dp"
-                    android:orientation="vertical"
-                    android:visibility="gone">
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/aleo_regular"
-                        android:text="Hello there, Partner!"
-                        android:textColor="@color/black"
-                        android:textSize="25dp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/aleo_regular"
-                        android:text="@string/registration"
-                        android:textColor="@color/gray_20"
-                        android:textSize="13dp" />
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:orientation="vertical">
-
-                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/aleo_regular"
-                                android:text="Business Name"
-                                android:textColor="@color/black"
-                                android:textSize="15dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="*"
-                                android:textColor="@color/black" />
-
-                        </LinearLayout>
-
-
-                        <EditText
-                            android:id="@+id/etShopName"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:background="@drawable/btn_border"
                             android:fontFamily="@font/aleo_regular"
-                            android:hint="Enter your Business name"
-                            android:inputType="text"
-                            android:padding="10dp"
-                            android:text="@={registrationVM.shopName}"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="vertical">
-
+                            android:text="Register with us!"
+                            android:textColor="@color/black"
+                            android:textSize="25dp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/aleo_regular"
-                                android:text="Owner Name"
-                                android:textColor="@color/black"
-                                android:textSize="15dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="*"
-                                android:textColor="@color/black" />
-
-
-                        </LinearLayout>
-
-                        <EditText
-                            android:id="@+id/etOwnerName"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:background="@drawable/btn_border"
-                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                            android:fontFamily="@font/aleo_regular"
-                            android:hint="Enter Full Name"
-                            android:inputType="text"
-                            android:padding="10dp"
-                            android:text="@={registrationVM.ownerName}"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/aleo_regular"
-                                android:text="Email"
-                                android:textColor="@color/black"
-                                android:textSize="15dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="*"
-                                android:textColor="@color/black" />
-
-                        </LinearLayout>
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:background="@drawable/btn_border"
-                            android:fontFamily="@font/aleo_regular"
-                            android:hint="Enter Email ID"
-                            android:inputType="text"
-                            android:padding="10dp"
-                            android:text="@={registrationVM.email}"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/aleo_regular"
-                                android:text="Mobile Number"
-                                android:textColor="@color/black"
-                                android:textSize="15dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="*"
-                                android:textColor="@color/black" />
-
-                        </LinearLayout>
-
-                        <EditText
-                            android:id="@+id/etMobile"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:background="@drawable/btn_border"
-                            android:fontFamily="@font/aleo_regular"
-                            android:hint="(Autofilled from previous page)"
-                            android:inputType="number"
-                            android:maxLength="10"
-                            android:padding="10dp"
-                            android:text="@={registrationVM.mobNo}"
-                            android:textSize="15dp" />
-
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="10dp"
-                            android:layout_weight="1"
+                            android:layout_marginTop="20dp"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -508,7 +67,52 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/aleo_regular"
-                                    android:text="State"
+                                    android:text="Username"
+                                    android:textColor="@color/black"
+                                    android:textSize="15dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="*"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+
+                            <EditText
+                                android:id="@+id/etUserName"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:background="@drawable/btn_border"
+                                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                android:fontFamily="@font/aleo_regular"
+                                android:hint="Enter username"
+                                android:inputType="text"
+                                android:padding="10dp"
+                                android:text="@={registrationVM.username}"
+                                android:textSize="15dp" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/aleo_regular"
+                                    android:text="Email"
                                     android:textColor="@color/black"
                                     android:textSize="15dp" />
 
@@ -521,26 +125,25 @@
 
                             </LinearLayout>
 
-                            <Spinner
-                                android:id="@+id/spnState"
+                            <EditText
+                                android:id="@+id/etEmail"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:background="@drawable/btn_border"
-                                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                android:entries="@array/state"
                                 android:fontFamily="@font/aleo_regular"
+                                android:hint="Enter email address"
                                 android:inputType="text"
                                 android:padding="10dp"
-                                android:textColor="@color/black"
-                                android:textSize="15dp"/>
-<!--                                tools:setOnItemSelectedListener="@{registrationVM.clicksListener}"/>-->
+                                android:text="@={registrationVM.email}"
+                                android:textSize="15dp" />
+
                         </LinearLayout>
+
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_weight="1"
+                            android:layout_marginTop="10dp"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -552,7 +155,224 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/aleo_regular"
-                                    android:text="District"
+                                    android:text="Password"
+                                    android:textColor="@color/black"
+                                    android:textSize="15dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="*"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <EditText
+                                android:id="@+id/etPassword"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:background="@drawable/btn_border"
+                                android:fontFamily="@font/aleo_regular"
+                                android:hint="Password"
+                                android:inputType="textPassword"
+                                android:padding="10dp"
+                                android:text="@={registrationVM.password}"
+                                android:textSize="15dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/aleo_regular"
+                                    android:text="Password"
+                                    android:textColor="@color/black"
+                                    android:textSize="15dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="*"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <EditText
+                                android:id="@+id/etConfirmPassword"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:background="@drawable/btn_border"
+                                android:fontFamily="@font/aleo_regular"
+                                android:hint="Confirm Password"
+                                android:inputType="textPassword"
+                                android:maxLength="10"
+                                android:padding="10dp"
+                                android:text="@={registrationVM.confirmPassword}"
+                                android:textSize="15dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal"
+                            android:weightSum="3">
+
+                            <TextView
+                                android:id="@+id/Button"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/register_border"
+                                android:gravity="center"
+                                android:text="Male"
+                                android:textAllCaps="false" />
+
+                            <TextView
+                                android:id="@+id/Button2"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/register_border"
+                                android:gravity="center"
+                                android:text="Female"
+                                android:textAllCaps="false" />
+
+                            <TextView
+                                android:id="@+id/Button3"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/register_border"
+                                android:gravity="center"
+                                android:text="Other"
+                                android:textAllCaps="false" />
+
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/btnJoin"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_alignBottom="@id/btnSubmit"
+                            android:layout_alignParentBottom="true"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/submitbutton"
+                            android:fontFamily="@font/aleo_regular"
+                            android:gravity="center"
+                            android:onClick="@{() ->registrationVM.btnJoin()}"
+                            android:text="Join Claraa"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="18dp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llUpdateProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginTop="80dp"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/aleo_regular"
+                            android:text="Hello there, Partner!"
+                            android:textColor="@color/black"
+                            android:textSize="25dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/aleo_regular"
+                            android:text="@string/registration"
+                            android:textColor="@color/gray_20"
+                            android:textSize="13dp" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/aleo_regular"
+                                    android:text="Business Name"
+                                    android:textColor="@color/black"
+                                    android:textSize="15dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="*"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+
+                            <EditText
+                                android:id="@+id/etShopName"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:background="@drawable/btn_border"
+                                android:fontFamily="@font/aleo_regular"
+                                android:hint="Enter your Business name"
+                                android:inputType="text"
+                                android:padding="10dp"
+                                android:text="@={registrationVM.shopName}"
+                                android:textSize="15dp" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/aleo_regular"
+                                    android:text="Owner Name"
                                     android:textColor="@color/black"
                                     android:textSize="15dp" />
 
@@ -565,135 +385,316 @@
 
                             </LinearLayout>
 
-
-                            <Spinner
-                                android:id="@+id/spnDistrict"
+                            <EditText
+                                android:id="@+id/etOwnerName"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:background="@drawable/btn_border"
                                 android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                android:entries="@array/district"
                                 android:fontFamily="@font/aleo_regular"
+                                android:hint="Enter Full Name"
                                 android:inputType="text"
                                 android:padding="10dp"
-                                android:textColor="@color/black"
-                                android:textSize="15dp"/>
-<!--                                tools:setOnItemSelectedListener="@{registrationVM.clickListener}" />-->
+                                android:text="@={registrationVM.ownerName}"
+                                android:textSize="15dp" />
 
                         </LinearLayout>
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
 
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/aleo_regular"
+                                    android:text="Email"
+                                    android:textColor="@color/black"
+                                    android:textSize="15dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="*"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:background="@drawable/btn_border"
                                 android:fontFamily="@font/aleo_regular"
-                                android:text="Address"
-                                android:textColor="@color/black"
+                                android:hint="Enter Email ID"
+                                android:inputType="text"
+                                android:padding="10dp"
+                                android:text="@={registrationVM.email}"
                                 android:textSize="15dp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="*"
-                                android:textColor="@color/black" />
-
-
                         </LinearLayout>
-
-                        <EditText
-                            android:id="@+id/etAddress"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:background="@drawable/btn_border"
-                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                            android:fontFamily="@font/aleo_regular"
-                            android:hint="(Enter Business Address)"
-                            android:inputType="text"
-                            android:padding="10dp"
-                            android:text="@={registrationVM.etAddress}"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
 
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/aleo_regular"
+                                    android:text="Mobile Number"
+                                    android:textColor="@color/black"
+                                    android:textSize="15dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="*"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <EditText
+                                android:id="@+id/etMobile"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:background="@drawable/btn_border"
                                 android:fontFamily="@font/aleo_regular"
-                                android:text="PinCode"
-                                android:textColor="@color/black"
+                                android:hint="(Autofilled from previous page)"
+                                android:inputType="number"
+                                android:maxLength="10"
+                                android:padding="10dp"
+                                android:text="@={registrationVM.mobNo}"
                                 android:textSize="15dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="*"
-                                android:textColor="@color/black" />
 
 
                         </LinearLayout>
 
-                        <EditText
-                            android:id="@+id/etPincode"
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="10dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/aleo_regular"
+                                        android:text="State"
+                                        android:textColor="@color/black"
+                                        android:textSize="15dp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="*"
+                                        android:textColor="@color/black" />
+
+
+                                </LinearLayout>
+
+                                <Spinner
+                                    android:id="@+id/spnState"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/btn_border"
+                                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    android:entries="@array/state"
+                                    android:fontFamily="@font/aleo_regular"
+                                    android:inputType="text"
+                                    android:padding="10dp"
+                                    android:textColor="@color/black"
+                                    android:textSize="15dp"/>
+                                <!--                                tools:setOnItemSelectedListener="@{registrationVM.clicksListener}"/>-->
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/aleo_regular"
+                                        android:text="District"
+                                        android:textColor="@color/black"
+                                        android:textSize="15dp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="*"
+                                        android:textColor="@color/black" />
+
+
+                                </LinearLayout>
+
+
+                                <Spinner
+                                    android:id="@+id/spnDistrict"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/btn_border"
+                                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    android:entries="@array/district"
+                                    android:fontFamily="@font/aleo_regular"
+                                    android:inputType="text"
+                                    android:padding="10dp"
+                                    android:textColor="@color/black"
+                                    android:textSize="15dp"/>
+                                <!--                                tools:setOnItemSelectedListener="@{registrationVM.clickListener}" />-->
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/aleo_regular"
+                                    android:text="Address"
+                                    android:textColor="@color/black"
+                                    android:textSize="15dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="*"
+                                    android:textColor="@color/black" />
+
+
+                            </LinearLayout>
+
+                            <EditText
+                                android:id="@+id/etAddress"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:background="@drawable/btn_border"
+                                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                android:fontFamily="@font/aleo_regular"
+                                android:hint="(Enter Business Address)"
+                                android:inputType="text"
+                                android:padding="10dp"
+                                android:text="@={registrationVM.etAddress}"
+                                android:textSize="15dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/aleo_regular"
+                                    android:text="PinCode"
+                                    android:textColor="@color/black"
+                                    android:textSize="15dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="*"
+                                    android:textColor="@color/black" />
+
+
+                            </LinearLayout>
+
+                            <EditText
+                                android:id="@+id/etPincode"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:background="@drawable/btn_border"
+                                android:fontFamily="@font/aleo_regular"
+                                android:hint="(Enter Pin Code)"
+                                android:inputType="number"
+                                android:maxLength="6"
+                                android:padding="10dp"
+                                android:text="@={registrationVM.pinCode}"
+                                android:textSize="15dp" />
+
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/btnSubmit"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
-                            android:background="@drawable/btn_border"
+                            android:layout_alignBottom="@id/btnSubmit"
+                            android:layout_alignParentBottom="true"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/submitbutton"
                             android:fontFamily="@font/aleo_regular"
-                            android:hint="(Enter Pin Code)"
-                            android:inputType="number"
-                            android:maxLength="6"
-                            android:padding="10dp"
-                            android:text="@={registrationVM.pinCode}"
-                            android:textSize="15dp" />
+                            android:gravity="center"
+                            android:onClick="@{() ->registrationVM.btnSubmit()}"
+                            android:text="Submit"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="18dp" />
 
                     </LinearLayout>
 
-                    <Button
-                        android:id="@+id/btnSubmit"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_alignBottom="@id/btnSubmit"
-                        android:layout_alignParentBottom="true"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/submitbutton"
-                        android:fontFamily="@font/aleo_regular"
-                        android:gravity="center"
-                        android:onClick="@{() ->registrationVM.btnSubmit()}"
-                        android:text="Submit"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textSize="18dp" />
 
                 </LinearLayout>
 
+            </ScrollView>
 
-            </LinearLayout>
-
-        </ScrollView>
-
-    </RelativeLayout>
+        </RelativeLayout>
         <LinearLayout
             android:id="@+id/llBottomImage"
             android:layout_width="match_parent"

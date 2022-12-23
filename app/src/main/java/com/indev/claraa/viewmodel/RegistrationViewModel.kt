@@ -61,7 +61,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
 
 
 
-    fun btnSubmit() {
+    fun btnJoin() {
         prefHelper = PrefHelper(context)
         checkLogin = prefHelper.getBoolean(Constant.PREF_IS_LOGIN)
 
@@ -111,21 +111,22 @@ class RegistrationViewModel (val context: Context): ViewModel() {
         }
     }
 
-    fun btnJoin(){
-        if(checkValidation()) {
+    fun btnSubmit(){
+ //       if(checkValidation()) {
             prefHelper = PrefHelper(context)
             userRegistrationTable = UserRegistrationModel(
                 prefHelper.getInt(Constant.PREF_USERID)!!,
-                "","",
+                shopName.get().toString(),
+                ownerName.get().toString(),
                 username.get().toString(),
-                password.get().toString(),
+                "amit123",
                 email.get().toString(),
-                "",
+                mobNo.get().toString(),
                 etAddress.get().toString(),
-                "",
-                "",
-                "", "17-12-2022", "male", "", "",
-                ""
+                UserRegistration.state_id.toString(),
+                UserRegistration.district_id.toString(),
+                etAddress.get().toString(), "17-12-2022", "male", "", "",
+                pinCode.get().toString()
             )
             viewModelScope.launch {
                 UserRegistrationRepository.insertUserData(context, userRegistrationTable)
@@ -144,7 +145,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
                     }
                 }
             }
-        }
+ //       }
     }
 
     fun getStateList(context: Context): List<StateModel>? {
@@ -154,33 +155,27 @@ class RegistrationViewModel (val context: Context): ViewModel() {
         return UserRegistrationRepository.getDistrictList(context)
     }
 
-    private fun checkValidation(): Boolean {
-        if(username.get().toString().length==0) {
-            Toast.makeText(context, "Please enter username..", Toast.LENGTH_SHORT).show()
-            return false
-        }
-
-        if(email.get().toString().length<10) {
-            Toast.makeText(context, "Please enter email..", Toast.LENGTH_SHORT).show()
-            return false
-        }
-
-
-        if(password.get().toString().length<5) {
-            Toast.makeText(context, "Please enter password..", Toast.LENGTH_SHORT).show()
-            return false
-        }
-
-        if(confirmPassword.get().toString().length<5) {
-            Toast.makeText(context, "Please enter confirm password..", Toast.LENGTH_SHORT).show()
-            return false
-        }
-
-        if(!password.get().equals(confirmPassword.get())) {
-            Toast.makeText(context, "Password and confirm password do not match..", Toast.LENGTH_SHORT).show()
-            return false
-        }
-        return true
-    }
+//    private fun checkValidation(): Boolean {
+//        if(shopName.get().toString().length==0) {
+//            Toast.makeText(context, "Please enter username..", Toast.LENGTH_SHORT).show()
+//            return false
+//        }
+//
+//        if(ownerName.get().toString().length<4) {
+//            Toast.makeText(context, "Please enter email..", Toast.LENGTH_SHORT).show()
+//            return false
+//        }
+//
+//
+//        if(username.get().toString().length<4) {
+//            Toast.makeText(context, "Please enter password..", Toast.LENGTH_SHORT).show()
+//            return false
+//        }
+//        if(email.get().toString().length<8) {
+//            Toast.makeText(context, "Please enter password..", Toast.LENGTH_SHORT).show()
+//            return false
+//        }
+//        return true
+//    }
 
 }
