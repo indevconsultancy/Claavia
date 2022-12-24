@@ -18,5 +18,12 @@ class CommonClass {
             currentDateandTime = sdf.format(Date())
             return currentDateandTime
         }
+
+        fun currentDate(): String? {
+            val date = Date()
+            //Calendar calUUID = Calendar.getInstance();
+            val df = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            return df.format(date)
+        }
     }
 }

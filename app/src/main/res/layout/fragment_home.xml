@@ -177,7 +177,7 @@
                         android:layout_marginHorizontal="2dp"
                         android:gravity="center"
                         android:layout_gravity="center"
-                        android:text="weekly"/>
+                        android:text="Color"/>
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnSolution"
                         android:layout_width="match_parent"

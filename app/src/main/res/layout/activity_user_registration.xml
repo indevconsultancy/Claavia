@@ -223,48 +223,48 @@
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="10dp"
-                            android:orientation="horizontal"
-                            android:weightSum="3">
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="40dp"-->
+<!--                            android:layout_marginTop="10dp"-->
+<!--                            android:orientation="horizontal"-->
+<!--                            android:weightSum="3">-->
 
-                            <TextView
-                                android:id="@+id/Button"
-                                android:layout_width="match_parent"
-                                android:layout_height="40dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="5dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/register_border"
-                                android:gravity="center"
-                                android:text="Male"
-                                android:textAllCaps="false" />
+<!--                            <TextView-->
+<!--                                android:id="@+id/Button"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="40dp"-->
+<!--                                android:layout_marginLeft="5dp"-->
+<!--                                android:layout_marginRight="5dp"-->
+<!--                                android:layout_weight="1"-->
+<!--                                android:background="@drawable/register_border"-->
+<!--                                android:gravity="center"-->
+<!--                                android:text="Male"-->
+<!--                                android:textAllCaps="false" />-->
 
-                            <TextView
-                                android:id="@+id/Button2"
-                                android:layout_width="match_parent"
-                                android:layout_height="40dp"
-                                android:layout_marginRight="5dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/register_border"
-                                android:gravity="center"
-                                android:text="Female"
-                                android:textAllCaps="false" />
+<!--                            <TextView-->
+<!--                                android:id="@+id/Button2"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="40dp"-->
+<!--                                android:layout_marginRight="5dp"-->
+<!--                                android:layout_weight="1"-->
+<!--                                android:background="@drawable/register_border"-->
+<!--                                android:gravity="center"-->
+<!--                                android:text="Female"-->
+<!--                                android:textAllCaps="false" />-->
 
-                            <TextView
-                                android:id="@+id/Button3"
-                                android:layout_width="match_parent"
-                                android:layout_height="40dp"
-                                android:layout_marginRight="5dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/register_border"
-                                android:gravity="center"
-                                android:text="Other"
-                                android:textAllCaps="false" />
+<!--                            <TextView-->
+<!--                                android:id="@+id/Button3"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="40dp"-->
+<!--                                android:layout_marginRight="5dp"-->
+<!--                                android:layout_weight="1"-->
+<!--                                android:background="@drawable/register_border"-->
+<!--                                android:gravity="center"-->
+<!--                                android:text="Other"-->
+<!--                                android:textAllCaps="false" />-->
 
-                        </LinearLayout>
+<!--                        </LinearLayout>-->
 
                         <Button
                             android:id="@+id/btnJoin"
@@ -436,6 +436,45 @@
                                 android:inputType="text"
                                 android:padding="10dp"
                                 android:text="@={registrationVM.email}"
+                                android:textSize="15dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/aleo_regular"
+                                    android:text="Password"
+                                    android:textColor="@color/black"
+                                    android:textSize="15dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="*"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:background="@drawable/btn_border"
+                                android:fontFamily="@font/aleo_regular"
+                                android:hint="Enter Password"
+                                android:padding="10dp"
+                                android:text="@={registrationVM.password}"
                                 android:textSize="15dp" />
 
                         </LinearLayout>
@@ -668,6 +707,53 @@
                                 android:textSize="15dp" />
 
                         </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal"
+                            android:weightSum="3">
+
+                            <TextView
+                                android:id="@+id/Button"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/register_border"
+                                android:gravity="center"
+                                android:text="Male"
+                                android:onClick="@{() ->registrationVM.btnMale()}"
+                                android:textAllCaps="false" />
+
+                            <TextView
+                                android:id="@+id/Button2"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/register_border"
+                                android:gravity="center"
+                                android:onClick="@{() ->registrationVM.btnFemale()}"
+                                android:text="Female"
+                                android:textAllCaps="false" />
+
+                            <TextView
+                                android:id="@+id/Button3"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/register_border"
+                                android:gravity="center"
+                                android:onClick="@{() ->registrationVM.btnOthers()}"
+                                android:text="Other"
+                                android:textAllCaps="false" />
+
+                        </LinearLayout>
+
 
                         <Button
                             android:id="@+id/btnSubmit"

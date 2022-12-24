@@ -23,81 +23,210 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="150dp"
-            android:layout_marginHorizontal="30dp"
-            android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
+            <LinearLayout
+                android:id="@+id/llRegistrationWitheUs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Verify Your Mobile Number"
-                android:gravity="center_vertical"
-                android:textSize="20dp"
-                android:fontFamily="@font/aleo_regular"
-                android:textColorHighlight="@color/bs_green"
-                android:padding="5dp"
-                android:textColor="@color/black" />
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="80dp"
+                android:orientation="vertical"
+                android:visibility="visible">
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                android:background="@drawable/btn_border"
-                android:hint="Enter the OTP"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/aleo_regular"
-                android:text="@={emailVM.email}"
-                android:inputType="text"
-                android:padding="10dp"
-                android:textSize="15dp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                android:text="Didn't receive OTP"
-                android:gravity="center"
-                android:fontFamily="@font/aleo_regular"
-                android:layout_marginTop="20dp"
-                android:textSize="15dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/aleo_regular"
+                    android:text="Forgot Password!"
+                    android:textColor="@color/black"
+                    android:textSize="25dp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                android:fontFamily="@font/aleo_regular"
-                android:text="Resend OTP in 30 sec."
-                android:textColor="@color/bs_blue"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:inputType="text"
-                android:textSize="15dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
 
-            <Button
-                android:id="@+id/SubmitButton"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/submitbutton"
-                android:gravity="center"
-                android:onClick="@{() ->emailVM.btnSubmit()}"
-                android:text="Verify"
-                android:textAllCaps="false"
-                android:textColor="#FFF"
-                android:fontFamily="@font/aleo_regular"
-                android:layout_marginTop="20dp"
-                android:textSize="15dp" />
-        </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-        </RelativeLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/aleo_regular"
+                            android:text="Username"
+                            android:textColor="@color/black"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="*"
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
+
+
+                    <EditText
+                        android:id="@+id/etUserName"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/btn_border"
+                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                        android:fontFamily="@font/aleo_regular"
+                        android:hint="Enter username"
+                        android:inputType="text"
+                        android:padding="10dp"
+                        android:textSize="15dp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/aleo_regular"
+                            android:text="Email"
+                            android:textColor="@color/black"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="*"
+                            android:textColor="@color/black" />
+
+
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/etEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/btn_border"
+                        android:fontFamily="@font/aleo_regular"
+                        android:hint="Enter email address"
+                        android:inputType="text"
+                        android:padding="10dp"
+                        android:textSize="15dp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/aleo_regular"
+                            android:text="Password"
+                            android:textColor="@color/black"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="*"
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/btn_border"
+                        android:fontFamily="@font/aleo_regular"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:padding="10dp"
+                        android:textSize="15dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/aleo_regular"
+                            android:text="Password"
+                            android:textColor="@color/black"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="*"
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/etConfirmPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/btn_border"
+                        android:fontFamily="@font/aleo_regular"
+                        android:hint="Confirm Password"
+                        android:inputType="textPassword"
+                        android:maxLength="10"
+                        android:padding="10dp"
+                        android:textSize="15dp" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnJoin"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_alignBottom="@id/btnSubmit"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/submitbutton"
+                    android:fontFamily="@font/aleo_regular"
+                    android:gravity="center"
+                    android:text="Join Claraa"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
+
+
+            </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"

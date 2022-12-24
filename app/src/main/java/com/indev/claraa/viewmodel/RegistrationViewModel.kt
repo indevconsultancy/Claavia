@@ -10,6 +10,7 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.*
+import com.indev.claraa.CommonClass
 import com.indev.claraa.SweetDialog
 import com.indev.claraa.entities.DistrictModel
 import com.indev.claraa.entities.StateModel
@@ -32,7 +33,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
     var password: ObservableField<String> = ObservableField("")
     var confirmPassword: ObservableField<String> = ObservableField("")
     var ownerName: ObservableField<String> = ObservableField("")
-    var gender: ObservableField<String> = ObservableField("")
+    var gender = ""
     var email: ObservableField<String> = ObservableField("")
     var mobNo: ObservableField<String> = ObservableField("")
     var etAddress: ObservableField<String> = ObservableField("")
@@ -78,7 +79,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
                 etAddress.get().toString(),
                 UserRegistration.state_id.toString(),
                 UserRegistration.district_id.toString(),
-                etAddress.get().toString(), "17-12-2022", "male", "", "",
+                etAddress.get().toString(), register_date = CommonClass.currentDate().toString(), "male", "", "",
                 pinCode.get().toString()
             )
             userRegistrationTable.shop_name = shopName.get().toString()
@@ -112,6 +113,19 @@ class RegistrationViewModel (val context: Context): ViewModel() {
         }
     }
 
+    fun btnMale(){
+        gender = "Male"
+    }
+
+    fun btnFemale(){
+        gender = "Female"
+    }
+
+    fun btnOthers(){
+        gender = "Others"
+
+    }
+
     fun btnSubmit(){
         SweetDialog.showProgressDialog(context)
         //       if(checkValidation()) {
@@ -121,25 +135,25 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             shopName.get().toString(),
             ownerName.get().toString(),
             username.get().toString(),
-            "amit123",
+            password.get().toString(),
             email.get().toString(),
             mobNo.get().toString(),
             etAddress.get().toString(),
             UserRegistration.state_id.toString(),
-            UserRegistration.district_id.toString(),
-            etAddress.get().toString(), "17-12-2022", "male", "", "",
+            UserRegistration.district_id.toString(),"",
+            register_date = CommonClass.currentDate().toString(), gender, "", "",
             pinCode.get().toString()
         )
         viewModelScope.launch {
             UserRegistrationRepository.insertUserData(context, userRegistrationTable)
-            var last_user_id=0
-                last_user_id = UserRegistrationRepository.userRegistrationAPI(userRegistrationTable)
-                if (last_user_id> 0) {
+            var last_insert_id=0
+            last_insert_id = UserRegistrationRepository.userRegistrationAPI(userRegistrationTable)
+                if (last_insert_id> 0) {
                     context.startActivity(Intent(context, LoginScreen::class.java))
                     Handler(Looper.getMainLooper()).post {
                         Toast.makeText(context, "User successfully registered...", Toast.LENGTH_LONG).show()
                     }
-                }else if (last_user_id == 2) {
+                }else if (last_insert_id == 2) {
                     context.startActivity(Intent(context, LoginScreen::class.java))
                     Handler(Looper.getMainLooper()).post {
                         Toast.makeText(context, "User already registered...", Toast.LENGTH_LONG).show()
