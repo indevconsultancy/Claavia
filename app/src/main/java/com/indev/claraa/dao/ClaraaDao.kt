@@ -125,4 +125,7 @@ interface ClaraaDao {
 
     @Query("UPDATE address SET id = :last_id WHERE id = :id")
     fun updateAddressId(last_id: Int, id: String): Int
+
+    @Query("UPDATE cart SET id = :last_id WHERE id = :id")
+    fun updateCartId(last_id: Int, id: String): Int
 }

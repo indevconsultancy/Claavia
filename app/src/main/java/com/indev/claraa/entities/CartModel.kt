@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "cart")
 data class CartModel(@PrimaryKey(autoGenerate = true)
                      val local_id: Int,
-                     val id: Int,
+                     val id: String,
                      val packets: String,
                      val product_id: String,
                      val user_id: Int,

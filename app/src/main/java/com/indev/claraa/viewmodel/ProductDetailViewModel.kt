@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
-import android.os.Message
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
@@ -12,12 +11,13 @@ import androidx.databinding.ObservableField
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.indev.claraa.CommonClass
 import com.indev.claraa.R
+import com.indev.claraa.SweetDialog
 import com.indev.claraa.adapter.PowerRangeAdapter
 import com.indev.claraa.adapter.ProductMasterAdapter
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.ProductMasterModel
-import com.indev.claraa.fragment.AddressList
 import com.indev.claraa.fragment.ProductDetails
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
@@ -73,13 +73,14 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
     }
 
 
-    @SuppressLint("SuspiciousIndentation")
+    @SuppressLint("SuspiciousIndentation", "NewApi")
     fun btnSubmit() {
         dataBase = initializeDB(context)
         prefHelper= PrefHelper(context)
 
         var user_id =prefHelper.getInt(Constant.PREF_USERID)!!
         if(checkValidation()) {
+            SweetDialog.showProgressDialog(context)
             var checkExitPorduct = 0
             CoroutineScope(Dispatchers.IO).launch {
                 var qty= etQuantity.get().toString()
@@ -89,9 +90,10 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
                     PowerRangeAdapter.power_range,
                     packetValue.toString())!!
                 var amount= productMasterArrayList.get(0).price.toInt() * qty.toInt()
+              var id= CommonClass.getUniqueId().toString()
                 if (checkExitPorduct == 0) {
                     cartModel = CartModel(
-                        0,0,
+                        0,id,
                         packetValue.toString(),
                         productID.toString(), user_id,
                         productMasterArrayList.get(0).product_name,
@@ -108,10 +110,19 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
                     )
                     viewModelScope.launch {
                         ProductRepository.insertCartData(context, cartModel)
-                        Handler(Looper.getMainLooper()).post {
+                        var last_inserted_id=0
+                        last_inserted_id = ProductRepository.cartInsertAPI(cartModel)
+                        if (last_inserted_id> 0) {
+                            ProductRepository.updateCartId(last_inserted_id,id,context)
+                            Toast.makeText(context, "Added", Toast.LENGTH_LONG).show()
                             showAlertDialog()
+                        }else {
+                            Handler(Looper.getMainLooper()).post {
+                                Toast.makeText(context, "Something went wrong...", Toast.LENGTH_LONG).show()
+                            }
                         }
                     }
+                    SweetDialog.dismissDialog()
                 } else {
                     cartModelArrayList = ProductRepository.getCartDatabyProductId(
                         productID,
@@ -119,12 +130,26 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
                     ) as ArrayList<CartModel>
                     var totalAmount =
                         cartModelArrayList.get(0).amount * (cartModelArrayList.get(0).quantity.toInt() +  qty.toInt())
-                    ProductRepository.updateCartProductQuantity(
-                        cartModelArrayList.get(0).quantity.toInt() + qty.toInt(),
-                        totalAmount,
-                        cartModelArrayList.get(0).local_id,
-                        context
-                    )
+                    viewModelScope.launch {
+                        ProductRepository.updateCartProductQuantity(
+                            cartModelArrayList.get(0).quantity.toInt() + qty.toInt(),
+                            totalAmount,
+                            cartModelArrayList.get(0).local_id,
+                            context)
+                        var last_updated_id=0
+                        last_updated_id = ProductRepository.cartUpdateApi(cartModel)
+                        if (last_updated_id> 0) {
+                            Toast.makeText(context, "Updated", Toast.LENGTH_LONG).show()
+                            showAlertDialog()
+                        }else {
+                            Handler(Looper.getMainLooper()).post {
+                                Toast.makeText(context, "Something went wrong...", Toast.LENGTH_LONG).show()
+                            }
+                        }
+                    }
+                    SweetDialog.dismissDialog()
+
+
 
                     Handler(Looper.getMainLooper()).post {
                         showAlertDialog()
@@ -137,8 +162,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
 
     private fun showAlertDialog() {
         SweetAlertDialog(context)
-            .setTitleText("Added Product in Cart")
-            .setContentText("")
+            .setContentText("Added Product successfully in Cart")
             .setConfirmText("Ok")
             .setConfirmClickListener {sdialog ->
                 sdialog.dismiss()

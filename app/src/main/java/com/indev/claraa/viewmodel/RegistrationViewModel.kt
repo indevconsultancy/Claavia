@@ -10,6 +10,7 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.*
+import com.indev.claraa.SweetDialog
 import com.indev.claraa.entities.DistrictModel
 import com.indev.claraa.entities.StateModel
 import com.indev.claraa.entities.UserRegistrationModel
@@ -112,6 +113,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
     }
 
     fun btnSubmit(){
+        SweetDialog.showProgressDialog(context)
         //       if(checkValidation()) {
         prefHelper = PrefHelper(context)
         userRegistrationTable = UserRegistrationModel(
@@ -131,21 +133,24 @@ class RegistrationViewModel (val context: Context): ViewModel() {
         viewModelScope.launch {
             UserRegistrationRepository.insertUserData(context, userRegistrationTable)
             var last_user_id=0
-            CoroutineScope(Dispatchers.IO).launch {
                 last_user_id = UserRegistrationRepository.userRegistrationAPI(userRegistrationTable)
                 if (last_user_id> 0) {
                     context.startActivity(Intent(context, LoginScreen::class.java))
                     Handler(Looper.getMainLooper()).post {
-                        Toast.makeText(context, "Successfully Registered..", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, "User successfully registered...", Toast.LENGTH_LONG).show()
+                    }
+                }else if (last_user_id == 2) {
+                    context.startActivity(Intent(context, LoginScreen::class.java))
+                    Handler(Looper.getMainLooper()).post {
+                        Toast.makeText(context, "User already registered...", Toast.LENGTH_LONG).show()
                     }
                 } else {
                     Handler(Looper.getMainLooper()).post {
-                        Toast.makeText(context, "Something went wrong..", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, "Something went wrong...", Toast.LENGTH_LONG).show()
                     }
                 }
+            SweetDialog.dismissDialog()
             }
-        }
-        //       }
     }
 
     fun getStateList(context: Context): List<StateModel>? {
