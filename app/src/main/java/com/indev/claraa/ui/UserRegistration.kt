@@ -42,6 +42,8 @@ class UserRegistration : AppCompatActivity() {
         )[RegistrationViewModel::class.java]
         binding.registrationVM = registrationViewModel
 
+        binding.Button.setOnClickListener(){
+        }
 
         stateArrayList = ArrayList<StateModel>()
         CoroutineScope(Dispatchers.IO).launch {

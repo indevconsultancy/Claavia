@@ -722,9 +722,10 @@
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginRight="5dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/register_border"
                                 android:gravity="center"
+                                android:background="@drawable/btn_color_change"
                                 android:text="Male"
+                                android:textColor="@color/white"
                                 android:onClick="@{() ->registrationVM.btnMale()}"
                                 android:textAllCaps="false" />
 
@@ -734,8 +735,9 @@
                                 android:layout_height="40dp"
                                 android:layout_marginRight="5dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/register_border"
                                 android:gravity="center"
+                                android:textColor="@color/white"
+                                android:background="@drawable/btn_color_change"
                                 android:onClick="@{() ->registrationVM.btnFemale()}"
                                 android:text="Female"
                                 android:textAllCaps="false" />
@@ -746,8 +748,9 @@
                                 android:layout_height="40dp"
                                 android:layout_marginRight="5dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/register_border"
+                                android:background="@drawable/btn_color_change"
                                 android:gravity="center"
+                                android:textColor="@color/white"
                                 android:onClick="@{() ->registrationVM.btnOthers()}"
                                 android:text="Other"
                                 android:textAllCaps="false" />

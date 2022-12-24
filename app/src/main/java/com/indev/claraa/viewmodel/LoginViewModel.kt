@@ -47,12 +47,12 @@ class LoginViewModel(val context: Context): ViewModel() {
                 if (status== 1) {
                     prefHelper.put(Constant.PREF_IS_LOGIN,true)
                     checkProfileUpdate = prefHelper.getBoolean(Constant.PREF_IS_UPDATE)
-                    if(checkProfileUpdate == true){
-                        context.startActivity(Intent(context, HomeScreen::class.java))
-                    }else {
-                        context.startActivity(Intent(context, UserRegistration::class.java))
-                    }
-                    SweetDialog.dismissDialog()
+//                    if(checkProfileUpdate == true){
+//                        context.startActivity(Intent(context, HomeScreen::class.java))
+//                    }else {
+//                        context.startActivity(Intent(context, UserRegistration::class.java))
+//                    }
+//                    SweetDialog.dismissDialog()
                 } else {
                     Handler(Looper.getMainLooper()).post {
                         SweetDialog.dismissDialog()

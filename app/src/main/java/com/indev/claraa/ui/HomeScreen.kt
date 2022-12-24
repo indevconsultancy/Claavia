@@ -34,6 +34,8 @@ class HomeScreen : AppCompatActivity(), ClickLinstener {
          cartArrayList.observe(this) {
              badge.number = it.size
          }
+
+
         preferences= PrefHelper(this)
         binding.bottomNavigation.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {

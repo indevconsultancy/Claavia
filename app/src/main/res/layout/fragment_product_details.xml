@@ -162,15 +162,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         app:cardCornerRadius="8dp"
+                        android:background="@drawable/btn_border"
                         app:cardElevation="8dp"
                         android:layout_weight="1">
 
                         <EditText
                             android:id="@+id/etQuantity"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/btn_border"
+                            android:layout_height="40dp"
                             android:fontFamily="@font/aleo_regular"
+                            android:background="@drawable/btn_border"
                             android:hint="Enter Qty."
                             android:inputType="number"
                             android:padding="5dp"
@@ -229,7 +230,7 @@
                         android:layout_alignBottom="@id/btnSubmit"
                         android:layout_alignParentBottom="true"
                         android:background="@drawable/submitbutton"
-                        android:backgroundTint="@color/teal_200"
+                        android:backgroundTint="@color/primary_color"
                         android:onClick="@{() ->productDetailVM.btnSubmit()}"
                         android:text="Add to Cart"
                         android:textAllCaps="false"
