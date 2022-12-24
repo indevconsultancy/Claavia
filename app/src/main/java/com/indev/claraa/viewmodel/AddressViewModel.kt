@@ -40,8 +40,8 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
     var etAddress2: ObservableField<String> = ObservableField("")
     var pinCode: ObservableField<String> = ObservableField("")
     var landmark: ObservableField<String> = ObservableField("")
-    var districtOfUser: String? = null
-    var stateOfUser: String? = null
+    var spnDistrict: String? = null
+    var spnState: String? = null
     lateinit var addressDetailsModel: AddressDetailsModel
     var local_id = 0
     var id = "0"
@@ -163,32 +163,40 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
     }
 
     private fun checkValidation(): Boolean{
-       if (shopName.get().toString().trim().length<4) {
+       if (shopName.get()?.isEmpty()==true) {
            Toast.makeText(context,"Please enter shop name",Toast.LENGTH_SHORT).show()
           return false
        }
-        if (personName.get().toString().trim().length<4){
+        if (personName.get()?.isEmpty()==true){
             Toast.makeText(context,"Please enter person name",Toast.LENGTH_SHORT).show()
             return false
         }
-        if (mobNo.get().toString().length<10){
+        if (mobNo.get()?.isEmpty()==true){
             Toast.makeText(context,"Please enter mobile number",Toast.LENGTH_SHORT).show()
             return false
         }
 
-        if (etAddress1.get().toString().trim().length<10){
+        if (etAddress1.get()?.isEmpty()==true){
             Toast.makeText(context,"Please enter address name",Toast.LENGTH_SHORT).show()
             return false
         }
-        if (etAddress2.get().toString().trim().length<10){
+//        if (spnState.get()?.isEmpty()==true){
+//            Toast.makeText(context,"Please enter address name",Toast.LENGTH_SHORT).show()
+//            return false
+//        }
+//        if (spnDistrict.get()?.isEmpty()==true){
+//            Toast.makeText(context,"Please enter address name",Toast.LENGTH_SHORT).show()
+//            return false
+//        }
+        if (etAddress2.get()?.isEmpty()==true){
             Toast.makeText(context,"Please enter street",Toast.LENGTH_SHORT).show()
             return false
         }
-        if (landmark.get().toString().trim().length<8){
+        if (landmark.get()?.isEmpty()==true){
             Toast.makeText(context,"Please enter landmark",Toast.LENGTH_SHORT).show()
             return false
         }
-        if (pinCode.get().toString().length<6){
+        if (pinCode.get()?.isEmpty()==true){
             Toast.makeText(context,"Please enter pin code",Toast.LENGTH_SHORT).show()
             return false
         }

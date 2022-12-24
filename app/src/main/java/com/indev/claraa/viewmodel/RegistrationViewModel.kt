@@ -1,5 +1,6 @@
 package com.indev.claraa.viewmodel
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
@@ -38,7 +39,8 @@ class RegistrationViewModel (val context: Context): ViewModel() {
     var mobNo: ObservableField<String> = ObservableField("")
     var etAddress: ObservableField<String> = ObservableField("")
     var pinCode: ObservableField<String> = ObservableField("")
-    var districtOfUser: String? = null
+    var spnState: String? = null
+    var spnDistrict: String? = null
     lateinit var userRegistrationTable: UserRegistrationModel
     val readAllData: LiveData<UserRegistrationModel>
     lateinit var prefHelper: PrefHelper
@@ -126,9 +128,10 @@ class RegistrationViewModel (val context: Context): ViewModel() {
 
     }
 
+    @SuppressLint("SuspiciousIndentation")
     fun btnSubmit(){
-        SweetDialog.showProgressDialog(context)
-        //       if(checkValidation()) {
+       // SweetDialog.showProgressDialog(context)
+        if(checkValidation()) {
         prefHelper = PrefHelper(context)
         userRegistrationTable = UserRegistrationModel(
             prefHelper.getInt(Constant.PREF_USERID)!!,
@@ -163,8 +166,9 @@ class RegistrationViewModel (val context: Context): ViewModel() {
                         Toast.makeText(context, "Something went wrong...", Toast.LENGTH_LONG).show()
                     }
                 }
-            SweetDialog.dismissDialog()
+           // SweetDialog.dismissDialog()
             }
+               }
     }
 
     fun getStateList(context: Context): List<StateModel>? {
@@ -174,27 +178,47 @@ class RegistrationViewModel (val context: Context): ViewModel() {
         return UserRegistrationRepository.getDistrictList(context)
     }
 
-//    private fun checkValidation(): Boolean {
-//        if(shopName.get().toString().length==0) {
-//            Toast.makeText(context, "Please enter username..", Toast.LENGTH_SHORT).show()
-//            return false
-//        }
-//
-//        if(ownerName.get().toString().length<4) {
-//            Toast.makeText(context, "Please enter email..", Toast.LENGTH_SHORT).show()
-//            return false
-//        }
-//
-//
-//        if(username.get().toString().length<4) {
-//            Toast.makeText(context, "Please enter password..", Toast.LENGTH_SHORT).show()
-//            return false
-//        }
-//        if(email.get().toString().length<8) {
-//            Toast.makeText(context, "Please enter password..", Toast.LENGTH_SHORT).show()
-//            return false
-//        }
-//        return true
-//    }
+    private fun checkValidation(): Boolean {
+        if(shopName.get()?.isEmpty()==true) {
+            Toast.makeText(context, "Please enter shop name..", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if(ownerName.get()?.isEmpty()==true) {
+            Toast.makeText(context, "Please enter owner name..", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if(email.get()?.isEmpty()==true) {
+            Toast.makeText(context, "Please enter email..", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if(password.get()?.isEmpty()==true) {
+            Toast.makeText(context, "Please enter password..", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if(mobNo.get().toString().length==11) {
+            Toast.makeText(context, "Please enter mobile number..", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if(spnState.toString().trim()=="Select State"){
+            Toast.makeText(context, "Please select state..", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if(spnDistrict.toString().trim()=="Select District"){
+            Toast.makeText(context, "Please select district..", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if(etAddress.get()?.isEmpty()==true) {
+            Toast.makeText(context, "Please enter address..", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if(pinCode.get().toString().length==7) {
+            Toast.makeText(context, "Please enter pin code..", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true
+    }
 
 }
