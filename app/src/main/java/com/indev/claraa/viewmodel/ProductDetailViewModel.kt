@@ -64,7 +64,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
         }
     }
 
-     val qtyClicksListener = object : AdapterView.OnItemSelectedListener {
+    val qtyClicksListener = object : AdapterView.OnItemSelectedListener {
         override fun onNothingSelected(parent: AdapterView<*>?) {
         }
 
@@ -109,7 +109,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
             context
         ) as ArrayList<CartModel>
         var totalAmount = cartModelArrayList.get(0).price.toInt() * (cartModelArrayList.get(0).quantity.toInt() +  qty.toInt())
-            viewModelScope.launch {
+        viewModelScope.launch {
             cartModel = CartModel(
                 cartModelArrayList.get(0).local_id,cartModelArrayList.get(0).id,
                 packetValue.toString(),
@@ -182,9 +182,9 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
             }else {
                 Handler(Looper.getMainLooper()).post {
                     Toast.makeText(context, "Something went wrong...", Toast.LENGTH_LONG).show()
+                }
             }
         }
-    }
     }
     private fun showAlertDialog() {
         SweetAlertDialog(context)

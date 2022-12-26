@@ -122,7 +122,7 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
             mobNo.get().toString(),
             etAddress1.get().toString(),AddNewAddress.state_id.toString(),
             AddNewAddress.district_id.toString(),pinCode.get().toString(),
-            etAddress2.get().toString(),"","","",
+            etAddress2.get().toString(),"","",address_registration_date = CommonClass.currentDate().toString(),
             landmark.get().toString(),
         )
         viewModelScope.launch {
@@ -174,20 +174,24 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
         if (mobNo.get()?.isEmpty()==true){
             Toast.makeText(context,"Please enter mobile number",Toast.LENGTH_SHORT).show()
             return false
+        }else if (mobNo.get()?.length!!<10){
+            Toast.makeText(context,"Please enter valid mobile number",Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (AddNewAddress.state_id.toString().isEmpty()){
+            Toast.makeText(context,"Please select state",Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if (AddNewAddress.district_id.toString().isEmpty()){
+            Toast.makeText(context,"Please select district",Toast.LENGTH_SHORT).show()
+            return false
         }
 
         if (etAddress1.get()?.isEmpty()==true){
             Toast.makeText(context,"Please enter address name",Toast.LENGTH_SHORT).show()
             return false
         }
-//        if (spnState.get()?.isEmpty()==true){
-//            Toast.makeText(context,"Please enter address name",Toast.LENGTH_SHORT).show()
-//            return false
-//        }
-//        if (spnDistrict.get()?.isEmpty()==true){
-//            Toast.makeText(context,"Please enter address name",Toast.LENGTH_SHORT).show()
-//            return false
-//        }
         if (etAddress2.get()?.isEmpty()==true){
             Toast.makeText(context,"Please enter street",Toast.LENGTH_SHORT).show()
             return false
@@ -198,6 +202,9 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
         }
         if (pinCode.get()?.isEmpty()==true){
             Toast.makeText(context,"Please enter pin code",Toast.LENGTH_SHORT).show()
+            return false
+        }else if (pinCode.get()?.length!!<6){
+            Toast.makeText(context,"Please enter valid pin code",Toast.LENGTH_SHORT).show()
             return false
         }
 

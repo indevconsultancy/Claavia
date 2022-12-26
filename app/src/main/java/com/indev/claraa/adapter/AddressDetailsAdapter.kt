@@ -41,9 +41,10 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
         val currentItem = addressDetailsModelList[position]
         holder.shopName.text = currentItem.shop_name
         holder.personName.text = currentItem.user_name
-        holder.mobNo.text = "Phone Number: " + currentItem.mobile_number
+        holder.mobNo.text = "Mobile Number: " + currentItem.mobile_number
         holder.stateDistrict.text = currentItem.state_id + ", " + currentItem.district_id
         holder.address1.text = currentItem.address1 +"," + currentItem.address2 + "," +currentItem.landmark
+        holder.pinCode.text = currentItem.pinCode
 
         preferences= PrefHelper(context)
         holder.btnDelivery.setOnClickListener{
@@ -105,6 +106,7 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
         val mobNo: TextView = itemView!!.findViewById(R.id.mobNo)
         val stateDistrict: TextView = itemView!!.findViewById(R.id.tvStateDistrict)
         val address1: TextView = itemView!!.findViewById(R.id.tvAddress1)
+        val pinCode: TextView = itemView!!.findViewById(R.id.pinCode)
         val editAddress: Button = itemView!!.findViewById(R.id.editAddress)
         val btnDelivery: Button = itemView!!.findViewById(R.id.btnDelivery)
         val deleteAddress: Button = itemView!!.findViewById(R.id.deleteAddress)

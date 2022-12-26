@@ -71,7 +71,7 @@ class AddNewAddress : Fragment() {
                 ) {
                     var id = spinnerMap[binding.spnState.getSelectedItemPosition()]
                     Log.d("TAG", "onItemSelected: " + id)
-                    UserRegistration.state_id = id!!.toInt()
+                    state_id = id!!.toInt()
 
                 }
 
@@ -102,9 +102,7 @@ class AddNewAddress : Fragment() {
                     id: Long
                 ) {
                     var id = spinnerMap[binding.spnDistrict.getSelectedItemPosition()]
-                    Log.d("TAG", "onItemSelected: " + id)
-                    UserRegistration.district_id = id!!.toInt()
-
+                   district_id = id!!.toInt()
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
