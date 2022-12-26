@@ -51,6 +51,9 @@ interface ClaraaDao {
     @Query("select state_name from state_master where state_id= :state_id")
     fun getsStateName(state_id: String): String
 
+    @Query("select district_name from district_master where district_id= :district_id")
+    fun getDistrictName(district_id: String): String
+
     @Query("SELECT * FROM user_master")
     fun getRegistrationData() : LiveData<UserRegistrationModel>
 

@@ -21,6 +21,7 @@ class ProfileViewModel(val context: Context): ViewModel() {
     lateinit var prefHelper: PrefHelper
     lateinit var database: RoomDB
     var state_name: ObservableField<String> = ObservableField("")
+    var district_name: ObservableField<String> = ObservableField("")
 
     private fun initializeDB(context: Context): RoomDB {
         return RoomDB.getDatabase(context)
@@ -35,6 +36,13 @@ class ProfileViewModel(val context: Context): ViewModel() {
            var  stat_name= UserRegistrationRepository.getsStateName(context, stateId)!!
             state_name.set(stat_name)
         }
+    }
+    fun getDistrict(districtId: String){
+        CoroutineScope(Dispatchers.IO).launch {
+            var districtName = UserRegistrationRepository.getDistrictName(context, districtId)!!
+            district_name.set(districtName)
+        }
+
     }
 
 //    fun getsStateName(state_id : String): String {

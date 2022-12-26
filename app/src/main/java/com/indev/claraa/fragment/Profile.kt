@@ -35,8 +35,6 @@ class Profile : Fragment() {
         return binding.root
     }
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
@@ -49,7 +47,7 @@ class Profile : Fragment() {
                 binding.tvEmail.text = it?.email
                 binding.tvMobile.text = it?.mobile_number
                 profileViewModel.getState(it.state_id)
-                binding.tvDistrict.text = it?.district_id
+                profileViewModel.getDistrict(it.district_id)
                 binding.tvAddress.text = it?.address
                 binding.tvPincode.text = it?.pinCode
             }

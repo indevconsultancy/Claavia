@@ -52,6 +52,10 @@ class UserRegistrationRepository {
             dataBase = initializeDB(context)
             return dataBase?.userDao()?.getsStateName(state_id)
         }
+        fun getDistrictName(context: Context, district_id: String): String? {
+            dataBase = initializeDB(context)
+            return dataBase?.userDao()?.getDistrictName(district_id)
+        }
 
         fun updateData(context: Context, userRegistrationTable: UserRegistrationModel){
             dataBase = initializeDB(context)
