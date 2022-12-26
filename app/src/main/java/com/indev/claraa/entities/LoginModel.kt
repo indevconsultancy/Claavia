@@ -1,6 +1,6 @@
 package com.indev.claraa.entities
 
 data class LoginModel(
-    val user_name: String,
+    val email: String,
     var password: String,
     )

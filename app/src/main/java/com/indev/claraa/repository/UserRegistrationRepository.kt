@@ -51,7 +51,6 @@ class UserRegistrationRepository {
          fun getsStateName(context: Context, state_id: String): String? {
             dataBase = initializeDB(context)
             return dataBase?.userDao()?.getsStateName(state_id)
-             Log.e("TAG", "getsStateName: "+ dataBase?.userDao()?.getsStateName(state_id) )
         }
 
         fun updateData(context: Context, userRegistrationTable: UserRegistrationModel){
@@ -60,7 +59,6 @@ class UserRegistrationRepository {
                 dataBase?.userDao()?.updateUser(userRegistrationTable)
             }
         }
-
 
         suspend fun userRegistrationAPI(userRegistrationTable: UserRegistrationModel): Int {
             try {

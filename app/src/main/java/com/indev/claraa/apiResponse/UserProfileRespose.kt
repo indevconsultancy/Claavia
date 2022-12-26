@@ -12,4 +12,5 @@ data class UserProfileRespose(val user_name: String,
                               val state_id: String,
                               val register_date: String,
                               val active: String,
+                              val credit: String,
                               val district_id: String)

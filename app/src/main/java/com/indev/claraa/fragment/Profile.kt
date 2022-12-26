@@ -1,7 +1,6 @@
 package com.indev.claraa.fragment
 
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.indev.claraa.R
 import com.indev.claraa.databinding.FragmentProfileBinding
-import com.indev.claraa.repository.UserRegistrationRepository
 import com.indev.claraa.viewmodel.ProfileViewModel
 import com.indev.claraa.viewmodel.ProfileViewModelFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.launch
 
 class Profile : Fragment() {
 
@@ -45,7 +40,6 @@ class Profile : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
-        var state_name= profileViewModel.getState()
 
         profileViewModel.readAllData.observe(viewLifecycleOwner, Observer {
 
@@ -54,8 +48,7 @@ class Profile : Fragment() {
                 binding.tvShapName.text = it?.shop_name
                 binding.tvEmail.text = it?.email
                 binding.tvMobile.text = it?.mobile_number
-                binding.tvState.text= state_name
-//                binding.tvState.text = it?.state_id
+                profileViewModel.getState(it.state_id)
                 binding.tvDistrict.text = it?.district_id
                 binding.tvAddress.text = it?.address
                 binding.tvPincode.text = it?.pinCode
