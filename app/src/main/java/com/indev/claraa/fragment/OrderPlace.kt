@@ -1,10 +1,12 @@
 package com.indev.claraa.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,7 +17,13 @@ import com.indev.claraa.adapter.CartAdapter
 import com.indev.claraa.databinding.FragmentOrderPlaceBinding
 import com.indev.claraa.databinding.FragmentProfileBinding
 import com.indev.claraa.entities.CartModel
+import com.indev.claraa.ui.AnonmyosActivity
+import com.indev.claraa.ui.HomeScreen
 import com.indev.claraa.viewmodel.*
+import com.razorpay.Checkout
+import com.razorpay.PaymentResultListener
+import org.json.JSONException
+import org.json.JSONObject
 
 class OrderPlace : Fragment(), ClickLinstener{
     private lateinit var binding: FragmentOrderPlaceBinding
@@ -60,7 +68,13 @@ class OrderPlace : Fragment(), ClickLinstener{
             replaceFregment(AddressList())
         }
         binding.toolbar.toolbarTitle.text = "Order Place"
-    }
+
+        binding.btnPlace.setOnClickListener {
+            startActivity(Intent(context, AnonmyosActivity::class.java))
+        }
+
+}
+
 
     override fun updateTextView(amount: Int) {
         binding.tvOrderTotal.text = "₹\u200E" + amount

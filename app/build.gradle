@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace 'com.indev.claraa'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.indev.claraa"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -100,6 +100,7 @@ dependencies {
 
     // Latest version compatible with the old Support Library
     implementation 'com.github.AppIntro:AppIntro:4.2.3'
+    implementation 'com.razorpay:checkout:1.6.4'
 
 
 }

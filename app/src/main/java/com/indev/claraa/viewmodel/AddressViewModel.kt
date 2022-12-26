@@ -4,9 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
-import android.view.View
-import android.widget.AdapterView
 import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.fragment.app.Fragment
@@ -25,7 +22,6 @@ import com.indev.claraa.fragment.AddressList
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.AddressDetailsRepository
-import com.indev.claraa.repository.UserRegistrationRepository
 import com.indev.claraa.ui.HomeScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -67,7 +63,7 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
 
     fun btnSubmit() {
         prefHelper = PrefHelper(context)
-        var user_id = prefHelper.getInt(Constant.PREF_USERID)
+        var user_id = prefHelper.getString(Constant.PREF_USERID)
         local_id = AddressDetailsAdapter.local_id
         id = AddressDetailsAdapter.id
         if(local_id== 0) {
@@ -77,9 +73,9 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
         }
     }
 
-    private fun updateAddress(local_id: Int, id: String, userId: Int) {
+    private fun updateAddress(local_id: Int, id: String, userId: String) {
         addressDetailsModel = AddressDetailsModel(
-            local_id,id,userId,
+            local_id,id,userId.toInt(),
             shopName.get().toString(),
             personName.get().toString(),
             mobNo.get().toString(),
@@ -113,10 +109,10 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
 
 
     @SuppressLint("NewApi")
-    private fun insertAddress(user_id: Int) {
+    private fun insertAddress(user_id: String) {
         if (checkValidation()){
         var id= CommonClass.getUniqueId()
-        addressDetailsModel = AddressDetailsModel(0, id.toString(),user_id,
+        addressDetailsModel = AddressDetailsModel(0, id.toString(),user_id.toInt(),
             shopName.get().toString(),
             personName.get().toString(),
             mobNo.get().toString(),

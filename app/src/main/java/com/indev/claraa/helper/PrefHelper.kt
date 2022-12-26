@@ -38,7 +38,7 @@ class PrefHelper  (context: Context) {
     }
 
     fun getInt(key: String): Int? {
-        return sharedPref.getInt(key.toString(), 0)
+        return sharedPref.getInt(key, 0)
     }
 
     fun clear() {

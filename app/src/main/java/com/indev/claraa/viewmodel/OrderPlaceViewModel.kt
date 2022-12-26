@@ -33,10 +33,10 @@ class OrderPlaceViewModel (val context: Context): ViewModel() {
     fun getCartList(context: Context): LiveData<List<CartModel>>? {
         return ProductRepository.getCartList(context)
     }
-
-    fun btnPlace(){
-        showDialog()
-    }
+//
+//    fun btnPlace(){
+//        showDialog()
+//    }
 
     private fun showDialog() {
         SweetAlertDialog(context)
