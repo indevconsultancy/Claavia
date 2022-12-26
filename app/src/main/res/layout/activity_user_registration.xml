@@ -349,7 +349,7 @@
                                 android:background="@drawable/btn_border"
                                 android:fontFamily="@font/aleo_regular"
                                 android:hint="Enter your Business name"
-                                android:inputType="text"
+                                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                                 android:padding="10dp"
                                 android:text="@={registrationVM.shopName}"
                                 android:textSize="15dp" />
@@ -435,7 +435,6 @@
                                 android:background="@drawable/btn_border"
                                 android:fontFamily="@font/aleo_regular"
                                 android:hint="Enter Email ID"
-                                android:inputType="text"
                                 android:padding="10dp"
                                 android:text="@={registrationVM.email}"
                                 android:textSize="15dp" />

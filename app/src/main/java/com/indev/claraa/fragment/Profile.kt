@@ -42,8 +42,8 @@ class Profile : Fragment() {
         profileViewModel.readAllData.observe(viewLifecycleOwner, Observer {
 
             if(it != null) {
-                binding.tvName.text = it?.user_name
-                binding.tvShapName.text = it?.shop_name
+                binding.tvName.text = it?.owner_name
+                binding.tvShopName.text = it?.shop_name
                 binding.tvEmail.text = it?.email
                 binding.tvMobile.text = it?.mobile_number
                 profileViewModel.getState(it.state_id)

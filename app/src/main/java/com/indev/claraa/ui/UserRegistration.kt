@@ -115,9 +115,9 @@ class UserRegistration : AppCompatActivity() {
             binding.llBottomImage.visibility = View.GONE
             registrationViewModel = ViewModelProvider(this).get(RegistrationViewModel::class.java)
             registrationViewModel.readAllData.observe(this, Observer {
-                binding.btnSubmit.setText("Update")
+                binding.btnSubmit.text = "Update"
                 binding.etShopName.setText(it.shop_name)
-                binding.etUserName.setText(it.user_name)
+                //binding.etUserName.setText(it.user_name)
                 binding.etOwnerName.setText(it.owner_name)
                 binding.etEmail.setText(it.email)
                 binding.etMobile.setText(it.mobile_number)

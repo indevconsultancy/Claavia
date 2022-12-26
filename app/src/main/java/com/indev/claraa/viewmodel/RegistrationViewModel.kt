@@ -137,7 +137,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             prefHelper.getInt(Constant.PREF_USERID)!!,
             shopName.get().toString(),
             ownerName.get().toString(),
-            username.get().toString(),
+            "",
             password.get().toString(),
             email.get().toString(),
             mobNo.get().toString(),

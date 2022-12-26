@@ -123,7 +123,7 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
             etAddress1.get().toString(),AddNewAddress.state_id.toString(),
             AddNewAddress.district_id.toString(),pinCode.get().toString(),
             etAddress2.get().toString(),"","",address_registration_date = CommonClass.currentDate().toString(),
-            landmark.get().toString(),
+            landmark.get().toString()
         )
         viewModelScope.launch {
             AddressDetailsRepository.insertAddressData(context, addressDetailsModel)
