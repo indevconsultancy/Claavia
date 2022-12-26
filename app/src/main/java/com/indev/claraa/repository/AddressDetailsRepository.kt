@@ -71,7 +71,10 @@ class AddressDetailsRepository {
             dataBase = initializeDB(context)
             return dataBase?.userDao()?.getDistrictList()
         }
-
+        fun getsStateName(context: Context, state_id: String): String? {
+            dataBase = initializeDB(context)
+            return dataBase?.userDao()?.getsStateName(state_id)
+        }
 
 
         suspend fun userAddressDetailsAPI(addressDetailsModel: AddressDetailsModel): Int {
