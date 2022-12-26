@@ -46,12 +46,12 @@ class LoginViewModel(val context: Context): ViewModel() {
                 status  = LoginRepository.login(context,loginModel)
                 if (status== 1) {
                     prefHelper.put(Constant.PREF_IS_LOGIN,true)
-                    checkProfileUpdate = prefHelper.getBoolean(Constant.PREF_IS_UPDATE)
-                    if(checkProfileUpdate == true){
+//                    checkProfileUpdate = prefHelper.getBoolean(Constant.PREF_IS_UPDATE)
+//                    if(checkProfileUpdate == true){
                         context.startActivity(Intent(context, HomeScreen::class.java))
-                    }else {
-                        context.startActivity(Intent(context, UserRegistration::class.java))
-                    }
+//                    }else {
+//                        context.startActivity(Intent(context, UserRegistration::class.java))
+//                    }
                     SweetDialog.dismissDialog()
                 } else {
                     Handler(Looper.getMainLooper()).post {

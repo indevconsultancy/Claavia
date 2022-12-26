@@ -21,9 +21,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-        <RelativeLayout
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -223,48 +225,48 @@
 
                         </LinearLayout>
 
-<!--                        <LinearLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="40dp"-->
-<!--                            android:layout_marginTop="10dp"-->
-<!--                            android:orientation="horizontal"-->
-<!--                            android:weightSum="3">-->
+                        <!--                        <LinearLayout-->
+                        <!--                            android:layout_width="match_parent"-->
+                        <!--                            android:layout_height="40dp"-->
+                        <!--                            android:layout_marginTop="10dp"-->
+                        <!--                            android:orientation="horizontal"-->
+                        <!--                            android:weightSum="3">-->
 
-<!--                            <TextView-->
-<!--                                android:id="@+id/Button"-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="40dp"-->
-<!--                                android:layout_marginLeft="5dp"-->
-<!--                                android:layout_marginRight="5dp"-->
-<!--                                android:layout_weight="1"-->
-<!--                                android:background="@drawable/register_border"-->
-<!--                                android:gravity="center"-->
-<!--                                android:text="Male"-->
-<!--                                android:textAllCaps="false" />-->
+                        <!--                            <TextView-->
+                        <!--                                android:id="@+id/Button"-->
+                        <!--                                android:layout_width="match_parent"-->
+                        <!--                                android:layout_height="40dp"-->
+                        <!--                                android:layout_marginLeft="5dp"-->
+                        <!--                                android:layout_marginRight="5dp"-->
+                        <!--                                android:layout_weight="1"-->
+                        <!--                                android:background="@drawable/register_border"-->
+                        <!--                                android:gravity="center"-->
+                        <!--                                android:text="Male"-->
+                        <!--                                android:textAllCaps="false" />-->
 
-<!--                            <TextView-->
-<!--                                android:id="@+id/Button2"-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="40dp"-->
-<!--                                android:layout_marginRight="5dp"-->
-<!--                                android:layout_weight="1"-->
-<!--                                android:background="@drawable/register_border"-->
-<!--                                android:gravity="center"-->
-<!--                                android:text="Female"-->
-<!--                                android:textAllCaps="false" />-->
+                        <!--                            <TextView-->
+                        <!--                                android:id="@+id/Button2"-->
+                        <!--                                android:layout_width="match_parent"-->
+                        <!--                                android:layout_height="40dp"-->
+                        <!--                                android:layout_marginRight="5dp"-->
+                        <!--                                android:layout_weight="1"-->
+                        <!--                                android:background="@drawable/register_border"-->
+                        <!--                                android:gravity="center"-->
+                        <!--                                android:text="Female"-->
+                        <!--                                android:textAllCaps="false" />-->
 
-<!--                            <TextView-->
-<!--                                android:id="@+id/Button3"-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="40dp"-->
-<!--                                android:layout_marginRight="5dp"-->
-<!--                                android:layout_weight="1"-->
-<!--                                android:background="@drawable/register_border"-->
-<!--                                android:gravity="center"-->
-<!--                                android:text="Other"-->
-<!--                                android:textAllCaps="false" />-->
+                        <!--                            <TextView-->
+                        <!--                                android:id="@+id/Button3"-->
+                        <!--                                android:layout_width="match_parent"-->
+                        <!--                                android:layout_height="40dp"-->
+                        <!--                                android:layout_marginRight="5dp"-->
+                        <!--                                android:layout_weight="1"-->
+                        <!--                                android:background="@drawable/register_border"-->
+                        <!--                                android:gravity="center"-->
+                        <!--                                android:text="Other"-->
+                        <!--                                android:textAllCaps="false" />-->
 
-<!--                        </LinearLayout>-->
+                        <!--                        </LinearLayout>-->
 
                         <Button
                             android:id="@+id/btnJoin"
@@ -290,7 +292,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginHorizontal="30dp"
-                        android:layout_marginTop="80dp"
+                        android:layout_marginTop="20dp"
                         android:orientation="vertical"
                         android:visibility="visible">
 
@@ -571,7 +573,7 @@
                                     android:inputType="text"
                                     android:padding="10dp"
                                     android:textColor="@color/black"
-                                    android:textSize="15dp"/>
+                                    android:textSize="15dp" />
                                 <!--                                tools:setOnItemSelectedListener="@{registrationVM.clicksListener}"/>-->
                             </LinearLayout>
 
@@ -616,7 +618,7 @@
                                     android:inputType="text"
                                     android:padding="10dp"
                                     android:textColor="@color/black"
-                                    android:textSize="15dp"/>
+                                    android:textSize="15dp" />
                                 <!--                                tools:setOnItemSelectedListener="@{registrationVM.clickListener}" />-->
 
                             </LinearLayout>
@@ -722,12 +724,12 @@
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginRight="5dp"
                                 android:layout_weight="1"
-                                android:gravity="center"
                                 android:background="@drawable/btn_color_change"
-                                android:text="Male"
-                                android:textColor="@color/white"
+                                android:gravity="center"
                                 android:onClick="@{() ->registrationVM.btnMale()}"
-                                android:textAllCaps="false" />
+                                android:text="Male"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white" />
 
                             <TextView
                                 android:id="@+id/Button2"
@@ -735,12 +737,12 @@
                                 android:layout_height="40dp"
                                 android:layout_marginRight="5dp"
                                 android:layout_weight="1"
-                                android:gravity="center"
-                                android:textColor="@color/white"
                                 android:background="@drawable/btn_color_change"
+                                android:gravity="center"
                                 android:onClick="@{() ->registrationVM.btnFemale()}"
                                 android:text="Female"
-                                android:textAllCaps="false" />
+                                android:textAllCaps="false"
+                                android:textColor="@color/white" />
 
                             <TextView
                                 android:id="@+id/Button3"
@@ -750,10 +752,10 @@
                                 android:layout_weight="1"
                                 android:background="@drawable/btn_color_change"
                                 android:gravity="center"
-                                android:textColor="@color/white"
                                 android:onClick="@{() ->registrationVM.btnOthers()}"
                                 android:text="Other"
-                                android:textAllCaps="false" />
+                                android:textAllCaps="false"
+                                android:textColor="@color/white" />
 
                         </LinearLayout>
 
@@ -766,12 +768,12 @@
                             android:layout_alignParentBottom="true"
                             android:layout_gravity="center"
                             android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
                             android:background="@drawable/submitbutton"
                             android:fontFamily="@font/aleo_regular"
                             android:gravity="center"
                             android:onClick="@{() ->registrationVM.btnSubmit()}"
                             android:text="Submit"
-                            android:layout_marginBottom="20dp"
                             android:textAllCaps="false"
                             android:textColor="@color/white"
                             android:textSize="18dp" />
@@ -783,7 +785,7 @@
 
             </ScrollView>
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <LinearLayout
             android:id="@+id/llBottomImage"
             android:layout_width="match_parent"

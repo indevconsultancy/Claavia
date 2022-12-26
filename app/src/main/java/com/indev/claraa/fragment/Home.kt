@@ -154,7 +154,7 @@ class Home : Fragment(), ClickLinstener {
             .setConfirmClickListener {
                 prefHelper= PrefHelper(requireContext())
                 prefHelper.put( Constant.PREF_IS_LOGIN,false)
-                LoginRepository.prefHelper.put(Constant.PREF_USERID,0)
+                prefHelper.put(Constant.PREF_USERID,0)
                 val intent= Intent(activity, LoginScreen::class.java)
                 startActivity(intent)
             }

@@ -40,6 +40,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
     private var dataBase: RoomDB? = null
     lateinit var prefHelper: PrefHelper
     var etQuantity: ObservableField<String> = ObservableField("")
+    var user_id=0
 
     private fun initializeDB(context: Context): RoomDB? {
         return RoomDB.getDatabase(context)
@@ -76,89 +77,115 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
     @SuppressLint("SuspiciousIndentation", "NewApi")
     fun btnSubmit() {
         dataBase = initializeDB(context)
-        prefHelper= PrefHelper(context)
-
-        var user_id =prefHelper.getInt(Constant.PREF_USERID)!!
-        if(checkValidation()) {
+        prefHelper = PrefHelper(context)
+        user_id = prefHelper.getInt(Constant.PREF_USERID)!!
+        if (checkValidation()) {
             SweetDialog.showProgressDialog(context)
             var checkExitPorduct = 0
             CoroutineScope(Dispatchers.IO).launch {
-                var qty= etQuantity.get().toString()
+                var qty = etQuantity.get().toString()
                 var productID = dataBase?.userDao()?.getproductID(PowerRangeAdapter.power_range)!!
                 checkExitPorduct = dataBase?.userDao()?.isProductRowExist(
                     productID,
                     PowerRangeAdapter.power_range,
-                    packetValue.toString())!!
-                var amount= productMasterArrayList.get(0).price.toInt() * qty.toInt()
-              var id= CommonClass.getUniqueId().toString()
+                    packetValue.toString()
+                )!!
+
                 if (checkExitPorduct == 0) {
-                    cartModel = CartModel(
-                        0,id,
-                        packetValue.toString(),
-                        productID.toString(), user_id,
-                        productMasterArrayList.get(0).product_name,
-                        productMasterArrayList.get(0).product_img1,
-                        productMasterArrayList.get(0).product_img2,
-                        productMasterArrayList.get(0).price,
-                        amount, qty,
-                        productMasterArrayList.get(0).type_id,
-                        productMasterArrayList.get(0).packet_id,
-                        PowerRangeAdapter.power_range,
-                        productMasterArrayList.get(0).currency,
-                        "", "", "", productMasterArrayList.get(0).active
-                    )
-                    viewModelScope.launch {
-                        ProductRepository.insertCartData(context, cartModel)
-                        var last_inserted_id=0
-                        last_inserted_id = ProductRepository.cartInsertAPI(cartModel)
-                        if (last_inserted_id> 0) {
-                            ProductRepository.updateCartId(last_inserted_id,id,context)
-                            Toast.makeText(context, "Added", Toast.LENGTH_LONG).show()
-                            showAlertDialog()
-                        }else {
-                            Handler(Looper.getMainLooper()).post {
-                                Toast.makeText(context, "Something went wrong...", Toast.LENGTH_LONG).show()
-                            }
-                        }
-                    }
+                    insertCart(productID, qty)
                     SweetDialog.dismissDialog()
                 } else {
-                    cartModelArrayList = ProductRepository.getCartDatabyProductId(
-                        productID,
-                        context
-                    ) as ArrayList<CartModel>
-                    var totalAmount =
-                        cartModelArrayList.get(0).amount * (cartModelArrayList.get(0).quantity.toInt() +  qty.toInt())
-                    viewModelScope.launch {
-                        ProductRepository.updateCartProductQuantity(
+                    updateCart(productID, qty)
+                }
+            }
+
+        }
+    }
+
+    @SuppressLint("SuspiciousIndentation")
+    private fun updateCart(productID: Int, qty: String) {
+        cartModelArrayList = ProductRepository.getCartDatabyProductId(
+            productID,
+            context
+        ) as ArrayList<CartModel>
+        var totalAmount = cartModelArrayList.get(0).price.toInt() * (cartModelArrayList.get(0).quantity.toInt() +  qty.toInt())
+            viewModelScope.launch {
+            cartModel = CartModel(
+                cartModelArrayList.get(0).local_id,cartModelArrayList.get(0).id,
+                packetValue.toString(),
+                productID.toString(), user_id,
+                productMasterArrayList.get(0).product_name,
+                productMasterArrayList.get(0).product_img1,
+                productMasterArrayList.get(0).product_img2,
+                productMasterArrayList.get(0).price,
+                totalAmount,
+                (cartModelArrayList.get(0).quantity.toInt() + qty.toInt()).toString(),
+                productMasterArrayList.get(0).type_id,
+                productMasterArrayList.get(0).packet_id,
+                PowerRangeAdapter.power_range,
+                productMasterArrayList.get(0).currency,
+                "", "", "", productMasterArrayList.get(0).active
+            )
+
+            /*   ProductRepository.updateCartProductQuantity(
                             cartModelArrayList.get(0).quantity.toInt() + qty.toInt(),
                             totalAmount,
                             cartModelArrayList.get(0).local_id,
-                            context)
-                        var last_updated_id=0
-                        last_updated_id = ProductRepository.cartUpdateApi(cartModel)
-                        if (last_updated_id> 0) {
-                            Toast.makeText(context, "Updated", Toast.LENGTH_LONG).show()
-                            showAlertDialog()
-                        }else {
-                            Handler(Looper.getMainLooper()).post {
-                                Toast.makeText(context, "Something went wrong...", Toast.LENGTH_LONG).show()
-                            }
-                        }
-                    }
-                    SweetDialog.dismissDialog()
+                            context)*/
+            ProductRepository.updateCartProduct(cartModel, context)
+            var last_updated_id=0
+            last_updated_id = ProductRepository.cartUpdateApi(cartModel)
+            if (last_updated_id> 0) {
 
-
-
-                    Handler(Looper.getMainLooper()).post {
-                        showAlertDialog()
-                    }
+                Toast.makeText(context, "Updated", Toast.LENGTH_LONG).show()
+                showAlertDialog()
+                Handler(Looper.getMainLooper()).post {
+                    showAlertDialog()
+                }
+            }else {
+                Handler(Looper.getMainLooper()).post {
+                    Toast.makeText(context, "Something went wrong...", Toast.LENGTH_LONG).show()
                 }
             }
         }
-
+        SweetDialog.dismissDialog()
     }
 
+    @SuppressLint("NewApi")
+    private fun insertCart(productID: Int, qty: String) {
+        var amount= productMasterArrayList.get(0).price.toInt() * qty.toInt()
+        var id= CommonClass.getUniqueId().toString()
+        cartModel = CartModel(
+            0,id,
+            packetValue.toString(),
+            productID.toString(), user_id,
+            productMasterArrayList.get(0).product_name,
+            productMasterArrayList.get(0).product_img1,
+            productMasterArrayList.get(0).product_img2,
+            productMasterArrayList.get(0).price,
+            amount,
+            qty,
+            productMasterArrayList.get(0).type_id,
+            productMasterArrayList.get(0).packet_id,
+            PowerRangeAdapter.power_range,
+            productMasterArrayList.get(0).currency,
+            "", "", "", productMasterArrayList.get(0).active
+        )
+        viewModelScope.launch {
+            ProductRepository.insertCartData(context, cartModel)
+            var last_inserted_id=0
+            last_inserted_id = ProductRepository.cartInsertAPI(cartModel)
+            if (last_inserted_id> 0) {
+                ProductRepository.updateCartId(last_inserted_id,id,context)
+                Toast.makeText(context, "Added", Toast.LENGTH_LONG).show()
+                showAlertDialog()
+            }else {
+                Handler(Looper.getMainLooper()).post {
+                    Toast.makeText(context, "Something went wrong...", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+    }
     private fun showAlertDialog() {
         SweetAlertDialog(context)
             .setContentText("Added Product successfully in Cart")

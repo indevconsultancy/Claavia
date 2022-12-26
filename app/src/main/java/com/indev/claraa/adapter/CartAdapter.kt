@@ -1,8 +1,9 @@
 package com.indev.claraa.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.text.Editable
-import android.text.TextWatcher
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +16,12 @@ import com.indev.claraa.R
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
+import com.indev.claraa.repository.AddressDetailsRepository
 import com.indev.claraa.repository.ProductRepository
 import com.indev.claraa.restApi.ClientApi
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class CartAdapter(val context: Context, var cartModelList: List<CartModel>, private val listener: ClickLinstener) : RecyclerView.Adapter<CartAdapter.MyViewholder>(){
@@ -34,6 +39,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
         return MyViewholder(itemView)
     }
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onBindViewHolder(holder: MyViewholder, position: Int) {
         val currentItem = cartModelList[position]
         holder.tvRange.text ="Power range: " + currentItem.power_range
@@ -43,6 +49,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
         totalProduct = count
         prefHelper= PrefHelper(context)
         check_cart_list=prefHelper.getBoolean(Constant.PREF_IS_CHECK_CART)
+
         if(check_cart_list == true){
             holder.llButton.visibility =View.GONE
         }else{
@@ -51,46 +58,45 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
 
         holder.etQuantity.setText(count.toString())
 
-//        holder.etQuantity.addTextChangedListener(object : TextWatcher {
-//            override fun onTextChanged(
-//                s: CharSequence, start: Int,
-//                before: Int, count: Int
-//            ) {
-//                //setting data to array, when changed
-//                // this is a semplified example in the actual app i save the text
-//                // in  a .txt in the external storage
-//
-//                isTextChanged= true
-//
-//            }
-//
-//            override fun beforeTextChanged(
-//                s: CharSequence, start: Int,
-//                count: Int, after: Int
-//            ) {
-//            }
-//
-//            override fun afterTextChanged(s: Editable) {
-//
-//                if(isTextChanged){
-//                    isTextChanged =false
-//
-//                    var qty= s.toString()
-//                    totalPrice= currentItem.price.toInt() * qty.toInt()
-//                    if(qty.toInt() > 1) {
-//                        ProductRepository.updateCartProductQuantity(
-//                            qty.toInt(),
-//                            totalPrice,
-//                            currentItem.local_id,
-//                            context
-//                        )
-//
-//
-//                    }
-//                }
-//            }
-//        })
+       /*     holder.etQuantity.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
+                //setting data to array, when changed
+                // this is a semplified example in the actual app i save the text
+                // in  a .txt in the external storage
 
+                isTextChanged= true
+
+            }
+
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int
+            ) {
+            }
+
+            override fun afterTextChanged(s: Editable) {
+
+                if(isTextChanged){
+                    isTextChanged =false
+
+                    var qty= s.toString()
+                    totalPrice= currentItem.price.toInt() * qty.toInt()
+                    if(qty.toInt() > 1) {
+                        ProductRepository.updateCartProductQuantity(
+                            qty.toInt(),
+                            totalPrice,
+                            currentItem.local_id,
+                            context
+                        )
+
+
+                    }
+                }
+            }
+        })*/
        /* holder.addButton.setOnClickListener {
             count= currentItem.quantity.toInt()
 
@@ -107,7 +113,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
 
 
       holder.btnDelete.setOnClickListener{
-            deletePopupShow(currentItem.local_id)
+            deletePopupShow(currentItem.id)
             notifyDataSetChanged()
         }
 
@@ -145,25 +151,42 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
             holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_remove_24));
         }*/
 //        holder.tvCount.setText("" + count)
-        holder.tvPrice.text = currentItem.currency +" "+ currentItem.amount.toString()
 
+        holder.tvPrice.text = currentItem.currency +" "+ currentItem.amount.toString()
         totalAmount= grandTotal(cartModelList)
         listener.updateTextView(totalAmount)
     }
 
-    private fun deletePopupShow(id: Int) {
+    private fun deletePopupShow(id: String) {
         SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE).setTitleText("")
             .setContentText("Are you sure you want to delete form the cart?").setCancelText("Cancel")
             .setConfirmText("Ok")
             .setConfirmClickListener { sDialog ->
                 listener.updateTextView(0)
-                ProductRepository.deleteProductData(id,context)
+                deleteCartProduct(id)
                 sDialog.dismiss()
             }
             .showCancelButton(true)
             .setCancelClickListener { sDialog -> // Showing simple toast message to user
                 sDialog.cancel()
             }.show()
+    }
+
+    private fun deleteCartProduct(id: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            ProductRepository.deleteProductData(id,context)
+            var last_id=0
+            last_id = ProductRepository.cartProductDelete(id)
+            if (last_id> 0) {
+                Handler(Looper.getMainLooper()).post {
+                    Toast.makeText(context, "Successfully Deleted...", Toast.LENGTH_LONG).show()
+                }
+            } else {
+                Handler(Looper.getMainLooper()).post {
+                    Toast.makeText(context, "Something went wrong", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 
     private fun grandTotal(size: List<CartModel>): Int {

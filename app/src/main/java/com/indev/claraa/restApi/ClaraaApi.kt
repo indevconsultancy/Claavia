@@ -1,6 +1,7 @@
 package com.indev.claraa.restApi
 
 import com.google.gson.JsonArray
+import com.indev.claraa.apiResponse.DeleteAPIResponse
 import com.indev.claraa.apiResponse.InsertAPIResponse
 import com.indev.claraa.apiResponse.LoginResponse
 import com.indev.claraa.apiResponse.UpdateAPIResponse
@@ -32,7 +33,7 @@ interface ClaraaApi {
     suspend fun updateAddress(@Body addressDetailsModel: AddressDetailsModel,@Header("Authorization") authorization:Any):  Response<UpdateAPIResponse>
 
     @POST("address_delete.php")
-    suspend fun deleteAddress(@Body id: String,@Header("Authorization") authorization:Any):  Response<InsertAPIResponse>
+    suspend fun deleteAddress(@Body id: String,@Header("Authorization") authorization:Any):  Response<DeleteAPIResponse>
 
     @POST("cart_insert.php")
     suspend fun cartInsertAPI(@Body cartModel: CartModel,@Header("Authorization") authorization:Any): Response<InsertAPIResponse>
@@ -40,8 +41,7 @@ interface ClaraaApi {
     @POST("cart_update.php")
     suspend fun cartUpdateAPI(@Body cartModel: CartModel,@Header("Authorization") authorization:Any):  Response<UpdateAPIResponse>
 
-    @POST("address_delete.php")
-    suspend fun deleteCartAPI(@Body id: String,@Header("Authorization") authorization:Any):  Response<InsertAPIResponse>
-
+    @POST("cart_delete.php")
+    suspend fun deleteCartAPI(@Body id: String,@Header("Authorization") authorization:Any):  Response<DeleteAPIResponse>
 
 }

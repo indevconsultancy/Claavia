@@ -7,6 +7,8 @@ class Constant {
         val PREF_IS_CHECK_CART = "PREF_IS_CHECK_CART"
         val PREF_SPLASH= "PREF_SPLASH"
         val PREF_USERID = "PREF_USERID"
+        val PREF_STATEID = "PREF_USERID"
+        val PREF_DISTRICTID = "PREF_USERID"
         val PREF_PASSWORD = "PREF_PASSWORD"
     }
 }

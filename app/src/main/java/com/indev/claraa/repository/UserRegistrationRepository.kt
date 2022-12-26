@@ -3,6 +3,7 @@ package com.indev.claraa.repository
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
+import com.indev.claraa.entities.AddressDetailsModel
 import com.indev.claraa.entities.DistrictModel
 import com.indev.claraa.entities.StateModel
 import com.indev.claraa.entities.UserRegistrationModel
@@ -18,6 +19,7 @@ class UserRegistrationRepository {
     companion object {
         private var dataBase: RoomDB? = null
         val apiInterface = ClientApi.getClient()?.create(ClaraaApi::class.java)
+        var stateName=""
 
         private fun initializeDB(context: Context): RoomDB? {
             return RoomDB.getDatabase(context)
@@ -46,10 +48,16 @@ class UserRegistrationRepository {
             return dataBase?.userDao()?.getDistrictList()
         }
 
+         fun getsStateName(context: Context, state_id: String): String? {
+            dataBase = initializeDB(context)
+            return dataBase?.userDao()?.getsStateName(state_id)
+             Log.e("TAG", "getsStateName: "+ dataBase?.userDao()?.getsStateName(state_id) )
+        }
+
         fun updateData(context: Context, userRegistrationTable: UserRegistrationModel){
             dataBase = initializeDB(context)
             CoroutineScope(Dispatchers.IO).launch {
-                dataBase?.userDao()?.update(userRegistrationTable)
+                dataBase?.userDao()?.updateUser(userRegistrationTable)
             }
         }
 

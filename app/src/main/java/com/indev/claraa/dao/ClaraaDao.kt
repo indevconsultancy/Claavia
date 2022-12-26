@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.indev.claraa.entities.*
+import com.indev.claraa.helper.Constant
 import org.jetbrains.annotations.NotNull
 
 @Dao
@@ -47,6 +48,8 @@ interface ClaraaDao {
    @Query("SELECT * FROM address where local_id= :id")
     fun getAddressDatabyLocalID(id : Int) : LiveData<AddressDetailsModel>
 
+    @Query("select state_name from state_master where state_id= :state_id")
+    fun getsStateName(state_id: String): String
 
     @Query("SELECT * FROM user_master")
     fun getRegistrationData() : LiveData<UserRegistrationModel>
@@ -58,7 +61,10 @@ interface ClaraaDao {
     fun getDistrictList() : List<DistrictModel>
 
     @Update
-    fun update(userRegistrationTable: UserRegistrationModel)
+    fun updateUser(userRegistrationTable: UserRegistrationModel)
+
+    @Update
+    fun updateCartProduct(cartModel: CartModel)
 
     @NotNull
     @Insert
@@ -99,8 +105,8 @@ interface ClaraaDao {
     @Query("DELETE FROM product_packet")
     fun deleteAllProductPackets()
 
-    @Query("DELETE FROM cart WHERE local_id = :cartId")
-    fun deleteByProductId(cartId: Int)
+    @Query("DELETE FROM cart WHERE id = :cartId")
+    fun deleteByProductId(cartId: String)
 
     @Query("UPDATE cart SET quantity = :quantity , amount = :totalPrice WHERE local_id = :id")
     fun updateCartProductQuantity(quantity: Int, totalPrice: Int, id: Int): Int

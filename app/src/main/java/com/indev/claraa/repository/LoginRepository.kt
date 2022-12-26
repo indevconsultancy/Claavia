@@ -22,19 +22,23 @@ class LoginRepository {
         private fun initializeDB(context: Context): RoomDB?{
             return RoomDB.getDatabase(context)
         }
+
+
         suspend fun login(context: Context,loginModel: LoginModel): Int {
             val userProfileArray= ArrayList<UserProfileRespose>()
 
             dataBase = initializeDB(context)
+            prefHelper= PrefHelper(context)
 
             try {
-                prefHelper= PrefHelper(context)
                 var result = apiInterface?.login(loginModel)
                 return if (result?.body()?.status==1){
                     dataBase?.userDao()?.deleteUserMasterTable()
                     userProfileArray.addAll(result?.body()!!.profile_data)
                     for (i in 0 until userProfileArray.size) {
                         prefHelper.put(Constant.PREF_USERID,userProfileArray[i].user_id)
+                        prefHelper.put(Constant.PREF_STATEID,userProfileArray[i].state_id)
+                        prefHelper.put(Constant.PREF_DISTRICTID,userProfileArray[i].district_id)
                         val user_profile = UserRegistrationModel(userProfileArray[i].user_id,userProfileArray[i].shop_name,userProfileArray[i].owner_name,userProfileArray[i].user_name,userProfileArray[i].email,userProfileArray[i].mobile_number,userProfileArray[i].address,  userProfileArray[i].state_id, userProfileArray[i].district_id,userProfileArray[i].active,userProfileArray[i].register_date,"","","","",userProfileArray[i].pinCode)
                         dataBase?.userDao()?.insertUserData(user_profile)
                     }

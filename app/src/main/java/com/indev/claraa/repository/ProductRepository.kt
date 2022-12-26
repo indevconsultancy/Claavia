@@ -54,7 +54,7 @@ class ProductRepository {
             return dataBase?.userDao()?.getCartDatabyProductId(productId)
         }
 
-        fun deleteProductData(cartId: Int,context: Context){
+        fun deleteProductData(cartId: String,context: Context){
             dataBase = initializeDB(context)
             CoroutineScope(Dispatchers.IO).launch {
                 dataBase?.userDao()?.deleteByProductId(cartId)
@@ -66,6 +66,14 @@ class ProductRepository {
 
             CoroutineScope(Dispatchers.IO).launch {
                 dataBase?.userDao()?.updateCartProductQuantity(quantity,totalPrice,cartId)
+            }
+        }
+
+        fun updateCartProduct(cartModel: CartModel, context: Context){
+            dataBase = initializeDB(context)
+
+            CoroutineScope(Dispatchers.IO).launch {
+                dataBase?.userDao()?.updateCartProduct(cartModel)
             }
         }
 
@@ -82,6 +90,21 @@ class ProductRepository {
                 var result = apiInterface?.cartInsertAPI(cartModel, "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjcxODY0MjEyLCJuYmYiOjE2NzE4NjQyMjIsImV4cCI6MTY3NDQ1NjI3MiwiZGF0YSI6eyJ1c2VyX2lkIjpudWxsLCJ1c2VyX25hbWUiOiJBbWl0IiwibW9iaWxlX251bWJlciI6bnVsbH19.Xu-4QUrTmQQpQTlQHr8UfSQxNRTBO4Wb2twDcgd5gCU")
                 return if (result?.body()?.status==1){
                     result?.body()!!.last_insert_id
+                } else {
+                    0
+                }
+            } catch (e: Exception) {
+                Log.d("fail", "$e")
+            }
+            return 0
+        }
+
+
+        suspend fun cartProductDelete(id: String): Int {
+            try {
+                var result = apiInterface?.deleteCartAPI(id, "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjcxODgwMzM0LCJuYmYiOjE2NzE4ODAzNDQsImV4cCI6MTY3NDQ3MjM5NCwiZGF0YSI6eyJ1c2VyX2lkIjpudWxsLCJ1c2VyX25hbWUiOiJBbWl0IiwibW9iaWxlX251bWJlciI6bnVsbH19.2AOPDJH7mBFeOzxjGKBAFcoXliWfKvDHUjtbt2GYie8")
+                return if (result?.body()?.status==1){
+                    1
                 } else {
                     0
                 }
