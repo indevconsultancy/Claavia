@@ -13,6 +13,7 @@ import com.indev.claraa.entities.AddressDetailsModel
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.UserRegistrationModel
 import com.indev.claraa.fragment.Home
+import com.indev.claraa.fragment.PaymentGateway
 import com.indev.claraa.fragment.Refer
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
@@ -33,10 +34,10 @@ class OrderPlaceViewModel (val context: Context): ViewModel() {
     fun getCartList(context: Context): LiveData<List<CartModel>>? {
         return ProductRepository.getCartList(context)
     }
-//
-//    fun btnPlace(){
-//        showDialog()
-//    }
+
+    fun btnPlace(){
+        replaceFregment(PaymentGateway())
+    }
 
     private fun showDialog() {
         SweetAlertDialog(context)

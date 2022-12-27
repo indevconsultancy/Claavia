@@ -13,7 +13,6 @@ import org.json.JSONObject
 
 class AnonmyosActivity : AppCompatActivity(), PaymentResultListener {
 
-
     lateinit var btnPay: Button
 
     @SuppressLint("MissingInflatedId")
@@ -23,7 +22,6 @@ class AnonmyosActivity : AppCompatActivity(), PaymentResultListener {
         btnPay = findViewById(R.id.btnPay)
         btnPay.setOnClickListener {
             val amt = 1
-
             // rounding off the amount.
             val amount = Math.round(amt.toFloat() * 100).toInt()
 

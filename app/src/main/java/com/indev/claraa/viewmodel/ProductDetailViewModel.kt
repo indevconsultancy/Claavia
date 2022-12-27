@@ -224,6 +224,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
     fun getPruductPowerList(context: Context, selectedProduct: String): LiveData<List<ProductMasterModel>>? {
         return ProductRepository.getPowerList(context,selectedProduct)
     }
+
 //
 //    fun clickRangeOptionEvent(pair: Pair<String, String>) {
 //        optionSelectedListener.value = pair

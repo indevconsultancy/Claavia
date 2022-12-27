@@ -67,12 +67,8 @@ class OrderPlace : Fragment(), ClickLinstener{
         binding.toolbar.backClick.setOnClickListener(){
             replaceFregment(AddressList())
         }
+
         binding.toolbar.toolbarTitle.text = "Order Place"
-
-        binding.btnPlace.setOnClickListener {
-            startActivity(Intent(context, AnonmyosActivity::class.java))
-        }
-
 }
 
 

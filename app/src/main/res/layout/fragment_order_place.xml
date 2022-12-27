@@ -105,13 +105,13 @@
 
 
             <Button
-                android:id="@+id/btnPlace"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="bottom"
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:text="Proceed to Checkout"
                 android:textAllCaps="false"
+                android:onClick="@{() ->orderPlaceVM.btnPlace()}"
                 android:textColor="@color/white" />
         </RelativeLayout>
 

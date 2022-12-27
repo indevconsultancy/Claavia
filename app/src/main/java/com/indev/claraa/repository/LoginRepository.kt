@@ -36,7 +36,7 @@ class LoginRepository {
                     dataBase?.userDao()?.deleteUserMasterTable()
                     userProfileArray.addAll(result?.body()!!.profile_data)
                     for (i in 0 until userProfileArray.size) {
-                        prefHelper.put(Constant.PREF_USERID,userProfileArray[i].user_id)
+                        prefHelper.put(Constant.PREF_USERID,userProfileArray[i].user_id.toString())
                         prefHelper.put(Constant.PREF_TOKEN,result?.body()?.Token!!)
 //                        prefHelper.put(Constant.PREF_STATEID,userProfileArray[i].state_id)
 //                        prefHelper.put(Constant.PREF_DISTRICTID,userProfileArray[i].district_id)
