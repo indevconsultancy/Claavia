@@ -28,6 +28,7 @@ import org.json.JSONObject
 class PaymentGateWayeViewModel (val context: Context): ViewModel() , PaymentResultListener {
 
     lateinit var cartArrayList: ArrayList<CartModel>
+    lateinit var orderDetailsArrayList: ArrayList<OrderDetailsModel>
     lateinit var orderMasterModel: OrderMasterModel
     lateinit var orderDetailsModel: OrderDetailsModel
     lateinit var prefHelper: PrefHelper
@@ -153,13 +154,14 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() , PaymentResu
     }
 
     private fun callOrderAPI(s: String?) {
-        viewModelScope.launch {
-            var last_id=0
+
             CoroutineScope(Dispatchers.IO).launch {
+                var last_id=0
+                orderDetailsArrayList = PaymentGatewayRepository.getOrderDetailsList(context) as ArrayList<OrderDetailsModel>
                 last_id = PaymentGatewayRepository.insertOrderMasterAPI(context,orderMasterModel)
                 if (last_id> 0) {
-                    for(i in cartArrayList) {
-                      var  lasts_id = PaymentGatewayRepository.insertOrderDetailAPI(context,orderDetailsModel)
+                    for(i in orderDetailsArrayList) {
+                      var  lasts_id = PaymentGatewayRepository.insertOrderDetailAPI(context,i)
                         if (lasts_id> 0) {
 //                    PaymentGatewayRepository.updateAddressId(last_id,id.toString(), context)
                             Handler(Looper.getMainLooper()).post {
@@ -180,20 +182,8 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() , PaymentResu
                     Handler(Looper.getMainLooper()).post {
                         Toast.makeText(context, "" + s, Toast.LENGTH_LONG).show()
                     }
-
                 }
             }
-        }
-
-    }
-
-    private fun callOrderDetailsAPI() {
-        viewModelScope.launch {
-            var last_id=0
-            CoroutineScope(Dispatchers.IO).launch {
-
-            }
-        }
     }
 
     override fun onPaymentError(p0: Int, s: String?) {

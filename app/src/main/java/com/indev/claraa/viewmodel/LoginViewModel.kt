@@ -11,7 +11,6 @@ import androidx.lifecycle.viewModelScope
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.indev.claraa.SweetDialog
 import com.indev.claraa.entities.LoginModel
-import com.indev.claraa.fragment.Home
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.LoginRepository
@@ -46,6 +45,9 @@ class LoginViewModel(val context: Context): ViewModel() {
                 status  = LoginRepository.login(context,loginModel)
                 if (status== 1) {
                     prefHelper.put(Constant.PREF_IS_LOGIN,true)
+                    var user_id = LoginRepository.prefHelper.getString(Constant.PREF_USERID)!!
+
+                    LoginRepository.insertDataAddress(context, user_id)
 //                    checkProfileUpdate = prefHelper.getBoolean(Constant.PREF_IS_UPDATE)
 //                    if(checkProfileUpdate == true){
                         context.startActivity(Intent(context, HomeScreen::class.java))

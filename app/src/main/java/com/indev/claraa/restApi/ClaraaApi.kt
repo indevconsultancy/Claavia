@@ -1,10 +1,7 @@
 package com.indev.claraa.restApi
 
 import com.google.gson.JsonArray
-import com.indev.claraa.apiResponse.DeleteAPIResponse
-import com.indev.claraa.apiResponse.InsertAPIResponse
-import com.indev.claraa.apiResponse.LoginResponse
-import com.indev.claraa.apiResponse.UpdateAPIResponse
+import com.indev.claraa.apiResponse.*
 import com.indev.claraa.entities.*
 import retrofit2.Response
 import retrofit2.http.Body
@@ -49,5 +46,8 @@ interface ClaraaApi {
 
     @POST("orderdetails_insert.php")
     suspend fun insertOrderDetailAPI(@Body orderDetailsModel: OrderDetailsModel,@Header("Authorization") authorization:Any): Response<InsertAPIResponse>
+
+    @POST("address_download.php")
+    suspend fun addressDownloadAPI(@Body user_id: String,@Header("Authorization") authorization:Any):  Response<AddressAPIResponse>
 
 }

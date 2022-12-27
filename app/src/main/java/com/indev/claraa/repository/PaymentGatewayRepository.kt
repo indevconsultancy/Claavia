@@ -32,6 +32,11 @@ class PaymentGatewayRepository {
             return dataBase?.userDao()?.getCartList()
         }
 
+        fun getOrderDetailsList(context: Context): List<OrderDetailsModel>? {
+            dataBase = initializeDB(context)
+            return dataBase?.userDao()?.getOrderDetailsList()
+        }
+
 
         fun insertOrderMaster(context: Context, orderMasterModel: OrderMasterModel){
             dataBase = initializeDB(context)
