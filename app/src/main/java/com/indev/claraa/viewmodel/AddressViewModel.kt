@@ -10,9 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.CommonClass
 import com.indev.claraa.R
+import com.indev.claraa.SweetDialog
 import com.indev.claraa.adapter.AddressDetailsAdapter
 import com.indev.claraa.entities.AddressDetailsModel
 import com.indev.claraa.entities.DistrictModel
@@ -90,7 +92,7 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
             AddressDetailsRepository.editAddress(addressDetailsModel, context)
             var last_id=0
             CoroutineScope(Dispatchers.IO).launch {
-                last_id = AddressDetailsRepository.addressUpdateApi(addressDetailsModel)
+                last_id = AddressDetailsRepository.addressUpdateApi(context,addressDetailsModel)
                 if (last_id> 0) {
                     replaceFregment(AddressList())
 
@@ -111,6 +113,7 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
     @SuppressLint("NewApi")
     private fun insertAddress(user_id: String) {
         if (checkValidation()){
+            SweetDialog.showProgressDialog(context)
         var id= CommonClass.getUniqueId()
         addressDetailsModel = AddressDetailsModel(0, id.toString(),user_id.toInt(),
             shopName.get().toString(),
@@ -138,7 +141,9 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
                     }
 
                 }
+                SweetDialog.dismissDialog()
             }
+
         }
         }
     }

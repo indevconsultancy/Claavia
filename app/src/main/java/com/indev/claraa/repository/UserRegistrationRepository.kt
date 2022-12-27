@@ -1,12 +1,15 @@
 package com.indev.claraa.repository
 
 import android.content.Context
+import android.media.session.MediaSession.Token
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.indev.claraa.entities.AddressDetailsModel
 import com.indev.claraa.entities.DistrictModel
 import com.indev.claraa.entities.StateModel
 import com.indev.claraa.entities.UserRegistrationModel
+import com.indev.claraa.helper.Constant
+import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.restApi.ClaraaApi
 import com.indev.claraa.restApi.ClientApi
 import com.indev.claraa.roomdb.RoomDB
@@ -20,6 +23,7 @@ class UserRegistrationRepository {
         private var dataBase: RoomDB? = null
         val apiInterface = ClientApi.getClient()?.create(ClaraaApi::class.java)
         var stateName=""
+        lateinit var prefHelper: PrefHelper
 
         private fun initializeDB(context: Context): RoomDB? {
             return RoomDB.getDatabase(context)
@@ -78,9 +82,11 @@ class UserRegistrationRepository {
             return 0
         }
 
-        suspend fun userProfileUpdateAPI(userRegistrationTable: UserRegistrationModel): Int {
+        suspend fun userProfileUpdateAPI(context: Context,userRegistrationTable: UserRegistrationModel): Int {
             try {
-                var result = apiInterface?.updateProfile(userRegistrationTable,"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjcwNTg0ODU3LCJuYmYiOjE2NzA1ODQ4NjcsImV4cCI6MTY3MDU4NDk3NywiZGF0YSI6eyJ1c2VyX2lkIjpudWxsLCJ1c2VyX25hbWUiOiJBbWl0IiwibW9iaWxlX251bWJlciI6bnVsbH19.t4EewAXitIlvC8dFadv_dM9TQ6gcyRA6-eex-j2Z-cQ")
+                prefHelper = PrefHelper(context)
+                var token="Bearer " + prefHelper.getString(Constant.PREF_TOKEN)
+                var result = apiInterface?.updateProfile(userRegistrationTable,token!!)
                 return if (result?.body()?.status==1){
                     result?.body()!!.updated_id
                 } else {

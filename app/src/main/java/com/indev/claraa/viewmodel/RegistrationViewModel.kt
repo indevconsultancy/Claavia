@@ -99,7 +99,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
                 CoroutineScope(Dispatchers.IO).launch {
                     UserRegistrationRepository.updateData(context, userRegistrationTable)
                     var last_user_id=0
-                    last_user_id = UserRegistrationRepository.userProfileUpdateAPI(userRegistrationTable)
+                    last_user_id = UserRegistrationRepository.userProfileUpdateAPI(context,userRegistrationTable)
                     if (last_user_id> 0) {
                         context.startActivity(Intent(context, HomeScreen::class.java))
                         Handler(Looper.getMainLooper()).post {
@@ -130,8 +130,11 @@ class RegistrationViewModel (val context: Context): ViewModel() {
 
     @SuppressLint("SuspiciousIndentation")
     fun btnSubmit(){
-       // SweetDialog.showProgressDialog(context)
+        prefHelper = PrefHelper(context)
+        checkLogin = prefHelper.getBoolean(Constant.PREF_IS_LOGIN)
+
         if(checkValidation()) {
+            if (checkLogin == false) {
             SweetDialog.showProgressDialog(context)
             prefHelper = PrefHelper(context)
             userRegistrationTable = UserRegistrationModel(
@@ -144,8 +147,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             mobNo.get().toString(),
             etAddress.get().toString(),
             UserRegistration.state_id.toString(),
-            UserRegistration.district_id.toString(),"",
-            register_date = CommonClass.currentDate().toString(), gender, "", "",
+            UserRegistration.district_id.toString(),"", CommonClass.currentDate().toString(), gender, "", "",
             pinCode.get().toString()
         )
         viewModelScope.launch {
@@ -170,6 +172,51 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             SweetDialog.dismissDialog()
             }
                }
+        }
+        else {
+            userRegistrationTable = UserRegistrationModel(
+                prefHelper.getInt(Constant.PREF_USERID)!!,
+                shopName.get().toString(),
+                ownerName.get().toString(),
+                username.get().toString(),
+                "",
+                email.get().toString(),
+                mobNo.get().toString(),
+                etAddress.get().toString(),
+                UserRegistration.state_id.toString(),
+                UserRegistration.district_id.toString(),
+                etAddress.get().toString(),CommonClass.currentDate().toString(),gender, "", "",
+                pinCode.get().toString()
+            )
+            userRegistrationTable.shop_name = shopName.get().toString()
+            userRegistrationTable.user_name = username.get().toString()
+            userRegistrationTable.owner_name = ownerName.get().toString()
+            userRegistrationTable.email = email.get().toString()
+            userRegistrationTable.mobile_number = mobNo.get().toString()
+            userRegistrationTable.address = etAddress.get().toString()
+            userRegistrationTable.state_id = UserRegistration.state_id.toString()
+            userRegistrationTable.district_id = UserRegistration.district_id.toString()
+            userRegistrationTable.pinCode = pinCode.get().toString()
+
+            viewModelScope.launch {
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    UserRegistrationRepository.updateData(context, userRegistrationTable)
+                    var last_user_id=0
+                    last_user_id = UserRegistrationRepository.userProfileUpdateAPI(context,userRegistrationTable)
+                    if (last_user_id> 0) {
+                        context.startActivity(Intent(context, HomeScreen::class.java))
+                        Handler(Looper.getMainLooper()).post {
+                            Toast.makeText(context, "Successfully Updated..", Toast.LENGTH_LONG).show()
+                        }
+                    } else {
+                        Handler(Looper.getMainLooper()).post {
+                            Toast.makeText(context, "Something went wrong..", Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }
+            }
+        }
     }
 
     fun getStateList(context: Context): List<StateModel>? {

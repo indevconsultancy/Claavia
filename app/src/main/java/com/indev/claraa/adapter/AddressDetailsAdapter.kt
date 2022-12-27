@@ -70,7 +70,7 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
         CoroutineScope(Dispatchers.IO).launch {
             AddressDetailsRepository.deleteAddress(id,context)
             var last_id=0
-            last_id = AddressDetailsRepository.addressDeleteApi(id)
+            last_id = AddressDetailsRepository.addressDeleteApi(context,id)
             if (last_id> 0) {
                 replaceFregment(AddressList())
                 Handler(Looper.getMainLooper()).post {
