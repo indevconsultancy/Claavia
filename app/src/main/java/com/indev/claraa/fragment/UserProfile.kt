@@ -13,9 +13,9 @@ import com.indev.claraa.databinding.FragmentProfileBinding
 import com.indev.claraa.viewmodel.ProfileViewModel
 import com.indev.claraa.viewmodel.ProfileViewModelFactory
 
-class Profile : Fragment() {
+class UserProfile : Fragment() {
 
-    private lateinit var binding: FragmentProfileBinding
+     lateinit var binding: FragmentProfileBinding
      lateinit var profileViewModel: ProfileViewModel
 
 

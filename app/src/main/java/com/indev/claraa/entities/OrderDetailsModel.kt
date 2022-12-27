@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "order_details")
 data class OrderDetailsModel(@PrimaryKey(autoGenerate = true)
                             val local_id: Int,
-                            val id: Int,
+                            val id: String,
                             val order_id: String,
                             val product_id: String,
                             val price: Int,

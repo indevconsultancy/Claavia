@@ -18,7 +18,6 @@ import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
 import com.indev.claraa.adapter.ProductMasterAdapter
 import com.indev.claraa.databinding.FragmentHomeBinding
-import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.ProductMasterModel
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
@@ -104,7 +103,7 @@ class Home : Fragment(), ClickLinstener {
         binding.navigationMenu.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.profile ->{
-                    replaceFregment(Profile())
+                    replaceFregment(UserProfile())
                 }R.id.order ->{
                 replaceFregment(Cart())
             }R.id.refer ->{

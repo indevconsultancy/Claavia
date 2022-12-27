@@ -9,14 +9,14 @@ import java.util.*
 class CommonClass {
 
     companion object {
-        var currentDateandTime = ""
+        var unique_id = ""
 
         @SuppressLint("NewApi")
         @RequiresApi(Build.VERSION_CODES.N)
         fun getUniqueId(): String? {
-            val sdf = SimpleDateFormat("mmddMMYYYY", Locale.getDefault())
-            currentDateandTime = sdf.format(Date())
-            return currentDateandTime
+            val sdf = SimpleDateFormat("ssmmddMMYYYY", Locale.getDefault())
+            unique_id = sdf.format(Date())
+            return unique_id
         }
 
         fun currentDate(): String? {

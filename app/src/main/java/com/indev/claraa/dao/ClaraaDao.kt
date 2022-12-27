@@ -19,8 +19,17 @@ interface ClaraaDao {
     @Insert
     suspend fun insertUserCart(cartModel: CartModel): Long
 
+    @Insert
+    suspend fun insertOrderMaster(orderMasterModel: OrderMasterModel): Long
+
+    @Insert
+    suspend fun insertOrderDetails(orderDetailsModel: OrderDetailsModel): Long
+
     @Query("SELECT * FROM cart ORDER BY local_id ASC")
     fun getCartData() : LiveData<List<CartModel>>
+
+    @Query("SELECT * FROM cart ORDER BY local_id ASC")
+    fun getCartList() : List<CartModel>
 
     @Query("SELECT * FROM product_master where type_id = :selectedCategory group by product_name ORDER BY product_id ASC")
     fun getProductMasterData(selectedCategory: Int): LiveData<List<ProductMasterModel>>

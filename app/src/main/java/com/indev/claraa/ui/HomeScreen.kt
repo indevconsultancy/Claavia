@@ -43,7 +43,7 @@ class HomeScreen : AppCompatActivity(), ClickLinstener {
                     replaceFregment(Home(), 0)
                 }
                 R.id.profile -> {
-                    replaceFregment(Profile(), 1)
+                    replaceFregment(UserProfile(), 1)
                 }
                 R.id.order -> {
                     preferences.put(Constant.PREF_IS_CHECK_CART, false)

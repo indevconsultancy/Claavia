@@ -33,10 +33,5 @@ class PaymentGateway : Fragment() {
         return inflater.inflate(R.layout.fragment_payment_gateway, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
 
 }

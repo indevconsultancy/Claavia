@@ -44,4 +44,10 @@ interface ClaraaApi {
     @POST("cart_delete.php")
     suspend fun deleteCartAPI(@Body id: String,@Header("Authorization") authorization:Any):  Response<DeleteAPIResponse>
 
+    @POST("ordermaster_insert.php")
+    suspend fun insertOrderMasterAPI(@Body orderMasterModel: OrderMasterModel,@Header("Authorization") authorization:Any): Response<InsertAPIResponse>
+
+    @POST("orderdetails_insert.php")
+    suspend fun insertOrderDetailAPI(@Body orderDetailsModel: OrderDetailsModel,@Header("Authorization") authorization:Any): Response<InsertAPIResponse>
+
 }

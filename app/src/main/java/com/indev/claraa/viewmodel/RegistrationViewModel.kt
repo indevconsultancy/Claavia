@@ -5,17 +5,21 @@ import android.content.Context
 import android.content.Intent
 import android.os.Handler
 import android.os.Looper
+import android.provider.ContactsContract.Profile
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.databinding.ObservableField
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import com.indev.claraa.CommonClass
+import com.indev.claraa.R
 import com.indev.claraa.SweetDialog
 import com.indev.claraa.entities.DistrictModel
 import com.indev.claraa.entities.StateModel
 import com.indev.claraa.entities.UserRegistrationModel
+import com.indev.claraa.fragment.ProductDetails
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.UserRegistrationRepository
@@ -134,11 +138,12 @@ class RegistrationViewModel (val context: Context): ViewModel() {
         checkLogin = prefHelper.getBoolean(Constant.PREF_IS_LOGIN)
 
         if(checkValidation()) {
+            SweetDialog.showProgressDialog(context)
             if (checkLogin == false) {
             SweetDialog.showProgressDialog(context)
             prefHelper = PrefHelper(context)
             userRegistrationTable = UserRegistrationModel(
-            prefHelper.getInt(Constant.PREF_USERID)!!,
+            0,
             shopName.get().toString(),
             ownerName.get().toString(),
             "",
@@ -160,7 +165,6 @@ class RegistrationViewModel (val context: Context): ViewModel() {
                         Toast.makeText(context, "User successfully registered...", Toast.LENGTH_LONG).show()
                     }
                 }else if (last_insert_id == 2) {
-                    context.startActivity(Intent(context, LoginScreen::class.java))
                     Handler(Looper.getMainLooper()).post {
                         Toast.makeText(context, "User already registered...", Toast.LENGTH_LONG).show()
                     }
@@ -170,16 +174,18 @@ class RegistrationViewModel (val context: Context): ViewModel() {
                     }
                 }
             SweetDialog.dismissDialog()
-            }
-               }
+
         }
+            }
+
         else {
+            var user_id= prefHelper.getString(Constant.PREF_USERID)
             userRegistrationTable = UserRegistrationModel(
-                prefHelper.getInt(Constant.PREF_USERID)!!,
+                user_id!!.toInt(),
                 shopName.get().toString(),
                 ownerName.get().toString(),
                 username.get().toString(),
-                "",
+                password.get().toString(),
                 email.get().toString(),
                 mobNo.get().toString(),
                 etAddress.get().toString(),
@@ -214,10 +220,15 @@ class RegistrationViewModel (val context: Context): ViewModel() {
                             Toast.makeText(context, "Something went wrong..", Toast.LENGTH_LONG).show()
                         }
                     }
+                    SweetDialog.dismissDialog()
                 }
             }
+          }
         }
     }
+
+
+
 
     fun getStateList(context: Context): List<StateModel>? {
         return UserRegistrationRepository.getStateList(context)
@@ -241,10 +252,13 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             Toast.makeText(context, "Please enter email..", Toast.LENGTH_SHORT).show()
             return false
         }
-        if(password.get()?.isEmpty()==true) {
-            Toast.makeText(context, "Please enter password..", Toast.LENGTH_SHORT).show()
-            return false
+        if (checkLogin == false) {
+            if (password.get()?.isEmpty() == true) {
+                Toast.makeText(context, "Please enter password..", Toast.LENGTH_SHORT).show()
+                return false
+            }
         }
+
         if(mobNo.get().toString().length==11) {
             Toast.makeText(context, "Please enter mobile number..", Toast.LENGTH_SHORT).show()
             return false
@@ -269,4 +283,9 @@ class RegistrationViewModel (val context: Context): ViewModel() {
         return true
     }
 
+    private fun replaceFregment(fragment : Fragment) {
+        var transaction = (context as HomeScreen).supportFragmentManager.beginTransaction()
+        transaction?.replace(R.id.frame_layout, fragment)
+        transaction.commit()
+    }
 }

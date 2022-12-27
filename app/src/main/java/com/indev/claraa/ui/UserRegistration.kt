@@ -42,8 +42,6 @@ class UserRegistration : AppCompatActivity() {
         )[RegistrationViewModel::class.java]
         binding.registrationVM = registrationViewModel
 
-        binding.Button.setOnClickListener(){
-        }
 
         stateArrayList = ArrayList<StateModel>()
         CoroutineScope(Dispatchers.IO).launch {
@@ -68,7 +66,6 @@ class UserRegistration : AppCompatActivity() {
                     var id = spinnerMap[binding.spnState.getSelectedItemPosition()]
                     Log.d("TAG", "onItemSelected: " + id)
                     state_id= id!!.toInt()
-
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -113,11 +110,11 @@ class UserRegistration : AppCompatActivity() {
             binding.llRegistrationWitheUs.visibility = View.GONE
             binding.llUpdateProfile.visibility = View.VISIBLE
             binding.llBottomImage.visibility = View.GONE
+            binding.llPassword.visibility = View.GONE
             registrationViewModel = ViewModelProvider(this).get(RegistrationViewModel::class.java)
             registrationViewModel.readAllData.observe(this, Observer {
                 binding.btnSubmit.text = "Update"
                 binding.etShopName.setText(it.shop_name)
-                //binding.etUserName.setText(it.user_name)
                 binding.etOwnerName.setText(it.owner_name)
                 binding.etEmail.setText(it.email)
                 binding.etMobile.setText(it.mobile_number)

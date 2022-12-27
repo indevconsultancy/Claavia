@@ -348,7 +348,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:background="@drawable/btn_border"
-                                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                                 android:fontFamily="@font/aleo_regular"
                                 android:hint="Enter Full Name"
                                 android:inputType="text"
@@ -399,6 +398,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/llPassword"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
@@ -674,7 +674,6 @@
                             android:weightSum="3">
 
                             <TextView
-                                android:id="@+id/Button"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_marginLeft="5dp"
@@ -688,7 +687,6 @@
                                 android:textColor="@color/white" />
 
                             <TextView
-                                android:id="@+id/Button2"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_marginRight="5dp"
@@ -701,7 +699,6 @@
                                 android:textColor="@color/white" />
 
                             <TextView
-                                android:id="@+id/Button3"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_marginRight="5dp"
