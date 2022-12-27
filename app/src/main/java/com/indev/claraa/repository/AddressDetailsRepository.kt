@@ -83,9 +83,7 @@ class AddressDetailsRepository {
         suspend fun userAddressDetailsAPI(context: Context,addressDetailsModel: AddressDetailsModel): Int {
             try {
                 prefHelper = PrefHelper(context)
-                prefHelper.getString(Constant.PREF_TOKEN)
-                var result = apiInterface?.addressDetails(addressDetailsModel,
-                    prefHelper.getString(Constant.PREF_TOKEN)!!
+                var result = apiInterface?.addressDetails(addressDetailsModel, prefHelper.getString(Constant.PREF_TOKEN)!!
                 )
                 return if (result?.body()?.status == 1) {
                     result?.body()!!.last_insert_id
