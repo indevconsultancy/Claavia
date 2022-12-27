@@ -1,6 +1,4 @@
 package com.indev.claraa.ui
-
-import android.R.array
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -26,16 +24,20 @@ import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.ProductRepository
 import com.indev.claraa.util.GPSUtils
 import android.Manifest
+import android.location.Location
+import android.location.LocationListener
 import android.widget.Toast
 
 
-class HomeScreen : AppCompatActivity(), ClickLinstener {
+class HomeScreen : AppCompatActivity(), LocationListener{
     private lateinit var binding: ActivityHomeScreenBinding
     lateinit var preferences: PrefHelper
     lateinit var cartArrayList: LiveData<List<CartModel>>
     private val TAG = "HOME"
     private lateinit var locationManager: LocationManager
     private val locationPermissionCode = 2
+    val lat = ""
+    val long = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +46,7 @@ class HomeScreen : AppCompatActivity(), ClickLinstener {
         replaceFregment(Home(), 0)
 
         GPSUtils(this).turnOnGPS()
+        getLocation()
         var badge= binding.bottomNavigation.bottomNavigation.getOrCreateBadge(R.id.order)
         cartArrayList = ProductRepository.getCartList(applicationContext)!!
 
@@ -80,6 +83,7 @@ class HomeScreen : AppCompatActivity(), ClickLinstener {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == Constant.GPS_CODE) {
                 Log.d(TAG, "onActivityResult: SUCCESS")
+//                Toast.makeText(applicationContext," gpsss on", Toast.LENGTH_LONG).show()
             } else {
                 GPSUtils(this).turnOnGPS()
             }
@@ -88,26 +92,27 @@ class HomeScreen : AppCompatActivity(), ClickLinstener {
         }
     }
 
-//    private fun getLocation() {
-//        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-//        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
-//            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionCode)
-//        }
-//        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
-//    }
-//
-//    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        if (requestCode == locationPermissionCode) {
-//            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
-//            }
-//            else {
-//                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//    }
-//
+    private fun getLocation() {
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionCode)
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == locationPermissionCode) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+
 
 
     override fun onBackPressed() {
@@ -146,14 +151,14 @@ class HomeScreen : AppCompatActivity(), ClickLinstener {
         fragmentTransition.commit()
     }
 
-    override fun onClickListner(position: Int) {
+    override fun onLocationChanged(location: Location) {
+//        tvGpsLocation = findViewById(R.id.textView)
+//        tvGpsLocation.text = "Latitude: " + location.latitude + " , Longitude: " + location.longitude
+        preferences.put("latitude",lat)
+        preferences.put("longitude",long)
+        Toast.makeText(applicationContext,"nckmfv",Toast.LENGTH_SHORT).show()
     }
 
-    override fun updateTextView(amount: Int) {
-    }
-
-    override fun updatePowerRange(power_range: String) {
-    }
 
 }
 
