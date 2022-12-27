@@ -132,8 +132,9 @@ class RegistrationViewModel (val context: Context): ViewModel() {
     fun btnSubmit(){
        // SweetDialog.showProgressDialog(context)
         if(checkValidation()) {
-        prefHelper = PrefHelper(context)
-        userRegistrationTable = UserRegistrationModel(
+            SweetDialog.showProgressDialog(context)
+            prefHelper = PrefHelper(context)
+            userRegistrationTable = UserRegistrationModel(
             prefHelper.getInt(Constant.PREF_USERID)!!,
             shopName.get().toString(),
             ownerName.get().toString(),
@@ -166,7 +167,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
                         Toast.makeText(context, "Something went wrong...", Toast.LENGTH_LONG).show()
                     }
                 }
-           // SweetDialog.dismissDialog()
+            SweetDialog.dismissDialog()
             }
                }
     }

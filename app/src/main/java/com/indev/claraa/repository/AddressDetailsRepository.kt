@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData
 import com.indev.claraa.entities.AddressDetailsModel
 import com.indev.claraa.entities.DistrictModel
 import com.indev.claraa.entities.StateModel
+import com.indev.claraa.helper.Constant
+import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.restApi.ClaraaApi
 import com.indev.claraa.restApi.ClientApi
 import com.indev.claraa.roomdb.RoomDB
@@ -17,6 +19,7 @@ class AddressDetailsRepository {
     companion object {
         private var dataBase: RoomDB? = null
         val apiInterface = ClientApi.getClient()?.create(ClaraaApi::class.java)
+        lateinit var prefHelper: PrefHelper
 
 
         private fun initializeDB(context: Context): RoomDB? {
@@ -77,11 +80,12 @@ class AddressDetailsRepository {
         }
 
 
-        suspend fun userAddressDetailsAPI(addressDetailsModel: AddressDetailsModel): Int {
+        suspend fun userAddressDetailsAPI(context: Context,addressDetailsModel: AddressDetailsModel): Int {
             try {
-                var result = apiInterface?.addressDetails(
-                    addressDetailsModel,
-                    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjcxNTI1NzYzLCJuYmYiOjE2NzE1MjU3NzMsImV4cCI6MTY3NDExNzgyMywiZGF0YSI6eyJ1c2VyX2lkIjpudWxsLCJ1c2VyX25hbWUiOiJBbWl0IiwibW9iaWxlX251bWJlciI6bnVsbH19.dPRrCfHsmpVPS0Rr0HquCzUca9qJOyUhy52HZoZzO1o"
+                prefHelper = PrefHelper(context)
+                prefHelper.getString(Constant.PREF_TOKEN)
+                var result = apiInterface?.addressDetails(addressDetailsModel,
+                    prefHelper.getString(Constant.PREF_TOKEN)!!
                 )
                 return if (result?.body()?.status == 1) {
                     result?.body()!!.last_insert_id

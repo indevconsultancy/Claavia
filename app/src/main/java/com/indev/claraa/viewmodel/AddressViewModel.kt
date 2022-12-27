@@ -125,7 +125,7 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
             AddressDetailsRepository.insertAddressData(context, addressDetailsModel)
             var last_id=0
             CoroutineScope(Dispatchers.IO).launch {
-                last_id = AddressDetailsRepository.userAddressDetailsAPI(addressDetailsModel)
+                last_id = AddressDetailsRepository.userAddressDetailsAPI(context,addressDetailsModel)
                 if (last_id> 0) {
                     replaceFregment(AddressList())
                     AddressDetailsRepository.updateAddressId(last_id,id.toString(), context)
