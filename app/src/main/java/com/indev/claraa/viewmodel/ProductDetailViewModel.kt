@@ -40,7 +40,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
     private var dataBase: RoomDB? = null
     lateinit var prefHelper: PrefHelper
     var etQuantity: ObservableField<String> = ObservableField("")
-    var user_id=0
+    var user_id="0"
 
     private fun initializeDB(context: Context): RoomDB? {
         return RoomDB.getDatabase(context)
@@ -78,7 +78,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
     fun btnSubmit() {
         dataBase = initializeDB(context)
         prefHelper = PrefHelper(context)
-        user_id = prefHelper.getInt(Constant.PREF_USERID)!!
+        user_id = prefHelper.getString(Constant.PREF_USERID)!!
         if (checkValidation()) {
             SweetDialog.showProgressDialog(context)
             var checkExitPorduct = 0
@@ -113,7 +113,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
             cartModel = CartModel(
                 cartModelArrayList.get(0).local_id,cartModelArrayList.get(0).id,
                 packetValue.toString(),
-                productID.toString(), user_id,
+                productID.toString(), user_id.toInt(),
                 productMasterArrayList.get(0).product_name,
                 productMasterArrayList.get(0).product_img1,
                 productMasterArrayList.get(0).product_img2,
@@ -158,7 +158,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
         cartModel = CartModel(
             0,id,
             packetValue.toString(),
-            productID.toString(), user_id,
+            productID.toString(), user_id.toInt(),
             productMasterArrayList.get(0).product_name,
             productMasterArrayList.get(0).product_img1,
             productMasterArrayList.get(0).product_img2,
@@ -210,7 +210,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
             return false
         }
 
-        if (qtyValue.toString().trim().equals("Qty.")) {
+        if (etQuantity.get().toString().trim().isEmpty() ==true) {
             Toast.makeText(context, "Please select Quantity..", Toast.LENGTH_SHORT).show()
             return false
         }
