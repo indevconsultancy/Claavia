@@ -1,8 +1,16 @@
 package com.indev.claraa.ui
 
 import android.R.array
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -16,18 +24,26 @@ import com.indev.claraa.fragment.*
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.ProductRepository
+import com.indev.claraa.util.GPSUtils
+import android.Manifest
+import android.widget.Toast
 
 
 class HomeScreen : AppCompatActivity(), ClickLinstener {
     private lateinit var binding: ActivityHomeScreenBinding
     lateinit var preferences: PrefHelper
     lateinit var cartArrayList: LiveData<List<CartModel>>
+    private val TAG = "HOME"
+    private lateinit var locationManager: LocationManager
+    private val locationPermissionCode = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home_screen)
         supportActionBar?.hide()
         replaceFregment(Home(), 0)
+
+        GPSUtils(this).turnOnGPS()
         var badge= binding.bottomNavigation.bottomNavigation.getOrCreateBadge(R.id.order)
         cartArrayList = ProductRepository.getCartList(applicationContext)!!
 
@@ -57,6 +73,41 @@ class HomeScreen : AppCompatActivity(), ClickLinstener {
             true
         }
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == Constant.GPS_CODE) {
+                Log.d(TAG, "onActivityResult: SUCCESS")
+            } else {
+                GPSUtils(this).turnOnGPS()
+            }
+        } else {
+            GPSUtils(this).turnOnGPS()
+        }
+    }
+
+//    private fun getLocation() {
+//        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+//        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+//            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionCode)
+//        }
+//        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
+//    }
+//
+//    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//        if (requestCode == locationPermissionCode) {
+//            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
+//            }
+//            else {
+//                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//    }
+//
 
 
     override fun onBackPressed() {

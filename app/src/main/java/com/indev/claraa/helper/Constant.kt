@@ -11,5 +11,6 @@ class Constant {
         val PREF_STATEID = "PREF_USERID"
         val PREF_DISTRICTID = "PREF_USERID"
         val PREF_PASSWORD = "PREF_PASSWORD"
+        val GPS_CODE = 1002
     }
 }
