@@ -259,8 +259,11 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             }
         }
 
-        if(mobNo.get().toString().length==11) {
+        if(mobNo.get()?.isEmpty()==true) {
             Toast.makeText(context, "Please enter mobile number..", Toast.LENGTH_SHORT).show()
+            return false
+        }else if(mobNo.get().toString().length<10) {
+            Toast.makeText(context, "Please enter valid mobile number..", Toast.LENGTH_SHORT).show()
             return false
         }
         if(spnState.toString().trim()=="Select State"){
@@ -276,8 +279,11 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             return false
         }
 
-        if(pinCode.get().toString().length==7) {
+        if(pinCode.get()?.isEmpty()==true) {
             Toast.makeText(context, "Please enter pin code..", Toast.LENGTH_SHORT).show()
+            return false
+        }else if (pinCode.get()?.length!!<6){
+            Toast.makeText(context,"Please enter valid pin code",Toast.LENGTH_SHORT).show()
             return false
         }
         return true
