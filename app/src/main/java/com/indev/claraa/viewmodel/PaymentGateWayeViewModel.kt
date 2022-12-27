@@ -6,17 +6,21 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.indev.claraa.CommonClass
+import com.indev.claraa.R
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.OrderDetailsModel
 import com.indev.claraa.entities.OrderMasterModel
 import com.indev.claraa.fragment.AddressList
+import com.indev.claraa.fragment.PaymentGateway
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.AddressDetailsRepository
 import com.indev.claraa.repository.PaymentGatewayRepository
+import com.indev.claraa.ui.HomeScreen
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import kotlinx.coroutines.CoroutineScope
@@ -82,7 +86,7 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() , PaymentResu
                     )
                     PaymentGatewayRepository.insertOrderDetails(context, orderDetailsModel)
                 }
-                callOrderAPI("s")
+                payment()
             }
         }
     }
@@ -150,9 +154,11 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() , PaymentResu
 
     override fun onPaymentSuccess(s: String?) {
         // this method is called on payment success.
+        Toast.makeText(context, " Success", Toast.LENGTH_LONG).show()
         callOrderAPI(s)
     }
 
+    @SuppressLint("SuspiciousIndentation")
     private fun callOrderAPI(s: String?) {
 
             CoroutineScope(Dispatchers.IO).launch {
@@ -174,6 +180,7 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() , PaymentResu
 
                         }
                     }
+                    replaceFregment(PaymentGateway())
 //                    PaymentGatewayRepository.updateAddressId(last_id,id.toString(), context)
                     Handler(Looper.getMainLooper()).post {
                         Toast.makeText(context, "" +s, Toast.LENGTH_LONG).show()
@@ -191,4 +198,11 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() , PaymentResu
         callOrderAPI(s)
 
     }
+
+    private fun replaceFregment(fragment : Fragment) {
+        var transaction = (context as HomeScreen).supportFragmentManager.beginTransaction()
+        transaction?.replace(R.id.frame_layout, fragment)
+        transaction.commit()
+    }
+
 }

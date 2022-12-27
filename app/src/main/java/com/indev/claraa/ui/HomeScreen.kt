@@ -45,8 +45,7 @@ class HomeScreen : AppCompatActivity(), LocationListener{
         supportActionBar?.hide()
         replaceFregment(Home(), 0)
 
-        GPSUtils(this).turnOnGPS()
-        getLocation()
+
         var badge= binding.bottomNavigation.bottomNavigation.getOrCreateBadge(R.id.order)
         cartArrayList = ProductRepository.getCartList(applicationContext)!!
 
@@ -75,6 +74,9 @@ class HomeScreen : AppCompatActivity(), LocationListener{
             }
             true
         }
+
+        GPSUtils(this).turnOnGPS()
+        getLocation()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
