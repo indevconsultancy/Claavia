@@ -33,13 +33,14 @@ class EmailVerificationViewModel  (val context: Context): ViewModel() {
     var email: ObservableField<String> = ObservableField("")
     var submit_alert: Dialog? = null
     lateinit var forgotModel: ForgotModel
+    lateinit var prefHelper: PrefHelper
 
     fun btnSubmit() {
 //        ShowSubmitDialog(
 //            context, R.string.emailUpdate.toString(),
 //            R.string.forgot_password_succesfully.toString()
 //        )
-        forgotModel = ForgotModel("", "", email.get().toString().trim())
+        forgotModel = ForgotModel(email.get().toString().trim())
         viewModelScope.launch {
             //Data store in model
             var status = 0
