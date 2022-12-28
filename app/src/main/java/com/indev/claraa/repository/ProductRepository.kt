@@ -35,7 +35,7 @@ class ProductRepository {
 
         fun getCartList(context: Context): LiveData<List<CartModel>>? {
             dataBase = initializeDB(context)
-            return dataBase?.userDao()?.getCartData()
+            return dataBase?.userDao()?.getCartData("Failed", "Pending")
         }
 
         fun getPowerList(context: Context, selectedProduct: String): LiveData<List<ProductMasterModel>>? {

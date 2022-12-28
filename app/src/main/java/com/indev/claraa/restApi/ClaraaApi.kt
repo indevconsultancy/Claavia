@@ -56,4 +56,10 @@ interface ClaraaApi {
     @POST("cart_download.php")
     suspend fun cartDownloadAPI(@Body user_id: String,@Header("Authorization") authorization:Any):  Response<CartApiResponse>
 
+    @POST("ordermaster_update.php")
+    suspend fun updateOrderMasterAPI(@Body orderMasterModel: OrderMasterModel,@Header("Authorization") authorization:Any): Response<UpdateAPIResponse>
+
+    @POST("orderdetails_update.php")
+    suspend fun updateOrderDetailsAPI(@Body orderDetailsModel: OrderDetailsModel,@Header("Authorization") authorization:Any): Response<UpdateAPIResponse>
+
 }

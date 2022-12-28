@@ -85,7 +85,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
                 etAddress.get().toString(),
                 UserRegistration.state_id.toString(),
                 UserRegistration.district_id.toString(),
-                etAddress.get().toString(), register_date = CommonClass.currentDate().toString(), "male", "", "",
+                etAddress.get().toString(), register_date = CommonClass.currentDate().toString(), "male", "", "","",
                 pinCode.get().toString()
             )
             userRegistrationTable.shop_name = shopName.get().toString()
@@ -152,7 +152,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             mobNo.get().toString(),
             etAddress.get().toString(),
             UserRegistration.state_id.toString(),
-            UserRegistration.district_id.toString(),"", CommonClass.currentDate().toString(), gender, "", "",
+            UserRegistration.district_id.toString(),"", CommonClass.currentDate().toString(), gender, "", "","",
             pinCode.get().toString()
         )
         viewModelScope.launch {
@@ -191,7 +191,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
                 etAddress.get().toString(),
                 UserRegistration.state_id.toString(),
                 UserRegistration.district_id.toString(),
-                etAddress.get().toString(),CommonClass.currentDate().toString(),gender, "", "",
+                etAddress.get().toString(),CommonClass.currentDate().toString(),gender, "", "","",
                 pinCode.get().toString()
             )
             userRegistrationTable.shop_name = shopName.get().toString()

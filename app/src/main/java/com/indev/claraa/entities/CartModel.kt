@@ -23,5 +23,6 @@ data class CartModel(@PrimaryKey(autoGenerate = true)
                      var cart_date: String,
                      var latitude : String,
                      var longitude: String,
+                     var payment_status: String,
                      var active: String
                      )

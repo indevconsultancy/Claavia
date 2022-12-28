@@ -124,7 +124,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
                 productMasterArrayList.get(0).packet_id,
                 PowerRangeAdapter.power_range,
                 productMasterArrayList.get(0).currency,
-                "", "", "", productMasterArrayList.get(0).active
+                "", "", "","Pending", productMasterArrayList.get(0).active
             )
 
             /*   ProductRepository.updateCartProductQuantity(
@@ -169,7 +169,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
             productMasterArrayList.get(0).packet_id,
             PowerRangeAdapter.power_range,
             productMasterArrayList.get(0).currency,
-            "", "", "", productMasterArrayList.get(0).active
+            "", "", "","Pending", productMasterArrayList.get(0).active
         )
         viewModelScope.launch {
             ProductRepository.insertCartData(context, cartModel)

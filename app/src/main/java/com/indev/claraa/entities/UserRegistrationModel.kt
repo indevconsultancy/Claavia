@@ -20,5 +20,6 @@ data class UserRegistrationModel(@PrimaryKey(autoGenerate = true)
                                  var gender: String,
                                  var latitude: String,
                                  var longitude: String,
+                                 var credit: String,
                                  var pinCode: String)
 

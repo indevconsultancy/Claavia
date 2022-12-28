@@ -41,7 +41,10 @@ class LoginRepository {
                     userProfileArray.addAll(result?.body()!!.profile_data)
                     for (i in 0 until userProfileArray.size) {
                         prefHelper.put(Constant.PREF_USERID, userProfileArray[i].user_id.toString())
+                        prefHelper.put(Constant.PREF_USER_EMAIL, userProfileArray[i].email)
+                        prefHelper.put(Constant.PREF_USER_MOBILE, userProfileArray[i].mobile_number)
                         prefHelper.put(Constant.PREF_TOKEN, result?.body()?.Token!!)
+                        prefHelper.put(Constant.PREF_CREDIT, userProfileArray[i].credit)
                         val user_profile = UserRegistrationModel(
                             userProfileArray[i].user_id,
                             userProfileArray[i].shop_name,
@@ -57,7 +60,7 @@ class LoginRepository {
                             userProfileArray[i].register_date,
                             "",
                             "",
-                            "",
+                            "",userProfileArray[i].credit,
                             userProfileArray[i].pinCode
                         )
                         dataBase?.userDao()?.insertUserData(user_profile)
@@ -121,7 +124,7 @@ class LoginRepository {
                     for (i in 0 until cartArrayList.size) {
                         val cartModel = CartModel(0,"",cartArrayList[i].packets,cartArrayList[i].product_id,cartArrayList[i].user_id,cartArrayList[i].product_name,
                             cartArrayList[i].product_img1,cartArrayList[i].product_img2,cartArrayList[i].price,0,cartArrayList[i].quantity,cartArrayList[i].type_id,cartArrayList[i].packet_id,cartArrayList[i].power_range,
-                            cartArrayList[i].currency,cartArrayList[i].cart_date,"","",""
+                            cartArrayList[i].currency,cartArrayList[i].cart_date,"","","",""
                         )
                         dataBase?.userDao()?.insertUserCart(cartModel)
                     }

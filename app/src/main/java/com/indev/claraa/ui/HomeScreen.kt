@@ -158,7 +158,7 @@ class HomeScreen : AppCompatActivity(), LocationListener{
 //        tvGpsLocation.text = "Latitude: " + location.latitude + " , Longitude: " + location.longitude
         preferences.put("latitude",lat)
         preferences.put("longitude",long)
-        Toast.makeText(applicationContext,"nckmfv",Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext,"nckmfv" + lat  + " "+ long,Toast.LENGTH_SHORT).show()
     }
 
 

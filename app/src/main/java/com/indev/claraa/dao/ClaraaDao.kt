@@ -1,10 +1,7 @@
 package com.indev.claraa.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.indev.claraa.entities.*
 import com.indev.claraa.helper.Constant
 import org.jetbrains.annotations.NotNull
@@ -19,20 +16,22 @@ interface ClaraaDao {
     @Insert
     suspend fun insertUserCart(cartModel: CartModel): Long
 
+    @NotNull
     @Insert
     suspend fun insertOrderMaster(orderMasterModel: OrderMasterModel): Long
 
+    @NotNull
     @Insert
     suspend fun insertOrderDetails(orderDetailsModel: OrderDetailsModel): Long
 
-    @Query("SELECT * FROM cart ORDER BY local_id ASC")
-    fun getCartData() : LiveData<List<CartModel>>
+    @Query("SELECT * FROM cart where payment_status= :payment_status or payment_status= :payment_status1 ORDER BY local_id ASC")
+    fun getCartData(payment_status: String, payment_status1: String) : LiveData<List<CartModel>>
 
     @Query("SELECT * FROM cart ORDER BY local_id ASC")
     fun getCartList() : List<CartModel>
 
-    @Query("SELECT * FROM order_details ORDER BY local_id ASC")
-    fun getOrderDetailsList() : List<OrderDetailsModel>
+    @Query("SELECT * FROM order_details where order_id= :order_id ORDER BY local_id ASC")
+    fun getOrderDetailsList(order_id: Int) : List<OrderDetailsModel>
 
     @Query("SELECT * FROM product_master where type_id = :selectedCategory group by product_name ORDER BY product_id ASC")
     fun getProductMasterData(selectedCategory: Int): LiveData<List<ProductMasterModel>>
@@ -150,6 +149,21 @@ interface ClaraaDao {
     @Query("UPDATE address SET id = :last_id WHERE id = :id")
     fun updateAddressId(last_id: Int, id: String): Int
 
+    @Query("UPDATE order_master SET order_id = :last_id WHERE local_id = :local_id")
+    fun updateOrderMasterbyId(last_id: Int, local_id: Int): Int
+
+    @Query("UPDATE order_details SET id = :last_id WHERE local_id = :local_id")
+    fun updateOrderDetailsbyId(last_id: Int, local_id: Int): Int
+
     @Query("UPDATE cart SET id = :last_id WHERE id = :id")
     fun updateCartId(last_id: Int, id: String): Int
+
+    @Query("UPDATE cart SET payment_status = :payment_status WHERE product_id = :product_id")
+    fun updateCartPaymentStatusbyId(product_id: Int, payment_status: String): Int
+
+    @Update
+    fun updateOrderMaster(orderMasterModel: OrderMasterModel)
+
+    @Update
+    fun updateOrderDetails(orderDetailsModel: OrderDetailsModel)
 }
