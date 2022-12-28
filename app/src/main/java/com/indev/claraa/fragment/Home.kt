@@ -1,6 +1,7 @@
 package com.indev.claraa.fragment
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,6 +35,7 @@ class Home : Fragment(), ClickLinstener {
     private lateinit var productMasterAdapter: ProductMasterAdapter
     var productMasterModelArrayList: ArrayList<ProductMasterModel> = ArrayList()
     lateinit var prefHelper: PrefHelper
+    var checkSelectedButton= "Monthly"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,25 +56,38 @@ class Home : Fragment(), ClickLinstener {
 
         binding.btnMonthly.setOnClickListener {
             getProductRecycleViewList(1)
+            binding.btnMonthly.setBackgroundResource(R.drawable.btn_border)
+
         }
 
         binding.btnWeekly.setOnClickListener {
             getProductRecycleViewList(2)
+            binding.btnWeekly.setBackgroundResource(R.drawable.btn_border)
         }
 
         binding.btnDaily.setOnClickListener {
             getProductRecycleViewList(3)
+            binding.btnDaily.setBackgroundResource(R.drawable.btn_border)
+            binding.btnMonthly.setBackgroundResource(R.drawable.btn_color_change)
+            binding.btnWeekly.setBackgroundResource(R.drawable.btn_color_change)
+            binding.btnSolution.setBackgroundResource(R.drawable.btn_color_change)
         }
 
         binding.btnSolution.setOnClickListener {
             getProductRecycleViewList(4)
-
+            binding.btnSolution.setBackgroundResource(R.drawable.btn_border)
         }
 
         val carousel: ImageCarousel = binding.carousel
         binding.toolbar.menuClick.setOnClickListener {
             binding.myDrawerLayout.openDrawer(GravityCompat.START)
         }
+
+            binding.btnMonthly.setBackgroundResource(R.drawable.btn_color_change)
+            binding.btnDaily.setBackgroundResource(R.drawable.btn_color_change)
+            binding.btnWeekly.setBackgroundResource(R.drawable.btn_color_change)
+            binding.btnSolution.setBackgroundResource(R.drawable.btn_color_change)
+
 
         carousel.registerLifecycle(lifecycle)
         val list = mutableListOf<CarouselItem>()
