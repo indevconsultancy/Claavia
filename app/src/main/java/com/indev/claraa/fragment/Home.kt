@@ -56,37 +56,30 @@ class Home : Fragment(), ClickLinstener {
 
         binding.btnMonthly.setOnClickListener {
             getProductRecycleViewList(1)
-            binding.btnMonthly.setBackgroundResource(R.drawable.btn_border)
-
+            checkSelectedButton= "Monthly"
+            binding.btnMonthly.setBackgroundColor(Color.parseColor("#FFBB86FC"))
         }
 
         binding.btnWeekly.setOnClickListener {
             getProductRecycleViewList(2)
-            binding.btnWeekly.setBackgroundResource(R.drawable.btn_border)
+            checkSelectedButton= "Color"
+
         }
 
         binding.btnDaily.setOnClickListener {
             getProductRecycleViewList(3)
-            binding.btnDaily.setBackgroundResource(R.drawable.btn_border)
-            binding.btnMonthly.setBackgroundResource(R.drawable.btn_color_change)
-            binding.btnWeekly.setBackgroundResource(R.drawable.btn_color_change)
-            binding.btnSolution.setBackgroundResource(R.drawable.btn_color_change)
+            checkSelectedButton= "Daily"
         }
 
         binding.btnSolution.setOnClickListener {
             getProductRecycleViewList(4)
-            binding.btnSolution.setBackgroundResource(R.drawable.btn_border)
+            checkSelectedButton= "Solution"
         }
 
         val carousel: ImageCarousel = binding.carousel
         binding.toolbar.menuClick.setOnClickListener {
             binding.myDrawerLayout.openDrawer(GravityCompat.START)
         }
-
-            binding.btnMonthly.setBackgroundResource(R.drawable.btn_color_change)
-            binding.btnDaily.setBackgroundResource(R.drawable.btn_color_change)
-            binding.btnWeekly.setBackgroundResource(R.drawable.btn_color_change)
-            binding.btnSolution.setBackgroundResource(R.drawable.btn_color_change)
 
 
         carousel.registerLifecycle(lifecycle)

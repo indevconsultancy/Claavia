@@ -55,8 +55,8 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() {
          user_id= prefHelper.getString(Constant.PREF_USERID)!!.toInt()
         CoroutineScope(Dispatchers.IO).launch {
             cartArrayList= PaymentGatewayRepository.getCartList(context) as ArrayList<CartModel>
-//            totalAmount= grandTotal(cartArrayList)
-            totalAmount= 1.0
+            totalAmount= grandTotal(cartArrayList)
+//            totalAmount= 1.0
             var orderMasterUniqueId= CommonClass.getUniqueId().toString()
 
             if(cartArrayList.size> 0) {
@@ -148,7 +148,19 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() {
                             }
                         }
                     }
-                    payment(amount)
+                    prefHelper = PrefHelper(context)
+                    var creditValue= prefHelper.getString(Constant.PREF_CREDIT)
+                    var creditValues= creditValue?.toDouble()!! - totalAmount
+                    if(creditValues>0) {
+                        prefHelper.put(Constant.PREF_CREDIT, creditValues.toString())
+                        if(creditValues.toInt()==0){
+                            payment(creditValues)
+                        }else{
+                            callOrderUpdateAPI("Success")
+                        }
+                    }else{
+                        payment(amount)
+                    }
                     Handler(Looper.getMainLooper()).post {
                         Toast.makeText(context, "" +"S", Toast.LENGTH_LONG).show()
                     }
