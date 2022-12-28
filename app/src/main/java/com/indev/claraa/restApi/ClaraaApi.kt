@@ -50,4 +50,7 @@ interface ClaraaApi {
     @POST("address_download.php")
     suspend fun addressDownloadAPI(@Body user_id: String,@Header("Authorization") authorization:Any):  Response<AddressAPIResponse>
 
+    @POST("cart_download.php")
+    suspend fun cartDownloadAPI(@Body user_id: String,@Header("Authorization") authorization:Any):  Response<CartApiResponse>
+
 }

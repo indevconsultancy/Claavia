@@ -48,6 +48,7 @@ class LoginViewModel(val context: Context): ViewModel() {
                     var user_id = LoginRepository.prefHelper.getString(Constant.PREF_USERID)!!
 
                     LoginRepository.insertDataAddress(context, user_id)
+                    LoginRepository.insertDataCart(context, user_id)
 //                    checkProfileUpdate = prefHelper.getBoolean(Constant.PREF_IS_UPDATE)
 //                    if(checkProfileUpdate == true){
                         context.startActivity(Intent(context, HomeScreen::class.java))

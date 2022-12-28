@@ -4,7 +4,9 @@ import android.content.Context
 import android.util.Log
 import com.indev.claraa.apiResponse.UserProfileRespose
 import com.indev.claraa.apiResponse.result
+import com.indev.claraa.apiResponse.result_cart
 import com.indev.claraa.entities.AddressDetailsModel
+import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.LoginModel
 import com.indev.claraa.entities.UserRegistrationModel
 import com.indev.claraa.helper.Constant
@@ -82,16 +84,46 @@ class LoginRepository {
             try {
                 dataBase?.userDao()?.deleteAllAdress()
 
-                var result = apiInterface?.addressDownloadAPI("113", token!!)
+                var result = apiInterface?.addressDownloadAPI(user_id, token!!)
                 return (if (result?.body()?.status == 1) {
                     addressArrayList.addAll(result?.body()!!.result)
                     for (i in 0 until addressArrayList.size) {
                         val addressDetailsModel = AddressDetailsModel(0,
-                         "0",0,addressArrayList[i].shop_name,addressArrayList[i].user_name,"","",
+                         "0",addressArrayList[i].user_id,addressArrayList[i].shop_name,addressArrayList[i].user_name,"","",
                             "","","","",
                         "","","",""
                         )
                         dataBase?.userDao()?.insertAddressData(addressDetailsModel)
+                    }
+                } else {
+                    0
+                }) as Int
+            } catch (e: Exception) {
+                Log.d("fail", "$e")
+            }
+            return 0
+        }
+
+        suspend fun insertDataCart(context: Context, user_id: String): Int {
+            val cartArrayList = ArrayList<result_cart>()
+
+            dataBase = initializeDB(context)
+            prefHelper = PrefHelper(context)
+
+            var token = "Bearer " + prefHelper.getString(Constant.PREF_TOKEN)
+
+            try {
+                dataBase?.userDao()?.deleteAllProductPackets()
+
+                var result = apiInterface?.cartDownloadAPI(user_id, token!!)
+                return (if (result?.body()?.status == 1) {
+                    cartArrayList.addAll(result?.body()!!.result)
+                    for (i in 0 until cartArrayList.size) {
+                        val cartModel = CartModel(0,"",cartArrayList[i].packets,cartArrayList[i].product_id,cartArrayList[i].user_id,cartArrayList[i].product_name,
+                            cartArrayList[i].product_img1,cartArrayList[i].product_img2,cartArrayList[i].price,0,cartArrayList[i].quantity,cartArrayList[i].type_id,cartArrayList[i].packet_id,cartArrayList[i].power_range,
+                            cartArrayList[i].currency,cartArrayList[i].cart_date,"","",""
+                        )
+                        dataBase?.userDao()?.insertUserCart(cartModel)
                     }
                 } else {
                     0

@@ -9,7 +9,7 @@ data class CartModel(@PrimaryKey(autoGenerate = true)
                      val id: String,
                      val packets: String,
                      val product_id: String,
-                     val user_id: Int,
+                     val user_id: String,
                      val product_name: String,
                      val product_img1: String,
                      val product_img2: String,

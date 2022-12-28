@@ -121,7 +121,7 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
             mobNo.get().toString(),
             etAddress1.get().toString(),AddNewAddress.state_id.toString(),
             AddNewAddress.district_id.toString(),pinCode.get().toString(),
-            etAddress2.get().toString(),"","",address_registration_date = CommonClass.currentDate().toString(),
+            etAddress2.get().toString(),"","",CommonClass.currentDate().toString(),
             landmark.get().toString()
         )
         viewModelScope.launch {
@@ -164,7 +164,7 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
     }
 
     private fun checkValidation(): Boolean{
-       if (shopName.get()?.isEmpty()==true) {
+       if (shopName.get()?.isEmpty() ==true) {
            Toast.makeText(context,"Please enter shop name",Toast.LENGTH_SHORT).show()
           return false
        }

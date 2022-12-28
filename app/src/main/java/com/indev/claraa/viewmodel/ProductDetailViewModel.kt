@@ -113,7 +113,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
             cartModel = CartModel(
                 cartModelArrayList.get(0).local_id,cartModelArrayList.get(0).id,
                 packetValue.toString(),
-                productID.toString(), user_id.toInt(),
+                productID.toString(), user_id,
                 productMasterArrayList.get(0).product_name,
                 productMasterArrayList.get(0).product_img1,
                 productMasterArrayList.get(0).product_img2,
@@ -158,7 +158,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
         cartModel = CartModel(
             0,id,
             packetValue.toString(),
-            productID.toString(), user_id.toInt(),
+            productID.toString(), user_id,
             productMasterArrayList.get(0).product_name,
             productMasterArrayList.get(0).product_img1,
             productMasterArrayList.get(0).product_img2,
