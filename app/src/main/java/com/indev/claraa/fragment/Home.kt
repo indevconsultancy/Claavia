@@ -116,6 +116,10 @@ class Home : Fragment(), ClickLinstener {
             binding.myDrawerLayout.closeDrawer(GravityCompat.START)
             true
         }
+
+        binding.btnMonthly.setOnClickListener {
+            binding.btnMonthly.isSelected != binding.btnMonthly.isSelected
+        }
     }
 
     private fun getProductRecycleViewList(selectedCategory: Int) {
@@ -164,6 +168,7 @@ class Home : Fragment(), ClickLinstener {
     }
 
     override fun onClickListner(position: Int) {
+
     }
 
     override fun updateTextView(amount: Int) {
