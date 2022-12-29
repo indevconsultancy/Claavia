@@ -27,7 +27,6 @@ class OrderPlaceViewModel (val context: Context): ViewModel() {
     }
 
     fun btnPlace(){
-
         context.startActivity(Intent(context, PaymentGateway::class.java))
     }
 

@@ -124,7 +124,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
                 productMasterArrayList.get(0).packet_id,
                 PowerRangeAdapter.power_range,
                 productMasterArrayList.get(0).currency,
-                "", "", "","Pending", productMasterArrayList.get(0).active
+                CommonClass.currentDate().toString(), prefHelper.getString(Constant.PREF_LATITUDE).toString(),prefHelper.getString(Constant.PREF_LONGITUDE).toString(),"Pending", productMasterArrayList.get(0).active
             )
 
             /*   ProductRepository.updateCartProductQuantity(
@@ -134,7 +134,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
                             context)*/
             ProductRepository.updateCartProduct(cartModel, context)
             var last_updated_id=0
-            last_updated_id = ProductRepository.cartUpdateApi(cartModel)
+            last_updated_id = ProductRepository.cartUpdateApi(context,cartModel)
             if (last_updated_id> 0) {
 
                 Toast.makeText(context, "Updated", Toast.LENGTH_LONG).show()
@@ -169,12 +169,12 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
             productMasterArrayList.get(0).packet_id,
             PowerRangeAdapter.power_range,
             productMasterArrayList.get(0).currency,
-            "", "", "","Pending", productMasterArrayList.get(0).active
+            CommonClass.currentDate().toString(), prefHelper.getString(Constant.PREF_LATITUDE).toString(),prefHelper.getString(Constant.PREF_LONGITUDE).toString(),"Pending", productMasterArrayList.get(0).active
         )
         viewModelScope.launch {
             ProductRepository.insertCartData(context, cartModel)
             var last_inserted_id=0
-            last_inserted_id = ProductRepository.cartInsertAPI(cartModel)
+            last_inserted_id = ProductRepository.cartInsertAPI(context,cartModel)
             if (last_inserted_id> 0) {
                 ProductRepository.updateCartId(last_inserted_id,id,context)
                 Toast.makeText(context, "Added", Toast.LENGTH_LONG).show()

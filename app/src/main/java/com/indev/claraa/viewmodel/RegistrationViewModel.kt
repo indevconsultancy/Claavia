@@ -67,79 +67,13 @@ class RegistrationViewModel (val context: Context): ViewModel() {
 //        }
 //    }
 
-
-
-    fun btnJoin() {
-        prefHelper = PrefHelper(context)
-        checkLogin = prefHelper.getBoolean(Constant.PREF_IS_LOGIN)
-
-        if (checkLogin == true) {
-            userRegistrationTable = UserRegistrationModel(
-                prefHelper.getInt(Constant.PREF_USERID)!!,
-                shopName.get().toString(),
-                ownerName.get().toString(),
-                username.get().toString(),
-                "amit123",
-                email.get().toString(),
-                mobNo.get().toString(),
-                etAddress.get().toString(),
-                UserRegistration.state_id.toString(),
-                UserRegistration.district_id.toString(),
-                etAddress.get().toString(), register_date = CommonClass.currentDate().toString(), "male", "", "","",
-                pinCode.get().toString()
-            )
-            userRegistrationTable.shop_name = shopName.get().toString()
-            userRegistrationTable.user_name = username.get().toString()
-            userRegistrationTable.owner_name = ownerName.get().toString()
-            userRegistrationTable.email = email.get().toString()
-            userRegistrationTable.mobile_number = mobNo.get().toString()
-            userRegistrationTable.address = etAddress.get().toString()
-            userRegistrationTable.state_id = UserRegistration.state_id.toString()
-            userRegistrationTable.district_id = UserRegistration.district_id.toString()
-            userRegistrationTable.latitude = prefHelper.getString(Constant.PREF_LATITUDE)!!
-            userRegistrationTable.longitude = prefHelper.getString(Constant.PREF_LATITUDE)!!
-            userRegistrationTable.pinCode = pinCode.get().toString()
-
-            viewModelScope.launch {
-
-                CoroutineScope(Dispatchers.IO).launch {
-                    UserRegistrationRepository.updateData(context, userRegistrationTable)
-                    var last_user_id=0
-                    last_user_id = UserRegistrationRepository.userProfileUpdateAPI(context,userRegistrationTable)
-                    if (last_user_id> 0) {
-                        context.startActivity(Intent(context, HomeScreen::class.java))
-                        Handler(Looper.getMainLooper()).post {
-                            Toast.makeText(context, "Successfully Updated..", Toast.LENGTH_LONG).show()
-                        }
-                    } else {
-                        Handler(Looper.getMainLooper()).post {
-                            Toast.makeText(context, "Something went wrong..", Toast.LENGTH_LONG).show()
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    fun btnMale(){
-        gender = "Male"
-    }
-
-    fun btnFemale(){
-        gender = "Female"
-    }
-
-    fun btnOthers(){
-        gender = "Others"
-
-    }
-
     @SuppressLint("SuspiciousIndentation")
     fun btnSubmit(){
         prefHelper = PrefHelper(context)
         checkLogin = prefHelper.getBoolean(Constant.PREF_IS_LOGIN)
 
         if(checkValidation()) {
+            gender= UserRegistration.gender
             SweetDialog.showProgressDialog(context)
             if (checkLogin == false) {
             SweetDialog.showProgressDialog(context)
@@ -154,7 +88,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             mobNo.get().toString(),
             etAddress.get().toString(),
             UserRegistration.state_id.toString(),
-            UserRegistration.district_id.toString(),"", CommonClass.currentDate().toString(), gender,prefHelper.getString(Constant.PREF_LATITUDE).toString(),prefHelper.getString(Constant.PREF_LATITUDE).toString(),"",
+            UserRegistration.district_id.toString(),prefHelper.getString(Constant.PREF_ACTIVE).toString(), CommonClass.currentDate().toString(), gender,prefHelper.getString(Constant.PREF_LATITUDE).toString(),prefHelper.getString(Constant.PREF_LONGITUDE).toString(),prefHelper.getString(Constant.PREF_CREDIT).toString(),
             pinCode.get().toString()
         )
         viewModelScope.launch {
@@ -193,7 +127,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
                 etAddress.get().toString(),
                 UserRegistration.state_id.toString(),
                 UserRegistration.district_id.toString(),
-                etAddress.get().toString(),CommonClass.currentDate().toString(),gender, "", "","",
+                etAddress.get().toString(),CommonClass.currentDate().toString(),gender, prefHelper.getString(Constant.PREF_LATITUDE).toString(),prefHelper.getString(Constant.PREF_LONGITUDE).toString(),prefHelper.getString(Constant.PREF_CREDIT).toString(),
                 pinCode.get().toString()
             )
             userRegistrationTable.shop_name = shopName.get().toString()

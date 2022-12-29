@@ -393,7 +393,7 @@
                                 android:hint="Enter Email ID"
                                 android:padding="10dp"
                                 android:text="@={registrationVM.email}"
-                                android:textSize="15dp" />
+                                android:textSize="15dp"/>
 
                         </LinearLayout>
 
@@ -530,7 +530,7 @@
                                     android:padding="10dp"
                                     android:textColor="@color/black"
                                     android:textSize="15dp" />
-                                <!--                                tools:setOnItemSelectedListener="@{registrationVM.clicksListener}"/>-->
+                                <!-- tools:setOnItemSelectedListener="@{registrationVM.clicksListener}"/>-->
                             </LinearLayout>
 
                             <LinearLayout
@@ -575,7 +575,7 @@
                                     android:padding="10dp"
                                     android:textColor="@color/black"
                                     android:textSize="15dp" />
-                                <!--                                tools:setOnItemSelectedListener="@{registrationVM.clickListener}" />-->
+                                <!--tools:setOnItemSelectedListener="@{registrationVM.clickListener}" />-->
 
                             </LinearLayout>
                         </LinearLayout>
@@ -674,38 +674,41 @@
                             android:weightSum="3">
 
                             <TextView
+                                android:id="@+id/btnMale"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginRight="5dp"
                                 android:layout_weight="1"
+                                android:enabled="true"
                                 android:background="@drawable/btn_color_change"
                                 android:gravity="center"
-                                android:onClick="@{() ->registrationVM.btnMale()}"
                                 android:text="Male"
                                 android:textAllCaps="false"
                                 android:textColor="@color/white" />
 
                             <TextView
+                                android:id="@+id/btnFemale"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_marginRight="5dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/btn_color_change"
                                 android:gravity="center"
-                                android:onClick="@{() ->registrationVM.btnFemale()}"
+                                android:enabled="true"
                                 android:text="Female"
                                 android:textAllCaps="false"
                                 android:textColor="@color/white" />
 
                             <TextView
+                                android:id="@+id/btnOther"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_marginRight="5dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/btn_color_change"
                                 android:gravity="center"
-                                android:onClick="@{() ->registrationVM.btnOthers()}"
+                                android:enabled="true"
                                 android:text="Other"
                                 android:textAllCaps="false"
                                 android:textColor="@color/white" />

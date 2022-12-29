@@ -177,7 +177,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
         CoroutineScope(Dispatchers.IO).launch {
             ProductRepository.deleteProductData(id,context)
             var last_id=0
-            last_id = ProductRepository.cartProductDelete(id)
+            last_id = ProductRepository.cartProductDelete(context,id)
             if (last_id> 0) {
                 Handler(Looper.getMainLooper()).post {
                     Toast.makeText(context, "Successfully Deleted...", Toast.LENGTH_LONG).show()

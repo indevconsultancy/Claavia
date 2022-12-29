@@ -67,10 +67,9 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() {
                     CommonClass.currentDate().toString(),
                     totalAmount.toString(),
                     "",
+                    prefHelper.getString(Constant.PREF_ACTIVE).toString(),
                     "",
-                    "",
-                    "",
-                    "",
+                    prefHelper.getString(Constant.PREF_LATITUDE).toString(),prefHelper.getString(Constant.PREF_LONGITUDE).toString(),
                     "Pending"
                 )
                 last_order_master_id= dataBase?.userDao()?.insertOrderMaster(orderMasterModel)!!
@@ -135,8 +134,7 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() {
                             i.quantity.toInt(),
                             "Pending",
                             i.price.toInt() * i.quantity.toInt(),
-                            user_id,
-                            ""
+                            user_id,prefHelper.getString(Constant.PREF_ACTIVE).toString()
                         )
                         last_order_details_id = dataBase?.userDao()?.insertOrderDetails(orderDetailsModel)!!
                         var  last_order_id = PaymentGatewayRepository.insertOrderDetailAPI(context, orderDetailsModel)
@@ -184,10 +182,10 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() {
                     CommonClass.currentDate().toString(),
                     totalAmount.toString(),
                     "",
+                    prefHelper.getString(Constant.PREF_ACTIVE).toString(),
                     "",
-                    "",
-                    "",
-                    "",
+                    prefHelper.getString(Constant.PREF_LATITUDE).toString(),
+                    prefHelper.getString(Constant.PREF_LONGITUDE).toString(),
                     s
                 )
                 PaymentGatewayRepository.updateOrderMaster(context, orderMasterModel)
@@ -204,7 +202,7 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() {
                             s,
                             i.price* i.quantity,
                             user_id,
-                            ""
+                            prefHelper.getString(Constant.PREF_ACTIVE).toString()
                         )
                         PaymentGatewayRepository.updateCartPaymentStatusbyId(i.product_id.toInt(),s, context)
                         PaymentGatewayRepository.updateOrderDetails(context, orderDetailsModel)

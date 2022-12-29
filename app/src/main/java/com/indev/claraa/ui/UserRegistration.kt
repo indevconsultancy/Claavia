@@ -43,6 +43,30 @@ class UserRegistration : AppCompatActivity() {
         binding.registrationVM = registrationViewModel
 
 
+
+        binding.btnMale.setOnClickListener {
+            gender="Male"
+            binding.btnMale.setBackgroundResource(R.drawable.selected_btn)
+            binding.btnFemale.setBackgroundResource(R.drawable.btn_color_change)
+            binding.btnOther.setBackgroundResource(R.drawable.btn_color_change)
+
+        }
+        binding.btnFemale.setOnClickListener {
+            gender="Female"
+            binding.btnMale.setBackgroundResource(R.drawable.btn_color_change)
+            binding.btnFemale.setBackgroundResource(R.drawable.selected_btn)
+            binding.btnOther.setBackgroundResource(R.drawable.btn_color_change)
+        }
+
+        binding.btnOther.setOnClickListener {
+            gender="Others"
+            binding.btnFemale.setBackgroundResource(R.drawable.btn_color_change)
+            binding.btnOther.setBackgroundResource(R.drawable.btn_color_change)
+            binding.btnOther.setBackgroundResource(R.drawable.selected_btn)
+
+        }
+
+
         stateArrayList = ArrayList<StateModel>()
         CoroutineScope(Dispatchers.IO).launch {
             stateArrayList = registrationViewModel.getStateList(applicationContext) as ArrayList<StateModel>
@@ -130,5 +154,6 @@ class UserRegistration : AppCompatActivity() {
     companion object{
         var state_id=0
         var district_id=0
+        var gender=""
     }
 }

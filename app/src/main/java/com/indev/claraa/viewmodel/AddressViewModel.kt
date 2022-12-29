@@ -83,7 +83,7 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
             mobNo.get().toString(),
             etAddress1.get().toString(),AddNewAddress.state_id.toString(),
             AddNewAddress.district_id.toString(),pinCode.get().toString(),
-            etAddress2.get().toString(),"","","",
+            etAddress2.get().toString(),prefHelper.getString(Constant.PREF_LATITUDE).toString(),prefHelper.getString(Constant.PREF_LONGITUDE).toString(),CommonClass.currentDate().toString(),
             landmark.get().toString(),
         )
         //AddressDetailsRepository.editAddress(addressDetailsModel, context)
@@ -121,7 +121,7 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
             mobNo.get().toString(),
             etAddress1.get().toString(),AddNewAddress.state_id.toString(),
             AddNewAddress.district_id.toString(),pinCode.get().toString(),
-            etAddress2.get().toString(),"","",CommonClass.currentDate().toString(),
+            etAddress2.get().toString(),prefHelper.getString(Constant.PREF_LATITUDE).toString(),prefHelper.getString(Constant.PREF_LONGITUDE).toString(),CommonClass.currentDate().toString(),
             landmark.get().toString()
         )
         viewModelScope.launch {

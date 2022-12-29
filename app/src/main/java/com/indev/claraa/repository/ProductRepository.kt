@@ -7,6 +7,8 @@ import com.indev.claraa.entities.AddressDetailsModel
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.ProductMasterModel
 import com.indev.claraa.entities.UserRegistrationModel
+import com.indev.claraa.helper.Constant
+import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.restApi.ClaraaApi
 import com.indev.claraa.restApi.ClientApi
 import com.indev.claraa.roomdb.RoomDB
@@ -18,6 +20,7 @@ class ProductRepository {
  
     companion object {
         private var dataBase: RoomDB? = null
+        lateinit var prefHelper: PrefHelper
         val apiInterface = ClientApi.getClient()?.create(ClaraaApi::class.java)
 
         private fun initializeDB(context: Context): RoomDB? {
@@ -85,9 +88,11 @@ class ProductRepository {
             }
         }
 
-        suspend fun cartInsertAPI(cartModel: CartModel): Int {
+        suspend fun cartInsertAPI(context: Context,cartModel: CartModel): Int {
             try {
-                var result = apiInterface?.cartInsertAPI(cartModel, "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjcxODY0MjEyLCJuYmYiOjE2NzE4NjQyMjIsImV4cCI6MTY3NDQ1NjI3MiwiZGF0YSI6eyJ1c2VyX2lkIjpudWxsLCJ1c2VyX25hbWUiOiJBbWl0IiwibW9iaWxlX251bWJlciI6bnVsbH19.Xu-4QUrTmQQpQTlQHr8UfSQxNRTBO4Wb2twDcgd5gCU")
+                prefHelper = PrefHelper(context)
+                var token="Bearer " +prefHelper.getString(Constant.PREF_TOKEN)
+                var result = apiInterface?.cartInsertAPI(cartModel, token!!)
                 return if (result?.body()?.status==1){
                     result?.body()!!.last_insert_id
                 } else {
@@ -100,9 +105,11 @@ class ProductRepository {
         }
 
 
-        suspend fun cartProductDelete(id: String): Int {
+        suspend fun cartProductDelete(context: Context,id: String): Int {
             try {
-                var result = apiInterface?.deleteCartAPI(id, "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjcxODgwMzM0LCJuYmYiOjE2NzE4ODAzNDQsImV4cCI6MTY3NDQ3MjM5NCwiZGF0YSI6eyJ1c2VyX2lkIjpudWxsLCJ1c2VyX25hbWUiOiJBbWl0IiwibW9iaWxlX251bWJlciI6bnVsbH19.2AOPDJH7mBFeOzxjGKBAFcoXliWfKvDHUjtbt2GYie8")
+                prefHelper = PrefHelper(context)
+                var token="Bearer " + prefHelper.getString(Constant.PREF_TOKEN)
+                var result = apiInterface?.deleteCartAPI(id, token!!)
                 return if (result?.body()?.status==1){
                     1
                 } else {
@@ -115,12 +122,12 @@ class ProductRepository {
         }
 
 
-        suspend fun cartUpdateApi(cartModel: CartModel): Int {
+        suspend fun cartUpdateApi(context: Context,cartModel: CartModel): Int {
             try {
+                prefHelper = PrefHelper(context)
+                var token="Bearer " + prefHelper.getString(Constant.PREF_TOKEN)
                 var result = apiInterface?.cartUpdateAPI(
-                    cartModel,
-                    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjcxNjEzMzk5LCJuYmYiOjE2NzE2MTM0MDksImV4cCI6MTY3NDIwNTQ1OSwiZGF0YSI6eyJ1c2VyX2lkIjpudWxsLCJ1c2VyX25hbWUiOiJBbWl0IiwibW9iaWxlX251bWJlciI6bnVsbH19.kgPPS_tGELwddw0hW3UwwQtW0-ZNZvza2R8FE0XJxr8"
-                )
+                    cartModel,token!!)
                 return if (result?.body()?.status == 1) {
                     result?.body()!!.updated_id
                 } else {

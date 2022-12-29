@@ -35,8 +35,6 @@ class Home : Fragment(), ClickLinstener {
     private lateinit var productMasterAdapter: ProductMasterAdapter
     var productMasterModelArrayList: ArrayList<ProductMasterModel> = ArrayList()
     lateinit var prefHelper: PrefHelper
-    var checkSelectedButton= "Monthly"
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,30 +55,33 @@ class Home : Fragment(), ClickLinstener {
         binding.btnMonthly.setOnClickListener {
             getProductRecycleViewList(1)
             binding.btnMonthly.setBackgroundResource(R.drawable.selected_btn)
+            binding.btnDaily.setBackgroundResource(R.drawable.btn_color_change)
+            binding.btnWeekly.setBackgroundResource(R.drawable.btn_color_change)
+            binding.btnSolution.setBackgroundResource(R.drawable.btn_color_change)
 
-            checkSelectedButton= "Monthly"
-            binding.btnMonthly.setBackgroundColor(Color.parseColor("#FFBB86FC"))
+        }
+        binding.btnDaily.setOnClickListener {
+            getProductRecycleViewList(3)
+            binding.btnMonthly.setBackgroundResource(R.drawable.btn_color_change)
+            binding.btnDaily.setBackgroundResource(R.drawable.selected_btn)
+            binding.btnWeekly.setBackgroundResource(R.drawable.btn_color_change)
+            binding.btnSolution.setBackgroundResource(R.drawable.btn_color_change)
         }
 
         binding.btnWeekly.setOnClickListener {
             getProductRecycleViewList(2)
-            binding.btnWeekly.setBackgroundResource(R.drawable.selected_btn)
-            checkSelectedButton= "Color"
-
-        }
-
-        binding.btnDaily.setOnClickListener {
-            getProductRecycleViewList(3)
-            binding.btnDaily.setBackgroundResource(R.drawable.selected_btn)
             binding.btnMonthly.setBackgroundResource(R.drawable.btn_color_change)
-            binding.btnWeekly.setBackgroundResource(R.drawable.btn_color_change)
+            binding.btnDaily.setBackgroundResource(R.drawable.btn_color_change)
+            binding.btnWeekly.setBackgroundResource(R.drawable.selected_btn)
             binding.btnSolution.setBackgroundResource(R.drawable.btn_color_change)
-            checkSelectedButton= "Daily"
+
         }
 
         binding.btnSolution.setOnClickListener {
             getProductRecycleViewList(4)
-            checkSelectedButton= "Solution"
+            binding.btnDaily.setBackgroundResource(R.drawable.btn_color_change)
+            binding.btnMonthly.setBackgroundResource(R.drawable.btn_color_change)
+            binding.btnWeekly.setBackgroundResource(R.drawable.btn_color_change)
             binding.btnSolution.setBackgroundResource(R.drawable.selected_btn)
         }
 
@@ -133,9 +134,6 @@ class Home : Fragment(), ClickLinstener {
             true
         }
 
-        binding.btnMonthly.setOnClickListener {
-            binding.btnMonthly.isSelected != binding.btnMonthly.isSelected
-        }
     }
 
     private fun getProductRecycleViewList(selectedCategory: Int) {
