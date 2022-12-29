@@ -125,6 +125,8 @@ class Home : Fragment(), ClickLinstener {
                 replaceFregment(Cart())
             }R.id.refer ->{
                 replaceFregment(Refer())
+            }R.id.orderHistory ->{
+                replaceFregment(OrderHistory())
             }
                 R.id.logout -> {
                     logoutPopUp()
