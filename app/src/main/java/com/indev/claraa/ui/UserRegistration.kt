@@ -70,6 +70,8 @@ class UserRegistration : AppCompatActivity() {
         stateArrayList = ArrayList<StateModel>()
         CoroutineScope(Dispatchers.IO).launch {
             stateArrayList = registrationViewModel.getStateList(applicationContext) as ArrayList<StateModel>
+            var stateModel= StateModel("0","Select State","0")
+            stateArrayList.add(0, stateModel)
             val spinnerArray = arrayOfNulls<String>(stateArrayList.size)
             val spinnerMap = HashMap<Int, String>()
             for (i in 0 until stateArrayList.size) {
@@ -100,9 +102,13 @@ class UserRegistration : AppCompatActivity() {
         districtArrayList = ArrayList<DistrictModel>()
         CoroutineScope(Dispatchers.IO).launch {
             districtArrayList = registrationViewModel.getDistrictList(applicationContext) as ArrayList<DistrictModel>
+            var da= DistrictModel("0","Select District","0","0")
+            districtArrayList.add(0, da)
             val spinnerArray = arrayOfNulls<String>(districtArrayList.size)
             val spinnerMap = HashMap<Int, String>()
+
             for (i in 0 until districtArrayList.size) {
+
                 spinnerMap[i] = districtArrayList.get(i).district_id
                 spinnerArray[i] = districtArrayList.get(i).district_name
             }
@@ -142,8 +148,8 @@ class UserRegistration : AppCompatActivity() {
                 binding.etOwnerName.setText(it.owner_name)
                 binding.etEmail.setText(it.email)
                 binding.etMobile.setText(it.mobile_number)
-                binding.spnState.setSelection(1)
-                binding.spnDistrict.setSelection(1)
+                binding.spnState.setSelection(it.state_id.toInt())
+                binding.spnDistrict.setSelection(it.district_id.toInt())
                 binding.etAddress.setText(it.address)
                 binding.etPincode.setText(it.pinCode)
             })

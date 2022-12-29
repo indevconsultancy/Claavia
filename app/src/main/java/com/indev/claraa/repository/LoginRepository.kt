@@ -14,6 +14,8 @@ import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.restApi.ClaraaApi
 import com.indev.claraa.restApi.ClientApi
 import com.indev.claraa.roomdb.RoomDB
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class LoginRepository {
 
@@ -42,6 +44,7 @@ class LoginRepository {
                     for (i in 0 until userProfileArray.size) {
                         prefHelper.put(Constant.PREF_USERID, userProfileArray[i].user_id.toString())
                         prefHelper.put(Constant.PREF_USER_EMAIL, userProfileArray[i].email)
+                        prefHelper.put(Constant.PREF_USER_NAME, userProfileArray[i].owner_name)
                         prefHelper.put(Constant.PREF_USER_MOBILE, userProfileArray[i].mobile_number)
                         prefHelper.put(Constant.PREF_TOKEN, result?.body()?.Token!!)
                         prefHelper.put(Constant.PREF_CREDIT, userProfileArray[i].credit)

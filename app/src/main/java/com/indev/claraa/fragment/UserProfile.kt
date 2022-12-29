@@ -12,8 +12,14 @@ import com.indev.claraa.R
 import com.indev.claraa.databinding.FragmentProfileBinding
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
+import com.indev.claraa.repository.OrderHistoryReposetory
+import com.indev.claraa.repository.UserRegistrationRepository
 import com.indev.claraa.viewmodel.ProfileViewModel
 import com.indev.claraa.viewmodel.ProfileViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class UserProfile : Fragment() {
 
@@ -42,19 +48,37 @@ class UserProfile : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         prefHelper= PrefHelper(requireContext())
-        profileViewModel.readAllData.observe(viewLifecycleOwner, Observer {
 
+
+        profileViewModel.readAllData.observe(viewLifecycleOwner, Observer {
             if(it != null) {
                 binding.tvName.text = it?.owner_name
                 binding.tvShopName.text = it?.shop_name
                 binding.tvEmail.text = it?.email
                 binding.tvMobile.text = it?.mobile_number
-                profileViewModel.getState(it.state_id)
-                profileViewModel.getDistrict(it.district_id)
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    var state_name = UserRegistrationRepository.getStateName(
+                        requireContext(),
+                        it.state_id
+                    ).toString()
+                    var district_name = UserRegistrationRepository.getDistrictName(
+                        requireContext(),
+                        it.district_id
+                    ).toString()
+                    binding.tvState.text = state_name
+                    binding.tvDistrict.text = district_name
+                }
+
+//                profileViewModel.getState(it.state_id)
+//                profileViewModel.getDistrict(it.district_id)
                 binding.tvAddress.text = it?.address
                 binding.tvPincode.text = it?.pinCode
             }
         })
+
+
+
         binding.tvCredit.text = prefHelper.getString(Constant.PREF_CREDIT)
 
             binding.toolbar.toolbarTitle.text = "Profile"

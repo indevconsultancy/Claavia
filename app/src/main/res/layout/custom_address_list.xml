@@ -52,16 +52,6 @@
                     android:textSize="15dp"
                     android:textStyle="bold"/>
 
-                <TextView
-                    android:id="@+id/tvStateDistrict"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/aleo_regular"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="30dp"
-                    android:text="State, District"
-                    android:textColor="@color/black"
-                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/tvAddress1"
@@ -82,6 +72,17 @@
                     android:gravity="center_vertical"
                     android:paddingLeft="30dp"
                     android:text="Pin code"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/tvStateDistrict"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/aleo_regular"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30dp"
+                    android:text="State, District"
                     android:textColor="@color/black"
                     android:textSize="15dp" />
 

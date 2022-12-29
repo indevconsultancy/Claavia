@@ -4,6 +4,7 @@ import android.content.Context
 import android.media.session.MediaSession.Token
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.sqlite.db.SimpleSQLiteQuery
 import com.indev.claraa.entities.AddressDetailsModel
 import com.indev.claraa.entities.DistrictModel
 import com.indev.claraa.entities.StateModel
@@ -52,14 +53,14 @@ class UserRegistrationRepository {
             return dataBase?.userDao()?.getDistrictList()
         }
 
-         fun getsStateName(context: Context, state_id: String): String? {
-            dataBase = initializeDB(context)
-            return dataBase?.userDao()?.getsStateName(state_id)
-        }
-        fun getDistrictName(context: Context, district_id: String): String? {
-            dataBase = initializeDB(context)
-            return dataBase?.userDao()?.getDistrictName(district_id)
-        }
+//         fun getsStateName(context: Context, state_id: String): String? {
+//            dataBase = initializeDB(context)
+//            return dataBase?.userDao()?.getsStateName(state_id)
+//        }
+//        fun getDistrictName(context: Context, district_id: String): String? {
+//            dataBase = initializeDB(context)
+//            return dataBase?.userDao()?.getDistrictName(district_id)
+//        }
 
         fun updateData(context: Context, userRegistrationTable: UserRegistrationModel){
             dataBase = initializeDB(context)
@@ -96,6 +97,20 @@ class UserRegistrationRepository {
                 Log.d("fail", "$e")
             }
             return 0
+        }
+
+        fun getStateName(context: Context, state_id: String): String? {
+            dataBase = initializeDB(context)
+            var queryString= "SELECT state_name FROM state_master where state_id =$state_id"
+            val query = SimpleSQLiteQuery(queryString)
+            return dataBase?.userDao()?.getName(query)
+        }
+
+        fun getDistrictName(context: Context, district_id: String): String? {
+            dataBase = initializeDB(context)
+            var queryString= "SELECT district_name FROM district_master where district_id =$district_id"
+            val query = SimpleSQLiteQuery(queryString)
+            return dataBase?.userDao()?.getName(query)
         }
 
     }

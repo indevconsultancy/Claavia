@@ -15,7 +15,6 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.indev.claraa.R
@@ -46,25 +45,25 @@ class SplashScreen : AppCompatActivity(), LocationListener {
         supportActionBar?.hide()
         prefHelper = PrefHelper(applicationContext)
 
-
         val PERMISSIONS = arrayOf(
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION
         )
+
         if (!hasPermissions(this, PERMISSIONS)) {
             ActivityCompat.requestPermissions(
                 this,
                 PERMISSIONS,
                 REQUEST
             )
+        }else{
+            callNextActivity()
         }
 
-        callNextActivity()
         this.window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN)
         splashViewModel = ViewModelProvider(this, SplashViewModelFactory(this@SplashScreen))[SplashViewModel::class.java]
-        getLocation()
     }
 
     override fun onLocationChanged(location: Location) {
@@ -75,10 +74,36 @@ class SplashScreen : AppCompatActivity(), LocationListener {
     }
     private fun getLocation() {
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionCode)
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String?>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            REQUEST -> {
+                if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("TAG", "@@@ PERMISSIONS grant")
+                    callNextActivity()
+                } else {
+                    Log.d("TAG", "@@@ PERMISSIONS Denied")
+                    Toast.makeText(this, "PERMISSIONS Denied", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
     private fun hasPermissions(context: Context?, permissions: Array<String>?): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
@@ -96,8 +121,8 @@ class SplashScreen : AppCompatActivity(), LocationListener {
     }
 
     private fun callNextActivity() {
+        getLocation()
         checkLogin = prefHelper.getBoolean(Constant.PREF_IS_LOGIN)
-
         Handler().postDelayed({
             if(checkLogin == true) {
                 val intent = Intent(this@SplashScreen, HomeScreen::class.java)

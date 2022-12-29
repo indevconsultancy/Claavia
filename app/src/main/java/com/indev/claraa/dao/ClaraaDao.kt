@@ -2,6 +2,7 @@ package com.indev.claraa.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteQuery
 import com.google.android.gms.common.api.internal.IStatusCallback
 import com.indev.claraa.entities.*
 import org.jetbrains.annotations.NotNull
@@ -39,6 +40,9 @@ interface ClaraaDao {
 
     @Query("SELECT * FROM product_master where product_name = :selectedProduct")
     fun getProductPowerList(selectedProduct: String): LiveData<List<ProductMasterModel>>
+
+    @Query("SELECT * FROM order_details where payment_status= :payment_status order by local_id ASC")
+    fun getOrderDetailsList(payment_status: String): LiveData<List<OrderDetailsModel>>
 
 
     @Query("SELECT * FROM product_master where product_id = :product_id")
@@ -173,6 +177,14 @@ interface ClaraaDao {
     @Update
     fun updateOrderDetails(orderDetailsModel: OrderDetailsModel)
 
-    @Query("SELECT * FROM product_packet where packet_id =:packet_id")
-    fun getPacksList(packet_id: String): List<ProductPacketModel>
+//    @Query("SELECT * FROM product_packet where packet_id =:packet_id")
+//    fun getPacksList(packet_id: String): List<ProductPacketModel>
+
+    @RawQuery
+    fun getPacksList(query: SupportSQLiteQuery) : List<ProductPacketModel>
+
+  @RawQuery
+    fun getName(query: SupportSQLiteQuery) : String
+
+
 }

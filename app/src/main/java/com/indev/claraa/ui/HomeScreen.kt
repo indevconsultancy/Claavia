@@ -71,6 +71,9 @@ class HomeScreen : AppCompatActivity(), LocationListener{
                 R.id.refer -> {
                     replaceFregment(Refer(),3)
                 }
+                R.id.orderHistory -> {
+                    replaceFregment(OrderHistory(),4)
+                }
             }
             true
         }
@@ -142,14 +145,14 @@ class HomeScreen : AppCompatActivity(), LocationListener{
         val fragmentManager = supportFragmentManager
         val fragmentTransition= fragmentManager.beginTransaction()
 //
-//        if(flag == 0){
-//            fragmentTransition.add(R.id.frame_layout, fragment)
-//            fragmentManager.popBackStack("FRAGMENT_1", FragmentManager.POP_BACK_STACK_INCLUSIVE)
-//            fragmentTransition.addToBackStack("FRAGMENT_1")
-//        }else{
+        if(flag == 0){
+            fragmentTransition.add(R.id.frame_layout, fragment)
+            fragmentManager.popBackStack("FRAGMENT_1", FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            fragmentTransition.addToBackStack("FRAGMENT_1")
+        }else{
             fragmentTransition.replace(R.id.frame_layout, fragment)
             fragmentTransition.addToBackStack(null)
-//        }
+        }
         fragmentTransition.commit()
     }
 
@@ -159,6 +162,7 @@ class HomeScreen : AppCompatActivity(), LocationListener{
         preferences.put("latitude",lat)
         preferences.put("longitude",long)
         Toast.makeText(applicationContext,"nckmfv" +lat + " "+ long,Toast.LENGTH_SHORT).show()
+        
     }
 
 

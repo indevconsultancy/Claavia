@@ -6,14 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
-import com.indev.claraa.adapter.CartAdapter
 import com.indev.claraa.adapter.OrderHistoryAdapter
 import com.indev.claraa.databinding.FragmentOrderHistoryBinding
-import com.indev.claraa.entities.CartModel
+import com.indev.claraa.entities.OrderDetailsModel
 import com.indev.claraa.entities.OrderMasterModel
 import com.indev.claraa.viewmodel.*
 
@@ -21,7 +21,7 @@ class OrderHistory : Fragment(), ClickLinstener {
     private lateinit var binding: FragmentOrderHistoryBinding
     private lateinit var orderHistoryViewModel: OrderHistoryViewModel
     private lateinit var orderHistoryAdapter: OrderHistoryAdapter
-    private lateinit var orderModelList: ArrayList<OrderMasterModel>
+    private lateinit var orderDetailsArrayList: ArrayList<OrderDetailsModel>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,8 +40,20 @@ class OrderHistory : Fragment(), ClickLinstener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         orderHistoryViewModel = OrderHistoryViewModel(requireContext())
-        orderHistoryAdapter = OrderHistoryAdapter( requireContext(),ArrayList<OrderMasterModel>(), this)
+        orderHistoryAdapter = OrderHistoryAdapter(requireContext(),ArrayList<OrderDetailsModel>(), this)
         recycleViewList()
+
+        orderHistoryViewModel.getOrderDetailsList(requireActivity())?.observe(requireActivity(), Observer {
+            orderHistoryAdapter.setData(it as ArrayList<OrderDetailsModel>)
+            orderDetailsArrayList = it
+            if(orderDetailsArrayList.size > 0){
+                binding.llEmpty.visibility =View.GONE
+                binding.llMain.visibility =View.VISIBLE
+            }else{
+                binding.llEmpty.visibility =View.VISIBLE
+                binding.llMain.visibility =View.GONE
+            }
+        })
 
     }
 

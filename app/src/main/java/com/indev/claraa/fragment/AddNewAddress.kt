@@ -51,6 +51,8 @@ class AddNewAddress : Fragment() {
         stateArrayList = ArrayList<StateModel>()
         CoroutineScope(Dispatchers.IO).launch {
             stateArrayList = context?.let { addressViewModel.getStateList(it) } as ArrayList<StateModel>
+            var stateModel= StateModel("0","Select State","0")
+            stateArrayList.add(0, stateModel)
             val spinnerArray = arrayOfNulls<String>(stateArrayList.size)
             val spinnerMap = HashMap<Int, String>()
             for (i in 0 until stateArrayList.size) {
@@ -83,6 +85,8 @@ class AddNewAddress : Fragment() {
         districtArrayList = ArrayList<DistrictModel>()
         CoroutineScope(Dispatchers.IO).launch {
             districtArrayList = context?.let { addressViewModel.getDistrictList(it) } as ArrayList<DistrictModel>
+            var da= DistrictModel("0","Select District","0","0")
+            districtArrayList.add(0, da)
             val spinnerArray = arrayOfNulls<String>(districtArrayList.size)
             val spinnerMap = HashMap<Int, String>()
             for (i in 0 until districtArrayList.size) {

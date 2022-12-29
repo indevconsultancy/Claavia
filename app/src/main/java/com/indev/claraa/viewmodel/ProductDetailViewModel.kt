@@ -161,7 +161,7 @@ class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
             amount,
             qty,
             productMasterArrayList.get(0).type_id,
-            productMasterArrayList.get(0).packet_id,
+            packetValue.toString(),
             PowerRangeAdapter.power_range,
             productMasterArrayList.get(0).currency,
             CommonClass.currentDate().toString(), prefHelper.getString(Constant.PREF_LATITUDE).toString(),prefHelper.getString(Constant.PREF_LONGITUDE).toString(),"Pending", productMasterArrayList.get(0).active
@@ -220,7 +220,7 @@ class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
         return ProductRepository.getPowerList(context,selectedProduct)
     }
 
-    fun getPacksList(context: Context, packet_id: Int): List<ProductPacketModel>? {
+    fun getPacksList(context: Context, packet_id: String): List<ProductPacketModel>? {
         return ProductRepository.getPacksList(context, packet_id)
     }
 

@@ -66,9 +66,8 @@ class RegistrationViewModel (val context: Context): ViewModel() {
     fun btnSubmit(){
         prefHelper = PrefHelper(context)
         checkLogin = prefHelper.getBoolean(Constant.PREF_IS_LOGIN)
-
+        gender= UserRegistration.gender
         if(checkValidation()) {
-            gender= UserRegistration.gender
             SweetDialog.showProgressDialog(context)
             if (checkLogin == false) {
             SweetDialog.showProgressDialog(context)
@@ -133,8 +132,8 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             userRegistrationTable.address = etAddress.get().toString()
             userRegistrationTable.state_id = UserRegistration.state_id.toString()
             userRegistrationTable.district_id = UserRegistration.district_id.toString()
-                userRegistrationTable.latitude = prefHelper.getString(Constant.PREF_LATITUDE)!!
-                userRegistrationTable.longitude = prefHelper.getString(Constant.PREF_LATITUDE)!!
+            userRegistrationTable.latitude = prefHelper.getString(Constant.PREF_LATITUDE)!!
+            userRegistrationTable.longitude = prefHelper.getString(Constant.PREF_LATITUDE)!!
             userRegistrationTable.pinCode = pinCode.get().toString()
 
             viewModelScope.launch {
@@ -209,6 +208,11 @@ class RegistrationViewModel (val context: Context): ViewModel() {
         }
         if(etAddress.get()?.isEmpty()==true) {
             Toast.makeText(context, "Please enter address..", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if(gender.length==0) {
+            Toast.makeText(context, "Please choose gender..", Toast.LENGTH_SHORT).show()
             return false
         }
 

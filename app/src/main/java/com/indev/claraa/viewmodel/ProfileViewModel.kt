@@ -31,19 +31,19 @@ class ProfileViewModel(val context: Context): ViewModel() {
         readAllData = UserRegistrationRepository.getRegistrationData(context)!!
     }
 
-    fun getState(stateId: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-           var  stat_name= UserRegistrationRepository.getsStateName(context, stateId)!!
-            state_name.set(stat_name)
-        }
-    }
-    fun getDistrict(districtId: String){
-        CoroutineScope(Dispatchers.IO).launch {
-            var districtName = UserRegistrationRepository.getDistrictName(context, districtId)!!
-            district_name.set(districtName)
-        }
-
-    }
+//    fun getState(stateId: String) {
+//        CoroutineScope(Dispatchers.IO).launch {
+//           var  stat_name= UserRegistrationRepository.getsStateName(context, stateId)!!
+//            state_name.set(stat_name)
+//        }
+//    }
+//    fun getDistrict(districtId: String){
+//        CoroutineScope(Dispatchers.IO).launch {
+//            var districtName = UserRegistrationRepository.getDistrictName(context, districtId)!!
+//            district_name.set(districtName)
+//        }
+//
+//    }
 
 //    fun getsStateName(state_id : String): String {
 //        database= initializeDB(context)

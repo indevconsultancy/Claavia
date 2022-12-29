@@ -1,11 +1,11 @@
 package com.indev.claraa.fragment
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -22,7 +22,6 @@ import com.indev.claraa.databinding.FragmentHomeBinding
 import com.indev.claraa.entities.ProductMasterModel
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
-import com.indev.claraa.repository.LoginRepository
 import com.indev.claraa.ui.LoginScreen
 import com.indev.claraa.viewmodel.HomeScreenViewModel
 import com.indev.claraa.viewmodel.HomeScreenViewModelFactory
@@ -51,6 +50,7 @@ class Home : Fragment(), ClickLinstener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getProductRecycleViewList(1)
+        prefHelper= PrefHelper(requireContext())
 
         binding.btnMonthly.setOnClickListener {
             getProductRecycleViewList(1)
@@ -116,6 +116,11 @@ class Home : Fragment(), ClickLinstener {
         )
         carousel.setData(list)
 
+        var view= binding.navigationMenu.getHeaderView(0)
+        var tvTitle: TextView = view.findViewById(R.id.tvTitle)
+        var tvEmail: TextView = view.findViewById(R.id.tvEmail)
+        tvTitle.text = prefHelper.getString(Constant.PREF_USER_NAME)
+        tvEmail.text = prefHelper.getString(Constant.PREF_USER_EMAIL)
 
         binding.navigationMenu.setNavigationItemSelectedListener {
             when(it.itemId){

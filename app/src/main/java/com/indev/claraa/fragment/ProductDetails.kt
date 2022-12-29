@@ -96,7 +96,7 @@ class ProductDetails : Fragment(), ClickLinstener {
 
         packsArrayList = ArrayList<ProductPacketModel>()
         CoroutineScope(Dispatchers.IO).launch {
-            packsArrayList = productDetailViewModel.getPacksList(requireContext(), ProductMasterAdapter.packet_id.toInt()) as ArrayList<ProductPacketModel>
+            packsArrayList = productDetailViewModel.getPacksList(requireContext(), ProductMasterAdapter.packet_id) as ArrayList<ProductPacketModel>
             val spinnerArray = arrayOfNulls<String>(packsArrayList.size)
             val spinnerMap = HashMap<Int, String>()
             for (i in 0 until packsArrayList.size) {

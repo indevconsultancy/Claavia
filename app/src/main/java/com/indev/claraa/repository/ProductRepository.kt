@@ -3,6 +3,7 @@ package com.indev.claraa.repository
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.sqlite.db.SimpleSQLiteQuery
 import com.indev.claraa.entities.*
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
@@ -12,6 +13,7 @@ import com.indev.claraa.roomdb.RoomDB
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
 
 class ProductRepository {
  
@@ -141,11 +143,11 @@ class ProductRepository {
             return 0
         }
 
-        fun getPacksList(context: Context, packet_id: Int): List<ProductPacketModel>? {
+        fun getPacksList(context: Context, packet_id: String): List<ProductPacketModel>? {
            dataBase = initializeDB(context)
-            return dataBase?.userDao()?.getPacksList("in ($packet_id)")
+            var queryString= "SELECT * FROM product_packet where packet_id in ($packet_id)"
+            val query = SimpleSQLiteQuery(queryString)
+            return dataBase?.userDao()?.getPacksList(query)
         }
-
     }
-
 }

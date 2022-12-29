@@ -21,4 +21,9 @@
             android:icon="@drawable/footer_history_i"
             android:title="Cart"/>
 
+        <item
+            android:id="@+id/orderHistory"
+            android:icon="@drawable/order_history"
+            android:title="Order History"/>
+
 </menu>

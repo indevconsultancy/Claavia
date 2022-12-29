@@ -25,6 +25,7 @@ import com.indev.claraa.repository.AddressDetailsRepository
 import com.indev.claraa.ui.HomeScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
@@ -44,7 +45,11 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
         holder.shopName.text = currentItem.shop_name
         holder.personName.text = currentItem.user_name
         holder.mobNo.text = "Mobile Number: " + currentItem.mobile_number
-        holder.stateDistrict.text = currentItem.state_id + ", " + currentItem.district_id
+        GlobalScope.launch {
+            var state_name= AddressDetailsRepository.getStateName(context, currentItem.state_id)
+            var district_name= AddressDetailsRepository.getDistrictName(context, currentItem.district_id)
+            holder.stateDistrict.text = state_name + ", " + district_name
+        }
         holder.address1.text = currentItem.address1 +"," + currentItem.address2 + "," +currentItem.landmark
         holder.pinCode.text = currentItem.pinCode
 

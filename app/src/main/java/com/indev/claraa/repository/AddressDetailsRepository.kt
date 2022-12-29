@@ -3,10 +3,8 @@ package com.indev.claraa.repository
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
-import com.indev.claraa.entities.AddressDetailsModel
-import com.indev.claraa.entities.DistrictModel
-import com.indev.claraa.entities.StateModel
-import com.indev.claraa.entities.deleteModel
+import androidx.sqlite.db.SimpleSQLiteQuery
+import com.indev.claraa.entities.*
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.restApi.ClaraaApi
@@ -128,6 +126,20 @@ class AddressDetailsRepository {
                 Log.d("fail", "$e")
             }
             return 0
+        }
+
+        fun getStateName(context: Context, state_id: String): String? {
+           dataBase =initializeDB(context)
+            var queryString= "SELECT state_name FROM state_master where state_id in ($state_id)"
+            val query = SimpleSQLiteQuery(queryString)
+            return dataBase?.userDao()?.getName(query)
+        }
+
+        fun getDistrictName(context: Context, district_id: String): String? {
+           dataBase =initializeDB(context)
+            var queryString= "SELECT district_name FROM district_master where district_id in ($district_id)"
+            val query = SimpleSQLiteQuery(queryString)
+            return dataBase?.userDao()?.getName(query)
         }
 
     }
