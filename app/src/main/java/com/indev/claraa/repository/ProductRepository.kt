@@ -3,10 +3,7 @@ package com.indev.claraa.repository
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
-import com.indev.claraa.entities.AddressDetailsModel
-import com.indev.claraa.entities.CartModel
-import com.indev.claraa.entities.ProductMasterModel
-import com.indev.claraa.entities.UserRegistrationModel
+import com.indev.claraa.entities.*
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.restApi.ClaraaApi
@@ -55,6 +52,11 @@ class ProductRepository {
         fun getCartDatabyProductId(productId: Int,context: Context): List<CartModel>? {
             dataBase = initializeDB(context)
             return dataBase?.userDao()?.getCartDatabyProductId(productId)
+        }
+
+        fun getPacksSize(packet_id: String,context: Context): List<ProductPacketModel>? {
+            dataBase = initializeDB(context)
+            return dataBase?.userDao()?.getPackSizebyID(packet_id)
         }
 
         fun deleteProductData(cartId: String,context: Context){
@@ -137,6 +139,11 @@ class ProductRepository {
                 Log.d("fail", "$e")
             }
             return 0
+        }
+
+        fun getPacksList(context: Context, product_id: Int): List<ProductPacketModel>? {
+           dataBase = initializeDB(context)
+            return dataBase?.userDao()?.getPacksList(product_id)
         }
 
     }

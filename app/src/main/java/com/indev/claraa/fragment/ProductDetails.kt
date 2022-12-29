@@ -1,10 +1,13 @@
 package com.indev.claraa.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -18,10 +21,16 @@ import com.indev.claraa.adapter.CartAdapter
 import com.indev.claraa.adapter.PowerRangeAdapter
 import com.indev.claraa.databinding.FragmentProductDetailsBinding
 import com.indev.claraa.entities.CartModel
+import com.indev.claraa.entities.DistrictModel
 import com.indev.claraa.entities.ProductMasterModel
+import com.indev.claraa.entities.ProductPacketModel
 import com.indev.claraa.restApi.ClientApi
+import com.indev.claraa.ui.UserRegistration
 import com.indev.claraa.viewmodel.ProductDetailViewModel
 import com.indev.claraa.viewmodel.ProductDetailViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class ProductDetails : Fragment(), ClickLinstener {
@@ -33,6 +42,8 @@ class ProductDetails : Fragment(), ClickLinstener {
     private lateinit var cartModelList: ArrayList<CartModel>
     lateinit var productMasterArrayList: ArrayList<ProductMasterModel>
      var selectedProduct ="Claraa Fresh Flo"
+    private lateinit var packsArrayList: ArrayList<ProductPacketModel>
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -81,6 +92,37 @@ class ProductDetails : Fragment(), ClickLinstener {
             productMasterArrayList = it
             showSlider(productMasterArrayList)
         })
+
+        packsArrayList = ArrayList<ProductPacketModel>()
+        CoroutineScope(Dispatchers.IO).launch {
+            packsArrayList = productDetailViewModel.getPacksList(requireContext(),1) as ArrayList<ProductPacketModel>
+            val spinnerArray = arrayOfNulls<String>(packsArrayList.size)
+            val spinnerMap = HashMap<Int, String>()
+            for (i in 0 until packsArrayList.size) {
+                spinnerMap[i] = packsArrayList.get(i).packet_id
+                spinnerArray[i] = packsArrayList.get(i).packet_size
+            }
+
+            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerArray)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.spnLensPacket.setAdapter(adapter)
+            binding.spnLensPacket.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener{
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    var id = spinnerMap[binding.spnLensPacket.getSelectedItemPosition()]
+                    Log.d("TAG", "onItemSelected: " + id)
+                    packet_id = id!!.toInt()
+
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                }
+            })
+        }
 
 
     }
@@ -144,5 +186,7 @@ class ProductDetails : Fragment(), ClickLinstener {
 
     }
 
-
+    companion object{
+        var packet_id=0
+    }
 }

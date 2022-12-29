@@ -152,9 +152,7 @@
                         android:id="@+id/spnLensPacket"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:entries="@array/packets"
-                        android:gravity="center"
-                        tools:setOnItemSelectedListener="@{productDetailVM.packetClicksListener}" />
+                        android:gravity="center"/>
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView

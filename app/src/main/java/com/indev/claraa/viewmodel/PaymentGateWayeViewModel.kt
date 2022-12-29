@@ -3,11 +3,13 @@ package com.indev.claraa.viewmodel
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.indev.claraa.CommonClass
 import com.indev.claraa.R
 import com.indev.claraa.entities.CartModel
@@ -38,6 +40,8 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() {
     var user_id=0
     var totalAmount=0.0
     var last_id=0
+    var creditValues=0.0
+    var updatedCredit=0.0
 
     init {
         setOrderData()
@@ -148,17 +152,23 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() {
                     }
                     prefHelper = PrefHelper(context)
                     var creditValue= prefHelper.getString(Constant.PREF_CREDIT)
-                    var creditValues= creditValue?.toDouble()!! - totalAmount
-                    if(creditValues>0) {
+                    if(creditValue?.toDouble()!! > totalAmount){
+                        creditValues= creditValue?.toDouble()!! - totalAmount
                         prefHelper.put(Constant.PREF_CREDIT, creditValues.toString())
-                        if(creditValues.toInt()==0){
-                            payment(creditValues)
-                        }else{
-                            callOrderUpdateAPI("Success")
-                        }
+                    }else{
+                        updatedCredit= totalAmount - creditValue?.toDouble()!!
+                        prefHelper.put(Constant.PREF_CREDIT, "0")
+                        creditValues=0.0
+                    }
+
+                    if(creditValues>0) {
+                        callOrderUpdateAPI("Success")
+                    }else if(creditValues==0.0) {
+                        payment(updatedCredit)
                     }else{
                         payment(amount)
                     }
+
                     Handler(Looper.getMainLooper()).post {
                         Toast.makeText(context, "" +"S", Toast.LENGTH_LONG).show()
                     }
@@ -205,15 +215,23 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() {
                             prefHelper.getString(Constant.PREF_ACTIVE).toString()
                         )
                         PaymentGatewayRepository.updateCartPaymentStatusbyId(i.product_id.toInt(),s, context)
+                        PaymentGatewayRepository.updateCreditInUserMaster(user_id,creditValues.toString(), context)
                         PaymentGatewayRepository.updateOrderDetails(context, orderDetailsModel)
                         var updated_order_details_id= PaymentGatewayRepository.updateOrderDetailsAPI(context,orderDetailsModel)
                         if(updated_order_details_id>0){
                             Handler(Looper.getMainLooper()).post {
-                                Toast.makeText(context, "Done", Toast.LENGTH_LONG).show()
+                                if(s.equals("Success")) {
+                                    showDialog(
+                                        "Transaction Complete",
+                                        "Your payment has been successful."
+                                    )
+                                }else{
+                                    showDialog("Transaction Failed", "Your payment has been failed")
+                                }
                             }
                         } else{
                             Handler(Looper.getMainLooper()).post {
-                                Toast.makeText(context, "Something went wrong...", Toast.LENGTH_LONG).show()
+                                showDialog("Transaction Failed", "Your payment has been failed")
                             }
                         }
                     }
@@ -223,5 +241,17 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() {
                 }
             }
         }
+    }
+
+    private fun showDialog(s: String, message: String) {
+        SweetAlertDialog(context,
+            SweetAlertDialog.SUCCESS_TYPE)
+            .setTitleText(s)
+            .setContentText(message)
+            .setConfirmText("Ok")
+            .setConfirmClickListener {sdialog ->
+                context.startActivity(Intent(context, HomeScreen::class.java))
+            }
+            .show()
     }
 }

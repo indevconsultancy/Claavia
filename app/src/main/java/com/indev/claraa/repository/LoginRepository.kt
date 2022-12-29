@@ -116,7 +116,7 @@ class LoginRepository {
             var token = "Bearer " + prefHelper.getString(Constant.PREF_TOKEN)
 
             try {
-                dataBase?.userDao()?.deleteAllProductPackets()
+//                dataBase?.userDao()?.del()
 
                 var result = apiInterface?.cartDownloadAPI(user_id, token!!)
                 return (if (result?.body()?.status == 1) {

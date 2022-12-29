@@ -14,15 +14,14 @@ import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.bumptech.glide.Glide
 import com.indev.claraa.R
 import com.indev.claraa.entities.CartModel
+import com.indev.claraa.entities.ProductPacketModel
 import com.indev.claraa.fragment.OrderPlace
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.AddressDetailsRepository
 import com.indev.claraa.repository.ProductRepository
 import com.indev.claraa.restApi.ClientApi
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 
 class CartAdapter(val context: Context, var cartModelList: List<CartModel>, private val listener: ClickLinstener) : RecyclerView.Adapter<CartAdapter.MyViewholder>(){
@@ -32,6 +31,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
     var totalPrice= 0
     var check_cart_list = false
     var isTextChanged= false
+    var packs_size= ArrayList<ProductPacketModel>()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewholder {
@@ -44,7 +44,10 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
     override fun onBindViewHolder(holder: MyViewholder, position: Int) {
         val currentItem = cartModelList[position]
         holder.tvRange.text ="Power range: " + currentItem.power_range
-        holder.tvPackSize.text ="Packs size: " + currentItem.packets
+        GlobalScope.launch {
+            packs_size = ProductRepository.getPacksSize(currentItem.packet_id, context) as ArrayList<ProductPacketModel>
+            holder.tvPackSize.setText("Packs size: " + packs_size.get(0).packet_size)
+        }
         holder.tvProductName.text = currentItem.product_name
         count= currentItem.quantity.toInt()
         totalProduct = count

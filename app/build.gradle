@@ -103,5 +103,6 @@ dependencies {
     implementation 'com.github.AppIntro:AppIntro:4.2.3'
     implementation 'com.razorpay:checkout:1.6.4'
 
-
+    def lottieVersion = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 }

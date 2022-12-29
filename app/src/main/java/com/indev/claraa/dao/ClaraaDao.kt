@@ -135,6 +135,9 @@ interface ClaraaDao {
     @Query("SELECT * from cart where product_id = :productId")
     fun getCartDatabyProductId(productId: Int) : List<CartModel>
 
+    @Query("SELECT * from product_packet where packet_id = :packet_id")
+    fun getPackSizebyID(packet_id: String) : List<ProductPacketModel>
+
     @Query("SELECT * from address where user_id = :addressId")
     fun getAddress(addressId: Int) : LiveData<AddressDetailsModel>
 
@@ -161,9 +164,15 @@ interface ClaraaDao {
     @Query("UPDATE cart SET payment_status = :payment_status WHERE product_id = :product_id")
     fun updateCartPaymentStatusbyId(product_id: Int, payment_status: String): Int
 
+    @Query("UPDATE user_master SET credit = :credit WHERE user_id = :user_id")
+    fun updateCreditUserMaster(user_id: Int, credit: String): Int
+
     @Update
     fun updateOrderMaster(orderMasterModel: OrderMasterModel)
 
     @Update
     fun updateOrderDetails(orderDetailsModel: OrderDetailsModel)
+
+    @Query("SELECT * FROM product_packet where packet_id= :packet_id")
+    fun getPacksList(packet_id: Int): List<ProductPacketModel>?
 }

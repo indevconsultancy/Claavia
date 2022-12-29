@@ -40,12 +40,6 @@ class AddressList : Fragment(), ClickLinstener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.toolbar.backClick.setOnClickListener(){
-            replaceFregment(Cart())
-        }
-
-        binding.toolbar.toolbarTitle.text = "Address List"
-
         addressListViewModel = AddressListViewModel(requireActivity())
         addressDetailsAdapter = AddressDetailsAdapter(requireActivity(),ArrayList<AddressDetailsModel>(), this)
         recycleViewList()
@@ -53,7 +47,20 @@ class AddressList : Fragment(), ClickLinstener {
         addressListViewModel.getAddressData(requireActivity())?.observe(requireActivity(), Observer {
             addressDetailsAdapter.setData(it as ArrayList<AddressDetailsModel>)
             addressDetailsViewModelList = it
+            if(addressDetailsViewModelList.size > 0){
+                binding.llEmpty.visibility =View.GONE
+                binding.rvAddressList.visibility =View.VISIBLE
+            }else{
+                binding.llEmpty.visibility =View.VISIBLE
+                binding.rvAddressList.visibility =View.GONE
+            }
         })
+
+//        binding.toolbar.backClick.setOnClickListener(){
+//            replaceFregment(Cart())
+//        }
+//
+//        binding.toolbar.toolbarTitle.text = "Address List"
 
     }
 

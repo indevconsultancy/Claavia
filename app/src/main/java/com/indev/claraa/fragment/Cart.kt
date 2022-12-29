@@ -49,6 +49,13 @@ class Cart : Fragment(), ClickLinstener {
         cartViewModel.getCartList(requireContext())?.observe(viewLifecycleOwner, Observer {
             cartAdapter.setData(it as ArrayList<CartModel>)
             cartModelList = it
+            if(cartModelList.size> 0) {
+                binding.llEmpty.visibility = View.GONE
+                binding.llMain.visibility = View.VISIBLE
+            }else{
+                binding.llEmpty.visibility = View.VISIBLE
+                binding.llMain.visibility = View.GONE
+            }
         })
 
         binding.toolbar.backClick.setOnClickListener(){
@@ -56,6 +63,7 @@ class Cart : Fragment(), ClickLinstener {
         }
 
         binding.toolbar.toolbarTitle.text = "Cart"
+
 
 
     }

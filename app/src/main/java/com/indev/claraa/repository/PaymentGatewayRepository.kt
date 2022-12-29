@@ -158,5 +158,13 @@ class PaymentGatewayRepository {
                 dataBase?.userDao()?.updateCartPaymentStatusbyId(product_id, payment_status)
             }
         }
+
+        fun updateCreditInUserMaster(user_id: Int,credit: String, context: Context) {
+            dataBase = initializeDB(context)
+
+            CoroutineScope(Dispatchers.IO).launch {
+                dataBase?.userDao()?.updateCreditUserMaster(user_id, credit)
+            }
+        }
     }
 }

@@ -17,11 +17,14 @@ import com.indev.claraa.SweetDialog
 import com.indev.claraa.adapter.PowerRangeAdapter
 import com.indev.claraa.adapter.ProductMasterAdapter
 import com.indev.claraa.entities.CartModel
+import com.indev.claraa.entities.DistrictModel
 import com.indev.claraa.entities.ProductMasterModel
+import com.indev.claraa.entities.ProductPacketModel
 import com.indev.claraa.fragment.ProductDetails
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.ProductRepository
+import com.indev.claraa.repository.UserRegistrationRepository
 import com.indev.claraa.roomdb.RoomDB
 import com.indev.claraa.ui.HomeScreen
 import kotlinx.coroutines.CoroutineScope
@@ -54,15 +57,15 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
         }
     }
 
-    val packetClicksListener = object : AdapterView.OnItemSelectedListener {
-        override fun onNothingSelected(parent: AdapterView<*>?) {
-        }
-
-        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
-            packetValue = parent?.getItemAtPosition(position) as String
-        }
-    }
+//    val packetClicksListener = object : AdapterView.OnItemSelectedListener {
+//        override fun onNothingSelected(parent: AdapterView<*>?) {
+//        }
+//
+//        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+//
+//            packetValue = parent?.getItemAtPosition(position) as String
+//        }
+//    }
 
     val qtyClicksListener = object : AdapterView.OnItemSelectedListener {
         override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -79,6 +82,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
         dataBase = initializeDB(context)
         prefHelper = PrefHelper(context)
         user_id = prefHelper.getString(Constant.PREF_USERID)!!
+        packetValue = ProductDetails.packet_id.toString()
         if (checkValidation()) {
             SweetDialog.showProgressDialog(context)
             var checkExitPorduct = 0
@@ -224,6 +228,11 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
     fun getPruductPowerList(context: Context, selectedProduct: String): LiveData<List<ProductMasterModel>>? {
         return ProductRepository.getPowerList(context,selectedProduct)
     }
+
+    fun getPacksList(context: Context, product_id: Int): List<ProductPacketModel>? {
+        return ProductRepository.getPacksList(context, product_id)
+    }
+
 
 //
 //    fun clickRangeOptionEvent(pair: Pair<String, String>) {

@@ -26,31 +26,16 @@ class PaymentGateway : AppCompatActivity(), PaymentResultListener {
         supportActionBar?.hide()
         paymentGatewayViewModel = ViewModelProvider(this, PaymentGatewayFactory(this))[PaymentGateWayeViewModel::class.java]
         binding.paymentGatewayVM = paymentGatewayViewModel
+        binding.toolbar.toolbarTitle.text = "Payment Status"
     }
 
     override fun onPaymentSuccess(s: String?) {
         // this method is called on payment success.
         paymentGatewayViewModel.callOrderUpdateAPI("Success")
-        showDialog("Transaction Complete")
-        Toast.makeText(applicationContext, "Payment is successful : " + s, Toast.LENGTH_SHORT).show();
     }
 
     override fun onPaymentError(p0: Int, p1: String?) {
         paymentGatewayViewModel.callOrderUpdateAPI( "Failed")
-        showDialog("Transaction Failed")
-        Toast.makeText(applicationContext, "Payment Failed due to error : " +p1, Toast.LENGTH_SHORT)
-            .show();
-    }
-
-    private fun showDialog(s: String) {
-        SweetAlertDialog(applicationContext)
-            .setTitleText(s)
-            .setContentText("")
-            .setConfirmText("Ok")
-            .setConfirmClickListener {sdialog ->
-                startActivity(Intent(applicationContext, HomeScreen::class.java))
-            }
-            .show()
     }
 
 }

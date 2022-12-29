@@ -31,11 +31,12 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
+            android:id="@+id/llMain"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginHorizontal="10dp"
             android:orientation="vertical">
 
             <TextView
@@ -48,31 +49,59 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 android:textColor="@color/black"
                 android:textSize="20dp" />
 
-        <Button
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:onClick="@{() ->cartVM.btnBackProduct()}"
-            android:textColor="@color/white"
-            android:textAllCaps="false"
-            android:text="Continue Shopping"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:onClick="@{() ->cartVM.btnBackProduct()}"
+                android:text="Continue Shopping"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
 
             <Button
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:onClick="@{() ->cartVM.btnBuy()}"
-            android:textColor="@color/white"
-            android:textAllCaps="false"
-            android:text="Proceed to Checkout"/>
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:onClick="@{() ->cartVM.btnBuy()}"
+                android:text="Proceed to Checkout"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_order"
-            android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_height="wrap_content">
-        </androidx.recyclerview.widget.RecyclerView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"></androidx.recyclerview.widget.RecyclerView>
 
-    </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:visibility="gone">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animationView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_400sdp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/productempty" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/aleobold"
+                android:gravity="center"
+                android:text="Empty Cart.."
+                android:textColor="@color/light_grey"
+                android:textSize="25dp" />
+
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
