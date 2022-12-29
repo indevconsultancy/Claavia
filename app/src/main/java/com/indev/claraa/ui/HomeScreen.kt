@@ -36,8 +36,8 @@ class HomeScreen : AppCompatActivity(), LocationListener{
     private val TAG = "HOME"
     private lateinit var locationManager: LocationManager
     private val locationPermissionCode = 2
-    val lat = ""
-    val long = ""
+    var lat = ""
+    var long = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -154,11 +154,11 @@ class HomeScreen : AppCompatActivity(), LocationListener{
     }
 
     override fun onLocationChanged(location: Location) {
-//        tvGpsLocation = findViewById(R.id.textView)
-//        tvGpsLocation.text = "Latitude: " + location.latitude + " , Longitude: " + location.longitude
+        lat= location.latitude.toString()
+        long= location.longitude.toString()
         preferences.put("latitude",lat)
         preferences.put("longitude",long)
-        Toast.makeText(applicationContext,"nckmfv" + lat  + " "+ long,Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext,"nckmfv" +lat + " "+ long,Toast.LENGTH_SHORT).show()
     }
 
 

@@ -96,6 +96,8 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             userRegistrationTable.address = etAddress.get().toString()
             userRegistrationTable.state_id = UserRegistration.state_id.toString()
             userRegistrationTable.district_id = UserRegistration.district_id.toString()
+            userRegistrationTable.latitude = prefHelper.getString(Constant.PREF_LATITUDE)!!
+            userRegistrationTable.longitude = prefHelper.getString(Constant.PREF_LATITUDE)!!
             userRegistrationTable.pinCode = pinCode.get().toString()
 
             viewModelScope.launch {
@@ -152,7 +154,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             mobNo.get().toString(),
             etAddress.get().toString(),
             UserRegistration.state_id.toString(),
-            UserRegistration.district_id.toString(),"", CommonClass.currentDate().toString(), gender, "", "","",
+            UserRegistration.district_id.toString(),"", CommonClass.currentDate().toString(), gender,prefHelper.getString(Constant.PREF_LATITUDE).toString(),prefHelper.getString(Constant.PREF_LATITUDE).toString(),"",
             pinCode.get().toString()
         )
         viewModelScope.launch {
@@ -202,6 +204,8 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             userRegistrationTable.address = etAddress.get().toString()
             userRegistrationTable.state_id = UserRegistration.state_id.toString()
             userRegistrationTable.district_id = UserRegistration.district_id.toString()
+                userRegistrationTable.latitude = prefHelper.getString(Constant.PREF_LATITUDE)!!
+                userRegistrationTable.longitude = prefHelper.getString(Constant.PREF_LATITUDE)!!
             userRegistrationTable.pinCode = pinCode.get().toString()
 
             viewModelScope.launch {
