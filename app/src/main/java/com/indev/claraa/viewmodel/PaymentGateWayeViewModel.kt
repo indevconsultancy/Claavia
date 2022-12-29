@@ -230,7 +230,7 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() {
                             }
                         } else{
                             Handler(Looper.getMainLooper()).post {
-                                showDialog("Transaction Failed", "Your payment has been failed")
+                                showDialog("Transaction Failed" + s, "Your payment has been failed")
                             }
                         }
                     }

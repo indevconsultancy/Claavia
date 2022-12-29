@@ -141,15 +141,15 @@ class HomeScreen : AppCompatActivity(), LocationListener{
     private fun replaceFregment(fragment : Fragment, flag: Int) {
         val fragmentManager = supportFragmentManager
         val fragmentTransition= fragmentManager.beginTransaction()
-
-        if(flag == 0){
-            fragmentTransition.add(R.id.frame_layout, fragment)
-            fragmentManager.popBackStack("FRAGMENT_1", FragmentManager.POP_BACK_STACK_INCLUSIVE)
-            fragmentTransition.addToBackStack("FRAGMENT_1")
-        }else{
+//
+//        if(flag == 0){
+//            fragmentTransition.add(R.id.frame_layout, fragment)
+//            fragmentManager.popBackStack("FRAGMENT_1", FragmentManager.POP_BACK_STACK_INCLUSIVE)
+//            fragmentTransition.addToBackStack("FRAGMENT_1")
+//        }else{
             fragmentTransition.replace(R.id.frame_layout, fragment)
             fragmentTransition.addToBackStack(null)
-        }
+//        }
         fragmentTransition.commit()
     }
 

@@ -76,6 +76,7 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
     }
 
     private fun updateAddress(local_id: Int, id: String, userId: String) {
+        SweetDialog.showProgressDialog(context)
         addressDetailsModel = AddressDetailsModel(
             local_id,id,userId.toInt(),
             shopName.get().toString(),
@@ -104,6 +105,7 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
                         Toast.makeText(context, "Invalid user", Toast.LENGTH_LONG).show()
                     }
                 }
+                SweetDialog.dismissDialog()
             }
         }
     }
@@ -219,6 +221,9 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
     }
 
     override fun updatePowerRange(power_range: String) {
+    }
+
+    override fun callUpdateCart(id: Int, qty: String) {
     }
 
 

@@ -64,8 +64,6 @@ class Cart : Fragment(), ClickLinstener {
 
         binding.toolbar.toolbarTitle.text = "Cart"
 
-
-
     }
 
     override fun updateTextView(amount: Int) {
@@ -73,6 +71,9 @@ class Cart : Fragment(), ClickLinstener {
     }
 
     override fun updatePowerRange(power_range: String) {
+    }
+
+    override fun callUpdateCart(id: Int, qty: String) {
     }
 
     private fun recycleViewList() {

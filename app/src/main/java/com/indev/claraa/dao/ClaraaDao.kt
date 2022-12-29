@@ -2,8 +2,8 @@ package com.indev.claraa.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.google.android.gms.common.api.internal.IStatusCallback
 import com.indev.claraa.entities.*
-import com.indev.claraa.helper.Constant
 import org.jetbrains.annotations.NotNull
 
 @Dao
@@ -173,6 +173,6 @@ interface ClaraaDao {
     @Update
     fun updateOrderDetails(orderDetailsModel: OrderDetailsModel)
 
-    @Query("SELECT * FROM product_packet where packet_id= :packet_id")
-    fun getPacksList(packet_id: Int): List<ProductPacketModel>?
+    @Query("SELECT * FROM product_packet where packet_id =:packet_id")
+    fun getPacksList(packet_id: String): List<ProductPacketModel>
 }

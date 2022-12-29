@@ -85,27 +85,27 @@
                 app:layout_constraintTop_toBottomOf="@+id/circleImageView" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/_10sdp"
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="35dp"
-                    android:layout_marginLeft="35dp"
-                    android:layout_weight="1"
                     android:src="@drawable/coin" />
 
 
                 <TextView
                     android:id="@+id/tvCredit"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="Credit"
-                    android:textColor="@color/black"
-                    android:textSize="15dp"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"

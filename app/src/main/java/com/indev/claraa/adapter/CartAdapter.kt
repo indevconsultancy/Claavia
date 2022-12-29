@@ -15,12 +15,14 @@ import com.bumptech.glide.Glide
 import com.indev.claraa.R
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.ProductPacketModel
+import com.indev.claraa.entities.deleteModel
 import com.indev.claraa.fragment.OrderPlace
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.AddressDetailsRepository
 import com.indev.claraa.repository.ProductRepository
 import com.indev.claraa.restApi.ClientApi
+import com.indev.claraa.viewmodel.ProductDetailViewModel
 import kotlinx.coroutines.*
 
 
@@ -32,7 +34,6 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
     var check_cart_list = false
     var isTextChanged= false
     var packs_size= ArrayList<ProductPacketModel>()
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewholder {
         val itemView =
@@ -133,7 +134,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
                         )
             notifyDataSetChanged()
         }
-
+            listener.callUpdateCart(currentItem.id.toInt(),qty.toInt().toString())
         }
     /*  holder.deleteButton.setOnClickListener {
             count= currentItem.quantity.toInt()
@@ -163,7 +164,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
 
     private fun deletePopupShow(id: String) {
         SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE).setTitleText("")
-            .setContentText("Are you sure you want to delete form the cart?").setCancelText("Cancel")
+            .setContentText("Are you sure you want to delete the cart?").setCancelText("Cancel")
             .setConfirmText("Ok")
             .setConfirmClickListener { sDialog ->
                 listener.updateTextView(0)
@@ -179,8 +180,10 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
     private fun deleteCartProduct(id: String) {
         CoroutineScope(Dispatchers.IO).launch {
             ProductRepository.deleteProductData(id,context)
+            var deleteModel= deleteModel(id)
+
             var last_id=0
-            last_id = ProductRepository.cartProductDelete(context,id)
+            last_id = ProductRepository.cartProductDelete(context,deleteModel)
             if (last_id> 0) {
                 Handler(Looper.getMainLooper()).post {
                     Toast.makeText(context, "Successfully Deleted...", Toast.LENGTH_LONG).show()

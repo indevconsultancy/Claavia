@@ -91,4 +91,8 @@ class AddressList : Fragment(), ClickLinstener {
     override fun updatePowerRange(power_range: String) {
     }
 
+    override fun callUpdateCart(id: Int, qty: String) {
+
+    }
+
 }

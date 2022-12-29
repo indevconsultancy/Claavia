@@ -19,6 +19,7 @@ import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
 import com.indev.claraa.adapter.CartAdapter
 import com.indev.claraa.adapter.PowerRangeAdapter
+import com.indev.claraa.adapter.ProductMasterAdapter
 import com.indev.claraa.databinding.FragmentProductDetailsBinding
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.DistrictModel
@@ -95,7 +96,7 @@ class ProductDetails : Fragment(), ClickLinstener {
 
         packsArrayList = ArrayList<ProductPacketModel>()
         CoroutineScope(Dispatchers.IO).launch {
-            packsArrayList = productDetailViewModel.getPacksList(requireContext(),1) as ArrayList<ProductPacketModel>
+            packsArrayList = productDetailViewModel.getPacksList(requireContext(), ProductMasterAdapter.packet_id.toInt()) as ArrayList<ProductPacketModel>
             val spinnerArray = arrayOfNulls<String>(packsArrayList.size)
             val spinnerMap = HashMap<Int, String>()
             for (i in 0 until packsArrayList.size) {
@@ -184,6 +185,9 @@ class ProductDetails : Fragment(), ClickLinstener {
     override fun updatePowerRange(power_range: String) {
         binding.txtRange.text = "Power Range: " + power_range
 
+    }
+
+    override fun callUpdateCart(id: Int, qty: String) {
     }
 
     companion object{

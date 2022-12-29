@@ -11,6 +11,7 @@ import androidx.databinding.ObservableField
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
 import com.indev.claraa.SweetDialog
 import com.indev.claraa.adapter.PowerRangeAdapter
@@ -32,7 +33,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class ProductDetailViewModel(val context: Context): ViewModel() {
+class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
 
     var packetValue: String? = null
     var qtyValue: String? = null
@@ -50,22 +51,12 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
     }
 
     init{
-        var product_id= ProductMasterAdapter.productId
+        var product_id=ProductMasterAdapter.productId
 
         CoroutineScope(Dispatchers.IO).launch {
             productMasterArrayList= ProductRepository.getProductData(context,product_id.toInt()) as ArrayList<ProductMasterModel>
         }
     }
-
-//    val packetClicksListener = object : AdapterView.OnItemSelectedListener {
-//        override fun onNothingSelected(parent: AdapterView<*>?) {
-//        }
-//
-//        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-//
-//            packetValue = parent?.getItemAtPosition(position) as String
-//        }
-//    }
 
     val qtyClicksListener = object : AdapterView.OnItemSelectedListener {
         override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -107,7 +98,7 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
     }
 
     @SuppressLint("SuspiciousIndentation")
-    private fun updateCart(productID: Int, qty: String) {
+    fun updateCart(productID: Int, qty: String) {
         cartModelArrayList = ProductRepository.getCartDatabyProductId(
             productID,
             context
@@ -229,10 +220,22 @@ class ProductDetailViewModel(val context: Context): ViewModel() {
         return ProductRepository.getPowerList(context,selectedProduct)
     }
 
-    fun getPacksList(context: Context, product_id: Int): List<ProductPacketModel>? {
-        return ProductRepository.getPacksList(context, product_id)
+    fun getPacksList(context: Context, packet_id: Int): List<ProductPacketModel>? {
+        return ProductRepository.getPacksList(context, packet_id)
     }
 
+    override fun onClickListner(position: Int) {
+    }
+
+    override fun updateTextView(amount: Int) {
+    }
+
+    override fun updatePowerRange(power_range: String) {
+    }
+
+    override fun callUpdateCart(id: Int, qty: String) {
+        updateCart(id, qty)
+    }
 
 //
 //    fun clickRangeOptionEvent(pair: Pair<String, String>) {

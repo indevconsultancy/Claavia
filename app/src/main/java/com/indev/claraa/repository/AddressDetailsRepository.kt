@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import com.indev.claraa.entities.AddressDetailsModel
 import com.indev.claraa.entities.DistrictModel
 import com.indev.claraa.entities.StateModel
+import com.indev.claraa.entities.deleteModel
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.restApi.ClaraaApi
@@ -112,12 +113,12 @@ class AddressDetailsRepository {
             return 0
         }
 
-        suspend fun addressDeleteApi(context: Context,id: String): Int {
+        suspend fun addressDeleteApi(context: Context,deleteModel: deleteModel): Int {
             try {
                 prefHelper = PrefHelper(context)
                 var token="Bearer " + prefHelper.getString(Constant.PREF_TOKEN)
                 var result = apiInterface?.deleteAddress(
-                    id,token!!)
+                    deleteModel,token!!)
                 return if (result?.body()?.status == 1) {
                    1
                 } else {

@@ -33,7 +33,7 @@ interface ClaraaApi {
     suspend fun updateAddress(@Body addressDetailsModel: AddressDetailsModel,@Header("Authorization") authorization:Any):  Response<UpdateAPIResponse>
 
     @POST("address_delete.php")
-    suspend fun deleteAddress(@Body id: String,@Header("Authorization") authorization:Any):  Response<DeleteAPIResponse>
+    suspend fun deleteAddress(@Body deleteModel: deleteModel,@Header("Authorization") authorization:Any):  Response<DeleteAPIResponse>
 
     @POST("cart_insert.php")
     suspend fun cartInsertAPI(@Body cartModel: CartModel,@Header("Authorization") authorization:Any): Response<InsertAPIResponse>
@@ -42,7 +42,7 @@ interface ClaraaApi {
     suspend fun cartUpdateAPI(@Body cartModel: CartModel,@Header("Authorization") authorization:Any):  Response<UpdateAPIResponse>
 
     @POST("cart_delete.php")
-    suspend fun deleteCartAPI(@Body id: String,@Header("Authorization") authorization:Any):  Response<DeleteAPIResponse>
+    suspend fun deleteCartAPI(@Body deleteModel: deleteModel,@Header("Authorization") authorization:String):  Response<DeleteAPIResponse>
 
     @POST("ordermaster_insert.php")
     suspend fun insertOrderMasterAPI(@Body orderMasterModel: OrderMasterModel,@Header("Authorization") authorization:Any): Response<InsertAPIResponse>

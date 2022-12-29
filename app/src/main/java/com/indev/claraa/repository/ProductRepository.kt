@@ -107,11 +107,11 @@ class ProductRepository {
         }
 
 
-        suspend fun cartProductDelete(context: Context,id: String): Int {
+        suspend fun cartProductDelete(context: Context,deleteModel: deleteModel): Int {
             try {
                 prefHelper = PrefHelper(context)
                 var token="Bearer " + prefHelper.getString(Constant.PREF_TOKEN)
-                var result = apiInterface?.deleteCartAPI(id, token!!)
+                var result = apiInterface?.deleteCartAPI(deleteModel, token!!)
                 return if (result?.body()?.status==1){
                     1
                 } else {
@@ -141,9 +141,9 @@ class ProductRepository {
             return 0
         }
 
-        fun getPacksList(context: Context, product_id: Int): List<ProductPacketModel>? {
+        fun getPacksList(context: Context, packet_id: Int): List<ProductPacketModel>? {
            dataBase = initializeDB(context)
-            return dataBase?.userDao()?.getPacksList(product_id)
+            return dataBase?.userDao()?.getPacksList("in ($packet_id)")
         }
 
     }

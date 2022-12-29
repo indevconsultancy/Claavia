@@ -35,6 +35,7 @@ class ProductMasterAdapter(private val context: Context, var productMasterModelA
         holder.cardView.setOnClickListener{
             replaceFregment(ProductDetails())
             productId= currentItem.product_id
+            packet_id= currentItem.packet_id
         }
 
     }
@@ -69,6 +70,7 @@ class ProductMasterAdapter(private val context: Context, var productMasterModelA
 
     companion object{
         var productId= "0.90"
+        var packet_id= "1"
     }
 
 }

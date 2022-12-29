@@ -11,9 +11,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
 import com.indev.claraa.entities.AddressDetailsModel
+import com.indev.claraa.entities.deleteModel
 import com.indev.claraa.fragment.AddNewAddress
 import com.indev.claraa.fragment.AddressList
 import com.indev.claraa.fragment.OrderPlace
@@ -55,7 +57,7 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
 
 
         holder.deleteAddress.setOnClickListener{
-            deleteAddress(currentItem.id)
+            deletePopupShow(currentItem.id)
         //            AddressDetailsRepository.deleteAddress(currentItem.local_id,context)
         }
 
@@ -66,11 +68,27 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
         }
     }
 
+    private fun deletePopupShow(id: String) {
+        SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE).setTitleText("")
+            .setContentText("Are you sure you want to delete the address?").setCancelText("Cancel")
+            .setConfirmText("Ok")
+            .setConfirmClickListener { sDialog ->
+                listener.updateTextView(0)
+                deleteAddress(id)
+                sDialog.dismiss()
+            }
+            .showCancelButton(true)
+            .setCancelClickListener { sDialog -> // Showing simple toast message to user
+                sDialog.cancel()
+            }.show()
+    }
+
     private fun deleteAddress(id: String) {
         CoroutineScope(Dispatchers.IO).launch {
             AddressDetailsRepository.deleteAddress(id,context)
+            var deleteModel= deleteModel(id)
             var last_id=0
-            last_id = AddressDetailsRepository.addressDeleteApi(context,id)
+            last_id = AddressDetailsRepository.addressDeleteApi(context,deleteModel)
             if (last_id> 0) {
                 replaceFregment(AddressList())
                 Handler(Looper.getMainLooper()).post {
