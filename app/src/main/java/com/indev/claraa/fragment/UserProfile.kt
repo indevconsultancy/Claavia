@@ -10,6 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.indev.claraa.R
 import com.indev.claraa.databinding.FragmentProfileBinding
+import com.indev.claraa.helper.Constant
+import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.viewmodel.ProfileViewModel
 import com.indev.claraa.viewmodel.ProfileViewModelFactory
 
@@ -17,6 +19,7 @@ class UserProfile : Fragment() {
 
      lateinit var binding: FragmentProfileBinding
      lateinit var profileViewModel: ProfileViewModel
+     lateinit var prefHelper: PrefHelper
 
 
     override fun onCreateView(
@@ -38,7 +41,7 @@ class UserProfile : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
-
+        prefHelper= PrefHelper(requireContext())
         profileViewModel.readAllData.observe(viewLifecycleOwner, Observer {
 
             if(it != null) {
@@ -52,8 +55,9 @@ class UserProfile : Fragment() {
                 binding.tvPincode.text = it?.pinCode
             }
         })
+        binding.tvCredit.text = prefHelper.getString(Constant.PREF_CREDIT)
 
-        binding.toolbar.toolbarTitle.text = "Profile"
+            binding.toolbar.toolbarTitle.text = "Profile"
 
         binding.toolbar.backClick.setOnClickListener {
             replaceFregment(Home())

@@ -7,10 +7,8 @@ import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.indev.claraa.CommonClass
 import com.indev.claraa.R
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.OrderDetailsModel
@@ -20,6 +18,7 @@ import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.PaymentGatewayRepository
 import com.indev.claraa.roomdb.RoomDB
 import com.indev.claraa.ui.HomeScreen
+import com.indev.claraa.util.CommonClass
 import com.razorpay.Checkout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

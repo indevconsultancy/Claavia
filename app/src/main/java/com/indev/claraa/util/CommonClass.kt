@@ -1,4 +1,4 @@
-package com.indev.claraa
+package com.indev.claraa.util
 
 import android.annotation.SuppressLint
 import android.os.Build

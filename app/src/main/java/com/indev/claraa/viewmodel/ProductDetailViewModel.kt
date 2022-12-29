@@ -11,7 +11,6 @@ import androidx.databinding.ObservableField
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.indev.claraa.CommonClass
 import com.indev.claraa.R
 import com.indev.claraa.SweetDialog
 import com.indev.claraa.adapter.PowerRangeAdapter
@@ -27,6 +26,7 @@ import com.indev.claraa.repository.ProductRepository
 import com.indev.claraa.repository.UserRegistrationRepository
 import com.indev.claraa.roomdb.RoomDB
 import com.indev.claraa.ui.HomeScreen
+import com.indev.claraa.util.CommonClass
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

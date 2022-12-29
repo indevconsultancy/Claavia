@@ -21,6 +21,11 @@
             android:title="Refer" />
 
         <item
+            android:id="@+id/orderHistory"
+            android:icon="@drawable/order_history"
+            android:title="Refer" />
+
+        <item
             android:id="@+id/logout"
             android:icon="@drawable/footer_logout_i"
             android:title="Logout" />

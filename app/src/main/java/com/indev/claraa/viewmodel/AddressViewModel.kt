@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.agraharisoft.notepad.Listener.ClickLinstener
-import com.indev.claraa.CommonClass
 import com.indev.claraa.R
 import com.indev.claraa.SweetDialog
 import com.indev.claraa.adapter.AddressDetailsAdapter
@@ -25,6 +24,7 @@ import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.AddressDetailsRepository
 import com.indev.claraa.ui.HomeScreen
+import com.indev.claraa.util.CommonClass
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

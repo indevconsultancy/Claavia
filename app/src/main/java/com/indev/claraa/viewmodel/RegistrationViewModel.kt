@@ -5,27 +5,22 @@ import android.content.Context
 import android.content.Intent
 import android.os.Handler
 import android.os.Looper
-import android.provider.ContactsContract.Profile
-import android.util.Log
-import android.view.View
-import android.widget.AdapterView
 import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
-import com.indev.claraa.CommonClass
 import com.indev.claraa.R
 import com.indev.claraa.SweetDialog
 import com.indev.claraa.entities.DistrictModel
 import com.indev.claraa.entities.StateModel
 import com.indev.claraa.entities.UserRegistrationModel
-import com.indev.claraa.fragment.ProductDetails
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.UserRegistrationRepository
 import com.indev.claraa.ui.HomeScreen
 import com.indev.claraa.ui.LoginScreen
 import com.indev.claraa.ui.UserRegistration
+import com.indev.claraa.util.CommonClass
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -89,7 +84,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             etAddress.get().toString(),
             UserRegistration.state_id.toString(),
             UserRegistration.district_id.toString(),prefHelper.getString(Constant.PREF_ACTIVE).toString(), CommonClass.currentDate().toString(), gender,prefHelper.getString(Constant.PREF_LATITUDE).toString(),prefHelper.getString(Constant.PREF_LONGITUDE).toString(),prefHelper.getString(Constant.PREF_CREDIT).toString(),
-            pinCode.get().toString()
+            "","",pinCode.get().toString()
         )
         viewModelScope.launch {
             UserRegistrationRepository.insertUserData(context, userRegistrationTable)
@@ -128,7 +123,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
                 UserRegistration.state_id.toString(),
                 UserRegistration.district_id.toString(),
                 etAddress.get().toString(),CommonClass.currentDate().toString(),gender, prefHelper.getString(Constant.PREF_LATITUDE).toString(),prefHelper.getString(Constant.PREF_LONGITUDE).toString(),prefHelper.getString(Constant.PREF_CREDIT).toString(),
-                pinCode.get().toString()
+                "","",pinCode.get().toString()
             )
             userRegistrationTable.shop_name = shopName.get().toString()
             userRegistrationTable.user_name = username.get().toString()
