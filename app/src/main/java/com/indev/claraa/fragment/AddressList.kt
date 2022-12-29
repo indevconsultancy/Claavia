@@ -56,11 +56,10 @@ class AddressList : Fragment(), ClickLinstener {
             }
         })
 
-//        binding.toolbar.backClick.setOnClickListener(){
-//            replaceFregment(Cart())
-//        }
-//
-//        binding.toolbar.toolbarTitle.text = "Address List"
+        binding.toolbar.backClick.setOnClickListener(){
+            replaceFregment(Cart())
+        }
+        binding.toolbar.toolbarTitle.text = "Address List"
 
     }
 

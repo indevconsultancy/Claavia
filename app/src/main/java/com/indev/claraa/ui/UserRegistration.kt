@@ -61,7 +61,7 @@ class UserRegistration : AppCompatActivity() {
         binding.btnOther.setOnClickListener {
             gender="Others"
             binding.btnFemale.setBackgroundResource(R.drawable.btn_color_change)
-            binding.btnOther.setBackgroundResource(R.drawable.btn_color_change)
+            binding.btnMale.setBackgroundResource(R.drawable.btn_color_change)
             binding.btnOther.setBackgroundResource(R.drawable.selected_btn)
 
         }
