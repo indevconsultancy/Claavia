@@ -2,6 +2,7 @@ package com.indev.claraa.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
@@ -13,15 +14,18 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.bumptech.glide.Glide
 import com.indev.claraa.R
+import com.indev.claraa.SweetDialog
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.ProductPacketModel
 import com.indev.claraa.entities.deleteModel
 import com.indev.claraa.fragment.OrderPlace
+import com.indev.claraa.fragment.ProductDetails
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.AddressDetailsRepository
 import com.indev.claraa.repository.ProductRepository
 import com.indev.claraa.restApi.ClientApi
+import com.indev.claraa.ui.HomeScreen
 import com.indev.claraa.viewmodel.ProductDetailViewModel
 import kotlinx.coroutines.*
 
@@ -123,6 +127,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
         }
 
         holder.btnUpdate.setOnClickListener{
+            SweetDialog.showProgressDialog(context)
             var qty= holder.etQuantity.text.toString()
             totalPrice= currentItem.price.toInt() * qty.toInt()
                     if(qty.toInt() > 1) {
@@ -132,10 +137,13 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
                             currentItem.local_id,
                             context
                         )
-            notifyDataSetChanged()
+                        showAlertDialog()
+                        notifyDataSetChanged()
         }
             listener.callUpdateCart(currentItem.id.toInt(),qty.toInt().toString())
+            SweetDialog.dismissDialog()
         }
+
     /*  holder.deleteButton.setOnClickListener {
             count= currentItem.quantity.toInt()
 
@@ -160,6 +168,16 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
         holder.tvPrice.text = currentItem.currency +" "+ currentItem.amount.toString()
         totalAmount= grandTotal(cartModelList)
         listener.updateTextView(totalAmount)
+    }
+
+    private fun showAlertDialog() {
+        SweetAlertDialog(context,SweetAlertDialog.SUCCESS_TYPE)
+            .setContentText("Product Updated successfully in Cart")
+            .setConfirmText("Ok")
+            .setConfirmClickListener {sdialog ->
+                sdialog.dismiss()
+            }
+            .show()
     }
 
     private fun deletePopupShow(id: String) {

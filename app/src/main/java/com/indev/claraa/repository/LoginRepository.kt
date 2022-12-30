@@ -64,7 +64,8 @@ class LoginRepository {
                             "",
                             "",
                             "",userProfileArray[i].credit,
-                            "","",userProfileArray[i].pinCode
+                            "","",userProfileArray[i].pinCode,"",
+                            "","","",""
                         )
                         dataBase?.userDao()?.insertUserData(user_profile)
                     }

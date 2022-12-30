@@ -24,4 +24,9 @@ class LoginScreen : AppCompatActivity() {
         binding.loginVM = loginViewModel
 
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
+    }
 }

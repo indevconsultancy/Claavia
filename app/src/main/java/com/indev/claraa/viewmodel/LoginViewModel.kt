@@ -97,12 +97,12 @@ class LoginViewModel(val context: Context): ViewModel() {
     }
 
     private fun checkValidation(): Boolean {
-        if(username.get().toString().length<4) {
-            Toast.makeText(context, "Please enter username..", Toast.LENGTH_SHORT).show()
+        if(username.get()?.isEmpty()==true) {
+            Toast.makeText(context, "Please enter email..", Toast.LENGTH_SHORT).show()
             return false
         }
 
-        if(password.get().toString().length<6) {
+        if(password.get()?.isEmpty()==true) {
             Toast.makeText(context, "Please enter username..", Toast.LENGTH_SHORT).show()
             return false
         }

@@ -208,7 +208,7 @@
 
                     </LinearLayout>
 
-                    <Spinner
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                         android:id="@+id/spnState"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
@@ -250,7 +250,7 @@
                     </LinearLayout>
 
 
-                    <Spinner
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                         android:id="@+id/spnDistrict"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"

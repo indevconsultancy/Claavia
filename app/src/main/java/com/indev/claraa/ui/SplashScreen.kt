@@ -26,7 +26,7 @@ import com.indev.claraa.viewmodel.SplashViewModelFactory
 
 class SplashScreen : AppCompatActivity(), LocationListener {
     private lateinit var binding: ActivitySplashScreenBinding
-    private val splashPreLength = 5000
+    private val splashPreLength = 8000
     var splashLoaded = "No"
     lateinit var splashViewModel: SplashViewModel
     lateinit var prefHelper: PrefHelper

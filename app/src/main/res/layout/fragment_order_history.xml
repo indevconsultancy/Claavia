@@ -43,6 +43,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
+            android:layout_gravity="center"
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:visibility="gone">
 
@@ -52,7 +53,7 @@
                 android:layout_height="@dimen/_400sdp"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
-                app:lottie_rawRes="@raw/addresslist" />
+                app:lottie_rawRes="@raw/empty_box" />
 
             <TextView
                 android:layout_width="match_parent"

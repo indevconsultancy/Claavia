@@ -22,6 +22,11 @@ data class UserRegistrationModel(@PrimaryKey(autoGenerate = true)
                                  var longitude: String,
                                  var credit: String,
                                  var approvel_id: String,
-                                 var market_id: String,
-                                 var pinCode: String)
+                                 var checker_id: String,
+                                 var pinCode: String,
+                                 var approved_approel_id: String,
+                                 var approved_checker_id: String,
+                                 var approved_maker_id: String,
+                                 var approved_status: String,
+                                 var role_id: String)
 

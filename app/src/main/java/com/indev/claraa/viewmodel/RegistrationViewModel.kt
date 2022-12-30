@@ -83,7 +83,8 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             etAddress.get().toString(),
             UserRegistration.state_id.toString(),
             UserRegistration.district_id.toString(),prefHelper.getString(Constant.PREF_ACTIVE).toString(), CommonClass.currentDate().toString(), gender,prefHelper.getString(Constant.PREF_LATITUDE).toString(),prefHelper.getString(Constant.PREF_LONGITUDE).toString(),prefHelper.getString(Constant.PREF_CREDIT).toString(),
-            "","",pinCode.get().toString()
+            "","",pinCode.get().toString(),"","",
+                "","",""
         )
         viewModelScope.launch {
             UserRegistrationRepository.insertUserData(context, userRegistrationTable)
@@ -122,7 +123,8 @@ class RegistrationViewModel (val context: Context): ViewModel() {
                 UserRegistration.state_id.toString(),
                 UserRegistration.district_id.toString(),
                 etAddress.get().toString(),CommonClass.currentDate().toString(),gender, prefHelper.getString(Constant.PREF_LATITUDE).toString(),prefHelper.getString(Constant.PREF_LONGITUDE).toString(),prefHelper.getString(Constant.PREF_CREDIT).toString(),
-                "","",pinCode.get().toString()
+                "","",pinCode.get().toString(),"","",
+                "","",""
             )
             userRegistrationTable.shop_name = shopName.get().toString()
             userRegistrationTable.user_name = username.get().toString()
@@ -186,6 +188,9 @@ class RegistrationViewModel (val context: Context): ViewModel() {
         }
         if (checkLogin == false) {
             if (password.get()?.isEmpty() == true) {
+                Toast.makeText(context, "Please enter password..", Toast.LENGTH_SHORT).show()
+                return false
+            }else if (password.get().toString().length<8) {
                 Toast.makeText(context, "Please enter password..", Toast.LENGTH_SHORT).show()
                 return false
             }
