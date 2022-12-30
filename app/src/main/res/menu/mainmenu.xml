@@ -22,7 +22,7 @@
 
         <item
             android:id="@+id/orderHistory"
-            android:icon="@drawable/order_history"
+            android:icon="@drawable/order_history_icon"
             android:title="Order History" />
 
         <item

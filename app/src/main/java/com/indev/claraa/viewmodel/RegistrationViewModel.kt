@@ -177,7 +177,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
 
     private fun checkValidation(): Boolean {
         if(shopName.get()?.isEmpty()==true) {
-            Toast.makeText(context, "Please enter shop name..", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Please enter business name..", Toast.LENGTH_SHORT).show()
             return false
         }
 
@@ -207,11 +207,11 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             Toast.makeText(context, "Please enter valid mobile number..", Toast.LENGTH_SHORT).show()
             return false
         }
-        if(spnState.toString().trim()=="Select State"){
+        if(UserRegistration.state_id.toString().trim()=="0"){
             Toast.makeText(context, "Please select state..", Toast.LENGTH_SHORT).show()
             return false
         }
-        if(spnDistrict.toString().trim()=="Select District"){
+        if(UserRegistration.district_id.toString().trim()=="0"){
             Toast.makeText(context, "Please select district..", Toast.LENGTH_SHORT).show()
             return false
         }
@@ -219,12 +219,6 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             Toast.makeText(context, "Please enter address..", Toast.LENGTH_SHORT).show()
             return false
         }
-
-        if(gender.length==0) {
-            Toast.makeText(context, "Please choose gender..", Toast.LENGTH_SHORT).show()
-            return false
-        }
-
         if(pinCode.get()?.isEmpty()==true) {
             Toast.makeText(context, "Please enter pin code..", Toast.LENGTH_SHORT).show()
             return false
@@ -232,6 +226,13 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             Toast.makeText(context,"Please enter valid pin code",Toast.LENGTH_SHORT).show()
             return false
         }
+
+        if(gender.isEmpty()) {
+            Toast.makeText(context, "Please choose gender..", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+
         return true
     }
 
