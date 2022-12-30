@@ -55,6 +55,21 @@ class OrderHistory : Fragment(), ClickLinstener {
             }
         })
 
+        binding.toolbar.backClick.setOnClickListener(){
+            replaceFregment(Home())
+        }
+
+        binding.toolbar.toolbarTitle.text = "Order History"
+
+
+    }
+
+    private fun replaceFregment(fragment : Fragment) {
+        val fragmentManager = activity?.supportFragmentManager
+        val fragmentTransition= fragmentManager?.beginTransaction()
+        fragmentTransition?.replace(R.id.frame_layout, fragment)
+        fragmentTransition?.addToBackStack(null)
+        fragmentTransition?.commit()
     }
 
     private fun recycleViewList() {

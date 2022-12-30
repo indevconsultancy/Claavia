@@ -16,9 +16,10 @@
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/custom_img_toolbar"
+            layout="@layout/custom_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/bs_blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

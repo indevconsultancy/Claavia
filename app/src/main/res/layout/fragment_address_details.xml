@@ -282,7 +282,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:fontFamily="@font/aleo_regular"
-                        android:text="Shop no., Building, Company, Apartment" />
+                        android:text="Building, Company, Apartment" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -299,7 +299,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/btn_border"
                     android:fontFamily="@font/aleo_regular"
-                    android:hint="Enter address"
+                    android:hint="Enter company name"
                     android:text="@={addressDetailsVM.etAddress1}"
                     android:inputType="text"
                     android:padding="10dp"
@@ -384,7 +384,7 @@
                     android:background="@drawable/btn_border"
                     android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:fontFamily="@font/aleo_regular"
-                    android:hint="Enter address"
+                    android:hint="Enter landmark"
                     android:text="@={addressDetailsVM.landmark}"
                     android:inputType="text"
                     android:padding="10dp"

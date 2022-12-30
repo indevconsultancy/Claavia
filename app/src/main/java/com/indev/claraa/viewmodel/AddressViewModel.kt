@@ -167,11 +167,11 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
 
     private fun checkValidation(): Boolean{
        if (shopName.get()?.isEmpty() ==true) {
-           Toast.makeText(context,"Please enter shop name",Toast.LENGTH_SHORT).show()
+           Toast.makeText(context,"Please enter business name",Toast.LENGTH_SHORT).show()
           return false
        }
         if (personName.get()?.isEmpty()==true){
-            Toast.makeText(context,"Please enter person name",Toast.LENGTH_SHORT).show()
+            Toast.makeText(context,"Please enter owner name",Toast.LENGTH_SHORT).show()
             return false
         }
         if (mobNo.get()?.isEmpty()==true){
