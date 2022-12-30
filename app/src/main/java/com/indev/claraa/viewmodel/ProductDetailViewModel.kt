@@ -17,20 +17,19 @@ import com.indev.claraa.SweetDialog
 import com.indev.claraa.adapter.PowerRangeAdapter
 import com.indev.claraa.adapter.ProductMasterAdapter
 import com.indev.claraa.entities.CartModel
-import com.indev.claraa.entities.DistrictModel
 import com.indev.claraa.entities.ProductMasterModel
 import com.indev.claraa.entities.ProductPacketModel
 import com.indev.claraa.fragment.ProductDetails
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.ProductRepository
-import com.indev.claraa.repository.UserRegistrationRepository
 import com.indev.claraa.roomdb.RoomDB
 import com.indev.claraa.ui.HomeScreen
 import com.indev.claraa.util.CommonClass
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.Objects
 
 
 class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
@@ -45,7 +44,7 @@ class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
     lateinit var prefHelper: PrefHelper
     var etQuantity: ObservableField<String> = ObservableField("")
     var user_id="0"
-
+    var isSubmitButtonEnabled = true
     private fun initializeDB(context: Context): RoomDB? {
         return RoomDB.getDatabase(context)
     }
@@ -70,30 +69,34 @@ class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
 
     @SuppressLint("SuspiciousIndentation", "NewApi")
     fun btnSubmit() {
-        dataBase = initializeDB(context)
-        prefHelper = PrefHelper(context)
-        user_id = prefHelper.getString(Constant.PREF_USERID)!!
-        packetValue = ProductDetails.packet_id.toString()
-        if (checkValidation()) {
-            SweetDialog.showProgressDialog(context)
-            var checkExitPorduct = 0
-            CoroutineScope(Dispatchers.IO).launch {
-                var qty = etQuantity.get().toString()
-                var productID = dataBase?.userDao()?.getproductID(PowerRangeAdapter.power_range)!!
-                checkExitPorduct = dataBase?.userDao()?.isProductRowExist(
-                    productID,
-                    PowerRangeAdapter.power_range,
-                    packetValue.toString()
-                )!!
+        if(isSubmitButtonEnabled ==true) {
+            dataBase = initializeDB(context)
+            prefHelper = PrefHelper(context)
+            user_id = prefHelper.getString(Constant.PREF_USERID)!!
+            packetValue = ProductDetails.packet_id.toString()
+            if (checkValidation()) {
+                isSubmitButtonEnabled = false
+                SweetDialog.showProgressDialog(context)
+                var checkExitPorduct = 0
+                CoroutineScope(Dispatchers.IO).launch {
+                    var qty = etQuantity.get().toString()
+                    var productID =
+                        dataBase?.userDao()?.getproductID(PowerRangeAdapter.power_range)!!
+                    checkExitPorduct = dataBase?.userDao()?.isProductRowExist(
+                        productID,
+                        PowerRangeAdapter.power_range,
+                        packetValue.toString(), "Pending"
+                    )!!
 
-                if (checkExitPorduct == 0) {
-                    insertCart(productID, qty)
-                    SweetDialog.dismissDialog()
-                } else {
-                    updateCart(productID, qty)
+                    if (checkExitPorduct == 0) {
+                        insertCart(productID, qty)
+                        SweetDialog.dismissDialog()
+                    } else {
+                        updateCart(productID, qty)
+                    }
                 }
-            }
 
+            }
         }
     }
 
@@ -116,7 +119,7 @@ class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
                 totalAmount,
                 (cartModelArrayList.get(0).quantity.toInt() + qty.toInt()).toString(),
                 productMasterArrayList.get(0).type_id,
-                productMasterArrayList.get(0).packet_id,
+                packetValue.toString(),
                 PowerRangeAdapter.power_range,
                 productMasterArrayList.get(0).currency,
                 CommonClass.currentDate().toString(), prefHelper.getString(Constant.PREF_LATITUDE).toString(),prefHelper.getString(Constant.PREF_LONGITUDE).toString(),"Pending", productMasterArrayList.get(0).active
@@ -131,17 +134,14 @@ class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
             var last_updated_id=0
             last_updated_id = ProductRepository.cartUpdateApi(context,cartModel)
             if (last_updated_id> 0) {
-
-                Toast.makeText(context, "Updated", Toast.LENGTH_LONG).show()
-                showAlertDialog()
-                Handler(Looper.getMainLooper()).post {
-                    showAlertDialog()
+                Handler(Looper.getMainLooper()).post{
+                    showAlertDialog("Updated Product successfully in Cart")
                 }
             }else {
-                Handler(Looper.getMainLooper()).post {
+                Handler(Looper.getMainLooper()).post{
                     Toast.makeText(context, "Something went wrong...", Toast.LENGTH_LONG).show()
                 }
-            }
+        }
         }
         SweetDialog.dismissDialog()
     }
@@ -172,8 +172,7 @@ class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
             last_inserted_id = ProductRepository.cartInsertAPI(context,cartModel)
             if (last_inserted_id> 0) {
                 ProductRepository.updateCartId(last_inserted_id,id,context)
-                Toast.makeText(context, "Added", Toast.LENGTH_LONG).show()
-                showAlertDialog()
+                showAlertDialog("Added Product successfully in Cart")
             }else {
                 Handler(Looper.getMainLooper()).post {
                     Toast.makeText(context, "Something went wrong...", Toast.LENGTH_LONG).show()
@@ -181,9 +180,9 @@ class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
             }
         }
     }
-    private fun showAlertDialog() {
-        SweetAlertDialog(context)
-            .setContentText("Added Product successfully in Cart")
+    private fun showAlertDialog(s: String) {
+        SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)
+            .setContentText(s)
             .setConfirmText("Ok")
             .setConfirmClickListener {sdialog ->
                 sdialog.dismiss()
@@ -200,13 +199,16 @@ class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
 
 
     private fun checkValidation(): Boolean {
-        if (packetValue.toString().trim().equals("Packs Size")) {
-            Toast.makeText(context, "Please select Pack size..", Toast.LENGTH_SHORT).show()
+        if (packetValue.toString().trim().equals("0")) {
+            Toast.makeText(context, "Please select pack size..", Toast.LENGTH_SHORT).show()
             return false
         }
 
         if (etQuantity.get().toString().trim().isEmpty() ==true) {
             Toast.makeText(context, "Please select Quantity..", Toast.LENGTH_SHORT).show()
+            return false
+        }else if (etQuantity.get()?.toInt()!! < 1 || etQuantity.get()?.toInt()!! > 999) {
+            Toast.makeText(context, "Please enter quantity more then 1 and less than 999", Toast.LENGTH_SHORT).show()
             return false
         }
         return true
@@ -236,6 +238,8 @@ class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
     override fun callUpdateCart(id: Int, qty: String) {
         updateCart(id, qty)
     }
+
+
 
 //
 //    fun clickRangeOptionEvent(pair: Pair<String, String>) {

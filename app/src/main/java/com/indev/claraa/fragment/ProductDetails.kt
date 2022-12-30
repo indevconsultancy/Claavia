@@ -22,10 +22,7 @@ import com.indev.claraa.adapter.CartAdapter
 import com.indev.claraa.adapter.PowerRangeAdapter
 import com.indev.claraa.adapter.ProductMasterAdapter
 import com.indev.claraa.databinding.FragmentProductDetailsBinding
-import com.indev.claraa.entities.CartModel
-import com.indev.claraa.entities.DistrictModel
-import com.indev.claraa.entities.ProductMasterModel
-import com.indev.claraa.entities.ProductPacketModel
+import com.indev.claraa.entities.*
 import com.indev.claraa.restApi.ClientApi
 import com.indev.claraa.ui.UserRegistration
 import com.indev.claraa.viewmodel.ProductDetailViewModel
@@ -95,9 +92,12 @@ class ProductDetails : Fragment(), ClickLinstener {
             showSlider(productMasterArrayList)
         })
 
+
         packsArrayList = ArrayList<ProductPacketModel>()
         CoroutineScope(Dispatchers.IO).launch {
             packsArrayList = productDetailViewModel.getPacksList(requireContext(), ProductMasterAdapter.packet_id) as ArrayList<ProductPacketModel>
+            var productPacketModel= ProductPacketModel("0","Pack Size","0")
+            packsArrayList.add(0, productPacketModel)
             val spinnerArray = arrayOfNulls<String>(packsArrayList.size)
             val spinnerMap = HashMap<Int, String>()
             for (i in 0 until packsArrayList.size) {
@@ -193,7 +193,7 @@ class ProductDetails : Fragment(), ClickLinstener {
     }
 
     override fun updatePowerRange(power_range: String) {
-        binding.txtRange.text = "Power Range: " + power_range
+        binding.txtRange.text = "Power: " + power_range
 
     }
 
@@ -203,4 +203,6 @@ class ProductDetails : Fragment(), ClickLinstener {
     companion object{
         var packet_id=0
     }
+
+
 }

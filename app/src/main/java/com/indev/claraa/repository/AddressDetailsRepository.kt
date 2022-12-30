@@ -69,9 +69,9 @@ class AddressDetailsRepository {
             dataBase = initializeDB(context)
             return dataBase?.userDao()?.getStateList()
         }
-        fun getDistrictList(context: Context): List<DistrictModel>? {
+        fun getDistrictList(context: Context, state_id: Int): List<DistrictModel>? {
             dataBase = initializeDB(context)
-            return dataBase?.userDao()?.getDistrictList()
+            return dataBase?.userDao()?.getDistrictList(state_id)
         }
         fun getsStateName(context: Context, state_id: String): String? {
             dataBase = initializeDB(context)

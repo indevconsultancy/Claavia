@@ -154,8 +154,8 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
     fun getStateList(context: Context): List<StateModel>? {
         return AddressDetailsRepository.getStateList(context)
     }
-    fun getDistrictList(context: Context): List<DistrictModel>? {
-        return AddressDetailsRepository.getDistrictList(context)
+    fun getDistrictList(context: Context,state_id:Int): List<DistrictModel>? {
+        return AddressDetailsRepository.getDistrictList(context,state_id)
     }
 
 

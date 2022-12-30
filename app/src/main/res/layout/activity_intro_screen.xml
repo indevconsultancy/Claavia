@@ -34,7 +34,7 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/introSliderViewPager"
                 android:layout_width="match_parent"
-                android:layout_height="470dp"
+                android:layout_height="430dp"
                 android:layout_marginTop="10dp"
                 android:onClick="introSliderViewPager"
                 android:overScrollMode="never" />
@@ -62,7 +62,7 @@
                 android:orientation="horizontal"
                 android:layout_alignParentBottom="true"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginBottom="50dp"
+                android:layout_marginBottom="40dp"
                 android:gravity="center"
                 android:weightSum="3">
 

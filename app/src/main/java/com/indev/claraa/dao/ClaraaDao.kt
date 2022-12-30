@@ -28,11 +28,14 @@ interface ClaraaDao {
     @Query("SELECT * FROM cart where payment_status= :payment_status or payment_status= :payment_status1 ORDER BY local_id ASC")
     fun getCartData(payment_status: String, payment_status1: String) : LiveData<List<CartModel>>
 
+    @Query("SELECT * FROM cart where payment_status = :payment_status ORDER BY local_id ASC")
+    fun getCartList(payment_status: String) : List<CartModel>
+
     @Query("SELECT * FROM cart ORDER BY local_id ASC")
     fun getCartList() : List<CartModel>
 
-    @Query("SELECT * FROM order_details where order_id= :order_id ORDER BY local_id ASC")
-    fun getOrderDetailsList(order_id: Int) : List<OrderDetailsModel>
+    @Query("SELECT * FROM order_details where order_id= :order_id and payment_status= :payment_status ORDER BY local_id ASC")
+    fun getOrderDetailsList(order_id: Int, payment_status: String) : List<OrderDetailsModel>
 
     @Query("SELECT * FROM product_master where type_id = :selectedCategory group by product_name ORDER BY product_id ASC")
     fun getProductMasterData(selectedCategory: Int): LiveData<List<ProductMasterModel>>
@@ -75,8 +78,8 @@ interface ClaraaDao {
     @Query("SELECT * FROM state_master")
     fun getStateList() : List<StateModel>
 
-    @Query("SELECT * FROM district_master")
-    fun getDistrictList() : List<DistrictModel>
+    @Query("SELECT * FROM district_master where state_id= :state_id")
+    fun getDistrictList(state_id: Int) : List<DistrictModel>
 
     @Update
     fun updateUser(userRegistrationTable: UserRegistrationModel)
@@ -133,8 +136,8 @@ interface ClaraaDao {
     fun updateCartProductQuantity(quantity: Int, totalPrice: Int, id: Int): Int
 
 
-    @Query("SELECT EXISTS(SELECT * from cart where product_id = :productId and power_range = :power_range and packets = :packets)")
-    fun isProductRowExist(productId: Int, power_range: String, packets: String): Int
+    @Query("SELECT EXISTS(SELECT * from cart where product_id = :productId and power_range = :power_range and packets = :packets and payment_status = :payment_status)")
+    fun isProductRowExist(productId: Int, power_range: String, packets: String, payment_status: String): Int
 
     @Query("SELECT * from cart where product_id = :productId")
     fun getCartDatabyProductId(productId: Int) : List<CartModel>

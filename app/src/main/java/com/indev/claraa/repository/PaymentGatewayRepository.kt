@@ -27,6 +27,11 @@ class PaymentGatewayRepository {
             return RoomDB.getDatabase(context)
         }
 
+        fun getCartPendingList(context: Context): List<CartModel>? {
+            dataBase = initializeDB(context)
+            return dataBase?.userDao()?.getCartList("Pending")
+        }
+
         fun getCartList(context: Context): List<CartModel>? {
             dataBase = initializeDB(context)
             return dataBase?.userDao()?.getCartList()
@@ -34,9 +39,8 @@ class PaymentGatewayRepository {
 
         fun getOrderDetailsList(context: Context, order_id: Int): List<OrderDetailsModel>? {
             dataBase = initializeDB(context)
-            return dataBase?.userDao()?.getOrderDetailsList(order_id)
+            return dataBase?.userDao()?.getOrderDetailsList(order_id,"Pending")
         }
-
 
         fun insertOrderMaster(context: Context, orderMasterModel: OrderMasterModel){
             dataBase = initializeDB(context)

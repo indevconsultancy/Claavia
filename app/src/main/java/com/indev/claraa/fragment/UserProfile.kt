@@ -16,10 +16,7 @@ import com.indev.claraa.repository.OrderHistoryReposetory
 import com.indev.claraa.repository.UserRegistrationRepository
 import com.indev.claraa.viewmodel.ProfileViewModel
 import com.indev.claraa.viewmodel.ProfileViewModelFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class UserProfile : Fragment() {
 
@@ -58,16 +55,20 @@ class UserProfile : Fragment() {
                 binding.tvMobile.text = it?.mobile_number
 
                 CoroutineScope(Dispatchers.IO).launch {
-                    var state_name = UserRegistrationRepository.getStateName(
-                        requireContext(),
-                        it.state_id
-                    ).toString()
-                    var district_name = UserRegistrationRepository.getDistrictName(
-                        requireContext(),
-                        it.district_id
-                    ).toString()
+                        var state_name = UserRegistrationRepository.getStateName(
+                            requireContext(),
+                            it.state_id
+                        ).toString()
+                        var district_name = UserRegistrationRepository.getDistrictName(
+                            requireContext(),
+                            it.district_id
+                        ).toString()
+
+                    withContext(Dispatchers.Main) {
+
                     binding.tvState.text = state_name
-                    binding.tvDistrict.text = district_name
+                        binding.tvDistrict.text = district_name
+                    }
                 }
 
 //                profileViewModel.getState(it.state_id)

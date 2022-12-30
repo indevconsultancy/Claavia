@@ -1,11 +1,9 @@
 package com.indev.claraa.repository
 
 import android.content.Context
-import android.media.session.MediaSession.Token
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.sqlite.db.SimpleSQLiteQuery
-import com.indev.claraa.entities.AddressDetailsModel
 import com.indev.claraa.entities.DistrictModel
 import com.indev.claraa.entities.StateModel
 import com.indev.claraa.entities.UserRegistrationModel
@@ -48,9 +46,9 @@ class UserRegistrationRepository {
             return dataBase?.userDao()?.getStateList()
         }
 
-        fun getDistrictList(context: Context): List<DistrictModel>? {
+        fun getDistrictList(context: Context, state_id: Int): List<DistrictModel>? {
             dataBase = initializeDB(context)
-            return dataBase?.userDao()?.getDistrictList()
+            return dataBase?.userDao()?.getDistrictList(state_id)
         }
 
 //         fun getsStateName(context: Context, state_id: String): String? {

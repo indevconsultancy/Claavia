@@ -230,6 +230,7 @@
                         android:background="@drawable/btn_color_change"
                         android:onClick="@{() ->productDetailVM.btnSubmit()}"
                         android:text="Add to Cart"
+                        android:enabled="@{productDetailVM.isSubmitButtonEnabled()}"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
                         android:textSize="18dp" />

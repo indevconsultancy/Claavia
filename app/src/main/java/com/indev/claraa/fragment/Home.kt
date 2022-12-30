@@ -61,7 +61,7 @@ class Home : Fragment(), ClickLinstener {
 
         }
         binding.btnDaily.setOnClickListener {
-            getProductRecycleViewList(3)
+            getProductRecycleViewList(2)
             binding.btnMonthly.setBackgroundResource(R.drawable.btn_color_change)
             binding.btnDaily.setBackgroundResource(R.drawable.selected_btn)
             binding.btnWeekly.setBackgroundResource(R.drawable.btn_color_change)
@@ -69,7 +69,7 @@ class Home : Fragment(), ClickLinstener {
         }
 
         binding.btnWeekly.setOnClickListener {
-            getProductRecycleViewList(2)
+            getProductRecycleViewList(3)
             binding.btnMonthly.setBackgroundResource(R.drawable.btn_color_change)
             binding.btnDaily.setBackgroundResource(R.drawable.btn_color_change)
             binding.btnWeekly.setBackgroundResource(R.drawable.selected_btn)

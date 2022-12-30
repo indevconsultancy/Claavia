@@ -104,7 +104,7 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() {
         try {
             val obj = JSONObject()
             obj.put("name", user_name)
-            obj.put("description", "Payment")
+            obj.put("description", "Test Payment")
             obj.put("theme.color", "")
             obj.put("currency", "INR")
             obj.put("amount", totalAmount *100)
@@ -112,7 +112,7 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() {
             obj.put("prefill.email", email)
             val retrObj = JSONObject()
             retrObj.put("enabled", true)
-            retrObj.put("max_count", 10000)
+            retrObj.put("max_count", 10)
             obj.put("retry", retrObj)
             checkout.open(context as Activity?, obj)
         } catch (e: JSONException) {
@@ -125,6 +125,7 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() {
         dataBase = initializeDB(context)
         CoroutineScope(Dispatchers.IO).launch {
                 last_id = PaymentGatewayRepository.insertOrderMasterAPI(context,orderMasterModel)
+                cartArrayList= PaymentGatewayRepository.getCartPendingList(context) as ArrayList<CartModel>
 
                 if (last_id> 0) {
                     PaymentGatewayRepository.updateOrderMasterbyId(last_id,last_order_master_id.toInt(), context)
@@ -163,9 +164,9 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() {
                     if(creditValues>0) {
                         callOrderUpdateAPI("Success")
                     }else if(creditValues==0.0) {
-                        payment(updatedCredit)
+                        payment(1.0)
                     }else{
-                        payment(amount)
+                        payment(1.0)
                     }
 
                     Handler(Looper.getMainLooper()).post {

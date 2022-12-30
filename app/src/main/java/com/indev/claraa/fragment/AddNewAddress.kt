@@ -21,6 +21,7 @@ import com.indev.claraa.viewmodel.AddressDetailsViewModelFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class AddNewAddress : Fragment() {
     private lateinit var binding: FragmentAddressDetailsBinding
@@ -46,8 +47,6 @@ class AddNewAddress : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
         stateArrayList = ArrayList<StateModel>()
         CoroutineScope(Dispatchers.IO).launch {
             stateArrayList = context?.let { addressViewModel.getStateList(it) } as ArrayList<StateModel>
@@ -84,7 +83,7 @@ class AddNewAddress : Fragment() {
 
         districtArrayList = ArrayList<DistrictModel>()
         CoroutineScope(Dispatchers.IO).launch {
-            districtArrayList = context?.let { addressViewModel.getDistrictList(it) } as ArrayList<DistrictModel>
+            districtArrayList = context?.let { addressViewModel.getDistrictList(it,state_id) } as ArrayList<DistrictModel>
             var da= DistrictModel("0","Select District","0","0")
             districtArrayList.add(0, da)
             val spinnerArray = arrayOfNulls<String>(districtArrayList.size)
@@ -93,25 +92,33 @@ class AddNewAddress : Fragment() {
                 spinnerMap[i] = districtArrayList.get(i).district_id
                 spinnerArray[i] = districtArrayList.get(i).district_name
             }
+            withContext(Dispatchers.Main) {
+                val adapter =
+                    context?.let {
+                        ArrayAdapter(
+                            it,
+                            android.R.layout.simple_spinner_item,
+                            spinnerArray
+                        )
+                    }
+                adapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                binding.spnDistrict.setAdapter(adapter)
+                binding.spnDistrict.setOnItemSelectedListener(object :
+                    AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        var id = spinnerMap[binding.spnDistrict.getSelectedItemPosition()]
+                        district_id = id!!.toInt()
+                    }
 
-            val adapter =
-                context?.let { ArrayAdapter(it, android.R.layout.simple_spinner_item, spinnerArray) }
-            adapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.spnDistrict.setAdapter(adapter)
-            binding.spnDistrict.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener{
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    var id = spinnerMap[binding.spnDistrict.getSelectedItemPosition()]
-                   district_id = id!!.toInt()
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                }
-            })
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                    }
+                })
+            }
         }
 
 

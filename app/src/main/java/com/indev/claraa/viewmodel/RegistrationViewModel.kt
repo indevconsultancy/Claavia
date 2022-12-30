@@ -45,6 +45,8 @@ class RegistrationViewModel (val context: Context): ViewModel() {
     lateinit var prefHelper: PrefHelper
     var checkLogin: Boolean = false
 
+    var lat=""
+    var long=""
     init {
         readAllData = UserRegistrationRepository.getRegistrationData(context)!!
     }
@@ -66,6 +68,8 @@ class RegistrationViewModel (val context: Context): ViewModel() {
     fun btnSubmit(){
         prefHelper = PrefHelper(context)
         checkLogin = prefHelper.getBoolean(Constant.PREF_IS_LOGIN)
+        lat = prefHelper.getString(Constant.PREF_LATITUDE).toString()
+        long = prefHelper.getString(Constant.PREF_LONGITUDE).toString()
         gender= UserRegistration.gender
         if(checkValidation()) {
             SweetDialog.showProgressDialog(context)
@@ -82,7 +86,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             mobNo.get().toString(),
             etAddress.get().toString(),
             UserRegistration.state_id.toString(),
-            UserRegistration.district_id.toString(),prefHelper.getString(Constant.PREF_ACTIVE).toString(), CommonClass.currentDate().toString(), gender,prefHelper.getString(Constant.PREF_LATITUDE).toString(),prefHelper.getString(Constant.PREF_LONGITUDE).toString(),prefHelper.getString(Constant.PREF_CREDIT).toString(),
+            UserRegistration.district_id.toString(),prefHelper.getString(Constant.PREF_ACTIVE).toString(), CommonClass.currentDate().toString(), gender,lat,long,prefHelper.getString(Constant.PREF_CREDIT).toString(),
             "","",pinCode.get().toString(),"","",
                 "","",""
         )
@@ -134,8 +138,8 @@ class RegistrationViewModel (val context: Context): ViewModel() {
             userRegistrationTable.address = etAddress.get().toString()
             userRegistrationTable.state_id = UserRegistration.state_id.toString()
             userRegistrationTable.district_id = UserRegistration.district_id.toString()
-            userRegistrationTable.latitude = prefHelper.getString(Constant.PREF_LATITUDE)!!
-            userRegistrationTable.longitude = prefHelper.getString(Constant.PREF_LATITUDE)!!
+            userRegistrationTable.latitude = lat
+            userRegistrationTable.longitude = long
             userRegistrationTable.pinCode = pinCode.get().toString()
 
             viewModelScope.launch {
@@ -167,8 +171,8 @@ class RegistrationViewModel (val context: Context): ViewModel() {
     fun getStateList(context: Context): List<StateModel>? {
         return UserRegistrationRepository.getStateList(context)
     }
-    fun getDistrictList(context: Context): List<DistrictModel>? {
-        return UserRegistrationRepository.getDistrictList(context)
+    fun getDistrictList(context: Context, state_id: Int): List<DistrictModel>? {
+        return UserRegistrationRepository.getDistrictList(context,state_id)
     }
 
     private fun checkValidation(): Boolean {
