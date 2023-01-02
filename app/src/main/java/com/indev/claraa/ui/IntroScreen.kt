@@ -21,11 +21,11 @@ class IntroScreen : AppCompatActivity() {
 
     val introSliderAdapter = IntroSliderAdapter(
         listOf(
-            IntroSlide("","",R.drawable.intro1),
-            IntroSlide("","",R.drawable.intro2),
-            IntroSlide("","",R.drawable.intro3),
-            IntroSlide("","",R.drawable.intro4),
-            IntroSlide("","",R.drawable.intro5),
+            IntroSlide("It's a New Beginning","",R.drawable.intro1),
+            IntroSlide("Envision a New Way","",R.drawable.intro2),
+            IntroSlide("Brighten your Path Ahead","",R.drawable.intro3),
+            IntroSlide("Are you Ready?","",R.drawable.intro4),
+            IntroSlide("Get 20/20 vision","",R.drawable.intro5),
         )
     )
 
