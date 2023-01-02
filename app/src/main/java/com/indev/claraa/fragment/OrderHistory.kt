@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
 import com.indev.claraa.adapter.OrderHistoryAdapter
+import com.indev.claraa.adapter.OrderListAdapter
 import com.indev.claraa.databinding.FragmentOrderHistoryBinding
 import com.indev.claraa.entities.OrderDetailsModel
 import com.indev.claraa.entities.OrderMasterModel
@@ -22,6 +23,8 @@ class OrderHistory : Fragment(), ClickLinstener {
     private lateinit var orderHistoryViewModel: OrderHistoryViewModel
     private lateinit var orderHistoryAdapter: OrderHistoryAdapter
     private lateinit var orderDetailsArrayList: ArrayList<OrderDetailsModel>
+    private lateinit var orderListAdapter: OrderListAdapter
+    private lateinit var orderMasterArrayList: ArrayList<OrderMasterModel>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,12 +49,21 @@ class OrderHistory : Fragment(), ClickLinstener {
         orderHistoryViewModel.getOrderDetailsList(requireActivity())?.observe(requireActivity(), Observer {
             orderHistoryAdapter.setData(it as ArrayList<OrderDetailsModel>)
             orderDetailsArrayList = it
-            if(orderDetailsArrayList.size > 0){
+        })
+        orderListAdapter = OrderListAdapter(requireContext(),ArrayList<OrderMasterModel>(), this)
+        recycleViewOrderList()
+
+        orderHistoryViewModel.getOrderList(requireActivity())?.observe(requireActivity(), Observer {
+            orderListAdapter.setData(it as ArrayList<OrderMasterModel>)
+            orderMasterArrayList = it
+            if(orderMasterArrayList.size > 0){
                 binding.llEmpty.visibility =View.GONE
-                binding.llMain.visibility =View.VISIBLE
+                binding.llMain.visibility =View.GONE
+                binding.llOrderList.visibility =View.VISIBLE
             }else{
                 binding.llEmpty.visibility =View.VISIBLE
                 binding.llMain.visibility =View.GONE
+                binding.llOrderList.visibility =View.VISIBLE
             }
         })
 
@@ -77,6 +89,13 @@ class OrderHistory : Fragment(), ClickLinstener {
             setHasFixedSize(true)
             binding.rvOrder.layoutManager = LinearLayoutManager(context)
             adapter= orderHistoryAdapter
+        }
+    }
+    private fun recycleViewOrderList() {
+        binding.rvOrderList.apply {
+            setHasFixedSize(true)
+            binding.rvOrderList.layoutManager = LinearLayoutManager(context)
+            adapter= orderListAdapter
         }
     }
 

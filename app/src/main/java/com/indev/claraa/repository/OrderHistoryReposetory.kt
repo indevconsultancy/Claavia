@@ -29,6 +29,10 @@ class OrderHistoryReposetory {
             dataBase = initializeDB(context)
             return dataBase?.userDao()?.getOrderDetailsList("Success")
         }
+        fun getOrderList(context: Context): LiveData<List<OrderMasterModel>>? {
+            dataBase = initializeDB(context)
+            return dataBase?.userDao()?.getOrderList("Success")
+        }
 
         fun getImage(context: Context, product_id: String): String? {
             dataBase = initializeDB(context)

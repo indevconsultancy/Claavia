@@ -47,6 +47,9 @@ interface ClaraaDao {
     @Query("SELECT * FROM order_details where payment_status= :payment_status order by local_id ASC")
     fun getOrderDetailsList(payment_status: String): LiveData<List<OrderDetailsModel>>
 
+   @Query("SELECT * FROM order_master where payment_status= :payment_status order by local_id ASC")
+    fun getOrderList(payment_status: String): LiveData<List<OrderMasterModel>>
+
 
     @Query("SELECT * FROM product_master where product_id = :product_id")
     fun getProductData(product_id: Int): List<ProductMasterModel>
