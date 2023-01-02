@@ -84,6 +84,7 @@ class IntroScreen : AppCompatActivity() {
                 this?.layoutParams = layoutParams
             }
             binding.indicatorContainer.addView(indicators[i])
+
         }
     }
 

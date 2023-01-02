@@ -43,13 +43,7 @@ class OrderHistory : Fragment(), ClickLinstener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         orderHistoryViewModel = OrderHistoryViewModel(requireContext())
-        orderHistoryAdapter = OrderHistoryAdapter(requireContext(),ArrayList<OrderDetailsModel>(), this)
-        recycleViewList()
 
-        orderHistoryViewModel.getOrderDetailsList(requireActivity())?.observe(requireActivity(), Observer {
-            orderHistoryAdapter.setData(it as ArrayList<OrderDetailsModel>)
-            orderDetailsArrayList = it
-        })
         orderListAdapter = OrderListAdapter(requireContext(),ArrayList<OrderMasterModel>(), this)
         recycleViewOrderList()
 
@@ -59,13 +53,13 @@ class OrderHistory : Fragment(), ClickLinstener {
             if(orderMasterArrayList.size > 0){
                 binding.llEmpty.visibility =View.GONE
                 binding.llMain.visibility =View.GONE
-                binding.llOrderList.visibility =View.VISIBLE
             }else{
                 binding.llEmpty.visibility =View.VISIBLE
                 binding.llMain.visibility =View.GONE
-                binding.llOrderList.visibility =View.VISIBLE
             }
         })
+
+
 
         binding.toolbar.backClick.setOnClickListener(){
             replaceFregment(Home())
@@ -74,6 +68,18 @@ class OrderHistory : Fragment(), ClickLinstener {
         binding.toolbar.toolbarTitle.text = "Order History"
 
 
+    }
+
+    fun showOrderDetailsList(order_id: Int) {
+        binding.llOrderList.visibility = View.GONE
+        binding.llMain.visibility = View.VISIBLE
+        orderHistoryAdapter = OrderHistoryAdapter(requireContext(),ArrayList<OrderDetailsModel>(), this)
+        recycleViewList()
+
+        orderHistoryViewModel.getOrderDetailsList(requireActivity(), order_id)?.observe(requireActivity(), Observer {
+            orderHistoryAdapter.setData(it as ArrayList<OrderDetailsModel>)
+            orderDetailsArrayList = it
+        })
     }
 
     private fun replaceFregment(fragment : Fragment) {
@@ -99,7 +105,8 @@ class OrderHistory : Fragment(), ClickLinstener {
         }
     }
 
-    override fun onClickListner(position: Int) {
+    override fun onClickListner(order_id: Int) {
+        showOrderDetailsList(order_id)
     }
 
     override fun updateTextView(amount: Int) {
@@ -109,7 +116,6 @@ class OrderHistory : Fragment(), ClickLinstener {
     }
 
     override fun callUpdateCart(id: Int, qty: String) {
-
     }
 
 

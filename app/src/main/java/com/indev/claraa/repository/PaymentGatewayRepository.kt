@@ -3,10 +3,8 @@ package com.indev.claraa.repository
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
-import com.indev.claraa.entities.AddressDetailsModel
-import com.indev.claraa.entities.CartModel
-import com.indev.claraa.entities.OrderDetailsModel
-import com.indev.claraa.entities.OrderMasterModel
+import androidx.sqlite.db.SimpleSQLiteQuery
+import com.indev.claraa.entities.*
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.restApi.ClaraaApi
@@ -34,8 +32,11 @@ class PaymentGatewayRepository {
 
         fun getCartList(context: Context): List<CartModel>? {
             dataBase = initializeDB(context)
-            return dataBase?.userDao()?.getCartList()
+            var queryString= "SELECT * FROM cart where payment_status=  \"Failed\"  or payment_status =  \"Pending\"   ORDER BY local_id ASC"
+            val query = SimpleSQLiteQuery(queryString)
+            return dataBase?.userDao()?.getCartList(query)
         }
+
 
         fun getOrderDetailsList(context: Context, order_id: Int): List<OrderDetailsModel>? {
             dataBase = initializeDB(context)
@@ -155,11 +156,11 @@ class PaymentGatewayRepository {
             }
         }
 
-        fun updateCartPaymentStatusbyId(product_id: Int,payment_status: String, context: Context) {
+        fun updateCartPaymentStatusbyId(cart_id: Int,payment_status: String, context: Context) {
             dataBase = initializeDB(context)
 
             CoroutineScope(Dispatchers.IO).launch {
-                dataBase?.userDao()?.updateCartPaymentStatusbyId(product_id, payment_status)
+                dataBase?.userDao()?.updateCartPaymentStatusbyId(cart_id, payment_status)
             }
         }
 

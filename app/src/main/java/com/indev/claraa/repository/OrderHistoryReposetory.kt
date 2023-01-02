@@ -1,18 +1,13 @@
 package com.indev.claraa.repository
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.indev.claraa.entities.*
-import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.restApi.ClaraaApi
 import com.indev.claraa.restApi.ClientApi
 import com.indev.claraa.roomdb.RoomDB
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class OrderHistoryReposetory {
     companion object {
@@ -25,9 +20,9 @@ class OrderHistoryReposetory {
         }
 
 
-        fun getOrderDetailsList(context: Context): LiveData<List<OrderDetailsModel>>? {
+        fun getOrderDetailsList(context: Context, order_id: Int): LiveData<List<OrderDetailsModel>>? {
             dataBase = initializeDB(context)
-            return dataBase?.userDao()?.getOrderDetailsList("Success")
+            return dataBase?.userDao()?.getOrderDetailList(order_id,"Success")
         }
         fun getOrderList(context: Context): LiveData<List<OrderMasterModel>>? {
             dataBase = initializeDB(context)

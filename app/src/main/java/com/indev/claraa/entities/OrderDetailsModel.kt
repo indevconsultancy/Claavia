@@ -8,6 +8,7 @@ data class OrderDetailsModel(@PrimaryKey(autoGenerate = true)
                             val local_id: Int,
                             val id: String,
                             val order_id: String,
+                            val cart_id: String,
                             val product_id: String,
                             val price: Int,
                             val quantity: Int,

@@ -3,7 +3,6 @@ package com.indev.claraa.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteQuery
-import com.google.android.gms.common.api.internal.IStatusCallback
 import com.indev.claraa.entities.*
 import org.jetbrains.annotations.NotNull
 
@@ -31,8 +30,9 @@ interface ClaraaDao {
     @Query("SELECT * FROM cart where payment_status = :payment_status ORDER BY local_id ASC")
     fun getCartList(payment_status: String) : List<CartModel>
 
-    @Query("SELECT * FROM cart ORDER BY local_id ASC")
-    fun getCartList() : List<CartModel>
+
+    @RawQuery
+    fun getCartList(query: SupportSQLiteQuery) : List<CartModel>
 
     @Query("SELECT * FROM order_details where order_id= :order_id and payment_status= :payment_status ORDER BY local_id ASC")
     fun getOrderDetailsList(order_id: Int, payment_status: String) : List<OrderDetailsModel>
@@ -44,8 +44,8 @@ interface ClaraaDao {
     @Query("SELECT * FROM product_master where product_name = :selectedProduct")
     fun getProductPowerList(selectedProduct: String): LiveData<List<ProductMasterModel>>
 
-    @Query("SELECT * FROM order_details where payment_status= :payment_status order by local_id ASC")
-    fun getOrderDetailsList(payment_status: String): LiveData<List<OrderDetailsModel>>
+    @Query("SELECT * FROM order_details where payment_status= :payment_status and order_id=:order_id order by local_id ASC")
+    fun getOrderDetailList(order_id: Int, payment_status: String): LiveData<List<OrderDetailsModel>>
 
    @Query("SELECT * FROM order_master where payment_status= :payment_status order by local_id ASC")
     fun getOrderList(payment_status: String): LiveData<List<OrderMasterModel>>
@@ -171,8 +171,8 @@ interface ClaraaDao {
     @Query("UPDATE cart SET id = :last_id WHERE id = :id")
     fun updateCartId(last_id: Int, id: String): Int
 
-    @Query("UPDATE cart SET payment_status = :payment_status WHERE product_id = :product_id")
-    fun updateCartPaymentStatusbyId(product_id: Int, payment_status: String): Int
+    @Query("UPDATE cart SET payment_status = :payment_status WHERE id = :cart_id")
+    fun updateCartPaymentStatusbyId(cart_id: Int, payment_status: String): Int
 
     @Query("UPDATE user_master SET credit = :credit WHERE user_id = :user_id")
     fun updateCreditUserMaster(user_id: Int, credit: String): Int

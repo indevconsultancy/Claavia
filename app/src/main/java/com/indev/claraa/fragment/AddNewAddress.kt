@@ -133,6 +133,7 @@ class AddNewAddress : Fragment() {
                     ) {
                         var id = spinnerMap[binding.spnState.getSelectedItemPosition()]
                         state_id =id!!.toInt()
+                        district_id =0
                         if(district_id ==0) {
                             setDistrictSpinner(state_id, 0)
                         }
@@ -169,15 +170,15 @@ class AddNewAddress : Fragment() {
                 )
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 binding.spnDistrict.setAdapter(adapter)
-                if(UserRegistration.district_id > 0){
+                if(district_id > 0){
                     var strDistrictName=""
                     for(i in districtArrayList){
                         if(i.district_id.equals(districtId.toString())) {
                             strDistrictName=  i.district_name
                         }
-                        var position= adapter.getPosition(strDistrictName)
-                        binding.spnDistrict.setSelection(position)
                     }
+                    var position= adapter.getPosition(strDistrictName)
+                    binding.spnDistrict.setSelection(position)
                 }
                 binding.spnDistrict.setOnItemSelectedListener(object :
                     AdapterView.OnItemSelectedListener {

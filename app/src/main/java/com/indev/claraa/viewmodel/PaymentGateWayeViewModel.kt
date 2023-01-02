@@ -133,7 +133,7 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() {
                         orderDetailsModel = OrderDetailsModel(
                             0,
                             CommonClass.getUniqueId().toString(),
-                            last_id.toString(),
+                            last_id.toString(),i.id,
                             i.product_id, i.price.toInt(),
                             i.quantity.toInt(),
                             "Pending",
@@ -152,22 +152,24 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() {
                     }
                     prefHelper = PrefHelper(context)
                     var creditValue= prefHelper.getString(Constant.PREF_CREDIT)
-                    if(creditValue?.toDouble()!! > totalAmount){
+                    if(creditValue?.toDouble()!! >= totalAmount){
                         creditValues= creditValue?.toDouble()!! - totalAmount
                         prefHelper.put(Constant.PREF_CREDIT, creditValues.toString())
+                        if(creditValues>=0.0) {
+                            callOrderUpdateAPI("Success")
+                        }
                     }else{
                         updatedCredit= totalAmount - creditValue?.toDouble()!!
                         prefHelper.put(Constant.PREF_CREDIT, "0")
                         creditValues=0.0
+                        if(updatedCredit>=0) {
+                            payment(updatedCredit)
+                        }else{
+                            payment(totalAmount)
+                        }
                     }
 
-                    if(creditValues>0) {
-                        callOrderUpdateAPI("Success")
-                    }else if(creditValues==0.0) {
-                        payment(updatedCredit)
-                    }else{
-                        payment(totalAmount)
-                    }
+
 
 //                    Handler(Looper.getMainLooper()).post {
 //                        Toast.makeText(context, "" +"S", Toast.LENGTH_LONG).show()
@@ -200,13 +202,14 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() {
                 )
                 PaymentGatewayRepository.updateOrderMaster(context, orderMasterModel)
                 var update_order_id = PaymentGatewayRepository.updateOrderMasterAPI(context,orderMasterModel)
+                var updated_order_details_id=0
                 if (update_order_id> 0) {
                     orderDetailsArrayList= PaymentGatewayRepository.getOrderDetailsList(context, update_order_id) as ArrayList<OrderDetailsModel>
                     for (i in orderDetailsArrayList) {
                         orderDetailsModel = OrderDetailsModel(
                             i.local_id,
                             i.id,
-                            i.order_id,
+                            i.order_id,i.cart_id,
                             i.product_id, i.price,
                             i.quantity,
                             s,
@@ -214,25 +217,26 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() {
                             user_id,
                             prefHelper.getString(Constant.PREF_ACTIVE).toString()
                         )
-                        PaymentGatewayRepository.updateCartPaymentStatusbyId(i.product_id.toInt(),s, context)
+                        PaymentGatewayRepository.updateCartPaymentStatusbyId(i.cart_id.toInt(),s, context)
                         PaymentGatewayRepository.updateCreditInUserMaster(user_id,creditValues.toString(), context)
                         PaymentGatewayRepository.updateOrderDetails(context, orderDetailsModel)
-                        var updated_order_details_id= PaymentGatewayRepository.updateOrderDetailsAPI(context,orderDetailsModel)
-                        if(updated_order_details_id>0){
-                            Handler(Looper.getMainLooper()).post {
-                                if(s.equals("Success")) {
-                                    showDialog(
-                                        "Transaction Complete",
-                                        "Your payment has been successful."
-                                    )
-                                }else{
-                                    showDialog("Transaction Failed", "Your payment has been failed")
-                                }
+                         updated_order_details_id= PaymentGatewayRepository.updateOrderDetailsAPI(context,orderDetailsModel)
+
+                    }
+                    if(updated_order_details_id>0){
+                        Handler(Looper.getMainLooper()).post {
+                            if(s.equals("Success")) {
+                                showDialog(
+                                    "Transaction Complete",
+                                    "Your payment has been successful."
+                                )
+                            }else{
+                                showDialog("Transaction Failed", "Your payment has been failed")
                             }
-                        } else{
-                            Handler(Looper.getMainLooper()).post {
-                                showDialog("Transaction Failed" + s, "Your payment has been failed")
-                            }
+                        }
+                    } else{
+                        Handler(Looper.getMainLooper()).post {
+                            showDialog("Transaction Failed" + s, "Your payment has been failed")
                         }
                     }
                 } else {

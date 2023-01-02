@@ -29,10 +29,11 @@ class OrderListAdapter (private val context: Context, var orderListArrayList: Ar
 
     override fun onBindViewHolder(holder: MyViewholder, position: Int) {
         val currentItem = orderListArrayList[position]
-        holder.tv_id.text =": "+currentItem.order_id.toString()
-        holder.tv_date.text =": "+currentItem.order_date.toString()
-        holder.tv_amount.text = ": "+currentItem.order_amount.toString()
+        holder.tv_id.text =": "+currentItem.order_id
+        holder.tv_date.text =": "+currentItem.order_date
+        holder.tv_amount.text = ": "+currentItem.order_amount
         holder.btnView.setOnClickListener(){
+            listener.onClickListner(currentItem.order_id.toInt())
         }
 
     }

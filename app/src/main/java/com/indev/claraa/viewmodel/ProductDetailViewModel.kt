@@ -45,13 +45,14 @@ class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
     var etQuantity: ObservableField<String> = ObservableField("")
     var user_id="0"
     var isSubmitButtonEnabled = true
+    var product_id=0
 
     private fun initializeDB(context: Context): RoomDB? {
         return RoomDB.getDatabase(context)
     }
 
     init{
-        var product_id=ProductMasterAdapter.productId
+         product_id=ProductMasterAdapter.productId.toInt()
 
         CoroutineScope(Dispatchers.IO).launch {
             productMasterArrayList= ProductRepository.getProductData(context,product_id.toInt()) as ArrayList<ProductMasterModel>
@@ -96,10 +97,10 @@ class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
                     )!!
 
                     if (checkExitPorduct == 0) {
-                        insertCart(productID, qty)
+                        insertCart(product_id, qty)
                         SweetDialog.dismissDialog()
                     } else {
-                        updateCart(productID, qty)
+                        updateCart(product_id, qty)
                     }
                 }
 
