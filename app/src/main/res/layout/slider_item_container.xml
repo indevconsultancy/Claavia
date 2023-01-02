@@ -9,11 +9,10 @@
         android:id="@+id/textTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/aleo_regular"
+        android:fontFamily="@font/aleobold"
         android:gravity="center"
         android:text="Discover a New Vision"
         android:textColor="@color/black"
-        android:textStyle="bold"
         android:textSize="25dp" />
 
     <ImageView

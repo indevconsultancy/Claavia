@@ -85,7 +85,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:textSize="15dp"
-                            android:hint="(Enter User Name)"
+                            android:hint="(Enter Mobile Number)"
                             android:fontFamily="@font/aleo_regular"
                             android:background="@drawable/custom_background"
                             android:text="@={loginVM.username}" />
