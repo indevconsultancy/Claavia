@@ -14,6 +14,8 @@ import com.bumptech.glide.Glide
 import com.indev.claraa.R
 import com.indev.claraa.entities.ProductMasterModel
 import com.indev.claraa.fragment.ProductDetails
+import com.indev.claraa.helper.Constant
+import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.ProductRepository
 import com.indev.claraa.repository.SplashRepository
 import com.indev.claraa.restApi.ClientApi
@@ -21,6 +23,7 @@ import com.indev.claraa.ui.HomeScreen
 
 class ProductMasterAdapter(private val context: Context, var productMasterModelArrayList: ArrayList<ProductMasterModel>, private val listener: ClickLinstener) : RecyclerView.Adapter<ProductMasterAdapter.MyViewholder>(){
 
+    lateinit var prefHelper: PrefHelper
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewholder {
         val itemView =
             LayoutInflater.from(parent.context).inflate(R.layout.custom_fragment_home, parent, false)
@@ -28,6 +31,7 @@ class ProductMasterAdapter(private val context: Context, var productMasterModelA
     }
 
     override fun onBindViewHolder(holder: MyViewholder, position: Int) {
+        prefHelper= PrefHelper(context)
         val currentItem = productMasterModelArrayList[position]
         holder.tvProductName.text = currentItem.product_name
         holder.tvPrice.text = currentItem.currency + " " +currentItem.price
@@ -36,6 +40,7 @@ class ProductMasterAdapter(private val context: Context, var productMasterModelA
             replaceFregment(ProductDetails())
             productId= currentItem.product_id
             packet_id= currentItem.packet_id
+            prefHelper.put(Constant.PREF_PRODUCT_NAME, currentItem.product_name)
         }
 
     }

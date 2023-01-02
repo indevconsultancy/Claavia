@@ -17,9 +17,13 @@ import com.indev.claraa.ui.PaymentGateway
 class OrderPlaceViewModel (val context: Context): ViewModel() {
     var address: ObservableField<String> = ObservableField("")
     val readAllData: LiveData<AddressDetailsModel>
+lateinit var prefHelper: PrefHelper
 
     init {
-        readAllData = OrderPlaceRepository.getAddress(context, 0)!!
+        prefHelper = PrefHelper(context)
+        readAllData = OrderPlaceRepository.getAddress(context,
+            prefHelper.getString(Constant.PREF_ADDRESS_ID)!!
+        )!!
     }
 
     fun getCartList(context: Context): LiveData<List<CartModel>>? {

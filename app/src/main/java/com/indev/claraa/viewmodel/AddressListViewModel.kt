@@ -7,12 +7,19 @@ import androidx.lifecycle.ViewModel
 import com.indev.claraa.R
 import com.indev.claraa.entities.AddressDetailsModel
 import com.indev.claraa.fragment.AddNewAddress
+import com.indev.claraa.helper.Constant
+import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.repository.AddressDetailsRepository
 import com.indev.claraa.ui.HomeScreen
 
 class AddressListViewModel (val context: Context): ViewModel() {
 
+    lateinit var prefHelper: PrefHelper
+
    fun newAddress(){
+
+       prefHelper= PrefHelper(context)
+       prefHelper.put(Constant.PREF_NEWADDRESS, true)
        replaceFregment(AddNewAddress())
    }
 

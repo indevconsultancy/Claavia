@@ -21,22 +21,34 @@ class SplashRepository{
             return RoomDB.getDatabase(context)
         }
 
+
+
         @SuppressLint("SuspiciousIndentation")
         suspend fun downloadMasterData1(context: Context, masterData: MasterData) {
             dataBase = initializeDB(context)
 
             try {
                 val result = apiInterface?.downloadMasterData(masterData)
-
+                Log.e("TAG", "downloadMasterData1: "+ masterData.table_name)
                 val jsonArray = JSONArray(result?.body().toString())
-                        dataBase?.userDao()?.deleteAllStates()
-                        dataBase?.userDao()?.deleteAllDistricts()
-                        dataBase?.userDao()?.deleteAllProductPackets()
-                        dataBase?.userDao()?.deleteAllProductMaster()
-                        dataBase?.userDao()?.deleteAllProductType()
+
                         for (i in 0 until jsonArray.length()) {
                             val singleData = JSONObject(jsonArray[i].toString())
-                            if(masterData.table_name == "state_master") {
+                             if(masterData.table_name == "product_packet") {
+                                val product_packet = ProductPacketModel(
+                                    singleData["packet_id"].toString(),
+                                    singleData["packet_size"].toString(),
+                                    singleData["active"].toString()
+                                )
+                                dataBase?.userDao()?.insertProductPacketMasterData(product_packet)
+                            }else if(masterData.table_name == "product_type") {
+                                val product_type_master = ProductTypeModel(
+                                    singleData["type_id"].toString(),
+                                    singleData["type_name"].toString(),
+                                    singleData["active"].toString())
+                                val type_id=  dataBase?.userDao()?.insertProductTypeData(product_type_master)
+                                Log.e("TAG", "downloadProductMasterData: " +type_id)
+                            }else if(masterData.table_name == "state_master") {
                                 val state_master = StateModel(
                                     singleData["state_id"].toString(),
                                     singleData["state_name"].toString(),
@@ -51,13 +63,6 @@ class SplashRepository{
                                     singleData["state_id"].toString()
                                 )
                                 dataBase?.userDao()?.insertDistrictMasterData(district_master)
-                            }else if(masterData.table_name == "product_packet") {
-                                val product_packet = ProductPacketModel(
-                                    singleData["packet_id"].toString(),
-                                    singleData["packet_size"].toString(),
-                                    singleData["active"].toString()
-                                )
-                                dataBase?.userDao()?.insertProductPacketMasterData(product_packet)
                             }else if(masterData.table_name == "product_master") {
                                 val product_master = ProductMasterModel(
                                     singleData["product_id"].toString(),
@@ -72,19 +77,22 @@ class SplashRepository{
                                     singleData["active"].toString())
                                 val produc_id=  dataBase?.userDao()?.insertProductMasterData(product_master)
                                 Log.e("TAG", "downloadProductMasterData: " +produc_id)
-                            }else if(masterData.table_name == "product_type") {
-                                val product_type_master = ProductTypeModel(
-                                    singleData["type_id"].toString(),
-                                    singleData["type_name"].toString(),
-                                    singleData["active"].toString())
-                                val type_id=  dataBase?.userDao()?.insertProductTypeData(product_type_master)
-                                Log.e("TAG", "downloadProductMasterData: " +type_id)
                             }
                         }
 
             } catch (e: Exception) {
                 Log.d("fail", "$e")
             }
+        }
+
+        fun deleteTables(context: Context) {
+            dataBase = initializeDB(context)
+
+            dataBase?.userDao()?.deleteAllStates()
+            dataBase?.userDao()?.deleteAllDistricts()
+            dataBase?.userDao()?.deleteAllProductPackets()
+            dataBase?.userDao()?.deleteAllProductMaster()
+            dataBase?.userDao()?.deleteAllProductType()
         }
     }
 }

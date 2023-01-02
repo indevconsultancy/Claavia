@@ -27,6 +27,7 @@ class SplashViewModel (private val context: Context): ViewModel() {
 
     fun downloadMasterData() {
         CoroutineScope(Dispatchers.IO).launch {
+            SplashRepository.deleteTables(context)
             for (i in 0 until table.size){
                 async { SplashRepository.downloadMasterData1(context,MasterData(table[i])) }
             }

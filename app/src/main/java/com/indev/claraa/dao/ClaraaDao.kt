@@ -145,8 +145,8 @@ interface ClaraaDao {
     @Query("SELECT * from product_packet where packet_id = :packet_id")
     fun getPackSizebyID(packet_id: String) : List<ProductPacketModel>
 
-    @Query("SELECT * from address where user_id = :addressId")
-    fun getAddress(addressId: Int) : LiveData<AddressDetailsModel>
+    @Query("SELECT * from address where id = :addressId")
+    fun getAddress(addressId: String) : LiveData<AddressDetailsModel>
 
 
     @Query("DELETE FROM address WHERE id = :id")

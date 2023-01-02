@@ -23,8 +23,9 @@ import com.indev.claraa.adapter.PowerRangeAdapter
 import com.indev.claraa.adapter.ProductMasterAdapter
 import com.indev.claraa.databinding.FragmentProductDetailsBinding
 import com.indev.claraa.entities.*
+import com.indev.claraa.helper.Constant
+import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.restApi.ClientApi
-import com.indev.claraa.ui.UserRegistration
 import com.indev.claraa.viewmodel.ProductDetailViewModel
 import com.indev.claraa.viewmodel.ProductDetailViewModelFactory
 import kotlinx.coroutines.CoroutineScope
@@ -40,8 +41,9 @@ class ProductDetails : Fragment(), ClickLinstener {
     private lateinit var powerRangeAdapter: PowerRangeAdapter
     private lateinit var cartModelList: ArrayList<CartModel>
     lateinit var productMasterArrayList: ArrayList<ProductMasterModel>
-     var selectedProduct ="Claraa Fresh Flo"
+    var selectedProduct =""
     private lateinit var packsArrayList: ArrayList<ProductPacketModel>
+    lateinit var prefHelper: PrefHelper
 
 
     override fun onCreateView(
@@ -63,7 +65,7 @@ class ProductDetails : Fragment(), ClickLinstener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         productMasterArrayList= ArrayList<ProductMasterModel>()
-
+        prefHelper= PrefHelper(requireContext())
         binding.toolbar.backClick.setOnClickListener(){
             replaceFregment(Home())
         }
@@ -86,12 +88,23 @@ class ProductDetails : Fragment(), ClickLinstener {
         powerRangeAdapter = PowerRangeAdapter(requireActivity(), productMasterArrayList, this)
         recycleViewPowerrangeList()
 
+        selectedProduct = prefHelper.getString(Constant.PREF_PRODUCT_NAME)!!
         productDetailViewModel.getPruductPowerList(requireActivity(), selectedProduct)?.observe(requireActivity(), Observer {
             powerRangeAdapter.setData(it as ArrayList<ProductMasterModel>)
             productMasterArrayList = it
             showSlider(productMasterArrayList)
         })
 
+        binding.tvProductName.text= prefHelper.getString(Constant.PREF_PRODUCT_NAME)
+
+
+        if(prefHelper.getString(Constant.PREF_PRODUCT_NAME)?.contains("Solution-") == true){
+            binding.rvPowerRange.visibility =View.GONE
+            binding.cvPacket.visibility =View.GONE
+        }else{
+            binding.rvPowerRange.visibility =View.VISIBLE
+            binding.cvPacket.visibility =View.VISIBLE
+        }
 
         packsArrayList = ArrayList<ProductPacketModel>()
         CoroutineScope(Dispatchers.IO).launch {

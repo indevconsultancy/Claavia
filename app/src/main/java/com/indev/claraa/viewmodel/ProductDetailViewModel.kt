@@ -45,6 +45,7 @@ class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
     var etQuantity: ObservableField<String> = ObservableField("")
     var user_id="0"
     var isSubmitButtonEnabled = true
+
     private fun initializeDB(context: Context): RoomDB? {
         return RoomDB.getDatabase(context)
     }
@@ -54,6 +55,7 @@ class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
 
         CoroutineScope(Dispatchers.IO).launch {
             productMasterArrayList= ProductRepository.getProductData(context,product_id.toInt()) as ArrayList<ProductMasterModel>
+
         }
     }
 
@@ -73,7 +75,12 @@ class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
             dataBase = initializeDB(context)
             prefHelper = PrefHelper(context)
             user_id = prefHelper.getString(Constant.PREF_USERID)!!
-            packetValue = ProductDetails.packet_id.toString()
+
+            if(prefHelper.getString(Constant.PREF_PRODUCT_NAME)!!.contains("Solution-")== true){
+                packetValue = productMasterArrayList.get(0).packet_id
+            }else{
+                packetValue = ProductDetails.packet_id.toString()
+            }
             if (checkValidation()) {
                 isSubmitButtonEnabled = false
                 SweetDialog.showProgressDialog(context)
@@ -199,10 +206,14 @@ class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
 
 
     private fun checkValidation(): Boolean {
-        if (packetValue.toString().trim().equals("0")) {
-            Toast.makeText(context, "Please select pack size..", Toast.LENGTH_SHORT).show()
-            return false
+
+        if(prefHelper.getString(Constant.PREF_PRODUCT_NAME)?.contains("Solution-")== false){
+            if (packetValue.toString().trim().equals("0")) {
+                Toast.makeText(context, "Please select pack size..", Toast.LENGTH_SHORT).show()
+                return false
+            }
         }
+
 
         if (etQuantity.get().toString().trim().isEmpty() ==true) {
             Toast.makeText(context, "Please select Quantity..", Toast.LENGTH_SHORT).show()

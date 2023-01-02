@@ -71,7 +71,9 @@ class UserRegistrationRepository {
             try {
                 var result = apiInterface?.registration(userRegistrationTable)
                 return if (result?.body()?.status==1){
-                    result?.body()!!.last_insert_id
+                    result?.body()!!.status
+                }else if (result?.body()?.status==2){
+                    result?.body()!!.status
                 } else {
                     0
                 }

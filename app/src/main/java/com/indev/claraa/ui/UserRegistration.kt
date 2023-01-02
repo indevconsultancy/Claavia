@@ -92,9 +92,6 @@ class UserRegistration : AppCompatActivity() {
         }else{
             setStateSpinner(0)
         }
-
-
-
     }
 
     private fun setStateSpinner(stateId: Int) {

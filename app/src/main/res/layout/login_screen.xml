@@ -51,7 +51,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:text="Email/ Username"
+                        android:text="Mobile Number"
                         android:fontFamily="@font/aleo_regular"
                         android:textColor="@android:color/black"
                         android:textSize="15dp" />

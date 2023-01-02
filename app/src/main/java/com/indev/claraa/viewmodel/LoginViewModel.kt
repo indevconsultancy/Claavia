@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
+import androidx.core.os.postDelayed
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -51,11 +52,13 @@ class LoginViewModel(val context: Context): ViewModel() {
                     LoginRepository.insertDataCart(context, user_id)
 //                    checkProfileUpdate = prefHelper.getBoolean(Constant.PREF_IS_UPDATE)
 //                    if(checkProfileUpdate == true){
+                    Handler(Looper.getMainLooper()).postDelayed( {
                         context.startActivity(Intent(context, HomeScreen::class.java))
+                        SweetDialog.dismissDialog()
+                    },10000)
 //                    }else {
 //                        context.startActivity(Intent(context, UserRegistration::class.java))
 //                    }
-                    SweetDialog.dismissDialog()
                 } else {
                     Handler(Looper.getMainLooper()).post {
                         SweetDialog.dismissDialog()

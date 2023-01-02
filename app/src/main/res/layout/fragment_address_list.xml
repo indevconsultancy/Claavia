@@ -70,7 +70,7 @@
                         android:layout_height="@dimen/_400sdp"
                         app:lottie_autoPlay="true"
                         app:lottie_loop="true"
-                        app:lottie_rawRes="@raw/addresslist" />
+                        app:lottie_rawRes="@raw/emptylist" />
 
                     <TextView
                         android:layout_width="match_parent"

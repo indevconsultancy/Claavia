@@ -164,14 +164,14 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() {
                     if(creditValues>0) {
                         callOrderUpdateAPI("Success")
                     }else if(creditValues==0.0) {
-                        payment(1.0)
+                        payment(updatedCredit)
                     }else{
-                        payment(1.0)
+                        payment(totalAmount)
                     }
 
-                    Handler(Looper.getMainLooper()).post {
-                        Toast.makeText(context, "" +"S", Toast.LENGTH_LONG).show()
-                    }
+//                    Handler(Looper.getMainLooper()).post {
+//                        Toast.makeText(context, "" +"S", Toast.LENGTH_LONG).show()
+//                    }
                 } else {
                     Handler(Looper.getMainLooper()).post {
                         Toast.makeText(context, "" + "Something.....", Toast.LENGTH_LONG).show()

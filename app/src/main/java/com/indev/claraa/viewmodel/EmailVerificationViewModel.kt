@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.indev.claraa.R
 import com.indev.claraa.SweetDialog
 import com.indev.claraa.entities.ForgotModel
@@ -36,62 +37,35 @@ class EmailVerificationViewModel  (val context: Context): ViewModel() {
     lateinit var prefHelper: PrefHelper
 
     fun btnSubmit() {
-//        ShowSubmitDialog(
-//            context, R.string.emailUpdate.toString(),
-//            R.string.forgot_password_succesfully.toString()
-//        )
-        forgotModel = ForgotModel(email.get().toString().trim())
-        viewModelScope.launch {
-            //Data store in model
-            var status = 0
+            SweetDialog.showProgressDialog(context)
 
             CoroutineScope(Dispatchers.IO).launch {
-                status = ForgotRepository.forgot(context, forgotModel)
+                forgotModel = ForgotModel(email.get().toString().trim())
+                var status = ForgotRepository.forgot(context, forgotModel)
                 if (status == 1) {
-                    context.startActivity(Intent(context, LoginScreen::class.java))
+                    Handler(Looper.getMainLooper()).post {
+                        showAlertDialog()
+                    }
                 } else {
                     Handler(Looper.getMainLooper()).post {
- //                       SweetDialog.dismissDialog()
-                        Toast.makeText(context, "Invalid credential...", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, "Invalid email address..", Toast.LENGTH_LONG).show()
                     }
                 }
-            }
+                SweetDialog.dismissDialog()
         }
     }
 
 
-        fun ShowSubmitDialog(context: Context?, infoTitle: String?, message: String?) {
-            submit_alert = Dialog(
-                context!!
-            )
-            submit_alert?.setContentView(R.layout.submit_alert)
-            submit_alert?.getWindow()!!.setBackgroundDrawable(
-                ColorDrawable(
-                    Color.WHITE
-                )
-            )
-            val params: WindowManager.LayoutParams =
-                submit_alert?.getWindow()!!.getAttributes()
-            params.gravity = Gravity.CENTER or Gravity.CENTER_HORIZONTAL
-
-
-            val btnOk =
-                submit_alert?.findViewById<View>(
-                    R.id.btnOk
-                ) as Button
-
-
-            btnOk.setOnClickListener {
-                //TO DO
-                submit_alert?.dismiss()
-
+    private fun showAlertDialog() {
+        SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)
+            .setContentText("Password has been sent on your registered email!")
+            .setConfirmText("Ok")
+            .setConfirmClickListener {sdialog ->
+                context.startActivity(Intent(context, LoginScreen::class.java))
+                sdialog.dismiss()
             }
-            submit_alert?.show()
-            submit_alert?.setCanceledOnTouchOutside(
-                false
-            )
-        }
-
+            .show()
+    }
 }
 
 

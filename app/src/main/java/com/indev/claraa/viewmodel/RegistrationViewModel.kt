@@ -5,10 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
+import com.google.gson.Gson
 import com.indev.claraa.R
 import com.indev.claraa.SweetDialog
 import com.indev.claraa.entities.DistrictModel
@@ -91,6 +93,10 @@ class RegistrationViewModel (val context: Context): ViewModel() {
                 "","",""
         )
         viewModelScope.launch {
+            var gson = Gson()
+            var jsonString = gson.toJson(userRegistrationTable)
+            Log.e("TAG", "btnSubmit: " + jsonString)
+
             UserRegistrationRepository.insertUserData(context, userRegistrationTable)
             var last_insert_id=0
             last_insert_id = UserRegistrationRepository.userRegistrationAPI(userRegistrationTable)
@@ -195,7 +201,7 @@ class RegistrationViewModel (val context: Context): ViewModel() {
                 Toast.makeText(context, "Please enter password..", Toast.LENGTH_SHORT).show()
                 return false
             }else if (password.get().toString().length<8) {
-                Toast.makeText(context, "Please enter password..", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Password should be 8 digit..", Toast.LENGTH_SHORT).show()
                 return false
             }
         }

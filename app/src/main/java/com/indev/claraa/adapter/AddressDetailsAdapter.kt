@@ -56,6 +56,7 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
         preferences= PrefHelper(context)
         holder.btnDelivery.setOnClickListener{
             preferences.put(Constant.PREF_IS_CHECK_CART, true)
+            preferences.put(Constant.PREF_ADDRESS_ID, currentItem.id)
             replaceFregment(OrderPlace())
         }
 
@@ -67,6 +68,7 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
         }
 
         holder.editAddress.setOnClickListener{
+            preferences.put(Constant.PREF_NEWADDRESS, false)
             local_id =currentItem.local_id
             id =currentItem.id
             replaceFregment(AddNewAddress())

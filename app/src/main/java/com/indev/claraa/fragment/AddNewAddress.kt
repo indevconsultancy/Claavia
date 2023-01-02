@@ -15,6 +15,8 @@ import com.indev.claraa.R
 import com.indev.claraa.databinding.FragmentAddressDetailsBinding
 import com.indev.claraa.entities.DistrictModel
 import com.indev.claraa.entities.StateModel
+import com.indev.claraa.helper.Constant
+import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.ui.UserRegistration
 import com.indev.claraa.viewmodel.AddressViewModel
 import com.indev.claraa.viewmodel.AddressDetailsViewModelFactory
@@ -28,7 +30,8 @@ class AddNewAddress : Fragment() {
     private lateinit var addressViewModel: AddressViewModel
     private lateinit var stateArrayList : ArrayList<StateModel>
     private lateinit var districtArrayList : ArrayList<DistrictModel>
-
+    lateinit var preferences: PrefHelper
+    var check_new_address: Boolean = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,85 +50,16 @@ class AddNewAddress : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        stateArrayList = ArrayList<StateModel>()
-        CoroutineScope(Dispatchers.IO).launch {
-            stateArrayList = context?.let { addressViewModel.getStateList(it) } as ArrayList<StateModel>
-            var stateModel= StateModel("0","Select State","0")
-            stateArrayList.add(0, stateModel)
-            val spinnerArray = arrayOfNulls<String>(stateArrayList.size)
-            val spinnerMap = HashMap<Int, String>()
-            for (i in 0 until stateArrayList.size) {
-                spinnerMap[i] = stateArrayList.get(i).state_id
-                spinnerArray[i] = stateArrayList.get(i).state_name
-            }
-
-            val adapter =
-                context?.let { ArrayAdapter(it, android.R.layout.simple_spinner_item, spinnerArray) }
-            adapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.spnState.setAdapter(adapter)
-            binding.spnState.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener{
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    var id = spinnerMap[binding.spnState.getSelectedItemPosition()]
-                    Log.d("TAG", "onItemSelected: " + id)
-                    state_id = id!!.toInt()
-
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                }
-            })
-        }
-
-        districtArrayList = ArrayList<DistrictModel>()
-        CoroutineScope(Dispatchers.IO).launch {
-            districtArrayList = context?.let { addressViewModel.getDistrictList(it,state_id) } as ArrayList<DistrictModel>
-            var da= DistrictModel("0","Select District","0","0")
-            districtArrayList.add(0, da)
-            val spinnerArray = arrayOfNulls<String>(districtArrayList.size)
-            val spinnerMap = HashMap<Int, String>()
-            for (i in 0 until districtArrayList.size) {
-                spinnerMap[i] = districtArrayList.get(i).district_id
-                spinnerArray[i] = districtArrayList.get(i).district_name
-            }
-            withContext(Dispatchers.Main) {
-                val adapter =
-                    context?.let {
-                        ArrayAdapter(
-                            it,
-                            android.R.layout.simple_spinner_item,
-                            spinnerArray
-                        )
-                    }
-                adapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                binding.spnDistrict.setAdapter(adapter)
-                binding.spnDistrict.setOnItemSelectedListener(object :
-                    AdapterView.OnItemSelectedListener {
-                    override fun onItemSelected(
-                        parent: AdapterView<*>?,
-                        view: View?,
-                        position: Int,
-                        id: Long
-                    ) {
-                        var id = spinnerMap[binding.spnDistrict.getSelectedItemPosition()]
-                        district_id = id!!.toInt()
-                    }
-
-                    override fun onNothingSelected(parent: AdapterView<*>?) {
-                    }
-                })
-            }
-        }
-
 
         binding.toolbar.backClick.setOnClickListener(){
             replaceFregment(AddressList())
         }
         binding.toolbar.toolbarTitle.text = "Add New Address"
+
+        preferences= PrefHelper(requireContext())
+        check_new_address = preferences.getBoolean(Constant.PREF_NEWADDRESS)
+
+        if(check_new_address ==false) {
         addressViewModel.readAllData.observe(viewLifecycleOwner, Observer {
             if(it != null) {
                 binding.etShopName.setText(it.shop_name)
@@ -133,14 +67,20 @@ class AddNewAddress : Fragment() {
                 binding.etUserName.setText(it.user_name)
                 binding.etAddress1.setText(it.address1)
                 binding.etAddress2.setText(it.address2)
-                binding.spnState.setSelection(1)
-                binding.spnDistrict.setSelection(1)
+                state_id =it.state_id.toInt()
+                district_id =it.district_id.toInt()
+                setStateSpinner(state_id)
+                setDistrictSpinner(state_id, district_id)
                 binding.etLandmark.setText(it.landmark)
                 binding.etPinCode.setText(it.pinCode)
 
             }
         })
-
+        }else {
+            state_id=0
+            district_id=0
+            setStateSpinner(0)
+        }
 
     }
 
@@ -150,6 +90,114 @@ class AddNewAddress : Fragment() {
         fragmentTransition?.replace(R.id.frame_layout, fragment)
         fragmentTransition?.addToBackStack(null)
         fragmentTransition?.commit()
+    }
+
+    private fun setStateSpinner(stateId: Int) {
+        stateArrayList = ArrayList<StateModel>()
+        CoroutineScope(Dispatchers.IO).launch {
+            stateArrayList = addressViewModel.getStateList(requireContext()) as ArrayList<StateModel>
+            var stateModel= StateModel("0","Select State","0")
+            stateArrayList.add(0, stateModel)
+            val spinnerArray = arrayOfNulls<String>(stateArrayList.size)
+            val spinnerMap = HashMap<Int, String>()
+            for (i in 0 until stateArrayList.size) {
+                spinnerMap[i] = stateArrayList.get(i).state_id
+                spinnerArray[i] = stateArrayList.get(i).state_name
+            }
+            withContext(Dispatchers.Main) {
+
+                val adapter = ArrayAdapter(
+                    requireContext(),
+                    android.R.layout.simple_spinner_item,
+                    spinnerArray
+                )
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                binding.spnState.setAdapter(adapter)
+                if(state_id > 0){
+                    var strStateName=""
+                    for(i in stateArrayList){
+                        if(i.state_id.equals(state_id.toString())) {
+                            strStateName=  i.state_name
+                        }
+                        var position= adapter.getPosition(strStateName)
+                        binding.spnState.setSelection(position)
+                    }
+                }
+                binding.spnState.setOnItemSelectedListener(object :
+                    AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        var id = spinnerMap[binding.spnState.getSelectedItemPosition()]
+                        state_id =id!!.toInt()
+                        if(district_id ==0) {
+                            setDistrictSpinner(state_id, 0)
+                        }
+
+                    }
+
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                    }
+                })
+            }
+        }
+    }
+
+    private fun setDistrictSpinner(state_id: Int,  districtId: Int) {
+        districtArrayList = ArrayList<DistrictModel>()
+        CoroutineScope(Dispatchers.IO).launch {
+            districtArrayList = addressViewModel.getDistrictList(requireContext(),state_id) as ArrayList<DistrictModel>
+            var da= DistrictModel("0","Select District","0","0")
+            districtArrayList.add(0, da)
+            val spinnerArray = arrayOfNulls<String>(districtArrayList.size)
+            val spinnerMap = HashMap<Int, String>()
+
+            for (i in 0 until districtArrayList.size) {
+
+                spinnerMap[i] = districtArrayList.get(i).district_id
+                spinnerArray[i] = districtArrayList.get(i).district_name
+            }
+            withContext(Dispatchers.Main) {
+
+                val adapter = ArrayAdapter(
+                    requireContext(),
+                    android.R.layout.simple_spinner_item,
+                    spinnerArray
+                )
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                binding.spnDistrict.setAdapter(adapter)
+                if(UserRegistration.district_id > 0){
+                    var strDistrictName=""
+                    for(i in districtArrayList){
+                        if(i.district_id.equals(districtId.toString())) {
+                            strDistrictName=  i.district_name
+                        }
+                        var position= adapter.getPosition(strDistrictName)
+                        binding.spnDistrict.setSelection(position)
+                    }
+                }
+                binding.spnDistrict.setOnItemSelectedListener(object :
+                    AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        var id = spinnerMap[binding.spnDistrict.getSelectedItemPosition()]
+                        Log.d("TAG", "onItemSelected: " + id)
+                        district_id = id!!.toInt()
+
+                    }
+
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                    }
+                })
+            }
+        }
     }
 
     companion object{

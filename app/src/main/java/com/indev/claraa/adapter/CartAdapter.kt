@@ -48,10 +48,17 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
     @SuppressLint("SuspiciousIndentation")
     override fun onBindViewHolder(holder: MyViewholder, position: Int) {
         val currentItem = cartModelList[position]
-        holder.tvRange.text ="Power range: " + currentItem.power_range
         GlobalScope.launch {
             packs_size = ProductRepository.getPacksSize(currentItem.packet_id, context) as ArrayList<ProductPacketModel>
-            holder.tvPackSize.setText("Packs size: " + packs_size.get(0).packet_size)
+            if(currentItem.product_name.contains("Solution-") == true) {
+                holder.tvPackSize.setText("Weight: " + packs_size.get(0).packet_size)
+                holder.tvRange.text ="Power: " + currentItem.power_range
+                holder.tvRange.visibility = View.GONE
+            }else{
+                holder.tvRange.text ="Power: " + currentItem.power_range
+                holder.tvRange.visibility = View.VISIBLE
+                holder.tvPackSize.setText("Packs size: " + packs_size.get(0).packet_size)
+            }
         }
         holder.tvProductName.text = currentItem.product_name
         count= currentItem.quantity.toInt()
@@ -61,9 +68,12 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
 
         if(check_cart_list == true){
             holder.llButton.visibility =View.GONE
+            holder.tvQuantity.visibility= View.VISIBLE
         }else{
             holder.llButton.visibility =View.VISIBLE
+            holder.tvQuantity.visibility= View.GONE
         }
+        holder.tvQuantity.text = "Quantity: " + currentItem.quantity
 
         holder.etQuantity.setText(count.toString())
 
@@ -127,9 +137,12 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
         }
 
         holder.btnUpdate.setOnClickListener{
-            SweetDialog.showProgressDialog(context)
             var qty= holder.etQuantity.text.toString()
-            totalPrice= currentItem.price.toInt() * qty.toInt()
+            if(qty.length ==0){
+                Toast.makeText(context, "Quantity should be greater than 1", Toast.LENGTH_LONG).show()
+            }else{
+                SweetDialog.showProgressDialog(context)
+                totalPrice= currentItem.price.toInt() * qty.toInt()
                     if(qty.toInt() > 1) {
                         ProductRepository.updateCartProductQuantity(
                             qty.toInt(),
@@ -139,9 +152,11 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
                         )
                         showAlertDialog()
                         notifyDataSetChanged()
-        }
-            listener.callUpdateCart(currentItem.id.toInt(),qty.toInt().toString())
-            SweetDialog.dismissDialog()
+                 }
+                listener.callUpdateCart(currentItem.id.toInt(),qty.toInt().toString())
+                SweetDialog.dismissDialog()
+            }
+
         }
 
     /*  holder.deleteButton.setOnClickListener {
@@ -239,6 +254,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
         val tvPackSize: TextView = itemView!!.findViewById(R.id.tvPackSize)
         val tvCount: TextView = itemView!!.findViewById(R.id.tvCount)
         val tvPrice: TextView = itemView!!.findViewById(R.id.tvPrice)
+        val tvQuantity: TextView = itemView!!.findViewById(R.id.tvQuantity)
         val tvProductName: TextView = itemView!!.findViewById(R.id.tvProductName)
         val deleteButton: ImageView = itemView!!.findViewById(R.id.deleteButton)
         val imageProduct: ImageView = itemView!!.findViewById(R.id.imageProduct)
