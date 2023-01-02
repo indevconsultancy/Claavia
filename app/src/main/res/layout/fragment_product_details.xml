@@ -134,7 +134,7 @@
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginTop="30dp"
                         android:gravity="top"
                         android:orientation="horizontal">
 
@@ -143,10 +143,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|top"
-                            android:fontFamily="@font/aleobold"
+                            android:fontFamily="@font/aleo_regular"
                             android:text="Product Name"
                             android:textColor="@color/black"
-                            android:textSize="20dp" />
+                            android:textSize="18dp" />
 
                     </LinearLayout>
 

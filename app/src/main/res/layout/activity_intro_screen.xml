@@ -21,16 +21,6 @@
             android:layout_marginHorizontal="10dp"
             android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/aleo_regular"
-            android:gravity="center"
-            android:text="Discover a New Vision"
-            android:textColor="@color/black"
-            android:textSize="30dp" />
-
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/introSliderViewPager"
                 android:layout_width="match_parent"

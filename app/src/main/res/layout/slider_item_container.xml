@@ -5,22 +5,24 @@
     android:orientation="vertical"
     android:padding="15dp">
 
+    <TextView
+        android:id="@+id/textTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/aleo_regular"
+        android:gravity="center"
+        android:text="Discover a New Vision"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="25dp" />
+
     <ImageView
         android:id="@+id/imageSlideIcon"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:layout_marginTop="20dp"
         android:contentDescription="@string/app_name" />
-
-    <TextView
-        android:id="@+id/textTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Title Text"
-        android:textColor="@color/bs_blue"
-        android:textSize="18sp"
-        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textDescription"
