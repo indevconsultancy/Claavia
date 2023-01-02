@@ -143,7 +143,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
             }else{
                 SweetDialog.showProgressDialog(context)
                 totalPrice= currentItem.price.toInt() * qty.toInt()
-                    if(qty.toInt() > 1) {
+                    if(qty.toInt() > 0 || qty.toInt() < 1000) {
                         ProductRepository.updateCartProductQuantity(
                             qty.toInt(),
                             totalPrice,
