@@ -66,11 +66,11 @@ class Cart : Fragment(), ClickLinstener {
 
     }
 
-    override fun updateTextView(amount: Int) {
+    override fun updateTextInteger(amount: Int) {
         binding.totalAmount.text = "SubTotal ₹\u200E" + amount
     }
 
-    override fun updatePowerRange(power_range: String) {
+    override fun updateTextString(power_range: String) {
     }
 
     override fun callUpdateCart(id: Int, qty: String) {

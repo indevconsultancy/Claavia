@@ -80,7 +80,7 @@ class AddressDetailsAdapter(private val context: Context, var addressDetailsMode
             .setContentText("Are you sure you want to delete the address?").setCancelText("Cancel")
             .setConfirmText("Ok")
             .setConfirmClickListener { sDialog ->
-                listener.updateTextView(0)
+                listener.updateTextInteger(0)
                 deleteAddress(id)
                 sDialog.dismiss()
             }

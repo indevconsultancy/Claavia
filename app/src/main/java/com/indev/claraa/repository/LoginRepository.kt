@@ -47,7 +47,7 @@ class LoginRepository {
                         prefHelper.put(Constant.PREF_USER_NAME, userProfileArray[i].owner_name)
                         prefHelper.put(Constant.PREF_USER_MOBILE, userProfileArray[i].mobile_number)
                         prefHelper.put(Constant.PREF_TOKEN, result?.body()?.Token!!)
-                        prefHelper.put(Constant.PREF_CREDIT, "10000")
+                        prefHelper.put(Constant.PREF_CREDIT,  userProfileArray[i].credit)
                         val user_profile = UserRegistrationModel(
                             userProfileArray[i].user_id,
                             userProfileArray[i].shop_name,

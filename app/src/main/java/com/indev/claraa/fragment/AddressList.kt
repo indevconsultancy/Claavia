@@ -84,10 +84,10 @@ class AddressList : Fragment(), ClickLinstener {
     override fun onClickListner(position: Int) {
     }
 
-    override fun updateTextView(amount: Int) {
+    override fun updateTextInteger(amount: Int) {
     }
 
-    override fun updatePowerRange(power_range: String) {
+    override fun updateTextString(power_range: String) {
     }
 
     override fun callUpdateCart(id: Int, qty: String) {

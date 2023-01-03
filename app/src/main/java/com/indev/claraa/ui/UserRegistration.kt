@@ -37,6 +37,8 @@ class UserRegistration : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_user_registration)
         supportActionBar?.hide()
 
+        state_id=0
+        district_id=0
         registrationViewModel = ViewModelProvider(
             this,
             RegistrationViewModelFactory(this)
@@ -75,6 +77,7 @@ class UserRegistration : AppCompatActivity() {
             binding.llBottomImage.visibility = View.GONE
             binding.llPassword.visibility = View.GONE
             registrationViewModel = ViewModelProvider(this).get(RegistrationViewModel::class.java)
+
             registrationViewModel.readAllData.observe(this, Observer {
                 binding.btnSubmit.text = "Update"
                 binding.etShopName.setText(it.shop_name)
@@ -135,10 +138,8 @@ class UserRegistration : AppCompatActivity() {
                     ) {
                         var id = spinnerMap[binding.spnState.getSelectedItemPosition()]
                         state_id=id!!.toInt()
-                        district_id =0
-                        if(district_id==0) {
-                            setDistrictSpinner(state_id, 0)
-                        }
+                        setDistrictSpinner(state_id, district_id)
+
 
                     }
 
@@ -178,9 +179,10 @@ class UserRegistration : AppCompatActivity() {
                         if(i.district_id.equals(districtId.toString())) {
                             strDistrictName=  i.district_name
                         }
-                        var position= adapter.getPosition(strDistrictName)
-                        binding.spnDistrict.setSelection(position)
+
                     }
+                    var position= adapter.getPosition(strDistrictName)
+                    binding.spnDistrict.setSelection(position)
                 }
                 binding.spnDistrict.setOnItemSelectedListener(object :
                     AdapterView.OnItemSelectedListener {
@@ -192,6 +194,7 @@ class UserRegistration : AppCompatActivity() {
                     ) {
                         var id = spinnerMap[binding.spnDistrict.getSelectedItemPosition()]
                         Log.d("TAG", "onItemSelected: " + id)
+
                         district_id = id!!.toInt()
 
                     }

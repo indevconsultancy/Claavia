@@ -2,7 +2,6 @@ package com.indev.claraa.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
@@ -18,15 +17,10 @@ import com.indev.claraa.SweetDialog
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.ProductPacketModel
 import com.indev.claraa.entities.deleteModel
-import com.indev.claraa.fragment.OrderPlace
-import com.indev.claraa.fragment.ProductDetails
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
-import com.indev.claraa.repository.AddressDetailsRepository
 import com.indev.claraa.repository.ProductRepository
 import com.indev.claraa.restApi.ClientApi
-import com.indev.claraa.ui.HomeScreen
-import com.indev.claraa.viewmodel.ProductDetailViewModel
 import kotlinx.coroutines.*
 
 
@@ -182,7 +176,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
 
         holder.tvPrice.text = currentItem.currency +" "+ currentItem.amount.toString()
         totalAmount= grandTotal(cartModelList)
-        listener.updateTextView(totalAmount)
+        listener.updateTextInteger(totalAmount)
     }
 
     private fun showAlertDialog() {
@@ -200,7 +194,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
             .setContentText("Are you sure you want to delete the cart?").setCancelText("Cancel")
             .setConfirmText("Ok")
             .setConfirmClickListener { sDialog ->
-                listener.updateTextView(0)
+                listener.updateTextInteger(0)
                 deleteCartProduct(id)
                 sDialog.dismiss()
             }

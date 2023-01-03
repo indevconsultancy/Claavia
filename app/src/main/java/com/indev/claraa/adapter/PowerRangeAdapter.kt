@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
 import com.indev.claraa.entities.ProductMasterModel
-import com.indev.claraa.viewmodel.ProductDetailViewModel
 
 class PowerRangeAdapter(private val context: Context, var productMasterArrayList: ArrayList<ProductMasterModel>, private val listener: ClickLinstener) : RecyclerView.Adapter<PowerRangeAdapter.MyViewholder>(){
 
@@ -28,16 +27,17 @@ class PowerRangeAdapter(private val context: Context, var productMasterArrayList
     override fun onBindViewHolder(holder: MyViewholder, position: Int) {
         val currentItem = productMasterArrayList[position]
         holder.tvPowerRange.text = currentItem.power_range
+        holder.tvPrice.text = currentItem.price
 
         if(checkRange==false) {
-            listener.updatePowerRange(productMasterArrayList[0].power_range)
+            listener.updateTextString(productMasterArrayList[0].power_range)
             power_range= productMasterArrayList[0].power_range
         }
 
         holder.cardView.setOnClickListener {
             selectedItemPosition= position
             power_range= currentItem.power_range
-            listener.updatePowerRange(currentItem.power_range)
+            listener.updateTextString(currentItem.power_range)
             checkRange=true
             notifyDataSetChanged()
         }
@@ -69,6 +69,7 @@ class PowerRangeAdapter(private val context: Context, var productMasterArrayList
 
     inner class MyViewholder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvPowerRange: TextView = itemView!!.findViewById(R.id.tvPowerRange)
+        val tvPrice: TextView = itemView!!.findViewById(R.id.tvPrice)
         val cardView: CardView = itemView!!.findViewById(R.id.cardView)
         val llMain: LinearLayout = itemView!!.findViewById(R.id.llMain)
 

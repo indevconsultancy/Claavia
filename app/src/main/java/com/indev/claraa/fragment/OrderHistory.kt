@@ -79,6 +79,7 @@ class OrderHistory : Fragment(), ClickLinstener {
         orderHistoryViewModel.getOrderDetailsList(requireActivity(), order_id)?.observe(requireActivity(), Observer {
             orderHistoryAdapter.setData(it as ArrayList<OrderDetailsModel>)
             orderDetailsArrayList = it
+
         })
     }
 
@@ -109,14 +110,13 @@ class OrderHistory : Fragment(), ClickLinstener {
         showOrderDetailsList(order_id)
     }
 
-    override fun updateTextView(amount: Int) {
+    override fun updateTextInteger(amount: Int) {
     }
 
-    override fun updatePowerRange(power_range: String) {
+    override fun updateTextString(amount: String) {
+        binding.totalAmount.text = "Total Amount: " + amount
     }
 
     override fun callUpdateCart(id: Int, qty: String) {
     }
-
-
 }

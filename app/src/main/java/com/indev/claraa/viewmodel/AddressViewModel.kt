@@ -217,10 +217,10 @@ class AddressViewModel (val context: Context): ViewModel(), ClickLinstener {
     override fun onClickListner(id: Int) {
     }
 
-    override fun updateTextView(id: Int) {
+    override fun updateTextInteger(id: Int) {
     }
 
-    override fun updatePowerRange(power_range: String) {
+    override fun updateTextString(power_range: String) {
     }
 
     override fun callUpdateCart(id: Int, qty: String) {

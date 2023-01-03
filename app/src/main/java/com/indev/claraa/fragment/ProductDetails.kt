@@ -202,10 +202,10 @@ class ProductDetails : Fragment(), ClickLinstener {
         Toast.makeText(requireActivity(), ""+position, Toast.LENGTH_LONG).show()
     }
 
-    override fun updateTextView(amount: Int) {
+    override fun updateTextInteger(amount: Int) {
     }
 
-    override fun updatePowerRange(power_range: String) {
+    override fun updateTextString(power_range: String) {
         binding.txtRange.text = "Power: " + power_range
 
     }
