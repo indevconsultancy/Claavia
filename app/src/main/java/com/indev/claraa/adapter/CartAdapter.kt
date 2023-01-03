@@ -132,8 +132,8 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
 
         holder.btnUpdate.setOnClickListener{
             var qty= holder.etQuantity.text.toString()
-            if(qty.toInt() <1 || qty.toInt() > 999){
-                Toast.makeText(context, "Quantity should be between 1- 1000", Toast.LENGTH_LONG).show()
+            if(qty.toInt() <1 || qty.toInt() > 9999){
+                Toast.makeText(context, "Quantity should be between 1- 10000", Toast.LENGTH_LONG).show()
             }else{
                 SweetDialog.showProgressDialog(context)
                 totalPrice= currentItem.price.toInt() * qty.toInt()

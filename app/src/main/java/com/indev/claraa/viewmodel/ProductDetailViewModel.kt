@@ -219,8 +219,8 @@ class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
         if (etQuantity.get().toString().trim().isEmpty() ==true) {
             Toast.makeText(context, "Please select Quantity..", Toast.LENGTH_SHORT).show()
             return false
-        }else if (etQuantity.get()?.toInt()!! < 1 || etQuantity.get()?.toInt()!! > 999) {
-            Toast.makeText(context, "Please enter quantity more then 1 and less than 999", Toast.LENGTH_SHORT).show()
+        }else if (etQuantity.get()?.toInt()!! < 1 || etQuantity.get()?.toInt()!! > 9999) {
+            Toast.makeText(context, "Please enter quantity more then 1 and less than 9999", Toast.LENGTH_SHORT).show()
             return false
         }
         return true
