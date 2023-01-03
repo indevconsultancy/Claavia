@@ -73,7 +73,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/btn_border"
                     android:fontFamily="@font/aleo_regular"
-                    android:hint="Enter shop name"
+                    android:hint="Enter business name"
                     android:inputType="text"
                     android:text="@={addressDetailsVM.shopName}"
                     android:textColor="@color/black"
@@ -100,7 +100,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:fontFamily="@font/aleo_regular"
-                        android:text="Owner Name" />
+                        android:text="Customer Name" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -117,7 +117,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/btn_border"
                     android:textColor="@color/black"
-                    android:hint="Enter person name"
+                    android:hint="(Enter Full Name)"
                     android:inputType="text"
                     android:fontFamily="@font/aleo_regular"
                     android:text="@={addressDetailsVM.personName}"

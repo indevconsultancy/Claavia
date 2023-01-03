@@ -133,11 +133,7 @@ class AddNewAddress : Fragment() {
                     ) {
                         var id = spinnerMap[binding.spnState.getSelectedItemPosition()]
                         state_id =id!!.toInt()
-                        district_id =0
-                        if(district_id ==0) {
-                            setDistrictSpinner(state_id, 0)
-                        }
-
+                        setDistrictSpinner(state_id, district_id)
                     }
 
                     override fun onNothingSelected(parent: AdapterView<*>?) {

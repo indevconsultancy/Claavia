@@ -87,6 +87,7 @@
                             android:textSize="15dp"
                             android:hint="(Enter Mobile Number)"
                             android:fontFamily="@font/aleo_regular"
+                            android:inputType="number"
                             android:background="@drawable/custom_background"
                             android:text="@={loginVM.username}" />
                     </com.google.android.material.textfield.TextInputLayout>
