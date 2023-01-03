@@ -140,7 +140,6 @@ class UserRegistration : AppCompatActivity() {
                         state_id=id!!.toInt()
                         setDistrictSpinner(state_id, district_id)
 
-
                     }
 
                     override fun onNothingSelected(parent: AdapterView<*>?) {
