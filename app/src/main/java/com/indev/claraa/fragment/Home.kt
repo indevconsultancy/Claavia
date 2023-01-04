@@ -18,6 +18,7 @@ import com.aemerse.slider.model.CarouselItem
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
 import com.indev.claraa.adapter.ProductMasterAdapter
+import com.indev.claraa.adapter.SolutionAdapter
 import com.indev.claraa.databinding.FragmentHomeBinding
 import com.indev.claraa.entities.ProductMasterModel
 import com.indev.claraa.helper.Constant
@@ -32,6 +33,7 @@ class Home : Fragment(), ClickLinstener {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var homeScreenViewModel: HomeScreenViewModel
     private lateinit var productMasterAdapter: ProductMasterAdapter
+    private lateinit var solutionAdapter: SolutionAdapter
     var productMasterModelArrayList: ArrayList<ProductMasterModel> = ArrayList()
     lateinit var prefHelper: PrefHelper
     override fun onCreateView(
@@ -50,6 +52,7 @@ class Home : Fragment(), ClickLinstener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getProductRecycleViewList(1)
+        getProductRecycleSolutionViewList(4)
         prefHelper= PrefHelper(requireContext())
 
         binding.btnMonthly.setOnClickListener {
@@ -77,13 +80,13 @@ class Home : Fragment(), ClickLinstener {
 
         }
 
-        binding.btnSolution.setOnClickListener {
-            getProductRecycleViewList(4)
-            binding.btnDaily.setBackgroundResource(R.drawable.btn_color_change)
-            binding.btnMonthly.setBackgroundResource(R.drawable.btn_color_change)
-            binding.btnWeekly.setBackgroundResource(R.drawable.btn_color_change)
-            binding.btnSolution.setBackgroundResource(R.drawable.selected_btn)
-        }
+//        binding.btnSolution.setOnClickListener {
+//            getProductRecycleViewList(4)
+//            binding.btnDaily.setBackgroundResource(R.drawable.btn_color_change)
+//            binding.btnMonthly.setBackgroundResource(R.drawable.btn_color_change)
+//            binding.btnWeekly.setBackgroundResource(R.drawable.btn_color_change)
+//            binding.btnSolution.setBackgroundResource(R.drawable.selected_btn)
+//        }
 
         val carousel: ImageCarousel = binding.carousel
         binding.toolbar.menuClick.setOnClickListener {
@@ -152,6 +155,27 @@ class Home : Fragment(), ClickLinstener {
             productMasterAdapter.setData(it as ArrayList<ProductMasterModel>)
             productMasterModelArrayList = it
         })
+    }
+
+    private fun getProductRecycleSolutionViewList(selectedCategory: Int) {
+        homeScreenViewModel = HomeScreenViewModel(requireContext())
+        solutionAdapter = SolutionAdapter(requireContext(), productMasterModelArrayList, this)
+        recycleViewSolutionList()
+
+        homeScreenViewModel.getProductMasterList(requireActivity(), selectedCategory)
+            ?.observe(requireActivity(), Observer {
+                solutionAdapter.setData(it as ArrayList<ProductMasterModel>)
+                productMasterModelArrayList = it
+            })
+    }
+
+    private fun recycleViewSolutionList() {
+        binding.rvSolution.apply {
+            setHasFixedSize(true)
+            binding.rvSolution.layoutManager = LinearLayoutManager(context)
+            (binding.rvSolution.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
+            adapter= solutionAdapter
+        }
     }
 
     private fun recycleViewList() {

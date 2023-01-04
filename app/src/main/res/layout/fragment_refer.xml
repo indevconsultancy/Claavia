@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_400sdp"
                 app:lottie_autoPlay="true"
-                app:lottie_loop="true"
+                app:lottie_loop="false"
                 app:lottie_rawRes="@raw/empty_state" />
 
         </LinearLayout>

@@ -142,10 +142,10 @@ interface ClaraaDao {
     @Query("SELECT EXISTS(SELECT * from cart where product_id = :productId and power_range = :power_range and packets = :packets and payment_status = :payment_status)")
     fun isProductRowExist(productId: Int, power_range: String, packets: String, payment_status: String): Int
 
-    @Query("SELECT * from cart where product_id = :productId")
+    @Query("SELECT * from cart where product_id = :productId ORDER BY local_id ASC")
     fun getCartDatabyProductId(productId: Int) : List<CartModel>
 
-    @Query("SELECT * from product_packet where packet_id = :packet_id")
+    @Query("SELECT * from product_packet where packet_id = :packet_id ")
     fun getPackSizebyID(packet_id: String) : List<ProductPacketModel>
 
     @Query("SELECT * from address where id = :addressId")
