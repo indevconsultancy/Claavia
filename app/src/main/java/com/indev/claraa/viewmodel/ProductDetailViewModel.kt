@@ -16,6 +16,7 @@ import com.indev.claraa.R
 import com.indev.claraa.SweetDialog
 import com.indev.claraa.adapter.PowerRangeAdapter
 import com.indev.claraa.adapter.ProductMasterAdapter
+import com.indev.claraa.adapter.SolutionAdapter
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.ProductMasterModel
 import com.indev.claraa.entities.ProductPacketModel
@@ -52,7 +53,7 @@ class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
     }
 
     init{
-         product_id=ProductMasterAdapter.productId.toInt()
+        product_id=ProductMasterAdapter.productId.toInt()
 
         CoroutineScope(Dispatchers.IO).launch {
             productMasterArrayList= ProductRepository.getProductData(context,product_id.toInt()) as ArrayList<ProductMasterModel>

@@ -68,6 +68,13 @@ class LoginRepository {
                             "","","",""
                         )
                         dataBase?.userDao()?.insertUserData(user_profile)
+                        val add_address = AddressDetailsModel(
+                            0,"",0, userProfileArray[i].shop_name,userProfileArray[i].owner_name,userProfileArray[i].mobile_number,
+                            userProfileArray[i].address, userProfileArray[i].state_id,
+                            userProfileArray[i].district_id,userProfileArray[i].pinCode,"",
+                            "","",userProfileArray[i].register_date,""
+                        )
+                        dataBase?.userDao()?.insertAddressData(add_address)
                     }
                     result?.body()!!.status
                 } else {
@@ -89,7 +96,7 @@ class LoginRepository {
             var token = "Bearer " + prefHelper.getString(Constant.PREF_TOKEN)
 
             try {
-                dataBase?.userDao()?.deleteAllAdress()
+          //      dataBase?.userDao()?.deleteAllAdress()
 
                 var result = apiInterface?.addressDownloadAPI(user_id, token!!)
                 return (if (result?.body()?.status == 1) {
