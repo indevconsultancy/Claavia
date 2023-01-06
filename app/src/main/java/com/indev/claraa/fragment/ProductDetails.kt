@@ -2,7 +2,6 @@ package com.indev.claraa.fragment
 
 import android.os.Bundle
 import android.util.Log
-import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +17,7 @@ import com.aemerse.slider.ImageCarousel
 import com.aemerse.slider.model.CarouselItem
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
-import com.indev.claraa.adapter.CartAdapter
+import com.indev.claraa.adapter.CartItemAdapter
 import com.indev.claraa.adapter.PowerRangeAdapter
 import com.indev.claraa.adapter.ProductMasterAdapter
 import com.indev.claraa.databinding.FragmentProductDetailsBinding
@@ -37,7 +36,7 @@ class ProductDetails : Fragment(), ClickLinstener {
 
     private lateinit var binding: FragmentProductDetailsBinding
     private lateinit var productDetailViewModel: ProductDetailViewModel
-    private lateinit var cartAdapter: CartAdapter
+    private lateinit var cartItemAdapter: CartItemAdapter
     private lateinit var powerRangeAdapter: PowerRangeAdapter
     private lateinit var cartModelList: ArrayList<CartModel>
     lateinit var productMasterArrayList: ArrayList<ProductMasterModel>
@@ -76,11 +75,11 @@ class ProductDetails : Fragment(), ClickLinstener {
 
 
         productDetailViewModel = ProductDetailViewModel(requireActivity())
-        cartAdapter = CartAdapter(requireActivity(), ArrayList<CartModel>(), this)
+        cartItemAdapter = CartItemAdapter(requireActivity(), ArrayList<CartModel>(), this)
         recycleViewList()
 
         productDetailViewModel.getCartList(requireActivity())?.observe(requireActivity(), Observer {
-            cartAdapter.setData(it as ArrayList<CartModel>)
+            cartItemAdapter.setData(it as ArrayList<CartModel>)
             cartModelList = it
         })
 
@@ -194,7 +193,7 @@ class ProductDetails : Fragment(), ClickLinstener {
         binding.recyclerViewCart.apply {
             setHasFixedSize(true)
             binding.recyclerViewCart.layoutManager = LinearLayoutManager(context)
-            adapter= cartAdapter
+            adapter= cartItemAdapter
         }
     }
 

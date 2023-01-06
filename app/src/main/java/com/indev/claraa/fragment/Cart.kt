@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -12,7 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
-import com.indev.claraa.adapter.CartAdapter
+import com.indev.claraa.adapter.CartHeaderAdapter
+import com.indev.claraa.adapter.CartItemAdapter
 import com.indev.claraa.databinding.FragmentCartBinding
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.viewmodel.*
@@ -21,7 +21,7 @@ import com.indev.claraa.viewmodel.*
 class Cart : Fragment(), ClickLinstener {
     lateinit var binding: FragmentCartBinding
     private lateinit var cartViewModel: CartViewModel
-    private lateinit var cartAdapter: CartAdapter
+    private lateinit var cartHeaderAdapter: CartHeaderAdapter
     private lateinit var cartModelList: ArrayList<CartModel>
 
     override fun onCreateView(
@@ -43,11 +43,11 @@ class Cart : Fragment(), ClickLinstener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         cartViewModel = CartViewModel(requireContext())
-        cartAdapter = CartAdapter( requireContext(),ArrayList<CartModel>(), this)
+        cartHeaderAdapter = CartHeaderAdapter( requireContext(),ArrayList<CartModel>(), this)
         recycleViewList()
 
         cartViewModel.getCartList(requireContext())?.observe(viewLifecycleOwner, Observer {
-            cartAdapter.setData(it as ArrayList<CartModel>)
+            cartHeaderAdapter.setData(it as ArrayList<CartModel>)
             cartModelList = it
             if(cartModelList.size> 0) {
                 binding.llEmpty.visibility = View.GONE
@@ -63,7 +63,6 @@ class Cart : Fragment(), ClickLinstener {
         }
 
         binding.toolbar.toolbarTitle.text = "Cart"
-
     }
 
     override fun updateTextInteger(amount: Int) {
@@ -80,7 +79,7 @@ class Cart : Fragment(), ClickLinstener {
         binding.rvOrder.apply {
             setHasFixedSize(true)
             binding.rvOrder.layoutManager = LinearLayoutManager(context)
-            adapter= cartAdapter
+            adapter= cartHeaderAdapter
         }
     }
 

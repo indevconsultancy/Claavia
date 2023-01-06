@@ -9,50 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
         android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3">
-
-            <ImageView
-                android:id="@+id/imageProduct"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_weight="0"
-                android:src="@drawable/product_one" />
-
-            <TextView
-                android:id="@+id/tvProductName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1.5"
-                android:gravity="center"
-                android:maxLines="2"
-                android:fontFamily="@font/aleo_regular"
-                android:text="Claraa Fresh Flo"
-                android:textColor="@color/primary_color"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-
-            <TextView
-                android:id="@+id/tvPackSize"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1.5"
-                android:gravity="center"
-                android:text="Rs. 500"
-                android:fontFamily="@font/aleo_regular"
-                android:textColor="@color/black"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

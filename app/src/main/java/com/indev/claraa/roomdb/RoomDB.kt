@@ -7,6 +7,8 @@ import androidx.room.RoomDatabase
 import com.indev.claraa.dao.ClaraaDao
 import com.indev.claraa.entities.*
 
+const val TYPE_ITEM =1
+const val TYPE_HEADER= 0
 
 @Database(entities = [UserRegistrationModel::class,
                         CartModel::class,

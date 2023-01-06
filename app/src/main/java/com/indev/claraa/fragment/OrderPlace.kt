@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
-import com.indev.claraa.adapter.CartAdapter
+import com.indev.claraa.adapter.CartItemAdapter
 import com.indev.claraa.databinding.FragmentOrderPlaceBinding
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.viewmodel.*
@@ -20,7 +20,7 @@ import com.indev.claraa.viewmodel.*
 class OrderPlace : Fragment(), ClickLinstener{
     private lateinit var binding: FragmentOrderPlaceBinding
     private lateinit var orderPlaceViewModel: OrderPlaceViewModel
-    private lateinit var cartAdapter: CartAdapter
+    private lateinit var cartItemAdapter: CartItemAdapter
     private lateinit var cartModelList: ArrayList<CartModel>
 
 
@@ -42,11 +42,11 @@ class OrderPlace : Fragment(), ClickLinstener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         orderPlaceViewModel= OrderPlaceViewModel(requireContext())
-        cartAdapter = CartAdapter( requireContext(),ArrayList<CartModel>(), this)
+        cartItemAdapter = CartItemAdapter( requireContext(),ArrayList<CartModel>(), this)
         recycleViewList()
 
         orderPlaceViewModel.getCartList(requireContext())?.observe(viewLifecycleOwner, Observer {
-            cartAdapter.setData(it as ArrayList<CartModel>)
+            cartItemAdapter.setData(it as ArrayList<CartModel>)
             cartModelList = it
         })
 
@@ -72,7 +72,7 @@ class OrderPlace : Fragment(), ClickLinstener{
         binding.rvOrder.apply {
             setHasFixedSize(true)
             binding.rvOrder.layoutManager = LinearLayoutManager(context)
-            adapter= cartAdapter
+            adapter= cartItemAdapter
         }
     }
 

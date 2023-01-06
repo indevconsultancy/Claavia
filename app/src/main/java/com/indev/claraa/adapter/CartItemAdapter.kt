@@ -24,7 +24,7 @@ import com.indev.claraa.restApi.ClientApi
 import kotlinx.coroutines.*
 
 
-class CartAdapter(val context: Context, var cartModelList: List<CartModel>, private val listener: ClickLinstener) : RecyclerView.Adapter<CartAdapter.MyViewholder>(){
+class CartItemAdapter(val context: Context, var cartModelList: List<CartModel>, private val listener: ClickLinstener) : RecyclerView.Adapter<CartItemAdapter.MyViewholder>(){
 
     lateinit var prefHelper: PrefHelper
     var count =0
@@ -32,6 +32,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
     var check_cart_list = false
     var isTextChanged= false
     var packs_size= ArrayList<ProductPacketModel>()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewholder {
         val itemView =
@@ -45,16 +46,15 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
         GlobalScope.launch {
             packs_size = ProductRepository.getPacksSize(currentItem.packet_id, context) as ArrayList<ProductPacketModel>
             if(currentItem.product_name.contains("Solution-") == true) {
-                holder.tvPackSize.setText("(" + packs_size.get(0).packet_size+")")
+//                holder.tvPackSize.setText("(" + packs_size.get(0).packet_size+")")
                 holder.tvRange.text = currentItem.power_range
                 holder.tvRange.visibility = View.GONE
             }else{
                 holder.tvRange.text = currentItem.power_range
                 holder.tvRange.visibility = View.VISIBLE
-                holder.tvPackSize.setText("(" + packs_size.get(0).packet_size+")")
+//                holder.tvPackSize.setText("(" + packs_size.get(0).packet_size+")")
             }
         }
-        holder.tvProductName.text = currentItem.product_name
         count= currentItem.quantity.toInt()
         totalProduct = count
         prefHelper= PrefHelper(context)
@@ -124,8 +124,6 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
                 holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_delete_outline_24));
             }
         }*/
-        Glide.with(context).load(ClientApi.BASE_IMAGE_URL +currentItem.product_img1).into(holder.imageProduct)
-
 
       holder.btnDelete.setOnClickListener{
             deletePopupShow(currentItem.id)
@@ -247,13 +245,10 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
 
    inner class MyViewholder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvRange: TextView = itemView!!.findViewById(R.id.tvRange)
-        val tvPackSize: TextView = itemView!!.findViewById(R.id.tvPackSize)
         val tvCount: TextView = itemView!!.findViewById(R.id.tvCount)
         val tvPrice: TextView = itemView!!.findViewById(R.id.tvPrice)
         val tvQuantity: TextView = itemView!!.findViewById(R.id.tvQuantity)
-        val tvProductName: TextView = itemView!!.findViewById(R.id.tvProductName)
         val deleteButton: ImageView = itemView!!.findViewById(R.id.deleteButton)
-        val imageProduct: ImageView = itemView!!.findViewById(R.id.imageProduct)
         val btnDelete: ImageView = itemView!!.findViewById(R.id.btnDelete)
         val addButton: ImageView = itemView!!.findViewById(R.id.addButton)
         val llButton: LinearLayout = itemView!!.findViewById(R.id.llButton)
@@ -271,5 +266,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
         var totalAmount = 0
         var totalProduct = 0
     }
+
+
 }
 
