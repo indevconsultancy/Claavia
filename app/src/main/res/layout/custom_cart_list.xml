@@ -33,21 +33,12 @@
                 android:layout_weight="1.5"
                 android:gravity="center"
                 android:maxLines="2"
+                android:fontFamily="@font/aleo_regular"
                 android:text="Claraa Fresh Flo"
                 android:textColor="@color/primary_color"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvQuantity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="5"
-                android:textColor="@color/black"
-                android:textSize="13dp"
-                android:visibility="gone"
-                android:layout_gravity="center_vertical"
-                />
 
             <TextView
                 android:id="@+id/tvPackSize"
@@ -57,6 +48,7 @@
                 android:layout_weight="1.5"
                 android:gravity="center"
                 android:text="Rs. 500"
+                android:fontFamily="@font/aleo_regular"
                 android:textColor="@color/black"
                 android:textSize="18dp"
                 android:textStyle="bold" />
@@ -84,22 +76,35 @@
                     android:padding="5dp"
                     android:layout_gravity="center"
                     android:text="+0.25"
+                    android:fontFamily="@font/aleo_regular"
                     android:textColor="@color/black"
-                    android:textSize="18dp" />
+                    android:textSize="15dp" />
 
                 <EditText
                     android:id="@+id/etQuantity"
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="30dp"
                     android:layout_weight="0.5"
-                    android:background="@drawable/custom_design_edittext"
-                    android:fontFamily="@font/aleo_regular"
-                    android:hint="Enter Qty."
+                    android:background="@drawable/register_border"
+                    android:hint="Qty."
                     android:inputType="number"
+                    android:fontFamily="@font/aleo_regular"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="@={productDetailVM.etQuantity}"
                     android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/tvQuantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:fontFamily="@font/aleo_regular"
+                    android:visibility="gone"
+                    android:layout_gravity="center_vertical"
+                    />
 
                 <TextView
                     android:id="@+id/totalAmount"
@@ -109,9 +114,10 @@
                     android:gravity="center"
                     android:padding="5dp"
                     android:text="Rs. 500"
+                    android:fontFamily="@font/aleo_regular"
                     android:layout_gravity="center"
                     android:textColor="@color/black"
-                    android:textSize="18dp" />
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/tvPrice"
@@ -121,9 +127,10 @@
                     android:gravity="center"
                     android:padding="5dp"
                     android:text="Rs. 500"
+                    android:fontFamily="@font/aleo_regular"
                     android:layout_gravity="center"
                     android:textColor="@color/black"
-                    android:textSize="18dp" />
+                    android:textSize="15dp" />
 
             </LinearLayout>
 
@@ -165,7 +172,7 @@
                 <ImageView
                     android:id="@+id/btnUpdate"
                     android:layout_width="30dp"
-                    android:layout_height="35dp"
+                    android:layout_height="30dp"
                     android:layout_weight="1.5"
                     android:gravity="center"
                     android:padding="5dp"
@@ -176,7 +183,7 @@
                 <TextView
                     android:id="@+id/tvCount"
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -195,7 +202,7 @@
                 <ImageView
                     android:id="@+id/btnDelete"
                     android:layout_width="30dp"
-                    android:layout_height="35dp"
+                    android:layout_height="30dp"
                     android:layout_weight="1.8"
                     android:padding="5dp"
                     android:gravity="center"

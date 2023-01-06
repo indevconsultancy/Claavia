@@ -31,14 +31,15 @@ lateinit var prefHelper: PrefHelper
     }
 
     fun btnPlace(){
+        showDialog()
         context.startActivity(Intent(context, PaymentGateway::class.java))
     }
 
     private fun showDialog() {
         SweetAlertDialog(context)
-            .setTitleText("Transaction Complete")
-            .setContentText("")
-            .setConfirmText("Ok")
+            .setTitleText("Make Payment")
+            .setContentText("Credit")
+            .setConfirmText("UPI")
             .setConfirmClickListener {sdialog ->
 //                replaceFregment(Home())
                 sdialog.dismiss()

@@ -62,10 +62,12 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
 
         if(check_cart_list == true){
             holder.llButton.visibility =View.GONE
+            holder.etQuantity.visibility =View.GONE
             holder.tvQuantity.visibility= View.VISIBLE
         }else{
             holder.llButton.visibility =View.VISIBLE
             holder.tvQuantity.visibility= View.GONE
+            holder.etQuantity.visibility= View.VISIBLE
         }
         holder.tvQuantity.text = "Quantity: " + currentItem.quantity
 

@@ -1,81 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_margin="@dimen/_5sdp"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:orientation="horizontal"
-        android:background="#F0F7F7"
-        android:backgroundTint="#F0F7F7"
-        android:padding="5dp"
-        android:weightSum="2">
-
-        <ImageView
-            android:id="@+id/imageProduct"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/product_image" />
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <ImageView
+                android:id="@+id/imageProduct"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="0"
+                android:src="@drawable/product_one" />
 
             <TextView
                 android:id="@+id/tvProductName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Claraa Fresh Flo"
-                android:layout_gravity="center_vertical"
-                android:textColor="@color/bs_blue"
+                android:layout_gravity="center"
+                android:layout_weight="1.5"
+                android:gravity="center"
                 android:maxLines="2"
-                android:textSize="16dp"
-                android:textStyle="bold"/>
+                android:text="Claraa Fresh Flo"
+                android:textColor="@color/primary_color"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvPower"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Power: -0.50"
-                android:textColor="@color/black"
-                android:textSize="13dp"
-                android:layout_gravity="center_vertical" />
 
             <TextView
                 android:id="@+id/tvPackSize"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Packs SIze: 3 Lenses"
+                android:layout_gravity="center"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:text="Rs. 500"
                 android:textColor="@color/black"
-                android:textSize="13dp"
-                android:layout_gravity="center_vertical"
-                />
-            <TextView
-                android:id="@+id/tvQuantity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Quantity: 50"
-                android:textColor="@color/black"
-                android:textSize="13dp"
-                android:layout_gravity="center_vertical" />
-
-            <TextView
-                android:id="@+id/tvTotalAmount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total Amount: 300"
-                android:textColor="@color/black"
-                android:textSize="13dp"
-                android:layout_gravity="center_vertical"
-                />
+                android:textSize="18dp"
+                android:textStyle="bold" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvPower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:layout_gravity="center"
+                    android:text="+0.25"
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/tvQuantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:visibility="gone"
+                    android:layout_gravity="center_vertical"
+                    />
+
+<!--                <EditText-->
+<!--                    android:id="@+id/etQuantity"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="35dp"-->
+<!--                    android:layout_weight="0.5"-->
+<!--                    android:background="@drawable/custom_design_edittext"-->
+<!--                    android:fontFamily="@font/aleo_regular"-->
+<!--                    android:hint="Enter Qty."-->
+<!--                    android:inputType="number"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="@={productDetailVM.etQuantity}"-->
+<!--                    android:textSize="15dp" />-->
+
+                <TextView
+                    android:id="@+id/tvTotalAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="Rs. 500"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/tvPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="Rs. 500"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.6"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/deleteButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:padding="@dimen/_3sdp"
+                    android:background="@color/main_orange_color"
+                    android:src="@drawable/ic_baseline_delete_outline_24"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteX="204dp"
+                    tools:layout_editor_absoluteY="679dp" />
+
+
+                <ImageView
+                    android:id="@+id/addButton"
+                    android:padding="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@color/main_orange_color"
+                    android:src="@drawable/ic_baseline_add_24"
+                    tools:ignore="MissingConstraints"
+                    android:visibility="gone"/>
+
+
+                <ImageView
+                    android:id="@+id/btnUpdate"
+                    android:layout_width="30dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/edit"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/tvCount"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="1"
+                    android:background="@color/white"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toStartOf="@+id/imageButton"
+                    app:layout_constraintStart_toEndOf="@+id/imageButton2"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteY="696dp" />
+
+
+
+                <ImageView
+                    android:id="@+id/btnDelete"
+                    android:layout_width="30dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1.8"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:src="@drawable/delete"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
+
 
 </LinearLayout>

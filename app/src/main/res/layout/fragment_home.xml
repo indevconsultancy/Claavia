@@ -124,10 +124,21 @@
                         app:sliderScrollTimeInSec="1" />
                 </androidx.cardview.widget.CardView>
 
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/_90sdp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:orientation="vertical">
 
@@ -145,7 +156,7 @@
                             android:layout_height="@dimen/_25sdp"
                             android:layout_gravity="center"
                             android:layout_weight="1"
-                            android:background="@drawable/btn_color_change"
+                            android:background="@drawable/selected_btn"
                             android:enabled="true"
                             android:gravity="center"
                             android:padding="5dp"
@@ -186,15 +197,7 @@
                             android:textSize="13dp" />
                     </LinearLayout>
                 </LinearLayout>
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="@dimen/_50sdp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/_15sdp"
-                        android:orientation="vertical">
+
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rvProductType"
@@ -213,7 +216,7 @@
                                 android:id="@+id/btnSolution"
                                 android:layout_width="120dp"
                                 android:layout_height="@dimen/_25sdp"
-                                android:background="@drawable/btn_color_change"
+                                android:background="@drawable/selected_btn"
                                 android:textColor="@color/white"
                                 android:textAllCaps="false"
                                 android:padding="5dp"

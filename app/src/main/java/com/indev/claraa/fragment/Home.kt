@@ -80,13 +80,13 @@ class Home : Fragment(), ClickLinstener {
 
         }
 
-//        binding.btnSolution.setOnClickListener {
-//            getProductRecycleViewList(4)
-//            binding.btnDaily.setBackgroundResource(R.drawable.btn_color_change)
-//            binding.btnMonthly.setBackgroundResource(R.drawable.btn_color_change)
-//            binding.btnWeekly.setBackgroundResource(R.drawable.btn_color_change)
-//            binding.btnSolution.setBackgroundResource(R.drawable.selected_btn)
-//        }
+        binding.btnSolution.setOnClickListener {
+            getProductRecycleViewList(4)
+            binding.btnDaily.setBackgroundResource(R.drawable.btn_color_change)
+            binding.btnMonthly.setBackgroundResource(R.drawable.btn_color_change)
+            binding.btnWeekly.setBackgroundResource(R.drawable.btn_color_change)
+            binding.btnSolution.setBackgroundResource(R.drawable.selected_btn)
+        }
 
         val carousel: ImageCarousel = binding.carousel
         binding.toolbar.menuClick.setOnClickListener {
