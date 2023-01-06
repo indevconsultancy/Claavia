@@ -35,7 +35,7 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewholder {
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.custom_cart, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.custom_cart_list, parent, false)
         return MyViewholder(itemView)
     }
 
@@ -45,13 +45,13 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
         GlobalScope.launch {
             packs_size = ProductRepository.getPacksSize(currentItem.packet_id, context) as ArrayList<ProductPacketModel>
             if(currentItem.product_name.contains("Solution-") == true) {
-                holder.tvPackSize.setText("Weight: " + packs_size.get(0).packet_size)
-                holder.tvRange.text ="Power: " + currentItem.power_range
+                holder.tvPackSize.setText("(" + packs_size.get(0).packet_size+")")
+                holder.tvRange.text = currentItem.power_range
                 holder.tvRange.visibility = View.GONE
             }else{
-                holder.tvRange.text ="Power: " + currentItem.power_range
+                holder.tvRange.text = currentItem.power_range
                 holder.tvRange.visibility = View.VISIBLE
-                holder.tvPackSize.setText("Packs size: " + packs_size.get(0).packet_size)
+                holder.tvPackSize.setText("(" + packs_size.get(0).packet_size+")")
             }
         }
         holder.tvProductName.text = currentItem.product_name
@@ -252,11 +252,11 @@ class CartAdapter(val context: Context, var cartModelList: List<CartModel>, priv
         val tvProductName: TextView = itemView!!.findViewById(R.id.tvProductName)
         val deleteButton: ImageView = itemView!!.findViewById(R.id.deleteButton)
         val imageProduct: ImageView = itemView!!.findViewById(R.id.imageProduct)
-        val btnDelete: Button = itemView!!.findViewById(R.id.btnDelete)
+        val btnDelete: ImageView = itemView!!.findViewById(R.id.btnDelete)
         val addButton: ImageView = itemView!!.findViewById(R.id.addButton)
         val llButton: LinearLayout = itemView!!.findViewById(R.id.llButton)
         val etQuantity: EditText = itemView!!.findViewById(R.id.etQuantity)
-        val btnUpdate: Button = itemView!!.findViewById(R.id.btnUpdate)
+        val btnUpdate: ImageView = itemView!!.findViewById(R.id.btnUpdate)
 
         init {
             itemView.setOnClickListener {

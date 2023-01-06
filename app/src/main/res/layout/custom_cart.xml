@@ -64,15 +64,16 @@
 
 
                             <TextView
-                                    android:id="@+id/tvPrice"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="500"
-                                    android:textColor="@color/black"
-                                    android:textSize="15dp"
-                                    android:layout_gravity="center_vertical"
-                                    android:textStyle="bold" />
+                                android:id="@+id/tvPrice"
+                                android:layout_marginTop="5dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="500"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:layout_gravity="center_vertical"
+                                android:textStyle="bold" />
+
                             <TextView
                                 android:id="@+id/tvRange"
                                 android:layout_width="wrap_content"
@@ -89,8 +90,8 @@
                                 android:text="Size: -0.5"
                                 android:textColor="@color/black"
                                 android:textSize="13dp"
-                                android:layout_gravity="center_vertical"
-                                />
+                                android:layout_gravity="center_vertical"/>
+
                             <TextView
                                 android:id="@+id/tvQuantity"
                                 android:layout_width="wrap_content"
