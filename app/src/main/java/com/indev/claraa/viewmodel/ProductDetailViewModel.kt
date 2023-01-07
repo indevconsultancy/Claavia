@@ -53,7 +53,8 @@ class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
     }
 
     init{
-        product_id=ProductMasterAdapter.productId.toInt()
+        prefHelper= PrefHelper(context)
+        product_id= prefHelper.getString(Constant.PREF_PRODUCT_ID)!!.toInt()
 
         CoroutineScope(Dispatchers.IO).launch {
             productMasterArrayList= ProductRepository.getProductData(context,product_id.toInt()) as ArrayList<ProductMasterModel>

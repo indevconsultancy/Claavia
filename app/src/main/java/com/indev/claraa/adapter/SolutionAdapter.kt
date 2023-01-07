@@ -36,9 +36,9 @@ class SolutionAdapter(private val context: Context, var productMasterModelArrayL
         Glide.with(context).load(ClientApi.BASE_IMAGE_URL +currentItem.product_img1).into(holder.imageProduct)
         holder.cardView.setOnClickListener{
             replaceFregment(ProductDetails())
-            productId= currentItem.product_id
             packet_id= currentItem.packet_id
             prefHelper.put(Constant.PREF_PRODUCT_NAME, currentItem.product_name)
+            prefHelper.put(Constant.PREF_PRODUCT_ID, currentItem.product_id)
         }
 
     }
@@ -72,7 +72,6 @@ class SolutionAdapter(private val context: Context, var productMasterModelArrayL
     }
 
     companion object{
-        var productId= "0.90"
         var packet_id= "1"
     }
 
