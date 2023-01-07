@@ -36,18 +36,18 @@ class OrderHistoryAdapter(private val context: Context, var orderDetailsArrayLis
                holder.tvProductName.text = product_name
                if(range.equals("0")){
                    holder.tvPower.visibility= View.GONE
-                   holder.tvPackSize.text = "Weight: " + packSize
+                   holder.tvPackSize.text = packSize
                }else{
-                   holder.tvPackSize.text = "Packs Size: " + packSize
+                   holder.tvPackSize.text = packSize
                    holder.tvPower.visibility= View.VISIBLE
-                   holder.tvPower.text = "Power: " + range
+                   holder.tvPower.text = range
                }
 
                Glide.with(context).load(ClientApi.BASE_IMAGE_URL + image).into(holder.imageProduct)
            }
     }
 
-        holder.tvTotalAmount.text ="Total Amount: " + currentItem.amount.toString()
+        holder.tvTotalAmount.text = currentItem.amount.toString()
         holder.tvQuantity.text ="Quantity: " + currentItem.quantity.toString()
     }
 

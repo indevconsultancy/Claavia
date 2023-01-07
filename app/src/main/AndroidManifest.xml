@@ -22,6 +22,7 @@
         tools:replace="android:allowBackup">
         <activity
             android:name=".ui.PaymentGateway"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -40,6 +41,7 @@
             android:name="com.razorpay.CheckoutActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/CheckoutTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,6 +53,7 @@
         </activity>
         <activity
             android:name=".ui.OTPScreen"
+            android:screenOrientation="portrait"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
@@ -58,6 +61,7 @@
         </activity>
         <activity
             android:name=".ui.MobileNumber"
+            android:screenOrientation="portrait"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
@@ -65,6 +69,7 @@
         </activity>
         <activity
             android:name=".ui.IntroScreen"
+            android:screenOrientation="portrait"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
@@ -72,13 +77,15 @@
         </activity>
         <activity
             android:name=".ui.AnonmyosActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="" />
+                android:value=""/>
         </activity>
         <activity
             android:name=".ui.EmailVarification"
+            android:screenOrientation="portrait"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
@@ -88,6 +95,7 @@
             android:name=".ui.HomeScreen"
             android:alwaysRetainTaskState="true"
             android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
@@ -95,6 +103,7 @@
         </activity>
         <activity
             android:name=".ui.UserRegistration"
+            android:screenOrientation="portrait"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
@@ -102,6 +111,7 @@
         </activity>
         <activity
             android:name=".ui.LoginScreen"
+            android:screenOrientation="portrait"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
@@ -109,6 +119,7 @@
         </activity>
         <activity
             android:name=".ui.SplashScreen"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
