@@ -1,16 +1,11 @@
 package com.indev.claraa.ui
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import cn.pedant.SweetAlert.SweetAlertDialog
 import com.indev.claraa.R
 import com.indev.claraa.databinding.ActivityPaymentGatewayBinding
-import com.indev.claraa.helper.Constant
-import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.viewmodel.PaymentGateWayeViewModel
 import com.indev.claraa.viewmodel.PaymentGatewayFactory
 import com.razorpay.PaymentResultListener
