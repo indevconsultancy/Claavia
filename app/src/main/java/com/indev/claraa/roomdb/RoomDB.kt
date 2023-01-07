@@ -18,7 +18,7 @@ const val TYPE_HEADER= 0
                         ProductMasterModel::class,
                         ProductTypeModel::class,
                         ProductPacketModel::class,
-                        OrderMasterModel::class,
+                        OrderMasterModel::class,SliderModel::class,
                         OrderDetailsModel::class], version = 2)
 
 abstract class RoomDB: RoomDatabase() {

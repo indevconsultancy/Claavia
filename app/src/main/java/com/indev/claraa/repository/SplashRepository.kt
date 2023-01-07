@@ -77,6 +77,13 @@ class SplashRepository{
                                     singleData["active"].toString())
                                 val produc_id=  dataBase?.userDao()?.insertProductMasterData(product_master)
                                 Log.e("TAG", "downloadProductMasterData: " +produc_id)
+                            }else if(masterData.table_name == "slider") {
+                                val sliderModel = SliderModel(
+                                    singleData["id"].toString(),
+                                    singleData["image_url"].toString(),
+                                    singleData["status"].toString())
+                                val id=  dataBase?.userDao()?.insertSliderData(sliderModel)
+                                Log.e("TAG", "downloadSliderMasterData: " +id)
                             }
                         }
 
@@ -93,6 +100,7 @@ class SplashRepository{
             dataBase?.userDao()?.deleteAllProductPackets()
             dataBase?.userDao()?.deleteAllProductMaster()
             dataBase?.userDao()?.deleteAllProductType()
+            dataBase?.userDao()?.deleteAllSlider()
         }
     }
 }

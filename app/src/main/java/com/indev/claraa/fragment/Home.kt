@@ -21,6 +21,7 @@ import com.indev.claraa.adapter.ProductMasterAdapter
 import com.indev.claraa.adapter.SolutionAdapter
 import com.indev.claraa.databinding.FragmentHomeBinding
 import com.indev.claraa.entities.ProductMasterModel
+import com.indev.claraa.entities.SliderModel
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.ui.LoginScreen
@@ -34,6 +35,7 @@ class Home : Fragment(), ClickLinstener {
     private lateinit var homeScreenViewModel: HomeScreenViewModel
     private lateinit var productMasterAdapter: ProductMasterAdapter
     private lateinit var solutionAdapter: SolutionAdapter
+    private lateinit var sliderArrayList: ArrayList<SliderModel>
     var productMasterModelArrayList: ArrayList<ProductMasterModel> = ArrayList()
     lateinit var prefHelper: PrefHelper
     override fun onCreateView(

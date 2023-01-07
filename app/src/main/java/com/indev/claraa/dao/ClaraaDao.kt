@@ -65,6 +65,9 @@ interface ClaraaDao {
     @Query("SELECT * FROM address ORDER BY local_id ASC")
     fun getAddressData() : LiveData<List<AddressDetailsModel>>
 
+    @Query("SELECT * FROM slider")
+    fun getSliderData() : LiveData<List<SliderModel>>
+
 
    @Query("SELECT * FROM address where local_id= :id")
     fun getAddressDatabyLocalID(id : Int) : LiveData<AddressDetailsModel>
@@ -126,8 +129,15 @@ interface ClaraaDao {
     @Insert
     suspend fun insertProductTypeData(productTypeModel: ProductTypeModel): Long
 
+    @NotNull
+    @Insert
+    suspend fun insertSliderData(sliderModel: SliderModel): Long
+
     @Query("DELETE FROM product_type")
     fun deleteAllProductType()
+
+    @Query("DELETE FROM slider")
+    fun deleteAllSlider()
 
     @Query("DELETE FROM product_packet")
     fun deleteAllProductPackets()

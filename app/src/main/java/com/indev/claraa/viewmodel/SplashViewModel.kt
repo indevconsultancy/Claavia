@@ -13,7 +13,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class SplashViewModel (private val context: Context): ViewModel() {
-    val table = arrayOf("product_packet","product_master","product_type","state_master", "district_master")
+    val table = arrayOf("product_packet","product_master","product_type","state_master","slider","district_master")
     lateinit var productMasterModel: ProductMasterModel
     lateinit var prefHelper: PrefHelper
 
