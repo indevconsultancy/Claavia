@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
 import com.indev.claraa.adapter.CartHeaderAdapter
-import com.indev.claraa.adapter.CartItemAdapter
 import com.indev.claraa.databinding.FragmentCartBinding
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.viewmodel.*
@@ -43,7 +42,7 @@ class Cart : Fragment(), ClickLinstener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         cartViewModel = CartViewModel(requireContext())
-        cartHeaderAdapter = CartHeaderAdapter( requireContext(),ArrayList<CartModel>(), this)
+        cartHeaderAdapter = CartHeaderAdapter(requireContext(),ArrayList<CartModel>(), this)
         recycleViewList()
 
         cartViewModel.getCartList(requireContext())?.observe(viewLifecycleOwner, Observer {

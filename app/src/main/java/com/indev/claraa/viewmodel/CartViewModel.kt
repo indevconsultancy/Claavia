@@ -15,7 +15,6 @@ class CartViewModel (val context: Context): ViewModel() {
     fun getCartList(context: Context): LiveData<List<CartModel>>? {
         return ProductRepository.getCartList(context)
     }
-
     fun btnBuy(){
         replaceFregment(AddressList())
     }

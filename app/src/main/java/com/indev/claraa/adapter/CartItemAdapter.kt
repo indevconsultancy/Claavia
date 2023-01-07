@@ -42,19 +42,22 @@ class CartItemAdapter(val context: Context, var cartModelList: List<CartModel>, 
 
     @SuppressLint("SuspiciousIndentation")
     override fun onBindViewHolder(holder: MyViewholder, position: Int) {
+
         val currentItem = cartModelList[position]
-        GlobalScope.launch {
+        CoroutineScope(Dispatchers.IO).launch {
             packs_size = ProductRepository.getPacksSize(currentItem.packet_id, context) as ArrayList<ProductPacketModel>
-            if(currentItem.product_name.contains("Solution-") == true) {
-//                holder.tvPackSize.setText("(" + packs_size.get(0).packet_size+")")
-                holder.tvRange.text = currentItem.power_range
-                holder.tvRange.visibility = View.GONE
-            }else{
-                holder.tvRange.text = currentItem.power_range
-                holder.tvRange.visibility = View.VISIBLE
-//                holder.tvPackSize.setText("(" + packs_size.get(0).packet_size+")")
+
+            withContext(Dispatchers.Main) {
+                if (currentItem.product_name.contains("Solution-") == true) {
+                    holder.tvRange.text = currentItem.power_range
+                    holder.tvRange.visibility = View.INVISIBLE
+                } else {
+                    holder.tvRange.text = currentItem.power_range
+                    holder.tvRange.visibility = View.VISIBLE
+                }
             }
         }
+
         count= currentItem.quantity.toInt()
         totalProduct = count
         prefHelper= PrefHelper(context)
@@ -72,60 +75,7 @@ class CartItemAdapter(val context: Context, var cartModelList: List<CartModel>, 
         holder.tvQuantity.text = "Quantity: " + currentItem.quantity
 
         holder.etQuantity.setText(count.toString())
-
-       /*     holder.etQuantity.addTextChangedListener(object : TextWatcher {
-            override fun onTextChanged(
-                s: CharSequence, start: Int,
-                before: Int, count: Int
-            ) {
-                //setting data to array, when changed
-                // this is a semplified example in the actual app i save the text
-                // in  a .txt in the external storage
-
-                isTextChanged= true
-
-            }
-
-            override fun beforeTextChanged(
-                s: CharSequence, start: Int,
-                count: Int, after: Int
-            ) {
-            }
-
-            override fun afterTextChanged(s: Editable) {
-
-                if(isTextChanged){
-                    isTextChanged =false
-
-                    var qty= s.toString()
-                    totalPrice= currentItem.price.toInt() * qty.toInt()
-                    if(qty.toInt() > 1) {
-                        ProductRepository.updateCartProductQuantity(
-                            qty.toInt(),
-                            totalPrice,
-                            currentItem.local_id,
-                            context
-                        )
-
-
-                    }
-                }
-            }
-        })*/
-       /* holder.addButton.setOnClickListener {
-            count= currentItem.quantity.toInt()
-
-            if(count >0){
-                increamentCount()
-                totalPrice= count * currentItem.price.toInt()
-                ProductRepository.updateCartProductQuantity(count,totalPrice,currentItem.local_id,context)
-                holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_remove_24));
-            }else{
-                holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_delete_outline_24));
-            }
-        }*/
-
-      holder.btnDelete.setOnClickListener{
+        holder.btnDelete.setOnClickListener{
             deletePopupShow(currentItem.id)
             notifyDataSetChanged()
         }
@@ -153,28 +103,8 @@ class CartItemAdapter(val context: Context, var cartModelList: List<CartModel>, 
 
         }
 
-    /*  holder.deleteButton.setOnClickListener {
-            count= currentItem.quantity.toInt()
-
-            if(count > 1){
-                decreamentCount()
-                totalPrice= count * currentItem.price.toInt()
-                ProductRepository.updateCartProductQuantity(count,totalPrice,currentItem.local_id,context)
-                holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_remove_24));
-            }else{
-                deletePopupShow(currentItem.local_id)
-                holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_delete_outline_24));
-            }
-        }*/
-
-        /*if(count<=1){
-            holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_delete_outline_24));
-        }else{
-            holder.deleteButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_remove_24));
-        }*/
-//        holder.tvCount.setText("" + count)
-
-        holder.tvPrice.text = currentItem.currency +" "+ currentItem.amount.toString()
+        holder.tvPrice.text = currentItem.currency +" "+ currentItem.price.toString()
+        holder.tvtotalAmount.text = currentItem.currency +" "+ currentItem.amount.toString()
         totalAmount= grandTotal(cartModelList)
         listener.updateTextInteger(totalAmount)
     }
@@ -247,6 +177,7 @@ class CartItemAdapter(val context: Context, var cartModelList: List<CartModel>, 
         val tvRange: TextView = itemView!!.findViewById(R.id.tvRange)
         val tvCount: TextView = itemView!!.findViewById(R.id.tvCount)
         val tvPrice: TextView = itemView!!.findViewById(R.id.tvPrice)
+        val tvtotalAmount: TextView = itemView!!.findViewById(R.id.totalAmount)
         val tvQuantity: TextView = itemView!!.findViewById(R.id.tvQuantity)
         val deleteButton: ImageView = itemView!!.findViewById(R.id.deleteButton)
         val btnDelete: ImageView = itemView!!.findViewById(R.id.btnDelete)

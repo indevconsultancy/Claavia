@@ -29,7 +29,7 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/toolbar"
             android:layout_marginTop="1dp"
-            android:layout_marginBottom="@dimen/_50sdp"
+            android:layout_marginBottom="@dimen/_100sdp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -98,17 +98,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="70dp">
+
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_gravity="bottom"
-                android:gravity="center"
                 android:layout_marginHorizontal="@dimen/_10sdp"
+                android:onClick="@{() ->orderPlaceVM.btnPlace()}"
                 android:text="Make Payment"
                 android:textAllCaps="false"
-                android:onClick="@{() ->orderPlaceVM.btnPlace()}"
                 android:textColor="@color/white" />
         </RelativeLayout>
 

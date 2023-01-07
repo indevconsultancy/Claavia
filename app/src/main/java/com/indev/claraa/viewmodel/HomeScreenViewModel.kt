@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.indev.claraa.R
+import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.ProductMasterModel
+import com.indev.claraa.entities.SliderModel
 import com.indev.claraa.fragment.ProductDetails
 import com.indev.claraa.repository.HomeRepository
+import com.indev.claraa.repository.ProductRepository
 import com.indev.claraa.ui.HomeScreen
 
 class HomeScreenViewModel (val context: Context): ViewModel() {
@@ -15,6 +18,10 @@ class HomeScreenViewModel (val context: Context): ViewModel() {
 
     fun cvProduct(){
         replaceFregment(ProductDetails())
+    }
+
+    fun getSliderList(context: Context): LiveData<List<SliderModel>>? {
+        return HomeRepository.getSliderList(context)
     }
 
 

@@ -2,6 +2,7 @@ package com.indev.claraa.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -95,31 +96,23 @@ class Home : Fragment(), ClickLinstener {
             binding.myDrawerLayout.openDrawer(GravityCompat.START)
         }
 
+        homeScreenViewModel.getSliderList(requireContext())?.observe(requireActivity(), Observer {
+                sliderArrayList =(it as ArrayList<SliderModel>)
+            carousel.registerLifecycle(lifecycle)
+            val list = mutableListOf<CarouselItem>()
+            val headers = mutableMapOf<String, String>()
+            for (i in sliderArrayList){
+                list.add(
+                    CarouselItem(
+                        imageUrl = i.image_url,
+                        headers = headers
+                    )
+                )
+            }
+            headers["header_key"] = "header_value"
+            carousel.setData(list)
+            })
 
-        carousel.registerLifecycle(lifecycle)
-        val list = mutableListOf<CarouselItem>()
-        val headers = mutableMapOf<String, String>()
-        headers["header_key"] = "header_value"
-
-        list.add(
-            CarouselItem(
-                imageUrl = "https://claraa.indevconsultancy.in/api/product_image/claraa1.jpg",
-            )
-        )
-
-        list.add(
-            CarouselItem(
-                imageUrl = "https://claraa.indevconsultancy.in/api/product_image/claraa2.jpg"
-            )
-        )
-
-        list.add(
-            CarouselItem(
-                imageUrl = "https://claraa.indevconsultancy.in/api/product_image/claraa3.jpg",
-                headers = headers
-            )
-        )
-        carousel.setData(list)
 
         var view= binding.navigationMenu.getHeaderView(0)
         var tvTitle: TextView = view.findViewById(R.id.tvTitle)

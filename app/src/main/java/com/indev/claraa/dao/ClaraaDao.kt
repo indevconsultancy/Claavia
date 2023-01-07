@@ -24,7 +24,7 @@ interface ClaraaDao {
     @Insert
     suspend fun insertOrderDetails(orderDetailsModel: OrderDetailsModel): Long
 
-    @Query("SELECT * FROM cart where payment_status= :payment_status or payment_status= :payment_status1 ORDER BY local_id ASC")
+    @Query("SELECT * FROM cart where payment_status= :payment_status or payment_status= :payment_status1 group by product_id ORDER BY local_id ASC")
     fun getCartData(payment_status: String, payment_status1: String) : LiveData<List<CartModel>>
 
     @Query("SELECT * FROM cart where payment_status = :payment_status ORDER BY local_id ASC")

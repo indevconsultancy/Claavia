@@ -17,7 +17,6 @@ import com.aemerse.slider.ImageCarousel
 import com.aemerse.slider.model.CarouselItem
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
-import com.indev.claraa.adapter.CartItemAdapter
 import com.indev.claraa.adapter.PowerRangeAdapter
 import com.indev.claraa.adapter.ProductMasterAdapter
 import com.indev.claraa.databinding.FragmentProductDetailsBinding
@@ -36,7 +35,6 @@ class ProductDetails : Fragment(), ClickLinstener {
 
     private lateinit var binding: FragmentProductDetailsBinding
     private lateinit var productDetailViewModel: ProductDetailViewModel
-    private lateinit var cartItemAdapter: CartItemAdapter
     private lateinit var powerRangeAdapter: PowerRangeAdapter
     private lateinit var cartModelList: ArrayList<CartModel>
     lateinit var productMasterArrayList: ArrayList<ProductMasterModel>
@@ -75,13 +73,6 @@ class ProductDetails : Fragment(), ClickLinstener {
 
 
         productDetailViewModel = ProductDetailViewModel(requireActivity())
-        cartItemAdapter = CartItemAdapter(requireActivity(), ArrayList<CartModel>(), this)
-        recycleViewList()
-
-        productDetailViewModel.getCartList(requireActivity())?.observe(requireActivity(), Observer {
-            cartItemAdapter.setData(it as ArrayList<CartModel>)
-            cartModelList = it
-        })
 
         productDetailViewModel = ProductDetailViewModel(requireActivity())
         powerRangeAdapter = PowerRangeAdapter(requireActivity(), productMasterArrayList, this)
@@ -187,14 +178,6 @@ class ProductDetails : Fragment(), ClickLinstener {
         fragmentTransition?.replace(R.id.frame_layout, fragment)
         fragmentTransition?.addToBackStack(null)
         fragmentTransition?.commit()
-    }
-
-    private fun recycleViewList() {
-        binding.recyclerViewCart.apply {
-            setHasFixedSize(true)
-            binding.recyclerViewCart.layoutManager = LinearLayoutManager(context)
-            adapter= cartItemAdapter
-        }
     }
 
     override fun onClickListner(position: Int) {
