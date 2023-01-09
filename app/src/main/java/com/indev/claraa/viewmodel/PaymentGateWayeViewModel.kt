@@ -151,25 +151,43 @@ class PaymentGateWayeViewModel (val context: Context): ViewModel() {
                         }
                     }
                     prefHelper = PrefHelper(context)
+                    var checkSelectedPaymentMode = prefHelper.getString(Constant.PREF_PAYMENT_MODE)
                     var creditValue= prefHelper.getString(Constant.PREF_CREDIT)
-                    if(creditValue?.toDouble()!! >= totalAmount){
-                        creditValues= creditValue?.toDouble()!! - totalAmount
-                        prefHelper.put(Constant.PREF_CREDIT, creditValues.toString())
-                        if(creditValues>=0.0) {
-                            callOrderUpdateAPI("Success")
-                        }
-                    }else{
-                        updatedCredit= totalAmount - creditValue?.toDouble()!!
-                        prefHelper.put(Constant.PREF_CREDIT, "0")
-                        creditValues=0.0
-                        if(updatedCredit>=0) {
-                            payment(updatedCredit)
+                    if(checkSelectedPaymentMode == "Payment") {
+                        payment(totalAmount)
+                    }else if(checkSelectedPaymentMode == "Credit") {
+                        if (creditValue?.toDouble()!! >= totalAmount) {
+                            creditValues = creditValue?.toDouble()!! - totalAmount
+                            prefHelper.put(Constant.PREF_CREDIT, creditValues.toString())
+                            if (creditValues >= 0.0) {
+                                callOrderUpdateAPI("Success")
+                            }
                         }else{
-                            payment(totalAmount)
+                            Handler(Looper.getMainLooper()).post {
+                                showDialog(
+                                    "No Credit!",
+                                    "You have no credit limit. You can payment through online payment."
+                                )
+                            }
+                        }
+                    }else {
+                        if (creditValue?.toDouble()!! >= totalAmount) {
+                            creditValues = creditValue?.toDouble()!! - totalAmount
+                            prefHelper.put(Constant.PREF_CREDIT, creditValues.toString())
+                            if (creditValues >= 0.0) {
+                                callOrderUpdateAPI("Success")
+                            }
+                        } else {
+                            updatedCredit = totalAmount - creditValue?.toDouble()!!
+                            prefHelper.put(Constant.PREF_CREDIT, "0")
+                            creditValues = 0.0
+                            if (updatedCredit >= 0) {
+                                payment(updatedCredit)
+                            } else {
+                                payment(totalAmount)
+                            }
                         }
                     }
-
-
 
 //                    Handler(Looper.getMainLooper()).post {
 //                        Toast.makeText(context, "" +"S", Toast.LENGTH_LONG).show()

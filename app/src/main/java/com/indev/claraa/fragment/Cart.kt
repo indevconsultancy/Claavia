@@ -14,7 +14,11 @@ import com.indev.claraa.R
 import com.indev.claraa.adapter.CartHeaderAdapter
 import com.indev.claraa.databinding.FragmentCartBinding
 import com.indev.claraa.entities.CartModel
+import com.indev.claraa.repository.ProductRepository
 import com.indev.claraa.viewmodel.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class Cart : Fragment(), ClickLinstener {
@@ -62,10 +66,14 @@ class Cart : Fragment(), ClickLinstener {
         }
 
         binding.toolbar.toolbarTitle.text = "Cart"
+
+        CoroutineScope(Dispatchers.IO).launch {
+            var totalAmount=  ProductRepository.getTotalAmount(requireContext())
+            binding.totalAmount.text = "SubTotal ₹\u200E" + totalAmount
+        }
     }
 
     override fun updateTextInteger(amount: Int) {
-        binding.totalAmount.text = "SubTotal ₹\u200E" + amount
     }
 
     override fun updateTextString(power_range: String) {

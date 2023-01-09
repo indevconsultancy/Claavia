@@ -44,16 +44,18 @@ interface ClaraaDao {
     @Query("SELECT * FROM product_master where product_name = :selectedProduct")
     fun getProductPowerList(selectedProduct: String): LiveData<List<ProductMasterModel>>
 
-    @Query("SELECT * FROM order_details where payment_status= :payment_status and order_id=:order_id order by local_id ASC")
+    @Query("SELECT * FROM order_details where payment_status= :payment_status and order_id=:order_id group by product_id order by order_id ASC")
     fun getOrderDetailList(order_id: Int, payment_status: String): LiveData<List<OrderDetailsModel>>
 
-   @Query("SELECT * FROM order_master where payment_status= :payment_status order by local_id ASC")
-    fun getOrderList(payment_status: String): LiveData<List<OrderMasterModel>>
 
+    @Query("SELECT * FROM order_details where payment_status= :payment_status and product_id=:product_id order by local_id ASC")
+    fun getOrderDetailListbyID(product_id: String, payment_status: String): List<OrderDetailsModel>
+
+    @Query("SELECT * FROM order_master where payment_status= :payment_status order by local_id ASC")
+    fun getOrderList(payment_status: String): LiveData<List<OrderMasterModel>>
 
     @Query("SELECT * FROM product_master where product_id = :product_id")
     fun getProductData(product_id: Int): List<ProductMasterModel>
-
 
     @Query("SELECT product_id from product_master where power_range = :power_range")
     fun getproductID(power_range: String): Int
@@ -152,8 +154,8 @@ interface ClaraaDao {
     @Query("SELECT EXISTS(SELECT * from cart where product_id = :productId and power_range = :power_range and packets = :packets and payment_status = :payment_status)")
     fun isProductRowExist(productId: Int, power_range: String, packets: String, payment_status: String): Int
 
-    @Query("SELECT * from cart where product_id = :productId ORDER BY local_id ASC")
-    fun getCartDatabyProductId(productId: Int) : List<CartModel>
+    @Query("SELECT * from cart where  payment_status= :payment_status or payment_status= :payment_status1 and product_id = :product_id ORDER BY local_id ASC")
+    fun getCartDatabyProductId(product_id: Int,payment_status: String, payment_status1: String) : List<CartModel>
 
     @Query("SELECT * from product_packet where packet_id = :packet_id ")
     fun getPackSizebyID(packet_id: String) : List<ProductPacketModel>
@@ -161,13 +163,11 @@ interface ClaraaDao {
     @Query("SELECT * from address where id = :addressId")
     fun getAddress(addressId: String) : LiveData<AddressDetailsModel>
 
-
     @Query("DELETE FROM address WHERE id = :id")
     fun deleteAddress(id: String)
 
     @Update
     fun editAddress(addressDetailsModel: AddressDetailsModel)
-
 
     @Query("UPDATE address SET id = :last_id WHERE id = :id")
     fun updateAddressId(last_id: Int, id: String): Int
@@ -201,6 +201,9 @@ interface ClaraaDao {
 
   @RawQuery
     fun getName(query: SupportSQLiteQuery) : String
+
+    @RawQuery
+    fun getTotalAmount(query: SupportSQLiteQuery) : String
 
 
 }

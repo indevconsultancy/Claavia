@@ -40,7 +40,7 @@
                 android:weightSum="3">
 
                 <TextView
-                    android:id="@+id/btnMale"
+                    android:id="@+id/btnCredit"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_marginLeft="5dp"
@@ -50,12 +50,25 @@
                     android:enabled="true"
                     android:background="@drawable/btn_color_change"
                     android:gravity="center"
-                    android:text="Credit cart"
+                    android:text="Credit"
                     android:textAllCaps="false"
                     android:textColor="@color/white" />
 
                 <TextView
-                    android:id="@+id/btnFemale"
+                    android:id="@+id/btnPayment"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_color_change"
+                    android:gravity="center"
+                    android:enabled="true"
+                    android:text="Payment"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/btnBoth"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_marginRight="5dp"
@@ -67,20 +80,21 @@
                     android:textAllCaps="false"
                     android:textColor="@color/white" />
 
-                <TextView
-                    android:id="@+id/btnOther"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_color_change"
-                    android:gravity="center"
-                    android:enabled="true"
-                    android:text="UPI"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white" />
+
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvCreditLimit"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/aleo_regular"
+                android:text="Available Credit Limit"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
         </LinearLayout>
     </RelativeLayout>
 

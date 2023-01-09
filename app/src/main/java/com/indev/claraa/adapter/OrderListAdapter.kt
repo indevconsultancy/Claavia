@@ -47,11 +47,11 @@ class OrderListAdapter (private val context: Context, var orderListArrayList: Ar
         val tv_date: TextView = itemView!!.findViewById(R.id.tv_date)
         val tv_amount: TextView = itemView!!.findViewById(R.id.tv_amount)
         val btnView: Button = itemView!!.findViewById(R.id.btnView)
-        init {
-            itemView.setOnClickListener {
-                listener.onClickListner(adapterPosition)
-            }
-        }
+//        init {
+//            itemView.setOnClickListener {
+//                listener.onClickListner(adapterPosition)
+//            }
+//        }
     }
 
 }

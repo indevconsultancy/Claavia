@@ -51,9 +51,9 @@ class ProductRepository {
             return dataBase?.userDao()?.getProductData(product_id)
         }
 
-        fun getCartDatabyProductId(productId: Int,context: Context): List<CartModel>? {
+        fun getCartDatabyProductId(product_id: Int,context: Context): List<CartModel>? {
             dataBase = initializeDB(context)
-            return dataBase?.userDao()?.getCartDatabyProductId(productId)
+            return dataBase?.userDao()?.getCartDatabyProductId(product_id,"Failed", "Pending")
         }
 
         fun getPacksSize(packet_id: String,context: Context): List<ProductPacketModel>? {
@@ -68,9 +68,24 @@ class ProductRepository {
             }
         }
 
+        fun getTotalAmount(context: Context): String? {
+            dataBase = initializeDB(context)
+            var queryString= "SELECT total(amount) FROM cart where payment_status= 'Pending' or payment_status ='Failed'"
+            val query = SimpleSQLiteQuery(queryString)
+            return dataBase?.userDao()?.getTotalAmount(query)
+        }
+
+
+        fun getProduct_id(context: Context): String? {
+            dataBase = initializeDB(context)
+            var queryString= "SELECT product_id FROM cart where range="
+            val query = SimpleSQLiteQuery(queryString)
+            return dataBase?.userDao()?.getTotalAmount(query)
+        }
+
+
         fun updateCartProductQuantity(quantity: Int,totalPrice: Int, cartId: Int,context: Context){
             dataBase = initializeDB(context)
-
             CoroutineScope(Dispatchers.IO).launch {
                 dataBase?.userDao()?.updateCartProductQuantity(quantity,totalPrice,cartId)
             }

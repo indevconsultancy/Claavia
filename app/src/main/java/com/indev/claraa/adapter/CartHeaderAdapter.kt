@@ -63,9 +63,6 @@ class CartHeaderAdapter(
         }
         SweetDialog.dismissDialog()
 
-
-
-
     }
 
     private fun showRecycleViewList(holder: MyViewholder) {

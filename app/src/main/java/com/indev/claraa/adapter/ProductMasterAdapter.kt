@@ -42,7 +42,6 @@ class ProductMasterAdapter(private val context: Context, var productMasterModelA
             prefHelper.put(Constant.PREF_PRODUCT_NAME, currentItem.product_name)
             prefHelper.put(Constant.PREF_PRODUCT_ID, currentItem.product_id)
         }
-
     }
 
     private fun replaceFregment(fragment : Fragment) {

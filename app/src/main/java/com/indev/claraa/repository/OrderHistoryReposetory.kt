@@ -19,11 +19,16 @@ class OrderHistoryReposetory {
             return RoomDB.getDatabase(context)
         }
 
-
         fun getOrderDetailsList(context: Context, order_id: Int): LiveData<List<OrderDetailsModel>>? {
             dataBase = initializeDB(context)
             return dataBase?.userDao()?.getOrderDetailList(order_id,"Success")
         }
+
+        fun getOrderDetailsListbyID(product_id: String,context: Context): List<OrderDetailsModel>? {
+            dataBase = initializeDB(context)
+            return dataBase?.userDao()?.getOrderDetailListbyID(product_id,"Success")
+        }
+
         fun getOrderList(context: Context): LiveData<List<OrderMasterModel>>? {
             dataBase = initializeDB(context)
             return dataBase?.userDao()?.getOrderList("Success")

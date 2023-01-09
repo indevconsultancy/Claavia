@@ -82,7 +82,7 @@ class CartItemAdapter(val context: Context, var cartModelList: List<CartModel>, 
 
         holder.btnUpdate.setOnClickListener{
             var qty= holder.etQuantity.text.toString()
-            if(qty.toInt() <1 || qty.toInt() > 9999){
+            if(qty.toInt() <0 || qty.toInt() > 10000){
                 Toast.makeText(context, "Quantity should be between 1- 10000", Toast.LENGTH_LONG).show()
             }else{
                 SweetDialog.showProgressDialog(context)
@@ -105,8 +105,7 @@ class CartItemAdapter(val context: Context, var cartModelList: List<CartModel>, 
 
         holder.tvPrice.text = currentItem.currency +" "+ currentItem.price.toString()
         holder.tvtotalAmount.text = currentItem.currency +" "+ currentItem.amount.toString()
-        totalAmount= grandTotal(cartModelList)
-        listener.updateTextInteger(totalAmount)
+
     }
 
     private fun showAlertDialog() {
@@ -152,17 +151,6 @@ class CartItemAdapter(val context: Context, var cartModelList: List<CartModel>, 
             }
         }
     }
-
-    private fun grandTotal(size: List<CartModel>): Int {
-        var totalPrice = 0
-        for (i in size.indices) {
-            totalPrice += size[i].amount
-        }
-        return totalPrice
-    }
-
-    fun increamentCount() = count++
-    fun decreamentCount() = count--
 
     fun setData(cartModel: ArrayList<CartModel>) {
         this.cartModelList= cartModel

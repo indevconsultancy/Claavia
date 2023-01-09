@@ -40,7 +40,6 @@ class SolutionAdapter(private val context: Context, var productMasterModelArrayL
             prefHelper.put(Constant.PREF_PRODUCT_NAME, currentItem.product_name)
             prefHelper.put(Constant.PREF_PRODUCT_ID, currentItem.product_id)
         }
-
     }
 
     private fun replaceFregment(fragment : Fragment) {

@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
-import com.indev.claraa.adapter.OrderHistoryAdapter
+import com.indev.claraa.adapter.OrderHistoryHeaderAdapter
 import com.indev.claraa.adapter.OrderListAdapter
 import com.indev.claraa.databinding.FragmentOrderHistoryBinding
 import com.indev.claraa.entities.OrderDetailsModel
@@ -21,7 +21,7 @@ import com.indev.claraa.viewmodel.*
 class OrderHistory : Fragment(), ClickLinstener {
     private lateinit var binding: FragmentOrderHistoryBinding
     private lateinit var orderHistoryViewModel: OrderHistoryViewModel
-    private lateinit var orderHistoryAdapter: OrderHistoryAdapter
+    private lateinit var orderHistoryHeaderAdapter: OrderHistoryHeaderAdapter
     private lateinit var orderDetailsArrayList: ArrayList<OrderDetailsModel>
     private lateinit var orderListAdapter: OrderListAdapter
     private lateinit var orderMasterArrayList: ArrayList<OrderMasterModel>
@@ -73,13 +73,12 @@ class OrderHistory : Fragment(), ClickLinstener {
     fun showOrderDetailsList(order_id: Int) {
         binding.llOrderList.visibility = View.GONE
         binding.llMain.visibility = View.VISIBLE
-        orderHistoryAdapter = OrderHistoryAdapter(requireContext(),ArrayList<OrderDetailsModel>(), this)
+        orderHistoryHeaderAdapter = OrderHistoryHeaderAdapter(requireContext(),ArrayList<OrderDetailsModel>(), this)
         recycleViewList()
 
         orderHistoryViewModel.getOrderDetailsList(requireActivity(), order_id)?.observe(requireActivity(), Observer {
-            orderHistoryAdapter.setData(it as ArrayList<OrderDetailsModel>)
+            orderHistoryHeaderAdapter.setData(it as ArrayList<OrderDetailsModel>)
             orderDetailsArrayList = it
-
         })
     }
 
@@ -95,7 +94,7 @@ class OrderHistory : Fragment(), ClickLinstener {
         binding.rvOrder.apply {
             setHasFixedSize(true)
             binding.rvOrder.layoutManager = LinearLayoutManager(context)
-            adapter= orderHistoryAdapter
+            adapter= orderHistoryHeaderAdapter
         }
     }
     private fun recycleViewOrderList() {

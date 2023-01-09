@@ -10,6 +10,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -29,6 +30,7 @@ class OrderPlaceViewModel (val context: Context): ViewModel() {
     var prefHelper: PrefHelper
     var submit_alert: Dialog? = null
 
+
     init {
         prefHelper = PrefHelper(context)
         readAllData = OrderPlaceRepository.getAddress(context,
@@ -42,10 +44,10 @@ class OrderPlaceViewModel (val context: Context): ViewModel() {
 
     fun btnPlace(){
         ShowSubmitDialog()
-      // context.startActivity(Intent(context, PaymentGateway::class.java))
     }
 
     fun ShowSubmitDialog() {
+        var selectPaymentMode=""
         submit_alert = Dialog(
             context
         )
@@ -60,31 +62,56 @@ class OrderPlaceViewModel (val context: Context): ViewModel() {
         params.gravity = Gravity.CENTER or Gravity.CENTER_HORIZONTAL
 
 
-        val btnMale =
+        val btnCredit =
             submit_alert!!.findViewById<View>(
-                R.id.btnMale
+                R.id.btnCredit
+            ) as TextView
+        val btnPayment =
+            submit_alert!!.findViewById<View>(
+                R.id.btnPayment
+            ) as TextView
+        val btnBoth =
+            submit_alert!!.findViewById<View>(
+                R.id.btnBoth
             ) as TextView
 
-        btnMale.setOnClickListener {
-            //TO DO
-            submit_alert!!.dismiss()
+        val tvCreditLimit =
+            submit_alert!!.findViewById<View>(
+                R.id.tvCreditLimit
+            ) as TextView
 
+
+        tvCreditLimit.text = "Available Credit Limit: " + prefHelper.getString(Constant.PREF_CREDIT)
+        btnCredit.setOnClickListener {
+            //TO DO
+            selectPaymentMode = "Credit"
+            prefHelper.put(Constant.PREF_PAYMENT_MODE,selectPaymentMode)
+            context.startActivity(Intent(context, PaymentGateway::class.java))
+            submit_alert!!.dismiss()
         }
+
+        btnPayment.setOnClickListener {
+            //TO DO
+            selectPaymentMode= "Payment"
+            prefHelper.put(Constant.PREF_PAYMENT_MODE,selectPaymentMode)
+            context.startActivity(Intent(context, PaymentGateway::class.java))
+            submit_alert!!.dismiss()
+        }
+
+        btnBoth.setOnClickListener {
+            //TO DO
+            selectPaymentMode= "Both"
+            prefHelper.put(Constant.PREF_PAYMENT_MODE,selectPaymentMode)
+            context.startActivity(Intent(context, PaymentGateway::class.java))
+            submit_alert!!.dismiss()
+        }
+
+
         submit_alert!!.show()
         submit_alert!!.setCanceledOnTouchOutside(
             false
         )
     }
 
-    private fun showDialog() {
-        SweetAlertDialog(context)
-            .setTitleText("Make payment with")
-            .setContentText("Credit")
-            .setConfirmText("UPI")
-            .setConfirmClickListener {sdialog ->
-                sdialog.dismiss()
-            }
-            .show()
-    }
 
 }
