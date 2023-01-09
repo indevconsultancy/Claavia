@@ -186,11 +186,14 @@ class CartItemAdapter(val context: Context, var cartModelList: List<CartModel>, 
         val etQuantity: EditText = itemView!!.findViewById(R.id.etQuantity)
         val btnUpdate: ImageView = itemView!!.findViewById(R.id.btnUpdate)
 
+
         init {
             itemView.setOnClickListener {
                 listener.onClickListner(adapterPosition)
             }
         }
+
+
     }
 
     companion object{
