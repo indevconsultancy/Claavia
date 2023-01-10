@@ -220,7 +220,7 @@
                                 android:textColor="@color/white"
                                 android:textAllCaps="false"
                                 android:padding="5dp"
-                                android:enabled="true"
+                                android:clickable="false"
                                 android:textSize="13dp"
                                 android:layout_marginHorizontal="2dp"
                                 android:gravity="center"

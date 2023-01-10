@@ -13,6 +13,13 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible">
+
         <include
             android:id="@+id/toolbar"
             layout="@layout/custom_img_toolbar"
@@ -20,12 +27,34 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_register2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+        <include
+            android:id="@+id/toolbar1"
+            layout="@layout/custom_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/toolbar">
+            android:layout_marginTop="@dimen/_50sdp"
+            android:layout_marginBottom="20dp">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -249,7 +278,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginHorizontal="30dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="10dp"
                         android:orientation="vertical"
                         android:visibility="visible">
 
@@ -679,7 +708,7 @@
                                 android:gravity="center"
                                 android:text="Male"
                                 android:textAllCaps="false"
-                                android:textColor="@color/white" />
+                                android:textColor="@color/white"/>
 
                             <TextView
                                 android:id="@+id/btnFemale"
@@ -718,7 +747,6 @@
                             android:layout_alignParentBottom="true"
                             android:layout_gravity="center"
                             android:layout_marginTop="20dp"
-                            android:layout_marginBottom="20dp"
                             android:background="@drawable/submitbutton"
                             android:fontFamily="@font/aleo_regular"
                             android:gravity="center"

@@ -1,5 +1,6 @@
 package com.indev.claraa.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -13,6 +14,7 @@ import com.indev.claraa.R
 import com.indev.claraa.databinding.ActivityUserRegistrationBinding
 import com.indev.claraa.entities.DistrictModel
 import com.indev.claraa.entities.StateModel
+import com.indev.claraa.fragment.Home
 import com.indev.claraa.helper.Constant
 import com.indev.claraa.helper.PrefHelper
 import com.indev.claraa.viewmodel.RegistrationViewModel
@@ -71,14 +73,24 @@ class UserRegistration : AppCompatActivity() {
         preferences= PrefHelper(this)
         checkLogin = preferences.getBoolean(Constant.PREF_IS_LOGIN)
 
+
         if(checkLogin ==true) {
             binding.llRegistrationWitheUs.visibility = View.GONE
+            binding.llRegister.visibility = View.GONE
+            binding.llRegister2.visibility = View.VISIBLE
             binding.llUpdateProfile.visibility = View.VISIBLE
             binding.llBottomImage.visibility = View.GONE
             binding.llPassword.visibility = View.GONE
             registrationViewModel = ViewModelProvider(this).get(RegistrationViewModel::class.java)
 
+            binding.toolbar1.toolbarTitle.text = "Edit Profile"
+            binding.toolbar1.backClick.setOnClickListener(){
+                val intent = Intent(this@UserRegistration, HomeScreen::class.java)
+                startActivity(intent)
+            }
+
             registrationViewModel.readAllData.observe(this, Observer {
+
                 binding.btnSubmit.text = "Update"
                 binding.etShopName.setText(it.shop_name)
                 binding.etOwnerName.setText(it.owner_name)
@@ -92,6 +104,7 @@ class UserRegistration : AppCompatActivity() {
                 binding.etPincode.setText(it.pinCode)
             })
             preferences.put(Constant.PREF_IS_UPDATE,true)
+
         }else{
             setStateSpinner(0)
         }
