@@ -22,7 +22,9 @@ import kotlinx.coroutines.*
 class OrderHistoryHeaderAdapter(private val context: Context, var orderDetailsArrayList: ArrayList<OrderDetailsModel>, private val listener: ClickLinstener) : RecyclerView.Adapter<OrderHistoryHeaderAdapter.MyViewholder>(){
 
     lateinit var orderDetailsListbyId: List<OrderDetailsModel>
+    lateinit var orderDetailsList: ArrayList<OrderDetailsModel>
     lateinit var adapterOrderDetailsItem: OrderHistoryItemAdapter
+    lateinit var orderDetailsModel: OrderDetailsModel
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewholder {
         val itemView =
@@ -35,6 +37,7 @@ class OrderHistoryHeaderAdapter(private val context: Context, var orderDetailsAr
         SweetDialog.showProgressDialog(context)
         val currentItem = orderDetailsArrayList[position]
 
+        var productIds= currentItem.product_id
        CoroutineScope(Dispatchers.IO).launch {
             var image= OrderHistoryReposetory.getImage(context, currentItem.product_id).toString()
             var product_name= OrderHistoryReposetory.getProductName(context, currentItem.product_id).toString()
@@ -45,11 +48,42 @@ class OrderHistoryHeaderAdapter(private val context: Context, var orderDetailsAr
                Glide.with(context).load(ClientApi.BASE_IMAGE_URL + image).into(holder.imageProduct)
            }
 
-           orderDetailsListbyId = OrderHistoryReposetory.getOrderDetailsListbyID(
-               currentItem.product_id,
-               context
-           ) as ArrayList<OrderDetailsModel>
+           orderDetailsList = ArrayList<OrderDetailsModel>()
+           val stringArray: List<String> = productIds.split(",")
+           if(stringArray.size >0) {
+               for (i in stringArray) {
 
+                   var product_id = i
+                   orderDetailsListbyId = OrderHistoryReposetory.getOrderDetailsListbyID(
+                       product_id,
+                       context
+                   ) as ArrayList<OrderDetailsModel>
+
+                   orderDetailsModel = OrderDetailsModel(
+                       orderDetailsListbyId.get(0).local_id,
+                       orderDetailsListbyId.get(0).id,
+                       orderDetailsListbyId.get(0).order_id,
+                       orderDetailsListbyId.get(0).cart_id,
+                       orderDetailsListbyId.get(0).product_id,
+                       orderDetailsListbyId.get(0).price,
+                       orderDetailsListbyId.get(0).quantity,
+                       orderDetailsListbyId.get(0).payment_status,
+                       orderDetailsListbyId.get(0).amount,
+                       orderDetailsListbyId.get(0).user_id,
+                       orderDetailsListbyId.get(0).active
+                   )
+                   orderDetailsList.add(orderDetailsModel)
+               }
+               adapterOrderDetailsItem =
+                   OrderHistoryItemAdapter(context, orderDetailsList, listener)
+               adapterOrderDetailsItem.setData(orderDetailsList as ArrayList<OrderDetailsModel>)
+               showRecycleViewList(holder)
+           }else{
+               orderDetailsListbyId = OrderHistoryReposetory.getOrderDetailsListbyID(
+                   currentItem.product_id,
+                   context
+               ) as ArrayList<OrderDetailsModel>
+           }
            adapterOrderDetailsItem = OrderHistoryItemAdapter(context, orderDetailsListbyId, listener)
            adapterOrderDetailsItem.setData(orderDetailsListbyId as ArrayList<OrderDetailsModel>)
            showRecycleViewList(holder)

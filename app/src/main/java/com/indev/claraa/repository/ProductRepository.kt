@@ -40,6 +40,11 @@ class ProductRepository {
             return dataBase?.userDao()?.getCartData("Failed", "Pending")
         }
 
+        fun getCartDataList(context: Context): LiveData<List<CartModel>>? {
+            dataBase = initializeDB(context)
+            return dataBase?.userDao()?.getCartDataList("Failed", "Pending")
+        }
+
         fun getPowerList(context: Context, selectedProduct: String): LiveData<List<ProductMasterModel>>? {
             dataBase = initializeDB(context)
             return dataBase?.userDao()?.getProductPowerList(selectedProduct)
@@ -71,14 +76,6 @@ class ProductRepository {
         fun getTotalAmount(context: Context): String? {
             dataBase = initializeDB(context)
             var queryString= "SELECT total(amount) FROM cart where payment_status= 'Pending' or payment_status ='Failed'"
-            val query = SimpleSQLiteQuery(queryString)
-            return dataBase?.userDao()?.getTotalAmount(query)
-        }
-
-
-        fun getProduct_id(context: Context): String? {
-            dataBase = initializeDB(context)
-            var queryString= "SELECT product_id FROM cart where range="
             val query = SimpleSQLiteQuery(queryString)
             return dataBase?.userDao()?.getTotalAmount(query)
         }
