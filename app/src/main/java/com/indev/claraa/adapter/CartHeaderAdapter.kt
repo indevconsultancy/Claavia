@@ -1,7 +1,9 @@
 package com.indev.claraa.adapter
 
+import android.R.string
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +28,8 @@ class CartHeaderAdapter(
 ) : RecyclerView.Adapter<CartHeaderAdapter.MyViewholder>(){
 
     lateinit var cartModelListbyProduct: List<CartModel>
+    lateinit var cartModelListbyProducts: ArrayList<CartModel>
+    lateinit var cartModel: CartModel
     lateinit var adapterCart: CartItemAdapter
 
 
@@ -50,16 +54,44 @@ class CartHeaderAdapter(
             }
         }
         Glide.with(context).load(ClientApi.BASE_IMAGE_URL +currentItem.product_img1).into(holder.imageProduct)
+        var productIds= currentItem.product_id
 
         CoroutineScope(Dispatchers.IO).launch {
-            cartModelListbyProduct = ProductRepository.getCartDatabyProductId(
-                currentItem.product_id.toInt(),
-                context
-            ) as ArrayList<CartModel>
+            cartModelListbyProducts = ArrayList<CartModel>()
+            val stringArray: List<String> = productIds.split(",")
+            if(stringArray.size >0){
+            for (i in stringArray){
+
+                var product_id= i.toInt()
+                cartModelListbyProduct = ProductRepository.getCartDatabyProductId(product_id,
+                    context
+                ) as ArrayList<CartModel>
+
+                cartModel = CartModel(
+                    cartModelListbyProduct.get(0).local_id,cartModelListbyProduct.get(0).id,cartModelListbyProduct.get(0).packet_id,cartModelListbyProduct.get(0).packet_id,
+                    cartModelListbyProduct.get(0).user_id,cartModelListbyProduct.get(0).product_name,cartModelListbyProduct.get(0).product_img1,cartModelListbyProduct.get(0).product_img2,cartModelListbyProduct.get(0).price,
+                    cartModelListbyProduct.get(0).amount,
+                    cartModelListbyProduct.get(0).quantity,cartModelListbyProduct.get(0).type_id,cartModelListbyProduct.get(0).packet_id,
+                    cartModelListbyProduct.get(0).power_range,cartModelListbyProduct.get(0).currency,cartModelListbyProduct.get(0).cart_date,
+                    cartModelListbyProduct.get(0).latitude,cartModelListbyProduct.get(0).longitude,cartModelListbyProduct.get(0).payment_status,cartModelListbyProduct.get(0).active
+                    )
+                (cartModelListbyProducts as ArrayList<CartModel>).add(cartModel)
+            }
+                adapterCart = CartItemAdapter(context, cartModelListbyProducts, listener)
+                adapterCart.setData(cartModelListbyProducts as ArrayList<CartModel>)
+
+                showRecycleViewList(holder)
+        }else{
+                cartModelListbyProduct = ProductRepository.getCartDatabyProductId(currentItem.product_id.toInt(),
+                    context
+                ) as ArrayList<CartModel>
+
 
             adapterCart = CartItemAdapter(context, cartModelListbyProduct, listener)
             adapterCart.setData(cartModelListbyProduct as ArrayList<CartModel>)
+
             showRecycleViewList(holder)
+            }
         }
         SweetDialog.dismissDialog()
 

@@ -39,7 +39,7 @@ class OrderPlaceViewModel (val context: Context): ViewModel() {
     }
 
     fun getCartList(context: Context): LiveData<List<CartModel>>? {
-        return ProductRepository.getCartList(context)
+        return ProductRepository.getCartDataList(context)
     }
 
     fun btnPlace(){

@@ -104,7 +104,6 @@ class UserRegistration : AppCompatActivity() {
                 binding.etPincode.setText(it.pinCode)
             })
             preferences.put(Constant.PREF_IS_UPDATE,true)
-
         }else{
             setStateSpinner(0)
         }

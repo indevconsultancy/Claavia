@@ -106,6 +106,11 @@ class CartItemAdapter(val context: Context, var cartModelList: List<CartModel>, 
         holder.tvPrice.text = currentItem.currency +" "+ currentItem.price.toString()
         holder.tvtotalAmount.text = currentItem.currency +" "+ currentItem.amount.toString()
 
+        CoroutineScope(Dispatchers.IO).launch {
+            var totalAmount=  ProductRepository.getTotalAmount(context)
+            listener.updateTextInteger(totalAmount!!.toInt())
+        }
+//        totalAmount= grandTotal(cartModelList)
     }
 
     private fun showAlertDialog() {
@@ -182,6 +187,13 @@ class CartItemAdapter(val context: Context, var cartModelList: List<CartModel>, 
         }
 
 
+    }
+    private fun grandTotal(size: List<CartModel>): Int {
+        var totalPrice = 0
+        for (i in size.indices) {
+            totalPrice += size[i].amount
+        }
+        return totalPrice
     }
 
     companion object{

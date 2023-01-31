@@ -30,6 +30,9 @@ interface ClaraaDao {
     @Query("SELECT * FROM cart where payment_status = :payment_status ORDER BY local_id ASC")
     fun getCartList(payment_status: String) : List<CartModel>
 
+    @NotNull
+    @Query("select group_concat(product_id) as product_id,product_name,local_id,id,packets,user_id,product_img1,product_img2,price,amount,quantity,type_id,packet_id,power_range,currency,cart_date,latitude,longitude,payment_status,active from cart where payment_status= :payment_status or payment_status= :payment_status1 group by product_name ORDER BY local_id ASC")
+    fun getCartDataList(payment_status: String, payment_status1: String) : LiveData<List<CartModel>>
 
     @RawQuery
     fun getCartList(query: SupportSQLiteQuery) : List<CartModel>
@@ -44,9 +47,8 @@ interface ClaraaDao {
     @Query("SELECT * FROM product_master where product_name = :selectedProduct")
     fun getProductPowerList(selectedProduct: String): LiveData<List<ProductMasterModel>>
 
-    @Query("SELECT * FROM order_details where payment_status= :payment_status and order_id=:order_id group by product_id order by order_id ASC")
+    @Query("SELECT group_concat(product_id) as product_id, payment_status,local_id,id,order_id,cart_id,price,quantity,amount,user_id,active, (Select product_name from product_master as p where p.product_id= o.product_id) as product_name FROM order_details as o where payment_status= :payment_status and order_id=:order_id group by product_name order by order_id ASC")
     fun getOrderDetailList(order_id: Int, payment_status: String): LiveData<List<OrderDetailsModel>>
-
 
     @Query("SELECT * FROM order_details where payment_status= :payment_status and product_id=:product_id order by local_id ASC")
     fun getOrderDetailListbyID(product_id: String, payment_status: String): List<OrderDetailsModel>
@@ -57,8 +59,8 @@ interface ClaraaDao {
     @Query("SELECT * FROM product_master where product_id = :product_id")
     fun getProductData(product_id: Int): List<ProductMasterModel>
 
-    @Query("SELECT product_id from product_master where power_range = :power_range")
-    fun getproductID(power_range: String): Int
+    @Query("SELECT product_id from product_master where power_range = :power_range and packet_id= :packetId")
+    fun getproductID(power_range: String,packetId: String): Int
 
     @NotNull
     @Insert

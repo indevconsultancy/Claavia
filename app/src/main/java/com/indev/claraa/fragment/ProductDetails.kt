@@ -39,6 +39,7 @@ class ProductDetails : Fragment(), ClickLinstener {
     private lateinit var cartModelList: ArrayList<CartModel>
     lateinit var productMasterArrayList: ArrayList<ProductMasterModel>
     var selectedProduct =""
+    var selectedPacketID =""
     private lateinit var packsArrayList: ArrayList<ProductPacketModel>
     lateinit var prefHelper: PrefHelper
 
@@ -79,6 +80,7 @@ class ProductDetails : Fragment(), ClickLinstener {
         recycleViewPowerrangeList()
 
         selectedProduct = prefHelper.getString(Constant.PREF_PRODUCT_NAME)!!
+        selectedPacketID = prefHelper.getString(Constant.PREF_PACKET_ID)!!
         productDetailViewModel.getPruductPowerList(requireActivity(), selectedProduct)?.observe(requireActivity(), Observer {
             powerRangeAdapter.setData(it as ArrayList<ProductMasterModel>)
             productMasterArrayList = it

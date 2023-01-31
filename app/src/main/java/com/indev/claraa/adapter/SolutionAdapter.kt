@@ -39,6 +39,7 @@ class SolutionAdapter(private val context: Context, var productMasterModelArrayL
             packet_id= currentItem.packet_id
             prefHelper.put(Constant.PREF_PRODUCT_NAME, currentItem.product_name)
             prefHelper.put(Constant.PREF_PRODUCT_ID, currentItem.product_id)
+            prefHelper.put(Constant.PREF_PACKET_ID, currentItem.packet_id)
         }
     }
 

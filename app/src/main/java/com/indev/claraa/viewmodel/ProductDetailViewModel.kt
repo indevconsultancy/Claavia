@@ -15,8 +15,6 @@ import com.agraharisoft.notepad.Listener.ClickLinstener
 import com.indev.claraa.R
 import com.indev.claraa.SweetDialog
 import com.indev.claraa.adapter.PowerRangeAdapter
-import com.indev.claraa.adapter.ProductMasterAdapter
-import com.indev.claraa.adapter.SolutionAdapter
 import com.indev.claraa.entities.CartModel
 import com.indev.claraa.entities.ProductMasterModel
 import com.indev.claraa.entities.ProductPacketModel
@@ -30,7 +28,6 @@ import com.indev.claraa.util.CommonClass
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.Objects
 
 
 class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
@@ -47,6 +44,7 @@ class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
     var user_id="0"
     var isSubmitButtonEnabled = true
     var product_id=0
+    var productID=0
 
     private fun initializeDB(context: Context): RoomDB? {
         return RoomDB.getDatabase(context)
@@ -58,7 +56,6 @@ class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
 
         CoroutineScope(Dispatchers.IO).launch {
             productMasterArrayList= ProductRepository.getProductData(context,product_id.toInt()) as ArrayList<ProductMasterModel>
-
         }
     }
 
@@ -78,10 +75,13 @@ class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
             dataBase = initializeDB(context)
             prefHelper = PrefHelper(context)
             user_id = prefHelper.getString(Constant.PREF_USERID)!!
+            var powerRange="0"
 
             if(prefHelper.getString(Constant.PREF_PRODUCT_NAME)!!.contains("Solution-")== true){
-                packetValue = productMasterArrayList.get(0).packet_id
+                 powerRange= "0"
+                 packetValue = productMasterArrayList.get(0).packet_id
             }else{
+                powerRange= PowerRangeAdapter.power_range
                 packetValue = ProductDetails.packet_id.toString()
             }
             if (checkValidation()) {
@@ -89,20 +89,21 @@ class ProductDetailViewModel(val context: Context): ViewModel(), ClickLinstener{
                 SweetDialog.showProgressDialog(context)
                 var checkExitPorduct = 0
                 CoroutineScope(Dispatchers.IO).launch {
-                    var qty = etQuantity.get().toString()
-                    var productID =
-                        dataBase?.userDao()?.getproductID(PowerRangeAdapter.power_range)!!
-                    checkExitPorduct = dataBase?.userDao()?.isProductRowExist(
+                     var qty = etQuantity.get().toString()
+                     var packetId= prefHelper.getString(Constant.PREF_PACKET_ID)
+
+                     productID = dataBase?.userDao()?.getproductID(powerRange,packetId.toString())!!
+                     checkExitPorduct = dataBase?.userDao()?.isProductRowExist(
                         productID,
                         PowerRangeAdapter.power_range,
                         packetValue.toString(), "Pending"
                     )!!
 
                     if (checkExitPorduct == 0) {
-                        insertCart(product_id, qty)
+                        insertCart(productID, qty)
                         SweetDialog.dismissDialog()
                     } else {
-                        updateCart(product_id, qty)
+                        updateCart(productID, qty)
                     }
                 }
 

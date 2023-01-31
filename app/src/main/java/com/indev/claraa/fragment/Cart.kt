@@ -67,13 +67,10 @@ class Cart : Fragment(), ClickLinstener {
 
         binding.toolbar.toolbarTitle.text = "Cart"
 
-        CoroutineScope(Dispatchers.IO).launch {
-            var totalAmount=  ProductRepository.getTotalAmount(requireContext())
-            binding.totalAmount.text = "SubTotal ₹\u200E" + totalAmount
-        }
     }
 
     override fun updateTextInteger(amount: Int) {
+        binding.totalAmount.text = "SubTotal ₹\u200E" + amount
     }
 
     override fun updateTextString(power_range: String) {
